@@ -1,0 +1,59 @@
+\begin{thebibliography}{10}
+
+\bibitem{McInnes1994}
+C.~R.~McInnes, ``Large angle slew maneuvers with autonomous sun vector
+  avoidance,''  {\em Journal of Guidance Control Dynamics}, Vol.~17, 06 1994,
+  pp.~875--877, 10.2514/3.21283.
+
+\bibitem{Spindler1998}
+K.~Spindler, ``New Methods in On-Board Attitude Control (AAS 98-308),''
+  Vol.~100, 01 1998.
+
+\bibitem{Hablani1998}
+H.~B. Hablani, ``{Attitude commands avoiding bright objects and maintaining
+  communication with ground station},''  {\em Advances in the Astronautical
+  Sciences}, 1998, 10.2514/2.4469.
+
+\bibitem{Biggs2016}
+J.~D. Biggs and L.~Colley, ``{Geometric Attitude Motion Planning for Spacecraft
+  with Pointing and Actuator Constraints},''  {\em Journal of Guidance,
+  Control, and Dynamics}, 2016, 10.2514/1.G001514.
+
+\bibitem{Frazzoli01}
+E.~Frazzoli, M.~A. Dahleh, E.~Feron, R.~P. Kornfeld, and R.~P. Kornfeld, ``A
+  Randomized Attitude Slew Planning Algorithm for Autonomous Spacecraft,''
+  {\em In AIAA Guidance, Navigation, and Control Conference}, 2001.
+
+\bibitem{Spiller2016}
+D.~Spiller, L.~Ansalone, and F.~Curti, ``{Particle Swarm Optimization for
+  Time-Optimal Spacecraft Reorientation with Keep-Out Cones},''  {\em Journal
+  of Guidance, Control, and Dynamics}, 2016, 10.2514/1.G001228.
+
+\bibitem{Kim2004}
+Y.~Kim and M.~Mesbahi, ``{Quadratically constrained attitude control via
+  semidefinite programming},''  {\em IEEE Transactions on Automatic Control},
+  2004, 10.1109/TAC.2004.825959.
+
+\bibitem{Kim2010}
+Y.~Kim, M.~Mesbahi, G.~Singh, and F.~Y. Hadaegh, ``{On the convex
+  parameterization of constrained spacecraft reorientation},''  {\em IEEE
+  Transactions on Aerospace and Electronic Systems}, 2010,
+  10.1109/TAES.2010.5545176.
+
+\bibitem{Sun2015}
+C.~Sun and R.~Dai, ``{Spacecraft Attitude Control under Constrained Zones via
+  Quadratically Constrained Quadratic Programming},''  2015,
+  10.2514/6.2015-2010.
+
+\bibitem{Lee2014}
+U.~Lee and M.~Mesbahi, ``{Quaternion based optimal spacecraft reorientation
+  under complex attitude constrained zones},''  {\em Advances in the
+  Astronautical Sciences}, 2014.
+
+\bibitem{Ramos2018}
+M.~{Diaz Ramos} and H.~Schaub, ``{Kinematic Steering Law for Conically
+  Constrained Torque-Limited Spacecraft Attitude Control},''  {\em Journal of
+  Guidance, Control, and Dynamics}, Vol.~41, jul 2018, pp.~1990--2001,
+  10.2514/1.G002873.
+
+\end{thebibliography}
