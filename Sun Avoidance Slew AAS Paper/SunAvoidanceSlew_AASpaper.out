@@ -12,6 +12,11 @@
 \BOOKMARK [3][-]{section*.12}{Problem Statement}{section*.11}% 12
 \BOOKMARK [3][-]{section*.13}{Velocity and Acceleration Constraints}{section*.11}% 13
 \BOOKMARK [3][-]{section*.14}{Steering Profiles}{section*.11}% 14
-\BOOKMARK [1][-]{section*.15}{Numerical simulation}{}% 15
-\BOOKMARK [1][-]{section*.16}{Conclusion}{}% 16
-\BOOKMARK [1][-]{section*.17}{Acknowledgment}{}% 17
+\BOOKMARK [2][-]{section*.15}{Case 2: Single-Axis, Agile Slew Maneuver with Acceleration Constraint}{section*.10}% 15
+\BOOKMARK [3][-]{section*.16}{Problem Statement}{section*.15}% 16
+\BOOKMARK [3][-]{section*.17}{The First Slew Maneuver: A single-axis nonrest-to-rest maneuver around the }{section*.15}% 17
+\BOOKMARK [3][-]{section*.18}{The Second Slew Maneuver: A rest-to-rest maneuver around the sun vector}{section*.15}% 18
+\BOOKMARK [3][-]{section*.19}{The Third Slew Maneuver: A single-axis rest-to-nonrest maneuver around the }{section*.15}% 19
+\BOOKMARK [1][-]{section*.20}{Numerical simulation}{}% 20
+\BOOKMARK [1][-]{section*.21}{Conclusion}{}% 21
+\BOOKMARK [1][-]{section*.22}{Acknowledgment}{}% 22

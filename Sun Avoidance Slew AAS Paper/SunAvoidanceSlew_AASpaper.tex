@@ -50,6 +50,8 @@
 
 \section{Introduction}
 
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	\subsection{Problem Justification}
 	
 		Given:$_N\hat{P}_i$, $_N\hat{P}_f$, $_N\hat{S}$, $_G\hat{P}$, $\epsilon_p$, $^Nq^G$, $^N_G\omega^G(t_i)$, and $^N_G\omega^G(t_f)$ .\\
@@ -67,6 +69,8 @@
 			\end{center}
 		\end{figure}
 	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 		Nomenclature: 
 		\begin{itemize}
 			\item $G$ frame: Unit sphere attached to the gyrostat.
@@ -77,6 +81,8 @@
 			\item $_N\hat{S}$: Unit vector of the sun vector in the $N$ frame.
 			\item $\epsilon_p$: Payload half-cone angle.
 		\end{itemize}
+	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	\clearpage
 	\subsection{Literature surveyed}
@@ -90,6 +96,8 @@
 \section{Algorithm Description} 
 
 	\subsection{Slew Maneuver} 
+	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 		\subsubsection{Check the Sun Vector Intrusion}
 			\begin{enumerate}
@@ -107,6 +115,8 @@
 				\vec{S}_{||}=\hat{S}\cos\alpha
 				\end{equation}
 			\end{enumerate}
+		
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		\subsubsection{Slew Maneuvers}
 		
@@ -127,6 +137,8 @@
 				\end{center}
 			\end{figure}
 		
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
 		%	\begin{enumerate}[2]
 				\item The $2^{nd}$ slew around the unit sun vector, $\hat{S}$, via $\phi_2$.
 				\begin{enumerate}
@@ -138,6 +150,8 @@
 				\includegraphics[width=2.3in]{./Figures/SVAS_2r}
 				\end{center}
 			\end{figure}
+		
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 			%	\begin{enumerate}[2]
 			%		\item The $2^{nd}$ slew around the unit sun vector, $\hat{S}$, via $\phi_2=180^{\circ}$.
@@ -151,6 +165,8 @@
 					\end{center}
 				\end{figure}
 			\end{enumerate}
+		
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 			\item The $3^{rd}$ slew about the $\hat{e}$ through angle:
 			\begin{equation}
@@ -171,6 +187,8 @@
 			\item The final slew is about the instrument boresight axis to go to the final attitude. 
 			\end{enumerate}
 	%	\end{enumerate}
+	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	\subsection{Summary of Algorithm} 
 		
@@ -206,16 +224,22 @@
 			
 			\item Perform the final rotation, $\phi_4$, about the instrument boresight axis to adjust the attitude. 
 		\end{enumerate}
+	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 		\begin{figure}[H]
 			\begin{center}
 			\includegraphics[width=6in]{./Figures/SASSchematic3}
 			\end{center}
 		\end{figure}
-
+	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 \section{Steering Laws} 
 
 	\subsection{Case 1: Single-Axis, Agile Slew Maneuver with Velocity and Acceleration Constraints.}	 
+	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 		\subsubsection{Problem Statement}
 		
@@ -243,6 +267,8 @@
 				\includegraphics[width=2.25in]{./Figures/Spacecraft}  
 				\end{center}    
 			\end{figure}
+		
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		\subsubsection{Velocity and Acceleration Constraints}
 
@@ -268,6 +294,9 @@
 			\begin{equation}
 				\dot{\phi}_{max}=[I^{w/w^*}]^{-1}[^NH^{G/G*}-(I^{G/G*}+I^{w/w*})^N\omega^G]/(e_x+e_y+e_z),
 			\end{equation}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 			and
 			\begin{equation}\label{phiddotmax}
 				\ddot{\phi}_{max}=_B\hat{e}^T\  _BM_{max}/I_{\hat{e}}^{G/G*},
@@ -277,7 +306,8 @@
 %			\vspace{0.5in}
 			
 			{\bf Find:} $\phi(t)$, $\dot{\phi}(t)$, and $\ddot{\phi}(t)$.
-			
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			
 			Using the Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
 			\begin{enumerate}
@@ -304,13 +334,16 @@
 %				Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \foral t\in[t_0, t_f]. $  
 				
 				\item Hamiltonian:
+				
 				\begin{equation}
 					\begin{split}
-					\mathscr{H}=& 1+\lambda_1x_2+\lambda_2 u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
-					& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
+					\mathscr{H}=& 1+\lambda_1x_2+\lambda_2u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+				    	& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
 					\end{split}
 				\end{equation}
-%				\end{enumerate}
+			\end{enumerate}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			
 %			\begin{enumerate}
 %				\conti
@@ -343,6 +376,8 @@
 %			\end{enumerate}
 %			\seti
 			This is a {\it singular arc} optimal control problem.
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			
 			\item Determining the optimal control in the singular arc:
 			\begin{equation}
@@ -358,6 +393,8 @@
 			\end{equation}
 		\end{enumerate}
 %	\seti
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		\subsubsection{Steering Profiles}
 		
@@ -405,22 +442,153 @@
 				\right.
 			\end{equation}
 			
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			
 			\begin{itemize}
 				\item Using the conditions, $\dot{\phi}(t_1)=\dot{\phi}_{max}$, $\dot{\phi}(t_f)=\dot{\phi}_f$, $\phi(t_f)=\phi_f$, we can determine switching times $t_1$, $t_2$, and final time $t_f$ as:
 			\end{itemize}
 			\begin{equation}\label{t1cons}
-			t_1=t_0+\frac{\dot{\phi}_{max}-\dot{\phi}_0}{\ddot{\phi}_{max}},
+				t_1=t_0+\frac{\dot{\phi}_{max}-\dot{\phi}_0}{\ddot{\phi}_{max}},
 			\end{equation}
 			\begin{equation}\label{t2cons}
-			\begin{split}
-			t_2=&t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2\\
-			&-\frac{\dot{\phi}_{max}(\dot{\phi}_{max}-\dot{\phi}_f)}{\ddot{\phi}_{max}}+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big],
-			\end{split}
+				\begin{split}
+				t_2=&t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2\\
+				&-\frac{\dot{\phi}_{max}(\dot{\phi}_{max}-\dot{\phi}_f)}{\ddot{\phi}_{max}}+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big],
+				\end{split}
 			\end{equation}
 			and
 			\begin{equation}\label{tfcons}
-			t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
+				t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
 			\end{equation}
+			
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+			\begin{itemize}
+				\item Steering profiles:
+				\begin{equation}
+				^Nq^D(t)=[e_x\sin\frac{\phi(t)}{2}, e_y\sin\frac{\phi(t)}{2}, e_z\sin\frac{\phi(t)}{2}, \cos\frac{\phi(t)}{2}]^T
+				\end{equation}
+				\begin{equation}
+				^N_G\omega^D(t)=\dot{\phi}(t)_G\hat{e}
+				\end{equation}
+				\begin{equation}
+				^N_G\alpha^D(t)=\ddot{\phi}(t)_G\hat{e}
+				\end{equation}
+			\end{itemize}
+		
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+	\subsection{Case 2: Single-Axis, Agile Slew Maneuver with Acceleration Constraint} 
+	
+		\subsubsection{Problem Statement} 
+			
+			Consider the optimal control problem described by Eqs.(\ref{costfunction}), (\ref{system}), (\ref{Bcs}), and subject to control constraint
+			\begin{equation}
+				C_2: \ |u=\ddot{\phi}|\leq \ddot{\phi}_{max}.
+			\end{equation}
+			
+			{\bf Find:} $\phi(t)$, $\dot{\phi}(t)$, and $\ddot{\phi}(t)$.
+				
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				
+			\begin{itemize}
+				\item Angular acceleration about the $\hat{e}$ axis:
+			\end{itemize}
+			\begin{equation}\label{alpha}
+			\ddot{\phi}(t)=\ddot{\phi}_{max}\mathbb{U}(t_0)- 2\ddot{\phi}_{max}\mathbb{U}(t-t_1)
+			\end{equation}
+			
+			\begin{center}
+				\includegraphics[width=2in]{./Figures/Bang_bang}      
+			\end{center}
+			
+			where the switching and the final times are given by
+			\begin{equation}
+				t_1=t_0-\frac{\dot{\phi}_{0}}{\ddot{\phi}_{max}}+\frac{\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_{f}+\dot{\phi}_{f}^2+\dot{\phi}_{0}^2)}}{\sqrt{2}\ddot{\phi}_{max}^2}
+			\end{equation}
+			
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			
+			and
+			\begin{equation}
+				t_f=t_0-\frac{\dot{\phi}_{f}+\dot{\phi}_{0}}{\ddot{\phi}_{max}}+\frac{\sqrt{2}\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_{f}+\dot{\phi}_{ef}^2+\dot{\phi}_{0}^2)}}{\ddot{\phi}_{max}^2}
+			\end{equation}
+			\begin{itemize}
+				\item Angular velocity about the $\hat{e}$ axis:
+			\end{itemize}
+			\begin{equation}\label{omega}
+				\dot{\phi}(t)=\dot{\phi}_{0}+\ddot{\phi}_{max}(t-t_0)\mathbb{U}(t_0)- 2\ddot{\phi}_{max}(t-t_1)\mathbb{U}(t-t_1)
+			\end{equation}
+			\begin{itemize}
+				\item Angular position about the $\hat{e}$ axis:
+			\end{itemize}
+			\begin{equation}\label{phi}
+				\begin{split}
+				\phi(t)&=\dot{\phi}_{0}(t-t_0)+\ddot{\phi}_{max}\frac{(t-t_0)^2}{2}\mathbb{U}(t_0)\\
+				&- 2\ddot{\phi}_{max}\frac{(t-t_1)^2}{2}\mathbb{U}(t-t_1)
+				\end{split}
+			\end{equation}
+			
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			\subsubsection{The First Slew Maneuver: A single-axis nonrest-to-rest maneuver around the $\hat{e}$}
+			
+			\begin{itemize}
+				\item The BCs: 
+			\end{itemize}
+			\begin{equation}\label{Bc1}
+			\dot{\phi}(t_0)=\dot{\phi}_{0},\phi(t_0)=0, \dot{\phi}(t_{f1})=0,\phi(t_{f1})=\phi_1.
+			\end{equation}
+			
+			The switching time, $t_{11}$, and minimum-time, $t_{f1}$, are
+			\begin{equation}\label{t11}
+			t_{11}=t_0-\frac{\dot{\phi}_0}{\ddot{\phi}_{max}}+\frac{\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_1+\dot{\phi}_{0}^2)}}{\sqrt{2}\ddot{\phi}_{max}^2}
+			\end{equation}
+			\begin{equation}\label{tf1}
+			t_{f1}=t_0-\frac{\dot{\phi}_0}{\ddot{\phi}_{max}}+\frac{\sqrt{2\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_1+\dot{\phi}_{0}^2)}}{\ddot{\phi}_{max}^2}
+			\end{equation}
+			The $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$,  can be found by substituting the boundary conditions given by (\ref{Bc1}) and $t_{11}$ and $t_{f1}$ in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively.
+			
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			\subsubsection{The Second Slew Maneuver: A rest-to-rest maneuver around the sun vector} 
+			
+			\begin{itemize}
+				\item The BCs: 
+			\end{itemize}
+			\begin{equation}\label{Bc2}
+			\dot{\phi}(t_0)=0,\phi(t_0)=0, \dot{\phi}(t_{f2})=0,\phi(t_{f2})=\phi_2.
+			\end{equation}
+			The switching time, $t_{12}$, and the minimum-time, $t_{f2}$, are
+			\begin{equation}\label{t21}
+			t_{12}=t_0-\frac{\sqrt{\phi_2}}{\ddot{\phi}_{max}}
+			\end{equation}
+			\begin{equation}\label{tf2}
+			t_{f2}=t_0-\frac{2\sqrt{\phi_2}}{\ddot{\phi}_{max}}
+			\end{equation}
+			The $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$,  can be found by substituting the boundary conditions given by (\ref{Bc2}) and $t_{12}$ and $t_{f2}$ in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively.
+			
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			\subsubsection{The Third Slew Maneuver: A single-axis rest-to-nonrest maneuver around the $\hat{e}$}
+			
+			
+			\begin{itemize}
+				\item The BCs: 
+			\end{itemize}
+			\begin{equation}\label{Bc3}
+			\dot{\phi}(t_0)=0,\phi(t_0)=0, \dot{\phi}(t_{f3})=\dot{\phi}_{f},\phi(t_{f3})=\phi_3.
+			\end{equation}
+			The switching time, $t_{13}$, and the minimum-time, $t_{f3}$, are
+			\begin{equation}\label{t31}
+			t_{13}=t_0+\frac{\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_3+\dot{\phi}_{f}^2)}}{\sqrt{2}\ddot{\phi}_{max}^2}
+			\end{equation}
+			\begin{equation}\label{tf3}
+			t_{f3}=t_0-\frac{\dot{\phi}_{f}}{\ddot{\phi}_{max}}+\frac{\sqrt{2\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_3+\dot{\phi}_{f}^2)}}{\ddot{\phi}_{max}^2}
+			\end{equation}
+			The $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$,  can be found by substituting the boundary conditions given by (\ref{Bc3}) and $t_{13}$ and $t_{f3}$ in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively.
+			
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 \section{Numerical simulation} 
 
