@@ -30,7 +30,7 @@
 
 \begin{document}
 
-\title{MANUSCRIPT TITLE (UP TO 6 INCHES IN WIDTH AND CENTERED, 14 POINT BOLD FONT, MAJUSCULE)}
+\title{SUN-AVOIDANCE SLEW PLANNING ALGORITHM WITH POINTING AND ACTUATOR CONSTRAINTS}
 
 \author{
 	Mohammad Ayoubi\thanks{Title, department, affiliation, postal address.} and Junette Hsin\thanks{Title, department, affiliation, postal address.}
@@ -49,6 +49,11 @@
 \end{abstract}
 
 \section{Introduction}
+Large-angle slew maneuvers are required during any Earth-pointing or interplanetary missions. In many space missions, and for safety consideration, a sensitive payload such as imaging camera or telescope needs to be retargeted while avoiding sun vector or other bright objects in the sky.
+The attitude reorientation problem in the presence of attitude constrained zones has been studied in the last three decades. McInnes\cite{McInnes1994} addressed this problem via using an artificial potential function. He proposed a guidance law which is entirely analytical and suitable for onboard implementation. However, he uses Euler angles which are singular for large slew angles. 
+A geometric approach was proposed by Spindle\cite{Spindler1998}, Hablani\cite{Hablani1998}, and Biggs and Colley\cite{Biggs2016}  where a feasible attitude maneuver, or a guidance law, is precomputed based on the attitude-avoidance-zone constraints.  Another approach for addressing this problem is using randomized algorithms\cite{Frazzoli01}. However, depends on the number of constraints and initial and final attitudes, this approach is computationally expensive and not suitable for onboard implementation. Another approach for solving the time optimal reorientation maneuver subject to boundaries and path constraints is proposed by Spiller et al.\cite{Spiller2016}. They used the particle swarm optimization (PSO) technique to find a sub-optimal solution with keep-out constraints. Another approach is to cast the problem as a convex optimization problem and use a semi-definite programming (SDP) or  quadratically constrained quadratic programming (QCQP) to solve them.  See for instance Kim and Mesbahi\cite{Kim2004}, Kim et al.\cite{Kim2010}, Sun and Dai\cite{Sun2015}, and Lee and Mesbahi\cite{Lee2014} %proposed a new method for time and energy optimal path planning in the presence of attitude constrained zones using unit quaternions. They solved their open-loop optimal control problem using Guass pseudospectral method. 
+Recently, Ramos and Schaub\cite{Ramos2018} proposed a method based on the Lyapunov stability theorem and logarithmic barrier potential function to derive a steering law for attitude control of a spacecraft subject to conically constrained inclusion and exclusion regions. They also considered the control-torque constraint in their algorithm.  
+In this paper, we present a novel geometric approach for large-angle slew planning with pointing and actuator constraints.  We assume spacecraft has a single light-sensitive payload with control-torque and angular momentum constraints. Furthermore, we assume the initial and final attitudes, instrument boresight vector, and sun vector are known. Then we derive the desired quaternions, angular velocity, and angular acceleration based on the Pontryagin's minimum principle (PMP) for this maneuver. The proposed algorithm in this paper is intuitive, deterministic, easy to implement, and includes the control-torque and angular momentum constraints. The main drawback of the proposed algorithm is its limitation for a single payload, single-constraint region.  A Monte Carlo simulation is performed to show the viability of the proposed algorithm with control-torque and angular momentum constraints. 
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -309,89 +314,89 @@
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			
-			Using the Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
-			\begin{enumerate}
-				\item State Eqs.:
-				\begin{equation}
-					\left\{
-					\begin{array}{l}
-					\dot{x}_1=x_2, \\
-					\dot{x}_2=u, \\
-					\dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
-					\end{array}
-					\right.
-				\end{equation}
-				where the unit step function, $\mathbb{U}$, is defined as
-				\begin{equation}
-					\mathbb{U}(X)=\left\{
-					\begin{array}{l}
-					1,   X>0, \\
-					0,   X\leq 0.
-					\end{array}
-					\right.
-				\end{equation}
-				Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, t\in[t_0, t_f]$. 
-%				Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \foral t\in[t_0, t_f]. $  
-				
-				\item Hamiltonian:
-				
-				\begin{equation}
-					\begin{split}
-					\mathscr{H}=& 1+\lambda_1x_2+\lambda_2u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
-				    	& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
-					\end{split}
-				\end{equation}
-			\end{enumerate}
-
-%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			
+%			Using the Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
 %			\begin{enumerate}
-%				\conti
-%				\small{
-					\item Costate Eqs.:
-					\begin{equation}
-					\left\{\begin{array}{l}
-					\dot{\lambda}_1=-\frac{\partial{\mathscr{H}}}{\partial{x_1}}=0,\\
-					\dot{\lambda}_2=-\frac{\partial{\mathscr{H}}}{\partial{x_2}}=-\lambda_1-2\lambda_3(x_2+\dot{\phi}_{max})\mathbb{U}(-x_2-\dot{\phi}_{max})\\
-					+2\lambda_3(\dot{\phi}_{max}-x_2)\mathbb{U}(x_2-\dot{\phi}_{max}),\\
-					\dot{\lambda}_3=-\frac{\partial{\mathscr{H}}}{\partial{x_3}}=0.\\
-					\end{array}
-					\right.
-					\end{equation}
-					\item Applying the Pontryagin's minimum principle (PMP),
-					\begin{equation}
-					u^*=arg \underset{u\in\mathcal{U}}{min} \mathscr{H},
-					\end{equation}
-					where $\mathcal{U}$ defines the domain of feasible controls. The optimal control can be determined as
-					\begin{equation}
-					u^*(t)=\left\{
-					\begin{array}{lI}
-					\ddot{\phi}_{max}&\lambda_2<0,\\
-					?& \lambda_2=0,\\
-					-\ddot{\phi}_{max}&\lambda_2>0.
-					\end{array}
-					\right.
-					\end{equation}
-%				}
+%				\item State Eqs.:
+%				\begin{equation}
+%					\left\{
+%					\begin{array}{l}
+%					\dot{x}_1=x_2, \\
+%					\dot{x}_2=u, \\
+%					\dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
+%					\end{array}
+%					\right.
+%				\end{equation}
+%				where the unit step function, $\mathbb{U}$, is defined as
+%				\begin{equation}
+%					\mathbb{U}(X)=\left\{
+%					\begin{array}{l}
+%					1,   X>0, \\
+%					0,   X\leq 0.
+%					\end{array}
+%					\right.
+%				\end{equation}
+%				Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, t\in[t_0, t_f]$. 
+%%				Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \foral t\in[t_0, t_f]. $  
+%				
+%				\item Hamiltonian:
+%				
+%				\begin{equation}
+%					\begin{split}
+%					\mathscr{H}=& 1+\lambda_1x_2+\lambda_2u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+%				    	& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
+%					\end{split}
+%				\end{equation}
 %			\end{enumerate}
-%			\seti
-			This is a {\it singular arc} optimal control problem.
-
-%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			
-			\item Determining the optimal control in the singular arc:
-			\begin{equation}
-				\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)=\ddot{\lambda}_2=0\rightarrow \dot{x}_2=0\rightarrow u^*=0
-			\end{equation}
-			\item Checking the Generalized Legendre-Clebsch condition for optimality:
-			\begin{equation}
-				(-1)^2\frac{\partial}{\partial u}\Big[\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)\Big]=1\geq 0
-			\end{equation}
-			\item The transversality condition:
-			\begin{equation}
-				\mathscr{H}|_{(*,t_f)}=0\  \text{and} \ \mathscr{H}\neq\mathscr{H}(t)\rightarrow \mathscr{H}=0, \forall t\in[t_0, t_f].
-			\end{equation}
-		\end{enumerate}
+%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%			
+%%			\begin{enumerate}
+%%				\conti
+%%				\small{
+%					\item Costate Eqs.:
+%					\begin{equation}
+%					\left\{\begin{array}{l}
+%					\dot{\lambda}_1=-\frac{\partial{\mathscr{H}}}{\partial{x_1}}=0,\\
+%					\dot{\lambda}_2=-\frac{\partial{\mathscr{H}}}{\partial{x_2}}=-\lambda_1-2\lambda_3(x_2+\dot{\phi}_{max})\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+%					+2\lambda_3(\dot{\phi}_{max}-x_2)\mathbb{U}(x_2-\dot{\phi}_{max}),\\
+%					\dot{\lambda}_3=-\frac{\partial{\mathscr{H}}}{\partial{x_3}}=0.\\
+%					\end{array}
+%					\right.
+%					\end{equation}
+%					\item Applying the Pontryagin's minimum principle (PMP),
+%					\begin{equation}
+%					u^*=arg \underset{u\in\mathcal{U}}{min} \mathscr{H},
+%					\end{equation}
+%					where $\mathcal{U}$ defines the domain of feasible controls. The optimal control can be determined as
+%					\begin{equation}
+%					u^*(t)=\left\{
+%					\begin{array}{lI}
+%					\ddot{\phi}_{max}&\lambda_2<0,\\
+%					?& \lambda_2=0,\\
+%					-\ddot{\phi}_{max}&\lambda_2>0.
+%					\end{array}
+%					\right.
+%					\end{equation}
+%%				}
+%%			\end{enumerate}
+%%			\seti
+%			This is a {\it singular arc} optimal control problem.
+%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%			
+%			\item Determining the optimal control in the singular arc:
+%			\begin{equation}
+%				\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)=\ddot{\lambda}_2=0\rightarrow \dot{x}_2=0\rightarrow u^*=0
+%			\end{equation}
+%			\item Checking the Generalized Legendre-Clebsch condition for optimality:
+%			\begin{equation}
+%				(-1)^2\frac{\partial}{\partial u}\Big[\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)\Big]=1\geq 0
+%			\end{equation}
+%			\item The transversality condition:
+%			\begin{equation}
+%				\mathscr{H}|_{(*,t_f)}=0\  \text{and} \ \mathscr{H}\neq\mathscr{H}(t)\rightarrow \mathscr{H}=0, \forall t\in[t_0, t_f].
+%			\end{equation}
+%		\end{enumerate}
 %	\seti
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -602,7 +607,7 @@
 \subsection*{Miscellaneous Physical Dimensions}
 
 \bibliographystyle{AAS_publication}   % Number the references.
-\bibliography{references}   % Use references.bib to resolve the labels.
+\bibliography{references_SAA}   % Use references.bib to resolve the labels.
 
 
 
