@@ -1,0 +1,83 @@
+\documentclass{article}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{mathrsfs}
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{amsmath}
+
+\begin{document}
+	
+	
+	
+	\begin{enumerate}
+		
+		% SUN VECTOR INTRUSION 
+		\item Check the sun vector intrusion 
+		
+		\begin{enumerate}
+			\item[a.] Find the eigenaxis of slew plane 
+				\begin{equation}\label{eaxis}
+				\hat{e}=\frac{\hat{P}_i\times\hat{P}_f}{|\hat{P}_i\times \hat{P}_f|}
+				\end{equation} 
+			\item[b.] Find the angular separation between the sun vector and the eigenaxis 
+				\begin{equation}
+				\alpha=\frac{\pi}{2}-\cos^{-1}(\hat{S}\cdot_\mathcal{N}\hat{e})
+				\end{equation}
+			\item[c.] IF $|\alpha|<\epsilon_p$, THEN determine the projection of the sun vector into the slew plane.
+				\begin{equation}\label{Sbar}
+				\vec{S}_{||}=\hat{S}\cos\alpha
+				\end{equation}
+		\end{enumerate}
+		
+		% SLEW AROUND EIGENAXIS 
+		\item Slew around the eigenaxis, $\hat{e}$, through angle $\phi_1$:
+		
+			\begin{enumerate}
+				\item[a.] If $\cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p\leq \pi$, then 
+					\begin{equation}
+					\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p
+					\end{equation}
+				\item[b.] If $\cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p>\pi$, then 
+					\begin{equation}
+					\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p-2\pi
+					\end{equation}
+			\end{enumerate}
+			
+		% SLEW AROUND SUN VECTOR 
+		\item Slew around the $\hat{S}$ via $\phi_2$:
+		
+			\begin{enumerate}
+				\item[a.] If $\alpha \neq 0$, then 
+					\begin{equation}
+					\phi_2 = 2\sin^{-1}\Big( \frac{ \sin\epsilon_p}{\sin \theta}\Big),\ \theta=\cos^{-1}(\hat{P}_1\cdot\hat{S})
+					\end{equation}
+				
+				\item[b.] If $\alpha = 0$, then 
+					\begin{equation}
+					\phi_2 = \pi
+					\end{equation}
+				
+			\end{enumerate}
+			
+		% SLEW AROUND EIGENAXIS AGAIN 
+		\item Slew about the $\hat{e}$ through angle $\phi_3$:
+		
+			\begin{enumerate}
+				\item[a.] If $_\mathcal{G}\hat{P}_f.\hat{P}_2\geq 0$, then 
+					\begin{equation}
+					\phi_3 = \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2
+					\end{equation}
+				
+				\item[b.] If $_\mathcal{G}\hat{P}_f.\hat{P}_2<0$, then 
+					\begin{equation}
+					\phi_3 = \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)-2\pi
+					\end{equation}
+				
+				
+			\end{enumerate}
+		
+		\item Perform the final rotation, $\phi_4$, about the instrument boresight axis to adjust the attitude. 
+		
+	\end{enumerate}
+
+\end{document}
