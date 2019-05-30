@@ -1,30 +1,44 @@
+
+
 % Simulation parameters 
 sim_rate = 0.01;			% sim rate = 100 Hz 
 sim_duration = 60*60;  			% sim duration = 60 minutes = 3600 seconds 
 t =  0:sim_rate:sim_duration; 		% defining time vector  
 
 % Non-changing parameters 
-Pi = [1 0 0; 0 1 0; 0 0 1]; 					% Pi = unit vector of initial point in the G frame 
-Pf = [sqrt(3/4) 0 -0.5; ... 
-    -0.5, 0, -sqrt(3/4); ... 
-    0 1 0];  					% Pf = Unit vector of the final point in the G frame 
+Pi = [1; 0; 0]; 					% Pi = unit vector of initial point in the G frame 
+Pf = [0; 1; 0];  					% Pf = unit vector of the final point in the G frame 
+S = [1; 0; 0];                      % S = unit vector of sun vector in the N frame 
+
+G_N_DCM = eye(3); 
+
 ep = pi/12; 					% payload half-cone angle. pi/12 rad = 15 deg  
-e = (Pi x Pf) / (Pi x Pf) 			% eigenaxis of PiPf plane 
+e = cross(Pi, Pf) / norm(cross(Pi, Pf)); 			% eigenaxis of PiPf plane 
 
-
-% each iteration of i represents simulation running at sim rate 
-for i = 1:max(size(t))
-	
-%Check angular separation between sun vector, S, and the plane of P
-S = ... 			% unit vector of Sun in the N frame 
-alpha = pi/2 ... acos(dot(S, e)) 		% angular separation between Sun vector and PiPf plane 
+% Check angular separation between sun vector S and the plane of P 
+alpha = pi/2 - acos(dot(S, e)); 
 
 % If angular separation is less than payload half-cone angle
 if alpha < ep 	
+        S_PiPf = S*cos(alpha); 
+end 
 
-		% Determine projection of sun vector onto  PiPf plane 
-		S_PiPf = S*cos(alpha) 
+phi_1a = acos(dot(Pi, S_PiPf)) - ep; 
+phi_1b = acos(dot(Pi, S_PiPf)) - ep - 2*pi; 
 
+% each iteration of i represents simulation running at sim rate 
+for i = 1:max(size(t))/3
+	
+    if acos(dot(Pi, S_PiPf) - ep > pi 
+    else 
+        phi_1 = acosd(dot(Pi, S_PiPf)) - ep; 
+    end 
+        
+        
+        
+        
+        
+        
 		% Slew around the Sun vector 
 		if alpha = 0 
 			phi_2 = pi; 
