@@ -29,18 +29,10 @@ phi_1b = acos(dot(Pi, S_PiPf)) - ep - 2*pi;
 % each iteration of i represents simulation running at sim rate 
 for i = 1:max(size(t))/3
 	
-    if acos(dot(Pi, S_PiPf) - ep > pi 
-    else 
-        phi_1 = acosd(dot(Pi, S_PiPf)) - ep; 
-    end 
-        
-        
-        
-        
-        
-        
+     phi_1 = acosd(dot(Pi, S_PiPf)) - ep; 
+           
 		% Slew around the Sun vector 
-		if alpha = 0 
+		if alpha == 0 
 			phi_2 = pi; 
 		else 
 			phi_2 = 2*atan(ep/sin(alpha)); 
@@ -48,14 +40,14 @@ for i = 1:max(size(t))/3
 
 	% Else, if angular separation greater than payload half-cone angle 
 	else 
-		% Slew around the eigenaxis. If before sun slew: 
-		if before sun slew: 
-			phi_1 =  
-		if after sun slew: 
-			phi_3 =  
+% 		% Slew around the eigenaxis. If before sun slew: 
+% 		if before sun slew: 
+% 			phi_1 =  
+% 		if after sun slew: 
+% 			phi_3 =  
 	end 
 
 	% Perform slew around phi at sim_rate 
-	slew ... 
+% 	slew ... 
 
 end 

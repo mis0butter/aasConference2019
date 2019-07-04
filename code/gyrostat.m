@@ -9,6 +9,8 @@ omega = [x(5);  x(6);   x(7)];          % Gyrostat angular velocity components
 wh = [x(8); x(9);   x(10)];             % Wheel momentum
 %q_cc=[x(11);x(12);x(13);x(14)]; % computed commanded quaternions
 
+
+
 torq = NLC_fun(kp,kd,omega,omega_c,omegadot_c,q,q_c,Jnom);
 
 % Integration Functions
