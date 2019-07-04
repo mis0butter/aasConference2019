@@ -1,9 +1,17 @@
 function dZdt = gyrostat_cont(inertia, torque, Z)
-
+% Attitude determination function for finding w and q from inertia, torque,
+% and initial w and q 
+% 
+% Inputs: 
+% inertia = [3x3] 
+% torque = [3x1] 
 % Z(1 - 3) = w
 % Z(4 - 7) = q
 
-% inertia = [408 0 0; 0 427 0; 0 0 305]; 
+% Ensure torque is column [3x1]
+if isrow(torque) == 1
+    torque = torque'; 
+end 
 
 w_skew =  [ 0      -Z(3)   Z(2); 
             Z(3)    0     -Z(1); 
