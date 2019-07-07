@@ -22,14 +22,19 @@ G_DCM_P = P_DCM_G';                         % P to G frame
 % Check angular separation between sun vector S and slew plane 
 alpha = pi/2 - acos(dot(S_G, e_G)); 
 
+%%%%%%
 % IF angular separation is less than payload half-cone angle --> find phi2
 % and phi3. Otherwise, slew is just phi1. 
+%%%%%%
 
 unit_S = S_G/norm(S_G); 
 S_PiPf_G = cross(cross(unit_S, e_G), e_G);  % sun projection vector G frame 
 
 % First slew around eigenaxis
 phi1 = acos(dot(Pi_G, S_PiPf_G)) - ep;      % dot product of unit vectors 
+if phi1 > pi/2 
+    phi1_rem = phi1 - pi/2; 
+end 
 
 % Find P1 vector 
 P1_P = [cos(phi1); sin(phi1); 0];           % P1 in P frame 
@@ -59,11 +64,12 @@ end
 
 % Slew around eigenvector via phi3 
 % What if Pi and Pf overlap with P2 and P2? Need to ask Mohammad this ... 
-if dot(Pf_G, P2_G) > 0 
-    phi3 = acos(dot(Pf_G, P2_G)); 
-else 
-    
+phi3 = acos(dot(Pf_G, P2_G)); 
+if phi3 > pi/2 
+    phi3_rem = phi3 - pi/2; 
 end 
+
+
 
 %%
         
@@ -75,20 +81,47 @@ torque = inertia*phi_1_accel;
 w_in = [    0.5;    0;      0]; 
 q_in = [    0;      0;      0;      1]; 
 
-[t, y1] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, 100], [w_in; q_in]);
+[t1, y1] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, 100], [w_in; q_in]);
 
 w_in = y1(end, 1:3)'; 
 q_in = y1(end, 4:7)'; 
 
-[t, y2] = ode45(@(t,Z) gyrostat_cont(inertia, -torque, Z), [0, 100], [w_in; q_in]); 
+[t2, y2] = ode45(@(t,Z) gyrostat_cont(inertia, -torque, Z), [0, 100], [w_in; q_in]); 
 
 y = [y1; y2]; 
+t = [t1; t2]; 
+
+%%
+
+w = y(:, 1:3); 
+ylimits = get_ylimits(w); 
 
 % Plot 
 figure()
-plot(y(:, 1:3)) 
-legend('w1', 'w2', 'w3'); 
+    plot(t, w) 
+    ylim(ylimits)
+    legend('w1', 'w2', 'w3'); 
+    ylabel('w (rad/s)') 
+    xlabel('time (s)') 
+    title('Angular Velocity') 
+
+q = y(:, 4:7); 
+ylimits = get_ylimits(q); 
 
 figure()
-plot(y(:, 4:7))
-legend('q1', 'q2', 'q3', 'q4'); 
+    plot(t, q)
+    legend('q1', 'q2', 'q3', 'q4'); 
+    ylim(ylimits)
+    ylabel('quats') 
+    xlabel('time (s)') 
+    title('Quaternions') 
+
+%% 
+function ylimits = get_ylimits(data) 
+% Set y limits of axis 
+
+rng = range(data(:)); 
+midp = min(data(:)) + rng/2; 
+ylimits = [ midp - 1.2*rng/2, midp + 1.2*rng/2 ]; 
+
+end 
