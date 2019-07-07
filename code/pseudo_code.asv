@@ -58,7 +58,7 @@ else
 end 
 
 % Slew around eigenvector via phi3 
-% What if Pi and Pf overlap with P2 and P2? Need to ask Mohammad this ... 
+% What if Pi and Pf overlap with P2 and P2? 
 if dot(Pf_G, P2_G) > 0 
     phi3 = acos(dot(Pf_G, P2_G)); 
 else 
