@@ -10,8 +10,8 @@ close all;
 inertia = [ 408     0       0; 
             0       427     0; 
             0       0       305]; 
-Pi_G = [1; 0; 0];                           % Pi = unit vector of initial point in the G frame 
-Pf_G = [0; 1; 0];                           % Pf = unit vector of the final point in the G frame 
+Pi_G = [0; 1; 0];                           % Pi = unit vector of initial point in the G frame 
+Pf_G = [1; 0; 0];                           % Pf = unit vector of the final point in the G frame 
 S_N = [cosd(45); cosd(45); cosd(45)];       % S = unit vector of sun vector in the N frame 
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
 G_DCM_N = eye(3);                           % DCM from the N to the G frame 
@@ -24,7 +24,7 @@ wMax = 1;                                  % Maximum angular velocity, rad/s
 %% Calculate slew angles 
 
 % Calculate normal vector of slew plane 
-e_G = cross(Pi_G, Pf_G) / norm(cross(Pi_G, Pf_G));  % eigenaxis of PiPf plane, in G frame 
+e_G = cross(Pf_G, Pi_G) / norm(cross(Pf_G, Pi_G));  % eigenaxis of PiPf plane, in G frame 
 Pperp_G = cross(Pi_G, e_G);              % perpendicular vector to e and Pi, slew plane, G frame 
 P_DCM_G = [Pi_G'; Pperp_G'; e_G'];     % DCM from G frame to P (slew plane) frame 
 G_DCM_P = P_DCM_G';                         % P to G frame 
@@ -63,16 +63,63 @@ if alpha == 0
     phi2 = pi; 
 else 
     % Not sure how to get the one below: 
-    theta = acos(dot(Pi_G, S_N)); 
+    theta = acos(dot(P1_G, S_G)); 
     phi2_M = 2*asin(sin(ep/2)/sin(theta/2)); 
+    phi2_M2 = 2*asin(sin(ep)/(2*sin(theta/2)));     % REVISED FORMULA 
 
     % Junette's derived: 
     theta = acos(dot(S_G, P1_G));           % angle btwn sun and P1 vectors 
-    P3_G = S_G*norm(P1_G)*cos(theta);             % P3 vector in G frame (S and P1 already unit vectors)
+    P3_G = S_G*norm(P1_G)*cos(theta);       % P3 vector in G frame (S and P1 already unit vectors)
     P3P1_G = P1_G - P3_G;                   % vector from P3 to P1 
     P3P2_G = P2_G - P3_G;                   % vector from P3 to P2 
-    phi2 = acos(dot(P3P1_G/norm(P3P1_G), P3P2_G/norm(P3P2_G)));       % slew around sun vector 
+    phi2_P3 = acos(dot(P3P1_G/norm(P3P1_G), P3P2_G/norm(P3P2_G)));       % slew around sun vector 
+
+    SP1_G = P1_G - S_G; 
+    SP2_G = P2_G - S_G; 
+    phi2_S = acos(dot(SP1_G/norm(SP1_G), SP2_G/norm(SP2_G))); 
 end 
+
+%% optional plotting routine to check things 
+
+close all; 
+
+plot_option = 1; 
+if plot_option == 1
+    figure()
+        plot3([0 P1_G(1)], [0 P1_G(2)], [0 P1_G(3)], 'b'); 
+        grid on; hold on; 
+        plot3([0 P2_G(1)], [0 P2_G(2)], [0 P2_G(3)], 'b'); 
+        plot3([0 S_G(1)], [0 S_G(2)], [0 S_G(3)], 'r'); 
+        plot3([0 S_PiPf_G(1)], [0 S_PiPf_G(2)], [0 S_PiPf_G(3)], 'r'); 
+        plot3([0 P3_G(1)], [0 P3_G(2)], [0 P3_G(3)], 'g'); 
+        plot3([P3_G(1) P1_G(1)], [P3_G(2) P1_G(2)], [P3_G(3) P1_G(3)], 'g'); 
+        plot3([P3_G(1) P2_G(1)], [P3_G(2) P2_G(2)], [P3_G(3) P2_G(3)], 'g'); 
+        text(P3_G(1), P3_G(2), P3_G(3), ... 
+            sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
+        title('Dot Product, Phi around P3') 
+        xlabel('P perp_G') 
+        ylabel('Pi_G')
+        zlabel('e_G') 
+        
+    figure()
+        plot3([0 P1_G(1)], [0 P1_G(2)], [0 P1_G(3)], 'b'); 
+        grid on; hold on; 
+        plot3([0 P2_G(1)], [0 P2_G(2)], [0 P2_G(3)], 'b'); 
+        plot3([0 S_G(1)], [0 S_G(2)], [0 S_G(3)], 'g'); 
+        plot3([0 S_PiPf_G(1)], [0 S_PiPf_G(2)], [0 S_PiPf_G(3)], 'r'); 
+        plot3([S_G(1) P1_G(1)], [S_G(2) P1_G(2)], [S_G(3) P1_G(3)], 'g'); 
+        plot3([S_G(1) P2_G(1)], [S_G(2) P2_G(2)], [S_G(3) P2_G(3)], 'g');
+        plot3([P1_G(1) P2_G(1)], [P1_G(2) P2_G(2)], [P1_G(3) P2_G(3)], 'g');  
+        text(S_G(1), S_G(2), S_G(3), ... 
+            sprintf('    phi2_M = %0.2f deg \n     phi2_{M2} = %0.2f deg \n     phi2_S = %0.2f deg', ... 
+            phi2_M*180/pi, phi2_M2*180/pi, phi2_S*180/pi))
+        title('Chord Trigonometry, Phi around S') 
+        xlabel('P perp_G') 
+        ylabel('Pi_G')
+        zlabel('e_G') 
+end 
+
+%%
 
 % Slew around eigenvector via phi3 
 % What if Pi and Pf overlap with P2 and P2? Need to ask Mohammad this ... 
