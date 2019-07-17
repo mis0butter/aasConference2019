@@ -186,21 +186,18 @@ q_phi1 = y_phi1(:, 4:7);
 
 ypr_phi1 = zeros(length(q_phi1), 3); 
 for i = 1:max(size(q_phi1))
-    ypr_phi1(i, :) = SpinCalc('QtoEA321', q_phi1(i, :), eps, 1); 
+    ypr_phi1(i, :) = SpinCalc('QtoEA321', q_phi1(i, :), eps, 0); 
 end 
 
 t_phi1 = [t1_phi1; t1_phi1(end)+t2_phi1(2:end); t1_phi1(end)+t2_phi1(end)+t3_phi1(2:end)]; 
 
 %% Plot phi1
-
-w = y_phi1(:, 1:3); 
-q = y_phi1(:, 4:7); 
 % ylimits = get_ylimits(q); 
 % ylimits = get_ylimits(w); 
 
 % Plot 
 figure()
-    plot(t_phi1, w) 
+    plot(t_phi1, w_phi1) 
 %     ylim(ylimits)
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
@@ -208,36 +205,51 @@ figure()
     title('Angular Velocity') 
 
 figure()
-    plot(t_phi1, q)
+    plot(t_phi1, q_phi1)
     legend('q1', 'q2', 'q3', 'q4'); 
 %     ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
     title('Quaternion') 
     
+figure()
+    plot(t_phi1, ypr_phi1)
+    legend('Yaw', 'Pitch', 'Roll'); 
+    xlabel('time (s)') 
+    ylabel('degrees') 
+    title('Euler Angles') 
+    
 %% Determine Phi 2 slew times 
 
 % idk 
-t1_phi2 = 10; 
-t2_phi2 = 10; 
+tEnd = 2; 
     
 %% Solve for attitude determination - second slew 
 
 a = aMax*S_G; 
 torque = inertia*a; 
-w_in = [    0;    0;      0]; 
-q_in = [    0;      0;      0;      1]; 
+w_in = w_phi1(end, :)'; 
+q_in = q_phi1(end, :)'; 
 
-[t1_phi2, y1_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, t1_phi2], [w_in; q_in]);
+[t1_phi2, y1_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
 
 w_in = y1_phi2(end, 1:3)'; 
 q_in = y1_phi2(end, 4:7)'; 
 a = aMax*-S_G; 
 torque = inertia*a; 
 
-[t2_phi2, y2_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, t2_phi2], [w_in; q_in]);
+[t2_phi2, y2_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
 
 y_phi2 = [y1_phi2; y2_phi2(2:end, :)]; 
+w_phi2 = y_phi2(:, 1:3); 
+q_phi2 = y_phi2(:, 4:7); 
+
+ypr_phi2 = zeros(length(q_phi2), 3); 
+
+for i = 1:max(size(q_phi2))
+    ypr_phi2(i, :) = SpinCalc('QtoEA321', q_phi2(i, :), eps, 0); 
+end 
+
 t_phi2 = [t1_phi2; t1_phi2(end) + t2_phi2(2:end)]; 
 
 %% Plot phi2
@@ -260,6 +272,13 @@ figure()
     ylabel('quats') 
     xlabel('time (s)') 
     title('Quaternion') 
+    
+figure()
+    plot(t_phi2, ypr_phi2)
+    legend('Yaw', 'Pitch', 'Roll'); 
+    xlabel('time (s)') 
+    ylabel('degrees') 
+    title('Euler Angles') 
     
 
 %% 
