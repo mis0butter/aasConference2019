@@ -178,9 +178,9 @@ q_in = y2_phi2(end, 4:7)';
 a = [ -aMax; 0; 0]; 
 torque = inertia*a; 
 
-[t3_phi1, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
+[t3_phi1, y3_phi1] = ode45(@(t, Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
 
-y_phi1 = [y1_phi1; y2_phi2(2:end, :); y3_phi3(2:end, :)]; 
+y_phi1 = [y1_phi1; y2_phi2(2:end, :); y3_phi1(2:end, :)]; 
 w_phi1 = y_phi1(:, 1:3); 
 q_phi1 = y_phi1(:, 4:7); 
 
@@ -202,7 +202,7 @@ figure()
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
     xlabel('time (s)') 
-    title('Angular Velocity') 
+    title('Angular Velocity Phi 1') 
 
 figure()
     plot(t_phi1, q_phi1)
@@ -210,14 +210,14 @@ figure()
 %     ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
-    title('Quaternion') 
+    title('Quaternion Phi 1') 
     
 figure()
     plot(t_phi1, ypr_phi1)
     legend('Yaw', 'Pitch', 'Roll'); 
     xlabel('time (s)') 
     ylabel('degrees') 
-    title('Euler Angles') 
+    title('Euler Angles Phi 1') 
     
 %% Determine Phi 2 slew times 
 
@@ -263,7 +263,7 @@ figure()
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
     xlabel('time (s)') 
-    title('Angular Velocity') 
+    title('Angular Velocity Phi 2') 
 
 figure()
     plot(t_phi2, q)
@@ -271,15 +271,104 @@ figure()
 %     ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
-    title('Quaternion') 
+    title('Quaternion Phi 2') 
     
 figure()
     plot(t_phi2, ypr_phi2)
     legend('Yaw', 'Pitch', 'Roll'); 
     xlabel('time (s)') 
     ylabel('degrees') 
-    title('Euler Angles') 
+    title('Euler Angles Phi 2') 
     
+
+
+%% Determine Phi 3 slew times
+
+w0 = 0; 
+t0 = 0; 
+wf = 0; 
+
+t1 = t0 + (wMax-w0)/aMax; 
+
+% Mohammad's equation 
+t2 = t1 - (1/wMax) * ... 
+    ( phi1 - w0*(t1 - t0) - 0.5*aMax*(t1 - t0)^2 ... 
+    - wMax*(wMax - wf)/aMax + (wMax - wf)^2/(2*aMax) );  
+
+% % Phi1 times 
+% t1_Phi1 = wMax/aMax; 
+% t2_Phi1 = Phi1/wMax; 
+% t3_Phi1 = t1_Phi1 + t2_Phi1; 
+
+t3 = t2 - (wf - wMax)/aMax; 
+
+%% Solve for attitue determination - third slew 
+        
+% t0 --> t1 
+tEnd = t1 - t0; 
+w_in = w_phi2(end, :)'; 
+q_in = q_phi2(end, :)'; 
+a = [ aMax;  0;  0];  
+torque = inertia*a; 
+
+[t1_phi3, y1_phi3] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+
+% t1 --> t2 
+tEnd = t2 - t1; 
+w_in = y1_phi3(end, 1:3)'; 
+q_in = y1_phi3(end, 4:7)'; 
+a = [0; 0; 0]; 
+torque = inertia*a; 
+
+[t2_phi3, y2_phi3] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
+
+% t2 --> t3 
+tEnd = t3 - t2; 
+w_in = y2_phi3(end, 1:3)'; 
+q_in = y2_phi3(end, 4:7)'; 
+a = [ -aMax; 0; 0]; 
+torque = inertia*a; 
+
+[t3_phi3, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
+
+y_phi3 = [y1_phi3; y2_phi3(2:end, :); y3_phi3(2:end, :)]; 
+w_phi3 = y_phi3(:, 1:3); 
+q_phi3 = y_phi3(:, 4:7); 
+
+ypr_phi3 = zeros(length(q_phi3), 3); 
+for i = 1:max(size(q_phi3))
+    ypr_phi3(i, :) = SpinCalc('QtoEA321', q_phi3(i, :), eps, 0); 
+end 
+
+t_phi3 = [t1_phi3; t1_phi3(end)+t2_phi3(2:end); t1_phi3(end)+t2_phi3(end)+t3_phi3(2:end)]; 
+
+%% Plot phi3
+% ylimits = get_ylimits(q); 
+% ylimits = get_ylimits(w); 
+
+% Plot 
+figure()
+    plot(t_phi3, w_phi3) 
+%     ylim(ylimits)
+    legend('w1', 'w2', 'w3'); 
+    ylabel('w (rad/s)') 
+    xlabel('time (s)') 
+    title('Angular Velocity Phi 3') 
+
+figure()
+    plot(t_phi3, q_phi3)
+    legend('q1', 'q2', 'q3', 'q4'); 
+%     ylim(ylimits)
+    ylabel('quats') 
+    xlabel('time (s)') 
+    title('Quaternion Phi 3') 
+    
+figure()
+    plot(t_phi3, ypr_phi3)
+    legend('Yaw', 'Pitch', 'Roll'); 
+    xlabel('time (s)') 
+    ylabel('degrees') 
+    title('Euler Angles Phi 3') 
 
 %% 
 % 
