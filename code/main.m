@@ -84,11 +84,12 @@ end
 
 close all; 
 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     figure()
         plot3([0 P1_G(1)], [0 P1_G(2)], [0 P1_G(3)], 'b'); 
-        grid on; hold on; 
+        grid on; hold on
+        plot(theta,sin(theta)./theta,'LineWidth',3) 
         plot3([0 P2_G(1)], [0 P2_G(2)], [0 P2_G(3)], 'b'); 
         plot3([0 S_G(1)], [0 S_G(2)], [0 S_G(3)], 'r'); 
         plot3([0 S_PiPf_G(1)], [0 S_PiPf_G(2)], [0 S_PiPf_G(3)], 'r'); 
@@ -138,8 +139,8 @@ wf = 0;
 t1 = t0 + (wMax-w0)/aMax; 
 
 % Mohammad's equation 
-t2 = t1 + (1/wMax) * ... 
-    ( phi1 - w0*(t1 - t0) - 0.5*aMax(t1 - t0)^2 ... 
+t2 = t1 - (1/wMax) * ... 
+    ( phi1 - w0*(t1 - t0) - 0.5*aMax*(t1 - t0)^2 ... 
     - wMax*(wMax - wf)/aMax + (wMax - wf)^2/(2*aMax) );  
 
 % % Phi1 times 
@@ -150,56 +151,116 @@ t2 = t1 + (1/wMax) * ...
 t3 = t2 - (wf - wMax)/aMax; 
 
 
-%% Solve for attitue determination 
+%% Solve for attitue determination - first slew 
         
-tEnd = t1; 
-phi_1_accel = [ 2*(phi1/2)/tEnd^2;  0;  0];  
-torque = inertia*phi_1_accel; 
-
-w_in = [    0.5;    0;      0]; 
+% t0 --> t1 
+tEnd = t1 - t0; 
+w_in = [    0;    0;      0]; 
 q_in = [    0;      0;      0;      1]; 
-[t1, y1] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+a = [ aMax;  0;  0];  
+torque = inertia*a; 
 
-w_in = y1(end, 1:3)'; 
-q_in = y1(end, 4:7)'; 
-torque = 0; 
+[t1_phi1, y1_phi1] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
 
-[t2, y2] = ode45(@(t,Z) gyrostat_cont(inertia, -torque, Z), [0, tEnd], [w_in; q_in]); 
+% t1 --> t2 
+tEnd = t2 - t1; 
+w_in = y1_phi1(end, 1:3)'; 
+q_in = y1_phi1(end, 4:7)'; 
+a = [0; 0; 0]; 
+torque = inertia*a; 
 
-y = [y1; y2(2:end, :)]; 
-t = [t1; t1(end)+t2(2:end)]; 
+[t2_phi1, y2_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
 
-%% Plot 
+% t2 --> t3 
+tEnd = t3 - t2; 
+w_in = y2_phi2(end, 1:3)'; 
+q_in = y2_phi2(end, 4:7)'; 
+a = [ -aMax; 0; 0]; 
+torque = inertia*a; 
 
-w = y(:, 1:3); 
-ylimits = get_ylimits(w); 
+[t3_phi1, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
+
+y_phi1 = [y1_phi1; y2_phi2(2:end, :); y3_phi3(2:end, :)]; 
+t_phi1 = [t1_phi1; t1_phi1(end)+t2_phi1(2:end); t1_phi1(end)+t2_phi1(end)+t3_phi1(2:end)]; 
+
+%% Plot phi1
+
+w = y_phi1(:, 1:3); 
+q = y_phi1(:, 4:7); 
+% ylimits = get_ylimits(q); 
+% ylimits = get_ylimits(w); 
 
 % Plot 
 figure()
-    plot(t, w) 
-    ylim(ylimits)
+    plot(t_phi1, w) 
+%     ylim(ylimits)
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
     xlabel('time (s)') 
     title('Angular Velocity') 
 
-q = y(:, 4:7); 
-ylimits = get_ylimits(q); 
-
 figure()
-    plot(t, q)
+    plot(t_phi1, q)
     legend('q1', 'q2', 'q3', 'q4'); 
-    ylim(ylimits)
+%     ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
     title('Quaternion') 
+    
+%% Determine Phi 2 slew times 
+
+% idk 
+t1_phi2 = 10; 
+t2_phi2 = 10; 
+    
+%% Solve for attitude determination - second slew 
+
+a = aMax*S_G; 
+torque = inertia*a; 
+w_in = [    0;    0;      0]; 
+q_in = [    0;      0;      0;      1]; 
+
+[t1_phi2, y1_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, t1_phi2], [w_in; q_in]);
+
+w_in = y1_phi2(end, 1:3)'; 
+q_in = y1_phi2(end, 4:7)'; 
+a = aMax*-S_G; 
+torque = inertia*a; 
+
+[t2_phi2, y2_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, t2_phi2], [w_in; q_in]);
+
+y_phi2 = [y1_phi2; y2_phi2(2:end, :)]; 
+t_phi2 = [t1_phi2; t1_phi2(end) + t2_phi2(2:end)]; 
+
+%% Plot phi2
+
+w = y_phi2(:, 1:3); 
+q = y_phi2(:, 4:7); 
+
+figure()
+    plot(t_phi2, w)
+%     ylim(ylimits)
+    legend('w1', 'w2', 'w3'); 
+    ylabel('w (rad/s)') 
+    xlabel('time (s)') 
+    title('Angular Velocity') 
+
+figure()
+    plot(t_phi2, q)
+    legend('q1', 'q2', 'q3', 'q4'); 
+%     ylim(ylimits)
+    ylabel('quats') 
+    xlabel('time (s)') 
+    title('Quaternion') 
+    
 
 %% 
-function ylimits = get_ylimits(data) 
-% Set y limits of axis 
-
-rng = range(data(:)); 
-midp = min(data(:)) + rng/2; 
-ylimits = [ midp - 1.2*rng/2, midp + 1.2*rng/2 ]; 
-
-end 
+% 
+% function ylimits = get_ylimits(data) 
+% % Set y limits of axis 
+% 
+% rng = range(data(:)); 
+% midp = min(data(:)) + rng/2; 
+% ylimits = [ midp - 1.2*rng/2, midp + 1.2*rng/2 ]; 
+% 
+% end 
