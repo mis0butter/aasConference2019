@@ -14,6 +14,7 @@ Pi_G = [0; 1; 0];                           % Pi = unit vector of initial point 
 Pf_G = [1; 0; 0];                           % Pf = unit vector of the final point in the G frame 
 S_N = [cosd(45); cosd(45); cosd(45)];       % S = unit vector of sun vector in the N frame 
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
+% G_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
 G_DCM_N = eye(3);                           % DCM from the N to the G frame 
 N_DCM_G = G_DCM_N';                         % G to N frame 
 S_G = G_DCM_N*S_N;                          % Sun vector in G frame 
@@ -83,7 +84,7 @@ end
 
 close all; 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     figure()
         plot3([0 P1_G(1)], [0 P1_G(2)], [0 P1_G(3)], 'b'); 
@@ -128,37 +129,59 @@ if phi3 > pi/2
     phi3_rem = phi3 - pi/2; 
 end 
 
-%% Determine slew times 
+%% Determine Phi 1 slew times
 
+w0 = 0; 
 t0 = 0; 
-tPhi1 = t0 + wMax/aMax; 
+wf = 0; 
+
+t1 = t0 + (wMax-w0)/aMax; 
 
 % Mohammad's equation 
-tPhi2 = tPhi1 + (1/wMax) * ... 
-    ( phi1 - 0.5*aMax(tPhi1)^2 - ... 
-    (wMax*wMax)/aMax + (wMax)^2/(2*aMax) ); 
+t2 = t1 - (1/wMax) * ... 
+    ( phi1 - w0*(t1 - t0) - 0.5*aMax*(t1 - t0)^2 ... 
+    - wMax*(wMax - wf)/aMax + (wMax - wf)^2/(2*aMax) );  
 
-tPhi3 = tPhi2 + tPhi1; 
+% % Phi1 times 
+% t1_Phi1 = wMax/aMax; 
+% t2_Phi1 = Phi1/wMax; 
+% t3_Phi1 = t1_Phi1 + t2_Phi1; 
 
-%% Solve for attitue determination 
+t3 = t2 - (wf - wMax)/aMax; 
+
+
+%% Solve for attitue determination - first slew 
         
-tEnd = 100; 
+% t0 --> t1 
+tEnd = t1 - t0; 
+a = [ aMax;  0;  0];  
+torque = inertia*a; 
 
-phi_1_accel = [ 2*(phi1/2)/tEnd^2;  0;  0];  
-torque = inertia*phi_1_accel; 
-
-w_in = [    0.5;    0;      0]; 
+w_in = [    0;    0;      0]; 
 q_in = [    0;      0;      0;      1]; 
 
-[t1, y1] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+[t1_phi1, y1] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
 
+% t1 --> t2 
+tEnd = t2 - t1; 
 w_in = y1(end, 1:3)'; 
 q_in = y1(end, 4:7)'; 
+a = [0; 0; 0]; 
+torque = inertia*a; 
 
-[t2, y2] = ode45(@(t,Z) gyrostat_cont(inertia, -torque, Z), [0, tEnd], [w_in; q_in]); 
+[t2_phi1, y2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
 
-y = [y1; y2]; 
-t = [t1; t2]; 
+% t2 --> t3 
+tEnd = t3 - t2; 
+w_in = y2(end, 1:3)'; 
+q_in = y2(end, 4:7)'; 
+a = [ -aMax; 0; 0]; 
+torque = inertia*a; 
+
+[t3_phi1, y3] = ode45(@(t, Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
+
+y = [y1; y2(2:end, :); y3(2:end, :)]; 
+t = [t1_phi1; t1_phi1(end)+t2_phi1(2:end); t1_phi1(end)+t2_phi1(end)+t3_phi1(2:end)]; 
 
 %% Plot 
 
@@ -183,9 +206,10 @@ figure()
     ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
-    title('Quaternions') 
+    title('Quaternion') 
 
 %% 
+
 function ylimits = get_ylimits(data) 
 % Set y limits of axis 
 
