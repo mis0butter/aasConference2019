@@ -1,0 +1,579 @@
+% use paper, or submit
+% use 11 pt (preferred), 12 pt, or 10 pt only
+
+\documentclass[letterpaper, preprint, paper,11pt]{AAS}	% for preprint proceedings
+%\documentclass[letterpaper, paper,11pt]{AAS}		% for final proceedings (20-page limit)
+%\documentclass[letterpaper, paper,12pt]{AAS}		% for final proceedings (20-page limit)
+%\documentclass[letterpaper, paper,10pt]{AAS}		% for final proceedings (20-page limit)
+%\documentclass[letterpaper, submit]{AAS}			% to submit to JAS
+
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{subfigure}
+%\usepackage[notref,notcite]{showkeys}  % use this to temporarily show labels
+\usepackage[colorlinks=true, pdfstartview=FitV, linkcolor=black, citecolor= black, urlcolor= black]{hyperref}
+\usepackage{overcite}
+\usepackage{footnpag}			      	% make footnote symbols restart on each page
+
+% Added packages 2019 Feb 17
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+%\usepackage{graphicx} % Allows including images
+%\usepackage{mathrsfs}
+%\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+
+
+\PaperNumber{XX-XXX}
+
+
+
+\begin{document}
+	
+	\title{SUN-AVOIDANCE SLEW PLANNING ALGORITHM WITH POINTING AND ACTUATOR CONSTRAINTS}
+	
+	\author{
+		Mohammad Ayoubi\thanks{Associate Professor, Department of Mechanical Engineering, Santa Clara University, Santa Clara, CA 95053. AIAA senior member, AAS senior member.} and Junette Hsin\thanks{Engineer, Dynamics and Control Analysis Group, Space Solutions (formerly Space Systems/Loral), postal address.}
+	}
+	
+	
+	\maketitle{} 		
+	
+	
+	\begin{abstract}
+		
+A novel geometric approach for a sun (or any bright object) avoidance slew maneuver with pointing and actuator constraints is presented. We assume spacecraft has a single light-sensitive payload with control-torque and reaction wheels' angular momentum constraints. Furthermore, we assume the initial and final attitudes, instrument boresight vector, and sun vector are known. Then we use Pontryagin's minimum principle (PMP) and derive the desired or target-frame quaternions, angular velocity and acceleration for two cases: 1) with control-torque and reaction wheels' angular momentum constraints, and 2) with control-torque constraints.  In the end, a Monte Carlo simulation is performed to show the viability of the proposed algorithm with control-torque and angular momentum constraints. 
+		
+	\end{abstract}
+	
+	\section{Introduction}
+	Large-angle slew maneuvers are required during any Earth-pointing or interplanetary missions. In many space missions, and for safety consideration, a sensitive payload such as imaging camera or telescope needs to be retargeted while avoiding the sun vector or other bright objects in the sky.
+	The attitude reorientation problem in the presence of attitude constrained zones has been studied in the last three decades. McInnes\cite{McInnes1994} addressed this problem via an artificial potential function. He proposed an entirely analytical guidance law which was suitable for onboard implementation. However, he used Euler angles, which are singular for large slew angles. 
+	A geometric approach was proposed by Spindle\cite{Spindler1998}, Hablani\cite{Hablani1998}, and Biggs and Colley\cite{Biggs2016}  where a feasible attitude maneuver, or a guidance law, is precomputed based on the attitude-avoidance-zone constraints.  Another approach for addressing this problem used randomized algorithms\cite{Frazzoli01}. However, depending on the number of constraints and initial and final attitudes, this approach can be computationally expensive and not suitable for onboard implementation. Another approach for solving the time optimal reorientation maneuver subject to boundaries and path constraints was proposed by Spiller et al.\cite{Spiller2016}. They used the particle swarm optimization (PSO) technique to find a sub-optimal solution with keep-out constraints. Another approach casted the problem as a convex optimization problem and used semi-definite programming (SDP) or quadratically constrained quadratic programming (QCQP) in its solution (see for instance Kim and Mesbahi\cite{Kim2004}, Kim et al.\cite{Kim2010}, Sun and Dai\cite{Sun2015}, and Lee and Mesbahi\cite{Lee2014}). Recently, Ramos and Schaub\cite{Ramos2018} proposed a method based on the Lyapunov stability theorem and logarithmic barrier potential function to derive a steering law for attitude control of a spacecraft subject to conically constrained inclusion and exclusion regions. They also considered the control-torque constraint in their algorithm.  
+	
+In this paper, we present a novel geometric approach for large-angle slew planning with pointing and actuator constraints.  We assume that the spacecraft has a single light-sensitive payload with control-torque and reaction wheels' angular momentum constraints. Furthermore, we assume that the initial and final attitudes, instrument boresight vector, and sun vector are known. Then, we derive the desired or target-frame quaternions, angular velocities, and angular accelerations based on the Pontryagin's minimum principle (PMP) for the proposed maneuver. The proposed algorithm in this paper is intuitive, deterministic, easy to implement, and includes the control-torque and reaction wheels' angular momentum constraints. The main drawback of the proposed algorithm is its limitation for a single sensitive-payload.  A Monte Carlo simulation is performed to show the viability of the proposed algorithm with control-torque and angular momentum constraints. 
+	
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Problem Formulation}
+Consider a gyrostat (a rigid body with reaction wheels) in a low earth orbit (LEO).  Assume a newtonian frame, $N$, and a gyrostat-centered unit sphere frame $G$ with a center $G^*$ at the center-of-mass of the gyrostat as shown in Fig. 1. The sun or bright-object avoidance planning problem can be stated as follows: 
+
+Assume that the following are given: initial state, $x_i=$\big[$_\mathcal{N}\hat{P}_i$, $^\mathcal{N}_\mathcal{G}\omega^\mathcal{G}(t_i), ^\mathcal{N}q^\mathcal{G}(t_i)\big]\in \mathbb{R}^3\times \mathbb{R}^3\times \mathbb{SO}(3)$, final state, $x_f=$\big[$_\mathcal{N}\hat{P}_f$, $^\mathcal{N}_\mathcal{G}\omega^\mathcal{G}(t_f)$, $^\mathcal{N}q^\mathcal{G}(t_f)\big]\in \mathbb{R}^3\times \mathbb{R}^3\times \mathbb{SO}(3)$, the sun unit vector in the inertial frame,$_\mathcal{N}\hat{S}\in \mathbb{R}^3$, the sensitive instrument boresight unit vector in the body-fixed frame, $_\mathcal{G}\hat{P}\in \mathbb{R}^3$, and the half-cone angle $\epsilon_p\in \mathbb{R}$.  
+
+Find:  A sequence of slew maneuvers such that the sun vector does not enter into the on-board sensitive instrument forbidden cone for all times $t\in [t_i, t_f]$ subject to actuator constraints.
+		\begin{figure}[htb]
+			\begin{center}
+				\includegraphics[width=3.5in]{./Figures/SASSchematic1}
+				\caption{Gyrostat-centered  unit sphere centered at point $\mathcal{G^*}$. }
+			\end{center}
+		\end{figure}
+		
+\section{Sun-Avoidance Slew (SAS) Algorithm Description} 
+	The first step is to determine if there is a sun vector intrusion. To this end we check the angular separation, $\alpha$, between the sun unit vector, $_\mathcal{N}\hat{S}$, and the $\hat{P}_i-\hat{P}_f$ plane or ``slew plane.''
+		\begin{equation}
+		\alpha=\frac{\pi}{2}-\cos^{-1}(\hat{S}\cdot\hat{e})
+		\end{equation}
+		where the eigenaxis unit vector is determined by
+		\begin{equation}\label{eaxis}
+		\hat{e}=\frac{\hat{P}_i\times\hat{P}_f}{|\hat{P}_i\times \hat{P}_f|}
+		\end{equation} 
+If $|\alpha|>=\epsilon_p$ then the sun vector intrusion has not happened. Otherwise, we need to perform the sun-avoidance slew maneuver which is explained in the next section.
+	
+%	\end{enumerate}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\subsubsection{Slew Planning}
+
+	If $|\alpha|<\epsilon_p$ then we need to plan the sun-avoidance slew in the following steps: 
+	\begin{enumerate}
+		\item The $1^{st}$ slew is around the eigenaxis, $\hat{e}$, through angle $\phi_1$:
+		%		\end{enumerate}
+		\begin{equation}\label{phi1_1}
+		\phi_1=\left\{
+		\begin{array}{ll}
+		\cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p& when\  \cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p\leq \pi\\
+		\cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p-2\pi& when\ \cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p>\pi\\
+		\end{array}
+		\right.
+		\end{equation}
+		\begin{figure}[htb]
+			\begin{center}
+				\includegraphics[width=3.5in]{./Figures/SVAS_1r}\includegraphics[width=3.5in]{./Figures/SVAS_1rb}
+				\caption{The sensitive instrument boresight vector motion during the $1^{st}$ slew.}
+			\end{center}
+		\end{figure}
+		where 
+		\begin{equation}\label{Sbar}
+		\vec{S}_{||}=\hat{S}\cos\alpha.
+		\end{equation}
+	
+		 It should be noted that the vector $\hat{S}_{||}$ is in the $\mathcal{N}$-frame, therefore it should be transformed in the $\mathcal{G}$-frame before it can be used in Eq. (\ref{phi1_1}).
+		%	\begin{enumerate}[2]
+		\item The $2^{nd}$ slew is around the unit sun vector, $\hat{S}$, via angle $\phi_2$.
+		\begin{enumerate}
+			\item when $\alpha\neq0$
+			%		\end{enumerate}
+			%	\end{enumerate}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=3.5in]{./Figures/SVAS_2r}
+					\caption{The sensitive instrument boresight vector motion during the $2^{nd}$ slew when $\alpha\neq 0$.}
+				\end{center}
+			\end{figure}
+			
+			%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			
+			%	\begin{enumerate}[2]
+			%		\item The $2^{nd}$ slew around the unit sun vector, $\hat{S}$, via $\phi_2=180^{\circ}$.
+			%		\begin{enumerate}[b)]
+			\item when $\alpha=0$
+			%		\end{enumerate}
+			%	\end{enumerate}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=3.5in]{./Figures/SVAS_3r}
+						\caption{The sensitive instrument boresight vector motion during the $2^{nd}$ slew when $\alpha= 0$.}
+				\end{center}
+			\end{figure}
+		\end{enumerate}
+		
+		%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		\item The $3^{rd}$ slew is about the $\hat{e}$ through angle $\phi_3$:
+		\begin{equation}\label{phi3_3}
+		\phi_3=\left\{
+		\begin{array}{ll}
+		\cos^{-1}(_\mathcal{G}\hat{P}_f\cdot\hat{P}_2)& when\  _\mathcal{G}\hat{P}_f\cdot\hat{P}_2\geq 0\\
+		\cos^{-1}(_\mathcal{G}\hat{P}_f\cdot\hat{P}_2)-2\pi& when\ _\mathcal{G}\hat{P}_f\cdot\hat{P}_2<0\\
+		\end{array}
+		\right.
+		\end{equation}
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[width=3.5in]{./Figures/SVAS_4r}
+					\caption{The sensitive instrument boresight vector motion during the $3^{rd}$ slew.}
+			\end{center}
+		\end{figure}
+		%		\end{enumerate}
+		%		\begin{enumerate}[4]
+		Similar to the $1^{st}$ maneuver, the vector $_\mathcal{N}\hat{P}_f$ needs to be transformed to the $\mathcal{G}$-frame before computing the dot product in Eq. (\ref{phi3_3}). 
+		\item The final slew about the instrument boresight axis may be needed in order to go to the final attitude. 
+	\end{enumerate}
+	%	\end{enumerate}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\subsection{Summary of Algorithm} 
+	
+	\begin{enumerate}
+		\item Slew around the eigenaxis,$\hat{e}$, through angle:
+		
+		\begin{equation}\label{phi1}
+		\phi_1=\left\{
+		\begin{array}{ll}
+		\cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p& when\  \cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p\leq \pi\\
+		\cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p-2\pi& when\ \cos^{-1}(\hat{P}\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p>\pi\\
+		\end{array}
+		\right.
+		\end{equation}
+		\item Slew around the $\hat{S}$ via:
+		\begin{equation}\label{phi2}
+		\phi_2=\left\{
+		\begin{array}{ll}
+		2\tan^{-1}(\frac{\epsilon_p}{\sin\alpha})& when\  \alpha\neq 0\\
+		\pi& when\ \alpha=0\\
+		\end{array}
+		\right.
+		\end{equation}
+		\item Slew about the $\hat{e}$ through angle:
+		\begin{equation}\label{phi3}
+		\phi_3=\left\{
+		\begin{array}{ll}
+		\cos^{-1}(_\mathcal{G}\hat{P}_f\cdot\hat{P}_2)& when\  _\mathcal{G}\hat{P}_f\cdot\hat{P}_2\geq 0\\
+		\cos^{-1}(_\mathcal{G}\hat{P}_f\cdot\hat{P}_2)-2\pi& when\ _\mathcal{G}\hat{P}_f\cdot\hat{P}_2<0\\
+		\end{array}
+		\right.
+		\end{equation}
+		
+		\item If necessary, perform the final rotation, $\phi_4$, about the instrument boresight axis to adjust the attitude. 
+	\end{enumerate}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\begin{figure}[H]
+		\begin{center}
+		\includegraphics[width=6in]{./Figures/SASSchematic3}
+		\caption{The trajectory of the instrument boresight tip on the gyrostat-centered unit sphere during the SAS maneuver.}
+		\end{center}
+	\end{figure}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\section{Steering Laws} 
+	In this section we utilize the proposed sun-avoidance slew algorithm to generate the required angular rate, $_\mathcal{G}^\mathcal{N}\omega^\mathcal{T}$, angular acceleration, $_\mathcal{G}^\mathcal{N}\alpha^\mathcal{T}$, and quaternions, $^\mathcal{N}q^\mathcal{T}$, for the control system. Figure 7 shows how the generated commands are utilized by an attitude control system to guide the gyrostat in each leg of the SAS.
+	
+	
+	In the following, we formulate the problem of finding the steering laws for two cases with: 1) velocity and acceleration constraints and 2) acceleration constraint.
+	\subsection{Case 1: Single-Axis, Agile Slew Maneuver with Velocity and Acceleration Constraints.}	 
+	
+
+	{\it Problem Statement}: Consider the motion of a gyrostat around a given inertially-fixed axis, $_\mathcal{N}\hat{e}=[e_x,e_y,e_z]^T$. The problem of minimum-time slew maneuver around the $_\mathcal{N}\hat{e}$ axis can be formulated as:
+	
+	\begin{equation}\label{costfunction}
+	\underset{u}{Minimize}\ \mathcal{J}[x(.), u(.), t_f]=\int_{t0}^{t_f} dt,
+	\end{equation}
+	
+	subject to the following dynamic constraints:
+	
+	\begin{equation}\label{system}
+	\Sigma_\mathcal{G}:\left\{
+	\begin{array}{l}
+	\dot{x}_1=x_2, \\
+	\dot{x}_2=M/I_{\hat{e}}^{\mathcal{G/G*}}=u, \\
+	\end{array}
+	\right.
+	\end{equation}
+	
+	where $x_1 \triangleq\phi$, $x_2=\dot{\phi}$, $M$ is the projection of the reaction wheel or other actuators torque along the $\hat{e}$, and 
+	\begin{equation}
+	I_{\hat{e}}^{\mathcal{G/G*}}=\hat{e\ }I^{\mathcal{G/G*}}\ \hat{e}^T.
+	\end{equation}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=3.5in]{./Figures/Spacecraft}  
+			\caption{A gyrostat rotating about the eigenaxis, $\hat{e}$. }
+		\end{center}    
+	\end{figure}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	The boundary conditions are given by
+	\begin{equation}\label{Bcs}
+	BCs:\left\{
+	\begin{array}{l}
+	\phi(t_0)=0, \phi(t_f)=\phi_{f},\\
+	\dot{\phi}(t_0)=\dot{\phi}_{0},\dot{ \phi}(t_f)=\dot{\phi}_{f}, \\
+	\end{array}
+	\right.
+	\end{equation}
+	and the reaction wheels' angular momentum and control-torque acceleration can be transformed into the angular velocity and angular acceleration constraints as follows
+	\begin{equation}\label{constraints1}
+	C_1:\left\{
+	\begin{array}{l}
+	|x_2=\dot{\phi}|\leq \dot{\phi}_{max},\\
+	|u=\ddot{\phi}|\leq \ddot{\phi}_{max},\\
+	\end{array}
+	\right.
+	\end{equation}
+	in which 
+	\begin{equation}
+	\dot{\phi}_{max}=[I^{w/w^*}]^{-1}[^\mathcal{N}H^{\mathcal{G}/\mathcal{G*}}-(I^{\mathcal{G}/\mathcal{G}*}+I^{w/w*})^\mathcal{N}\omega^\mathcal{G}]/(e_x+e_y+e_z),
+	\end{equation}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	and
+	\begin{equation}\label{phiddotmax}
+	\ddot{\phi}_{max}= M_{max}/I_{\hat{e}}^{\mathcal{G/G*}},
+	\end{equation}
+	where $^\mathcal{N}H^{\mathcal{G/G*}}$ is the total angular momentum of the gyrostat with respect to its center of mass, $\mathcal{G}^*$, in the $\mathcal{N}$-frame. $I^{\mathcal{G/G^*}}$ and $I^{w/w*}$ represent the mass-moment-of-inertia of the gyrostat and reaction wheels with respect to their center of masses, respectively. $M_{max}$ is the maximum available torque along the eigenaxis in the $\mathcal{G}$-frame. Find $^\mathcal{N}\omega^\mathcal{T}$, $^\mathcal{N}\alpha^\mathcal{T}$, and $^\mathcal{N}q^\mathcal{T}$.\\
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	Using the optimal control theory and Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
+	\begin{enumerate}
+		\item State Eqs.:
+		\begin{equation}
+		\left\{
+		\begin{array}{l}
+		\dot{x}_1=x_2, \\
+		\dot{x}_2=u, \\
+		\dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
+		\end{array}
+		\right.
+		\end{equation}
+		where the unit step function, $\mathbb{U}$, is defined as
+		\begin{equation}
+		\mathbb{U}(X)=\left\{
+		\begin{array}{l}
+		1,   X>0, \\
+		0,   X\leq 0.
+		\end{array}
+		\right.
+		\end{equation}
+		Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, t\in[t_0, t_f]$. 
+		%				Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \foral t\in[t_0, t_f]. $  
+		
+		\item Hamiltonian:
+		
+		\begin{equation}
+		\begin{split}
+		\mathscr{H}=& 1+\lambda_1x_2+\lambda_2u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+		& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
+		\end{split}
+		\end{equation}
+		%			\end{enumerate}
+		
+		%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		%			\begin{enumerate}
+		%				\conti
+		%				\small{
+		\item Costate Eqs.:
+		\begin{equation}
+		\left\{\begin{array}{l}
+		\dot{\lambda}_1=-\frac{\partial{\mathscr{H}}}{\partial{x_1}}=0,\\
+		\dot{\lambda}_2=-\frac{\partial{\mathscr{H}}}{\partial{x_2}}=-\lambda_1-2\lambda_3(x_2+\dot{\phi}_{max})\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+		+2\lambda_3(\dot{\phi}_{max}-x_2)\mathbb{U}(x_2-\dot{\phi}_{max}),\\
+		\dot{\lambda}_3=-\frac{\partial{\mathscr{H}}}{\partial{x_3}}=0.\\
+		\end{array}
+		\right.
+		\end{equation}
+		\item Applying the Pontryagin's minimum principle (PMP),
+		\begin{equation}
+		u^*=arg \underset{u\in\mathcal{U}}{min} \mathscr{H},
+		\end{equation}
+		where $\mathcal{U}$ defines the domain of feasible controls. The optimal control can be determined as
+		\begin{equation}
+		u^*(t)=\left\{
+		\begin{array}{ll}
+		\ddot{\phi}_{max}&\lambda_2<0,\\
+		?& \lambda_2=0,\\
+		-\ddot{\phi}_{max}&\lambda_2>0.
+		\end{array}
+		\right.
+		\end{equation}
+		%				}
+		%			\end{enumerate}
+		%			\seti
+		This is a {\it singular arc} optimal control problem.
+		
+		%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		\item Determining the optimal control in the singular arc:
+		\begin{equation}
+		\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)=\ddot{\lambda}_2=0\rightarrow \dot{x}_2=0\rightarrow u^*=0
+		\end{equation}
+		\item Checking the Generalized Legendre-Clebsch condition for optimality:
+		\begin{equation}
+		(-1)^2\frac{\partial}{\partial u}\Big[\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)\Big]=1\geq 0
+		\end{equation}
+		\item Checking the transversality condition:
+		\begin{equation}
+		\mathscr{H}|_{(*,t_f)}=0\  \text{and} \ \mathscr{H}\neq\mathscr{H}(t)\rightarrow \mathscr{H}=0, \forall t\in[t_0, t_f].
+		\end{equation}
+	\end{enumerate}
+	%	\seti
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	The angular acceleration profile is bang-off-bang, as shown in Fig. \ref{bang_off_bang}
+
+	\begin{equation}\label{phidd_cons}
+	\ddot{\phi}(t)=u=\left\{
+	\begin{array}{ll}
+	\ddot{\phi}_{max}& when\  t_0\leq t\leq t_1,\\
+	0& when\  t_1\leq t \leq t_2,\\
+	-\ddot{\phi}_{max}& when \ t_2\leq t\leq t_f.
+	\end{array}
+	\right.
+	\end{equation}
+
+	\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=3.5in]{./Figures/bang_off_bang}
+	\caption{The optimal control law for case 1.}
+	\label{bang_off_bang}
+	\end{center}
+	\end{figure}
+ The angular velocity profile can be determined as
+
+	\begin{equation}\label{phid_cons}
+	\dot{\phi}(t)=\left\{
+	\begin{array}{ll}
+	\dot{\phi}_0+\ddot{\phi}_{max}(t-t_0)& when\  t_0\leq t\leq t_1,\\
+	\dot{\phi}_{max}& when\  t_1\leq t \leq t_2,\\
+	\dot{\phi}_{max}-\ddot{\phi}_{max}(t-t_2)& when \ t_2\leq t\leq t_f.
+	\end{array}
+	\right.
+	\end{equation}
+
+and the angular position can be find by direct integration of Eq. (\ref{phid_cons}),
+	\begin{equation}\label{phi_cons}
+	\phi(t)=\left\{
+	\begin{array}{ll}
+	\dot{\phi}_0(t-t_0)+\frac{1}{2}\ddot{\phi}_{max}(t-t_0)^2& when\  t_0\leq t\leq t_1,\\
+	\phi(t_1)+ \dot{\phi}_{max}(t-t_1)& when\  t_1\leq t \leq t_2,\\
+	\phi(t_2)+\dot{\phi}_{max}(t-t_2)-\frac{1}{2}\ddot{\phi}_{max}(t-t_2)^2& when \ t_2\leq t\leq t_f.
+	\end{array}
+	\right.
+	\end{equation}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	 Using the conditions, $\dot{\phi}(t_1)=\dot{\phi}_{max}$, $\dot{\phi}(t_f)=\dot{\phi}_f$, $\phi(t_f)=\phi_f$, we can determine switching times $t_1$, $t_2$, and final time $t_f$ as:
+	
+	\begin{equation}\label{t1cons}
+	t_1=t_0+\frac{\dot{\phi}_{max}-\dot{\phi}_0}{\ddot{\phi}_{max}},
+	\end{equation}
+	\begin{equation}\label{t2cons}
+	\begin{split}
+	t_2=&t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2\\
+	&-\frac{\dot{\phi}_{max}(\dot{\phi}_{max}-\dot{\phi}_f)}{\ddot{\phi}_{max}}+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big],
+	\end{split}
+	\end{equation}
+	and
+	\begin{equation}\label{tfcons}
+	t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
+	\end{equation}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+		and the steering profiles including the quaternions, angular rate, and angular acceleration can be determined as
+		\begin{equation}\label{quatT}
+		^\mathcal{N}q^\mathcal{T}(t)=\Big[e_x\sin\frac{\phi(t)}{2}, e_y\sin\frac{\phi(t)}{2}, e_z\sin\frac{\phi(t)}{2}, \cos\frac{\phi(t)}{2}\Big]^T,
+		\end{equation}
+		\begin{equation}\label{omegaT}
+		^\mathcal{N}\omega^\mathcal{T}(t)=\dot{\phi}(t)\hat{e},
+		\end{equation}
+		\begin{equation}\label{alpha_1}
+		^\mathcal{N}\alpha^\mathcal{T}(t)=\ddot{\phi}(t)\hat{e}.
+		\end{equation}
+
+	Equations (\ref{phidd_cons})--(\ref{alpha_1}) can be used with proper boundary conditions to determine the steering laws for each segment of the SAS algorithm. This is shown in the next section for the acceleration constraint case.
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\subsection{Case 2: Single-Axis, Agile Slew Maneuver with Acceleration Constraint} 
+	
+	{\it Problem Statement}: Consider the optimal control problem described by Eqs. (\ref{costfunction}), (\ref{system})--(\ref{Bcs}), subject to control constraint
+	\begin{equation}
+	C_2: \ |u=\ddot{\phi}|\leq \ddot{\phi}_{max},
+	\end{equation}
+	and find $^\mathcal{N}\omega^\mathcal{T}$, $^\mathcal{N}\alpha^\mathcal{T}$, and $^\mathcal{N}q^\mathcal{T}$ for the SAS maneuver.
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	 It is well known that the angular acceleration about the $\hat{e}$ axis is a bang-bang control as shown in Fig. \ref{bang_bang}.
+	\begin{equation}\label{alpha}
+	\ddot{\phi}(t)=\ddot{\phi}_{max}\mathbb{U}(t_0)- 2\ddot{\phi}_{max}\mathbb{U}(t-t_1),
+	\end{equation}
+	
+	\begin{figure}[!ht]
+	\begin{center}
+	\includegraphics[width=2in]{./Figures/Bang_bang}    
+	\caption{The optimal control in case 2.}  
+	\label{bang_bang}
+	\end{center}
+	\end{figure}
+	where the switching and the final times are given by
+	\begin{equation}
+	t_1=t_0-\frac{\dot{\phi}_{0}}{\ddot{\phi}_{max}}+\frac{\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_{f}+\dot{\phi}_{f}^2+\dot{\phi}_{0}^2)}}{\sqrt{2}\ddot{\phi}_{max}^2},
+	\end{equation}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	and
+	\begin{equation}
+	t_f=t_0-\frac{\dot{\phi}_{f}+\dot{\phi}_{0}}{\ddot{\phi}_{max}}+\frac{\sqrt{2}\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_{f}+\dot{\phi}_{ef}^2+\dot{\phi}_{0}^2)}}{\ddot{\phi}_{max}^2}.
+	\end{equation}
+The angular velocity and angular rate about the $\hat{e}$ axis are
+
+	\begin{equation}\label{omega}
+	\dot{\phi}(t)=\dot{\phi}_{0}+\ddot{\phi}_{max}(t-t_0)\mathbb{U}(t_0)- 2\ddot{\phi}_{max}(t-t_1)\mathbb{U}(t-t_1),
+	\end{equation}
+
+	\begin{equation}\label{phi}
+	\phi(t)=\dot{\phi}_{0}(t-t_0)+\ddot{\phi}_{max}\frac{(t-t_0)^2}{2}\mathbb{U}(t_0)- 2\ddot{\phi}_{max}\frac{(t-t_1)^2}{2}\mathbb{U}(t-t_1).
+	\end{equation}
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	%In the following, we calculate the $\phi(t)$, $\dot{\phi}(t)$, and $\ddot{\phi}(t)$ for each leg of the sun avoidance slew and from Eqs. (\ref{quatT})--(\ref{alpha_1}), we 
+	\subsubsection{The First Slew Maneuver:} 
+	This is a single-axis nonrest-to-rest maneuver around the $\hat{e}$ with boundary conditions,
+
+	\begin{equation}\label{Bc1}
+	\dot{\phi}(t_0)=\dot{\phi}_{0},\phi(t_0)=0, \dot{\phi}(t_{f1})=0,\phi(t_{f1})=\phi_1.
+	\end{equation}
+	
+	The switching time, $t_{11}$, and the minimum-time, $t_{f1}$, are 
+	\begin{equation}\label{t11}
+	t_{11}=t_0-\frac{\dot{\phi}_0}{\ddot{\phi}_{max}}+\frac{\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_1+\dot{\phi}_{0}^2)}}{\sqrt{2}\ddot{\phi}_{max}^2},
+	\end{equation}
+	\begin{equation}\label{tf1}
+	t_{f1}=t_0-\frac{\dot{\phi}_0}{\ddot{\phi}_{max}}+\frac{\sqrt{2\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_1+\dot{\phi}_{0}^2)}}{\ddot{\phi}_{max}^2}.
+	\end{equation}
+
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\subsubsection{The Second Slew Maneuver:}
+	This is a rest-to-rest maneuver around the sun vector with boundary conditions given by	
+	\begin{equation}\label{Bc2}
+	\dot{\phi}(t_0)=0, \phi(t_0)=0, \dot{\phi}(t_{f2})=0, \phi(t_{f2})=\phi_2.
+	\end{equation}
+	The switching time, $t_{12}$, and the minimum-time, $t_{f2}$, are
+	\begin{equation}\label{t21}
+	t_{12}=t_0-\frac{\sqrt{\phi_2}}{\ddot{\phi}_{max}},
+	\end{equation}
+	\begin{equation}\label{tf2}
+	t_{f2}=t_0-\frac{2\sqrt{\phi_2}}{\ddot{\phi}_{max}}.
+	\end{equation}
+
+	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\subsubsection{The Third Slew Maneuver:}
+	 This is a  single-axis rest-to-nonrest maneuver around the $\hat{e}$ with boundary conditions,
+	\begin{equation}\label{Bc3}
+	\dot{\phi}(t_0)=0,\phi(t_0)=0, \dot{\phi}(t_{f3})=\dot{\phi}_{f},\phi(t_{f3})=\phi_3.
+	\end{equation}
+	The switching time, $t_{13}$, and the minimum-time, $t_{f3}$, are
+	\begin{equation}\label{t31}
+	t_{13}=t_0+\frac{\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_3+\dot{\phi}_{f}^2)}}{\sqrt{2}\ddot{\phi}_{max}^2},
+	\end{equation}
+	\begin{equation}\label{tf3}
+	t_{f3}=t_0-\frac{\dot{\phi}_{f}}{\ddot{\phi}_{max}}+\frac{\sqrt{2\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_3+\dot{\phi}_{f}^2)}}{\ddot{\phi}_{max}^2}.
+	\end{equation}
+	Knowing the switching time for each slew, the $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$, can be found by substituting the boundary conditions for each slew in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively. Then the steering laws, i.e. $^\mathcal{N}\omega^\mathcal{T}(t)$, $^\mathcal{N}\alpha^\mathcal{T}(t)$, $^\mathcal{N}q^\mathcal{T}(t)$, can be found from Eqs. (\ref{quatT})--(\ref{alpha_1}).	
+	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	\section{Numerical simulation} 
+	
+	\section{Conclusion}
+	
+	\section{Acknowledgment}
+	
+	\section{Notation}
+\begin{tabular}{r l}
+$\mathcal{G}$-frame& gyrostat body-fixed frame\\
+$^\mathcal{N}H^{\mathcal{G/G*}}$& the total angular momentum of the gyrostat with respect to its center of mass\\
+$I^{\mathcal{G/G^*}}$ &the mass-moment-of-inertia of the gyrostat\\
+$I^{w/w*}$ & the mass-moment-of-inertia of reaction wheels with respect to their center of masses\\
+$M_{max}$ & the maximum available torque along the eigenaxis\\
+$\mathcal{N}$-frame & the Newtonian frame \\
+
+
+$_\mathcal{G}\hat{P}$ & unit vector along the bore sight of payload in the $\mathcal{G}$-frame\\
+$_\mathcal{N}\hat{P}_i$ & unit vector of the initial point in the $\mathcal{N}$-frame\\
+$_\mathcal{N}\hat{P}_f$ & unit vector of the final point in the $\mathcal{N}$-frame\\
+
+$^\mathcal{N}q^\mathcal{T}$& quaternion of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
+$_\mathcal{N}\hat{S}$ & unit vector of the sun vector in the $\mathcal{N}$-frame\\
+$\mathcal{T}$-frame & the target frame \\
+$\epsilon_p$ & Payload half-cone angle\\
+$^\mathcal{N}\alpha^\mathcal{T}$& angular acceleration of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
+$^\mathcal{N}\omega^\mathcal{T}$& angular velocity of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
+
+\end{tabular} \\
+
+	
+	\bibliographystyle{AAS_publication}   % Number the references.
+	\bibliography{references_SAA}   % Use references.bib to resolve the labels.
+	
+	
+	
+\end{document}
