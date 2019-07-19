@@ -251,7 +251,52 @@ q_in = q_phi1(end, :)';
 a = aMax*S_G; 
 torque = inertia*a; 
 
-[t1_phi2, y1_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+% G --> N frame 
+% N_Q_G = SpinCalc('DCMtoQ', N_DCM_G, eps, 1); 
+% w_in = N_DCM_G*w_in; 
+% q_in = N_Q_G*q_in; 
+% torque_N = N_DCM_G*torque; 
+
+%%
+%%%%%%
+% 
+% What I need to happen: 
+% for t0 --> t1: 
+% 
+% the direction of torque_G needs to be recalculated at every time step 
+
+w = w_in; 
+Q = q_in; 
+dt = 1/16; 
+int = 0; 
+quat = zeros(t1/dt + 1, 4); 
+ang_vel = zeros(t1/dt + 1, 3); 
+
+for t = 0:dt:t1 
+    nsteps = 10;
+    for i = 1:nsteps
+        dw = inv(inertia)*(torque - cross(w, inertia*w));
+        dQ = 1/2*[Q(4), -Q(3), Q(2);
+                  Q(3), Q(4), -Q(1);
+                  -Q(2), Q(1), Q(4);
+                  -Q(1), -Q(2), -Q(3)]*w;
+        w = w + dw*dt/nsteps;
+        Q = Q + dQ*dt/nsteps;
+    end
+    DCM = SpinCalc('QtoDCM', Q', eps, 0); 
+    torque = DCM*torque; 
+    inertia = DCM*inertia; 
+    
+    int = int + 1; 
+    quat(int, :) = Q'; 
+    ang_vel(int, :) = w'; 
+    
+end 
+    
+%%%%%%
+%%
+
+[t1_phi2, y1_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque_N, Z), [0, tEnd], [w_in; q_in]);
 
 tEnd = t2 - t1; 
 w_in = y1_phi2(end, 1:3)'; 
@@ -266,8 +311,9 @@ w_in = y2_phi2(end, 1:3)';
 q_in = y2_phi2(end ,4:7)'; 
 a = -aMax*S_G; 
 torque = inertia*a; 
+torque_N = N_DCM_G*torque; 
 
-[t3_phi2, y3_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+[t3_phi2, y3_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque_N, Z), [0, tEnd], [w_in; q_in]);
 
 y_phi2 = [y1_phi2; y2_phi2(2:end, :); y3_phi2(2:end, :)]; 
 w_phi2 = y_phi2(:, 1:3); 
