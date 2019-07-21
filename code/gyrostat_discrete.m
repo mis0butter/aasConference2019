@@ -11,9 +11,9 @@ end
 w = w0; 
 q = q0; 
 int = 1; 
-w_out = [ w0'; zeros(dt : dt : (t_end - t_start)), 3 ]; 
-q_out = [ q0'; zeros(dt : dt : (t_end - t_start)), 4 ];
-time = [t_start; zeros(dt : dt : (t_end - t_start))]; 
+w_out = [ w0'; zeros(length(dt : dt : (t_end - t_start)), 3 )]; 
+q_out = [ q0'; zeros(length(dt : dt : (t_end - t_start)), 4 )];
+time = [t_start; zeros(length(dt : dt : (t_end - t_start)), 1)]; 
 
 for t = t_start+dt : dt : t_end 
     
