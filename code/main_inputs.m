@@ -11,9 +11,9 @@ Pf_G = [1; 0; 0];                           % Pf = unit vector of the final poin
 S_N = [cosd(45); cosd(45); cosd(45)];       % S = unit vector of sun vector in the N frame 
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
 % G_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
-G_DCM_N = eye(3);                           % DCM from the N to the G frame 
-N_DCM_G = G_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
-S_G = G_DCM_N*S_N;                          % Sun vector in G frame 
+G0_DCM_N = eye(3);                           % DCM from the N to the G frame 
+N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
+S_G = G0_DCM_N*S_N;                          % Sun vector in G frame 
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
 aMax = 1;                                  % Maximum acceleration, rad/s^2
 wMax = 1;                                  % Maximum angular velocity, rad/s

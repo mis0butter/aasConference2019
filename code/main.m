@@ -302,8 +302,8 @@ dt = 1/100;
 
 a = aMax*S_G; 
 torque = inertia*a; 
-w = w_phi1(end, :)'; 
-Q = q_phi1(end, :)'; 
+w0 = w_phi1(end, :)'; 
+Q0 = q_phi1(end, :)'; 
 t_start = t_phi1(end); 
 
 [t1_phi2, q1_phi2, w1_phi2] = gyrostat_discrete(dt, ... 

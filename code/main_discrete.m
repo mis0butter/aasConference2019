@@ -12,6 +12,7 @@ phi1_check_vectors
 
 %% Determine Phi 1 slew times
 
+% Initial conditions 
 w0 = 0; 
 t0 = 0; 
 wf = 0; 
@@ -25,10 +26,10 @@ t2 = t1 - (1/wMax) * ...
 
 t3 = t2 - (wf - wMax)/aMax; 
 
+% Discretize slew times to 2 decimal places 
 t1 = round(t1, 2); 
 t2 = round(t2, 2); 
 t3 = round(t3, 3); 
-
 
 %% Solve for attitude determination - first slew 
         
@@ -41,7 +42,7 @@ torque = inertia*a;                                 % wrt G frame
 dt = 1/100; 
 [t1_phi1, q1_phi1, w1_phi1] = gyrostat_discrete(dt, t0, t1, inertia, torque, w0, q0); 
 
-% t1 --> t2 =
+% t1 --> t2 
 w0 = w1_phi1(end, :)'; 
 q0 = q1_phi1(end, :)'; 
 a = [0; 0; 0]; 
@@ -100,6 +101,7 @@ end
     
 %% Determine Phi 2 slew times 
 
+% Starting from rest, ending at rest 
 w0 = 0; 
 t0 = 0; 
 wf = 0; 
@@ -111,45 +113,32 @@ t2 = t1 - (1/wMax) * ...
     ( phi2 - w0*(t1 - t0) - 0.5*aMax*(t1 - t0)^2 ... 
     - wMax*(wMax - wf)/aMax + (wMax - wf)^2/(2*aMax) );  
 
-% % Phi1 times 
-% t1_Phi1 = wMax/aMax; 
-% t2_Phi1 = Phi1/wMax; 
-% t3_Phi1 = t1_Phi1 + t2_Phi1; 
-
 t3 = t2 - (wf - wMax)/aMax; 
     
 %% Solve for attitude determination - second slew 
-
-% G --> N frame 
-% N_Q_G = SpinCalc('DCMtoQ', N_DCM_G, eps, 1); 
-% w_in = N_DCM_G*w_in; 
-% q_in = N_Q_G*q_in; 
-% torque_N = N_DCM_G*torque; 
-
-%%
-%%%%%%
 % 
 % What I need to happen: 
 % for t0 --> t1: 
 % 
-% the direction of torque_G needs to be recalculated at every time step 
+% the direction of torque_G needs to be recalculated at every time step. 
 
 dt = 1/100; 
 
+w0 = w_phi1(end, :)'; 
+
+% This is the quaternion of current in initial G0 frame. 
+q0 = q_phi1(end, :)';    
+G0_DCM_G = SpinCalc('QtoDCM', q0', eps, 0); 
+G_DCM_G0 = G0_DCM_G'; 
+
 a = aMax*S_G; 
 torque = inertia*a; 
-w = w_phi1(end, :)'; 
-Q = q_phi1(end, :)'; 
-t_start = t_phi1(end); 
 
-[t1_phi2, q1_phi2, w1_phi2] = gyrostat_discrete(dt, ... 
-    t_start, t_end, inertia, torque, w0, q0); 
+[t1_phi2, q1_phi2, w1_phi2] = gyrostat_discrete(dt, t0, t1, inertia, torque, w0, q0); 
 
 torque = [0; 0; 0]; 
-q2_phi2 = zeros(length(t1+dt:dt:t2), 4); 
-w2_phi2 = zeros(length(t1+dt:dt:t2), 3); 
-t2_phi2 = zeros(length(t1+dt:dt:t2), 1); 
 
+[t2_phi2, q2_phi2, w2_phi2] = gyrostat_discrete(dt, t1, t2, inertia, torque, w0, q0); 
 
 a = aMax*S_G; 
 torque = inertia*a; 
