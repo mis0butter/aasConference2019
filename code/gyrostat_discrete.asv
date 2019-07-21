@@ -58,6 +58,7 @@ for t = t_start+dt : dt : t_end
     q_out(int, :) = q'; 
     w_out(int, :) = w'; 
     time(int) = t; 
+    if int = length(t_start+dt : dt : t_end )
     
 end 
 

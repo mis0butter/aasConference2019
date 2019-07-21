@@ -37,8 +37,8 @@ dq = 1/2*[q(4), -q(3), q(2);
           -q(2), q(1), q(4);
           -q(1), -q(2), -q(3)]*w;
 % dq = 0.5*[  0       w(3)   -w(2)    w(1);     % Interesting - this kind
-%            -w(3)    0      -w(1)    w(2);     % skew matrix results in 
-%             w(2)   -w(1)    0       w(3);     % q's blowing up 
+%            -w(3)    0      -w(1)    w(2);     % ske
+%             w(2)   -w(1)    0       w(3); 
 %            -w(1)    w(2)   -w(3)    0]*q; 
 
 dZdt = [dw; dq]; 

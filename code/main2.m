@@ -82,46 +82,9 @@ else
     phi2 = phi2_S; 
 end 
 
-%% optional plotting routine to check things 
-
-close all; 
-
+% optional plotting routine to check things 
 plot_option = 0; 
-if plot_option == 1
-    figure()
-        plot3([0 P1_G(1)], [0 P1_G(2)], [0 P1_G(3)], 'b'); 
-        grid on; hold on
-        plot(theta,sin(theta)./theta,'LineWidth',3) 
-        plot3([0 P2_G(1)], [0 P2_G(2)], [0 P2_G(3)], 'b'); 
-        plot3([0 S_G(1)], [0 S_G(2)], [0 S_G(3)], 'r'); 
-        plot3([0 S_PiPf_G(1)], [0 S_PiPf_G(2)], [0 S_PiPf_G(3)], 'r'); 
-        plot3([0 P3_G(1)], [0 P3_G(2)], [0 P3_G(3)], 'g'); 
-        plot3([P3_G(1) P1_G(1)], [P3_G(2) P1_G(2)], [P3_G(3) P1_G(3)], 'g'); 
-        plot3([P3_G(1) P2_G(1)], [P3_G(2) P2_G(2)], [P3_G(3) P2_G(3)], 'g'); 
-        text(P3_G(1), P3_G(2), P3_G(3), ... 
-            sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
-        title('Dot Product, Phi around P3') 
-        xlabel('P perp_G') 
-        ylabel('Pi_G')
-        zlabel('e_G') 
-        
-    figure()
-        plot3([0 P1_G(1)], [0 P1_G(2)], [0 P1_G(3)], 'b'); 
-        grid on; hold on; 
-        plot3([0 P2_G(1)], [0 P2_G(2)], [0 P2_G(3)], 'b'); 
-        plot3([0 S_G(1)], [0 S_G(2)], [0 S_G(3)], 'g'); 
-        plot3([0 S_PiPf_G(1)], [0 S_PiPf_G(2)], [0 S_PiPf_G(3)], 'r'); 
-        plot3([S_G(1) P1_G(1)], [S_G(2) P1_G(2)], [S_G(3) P1_G(3)], 'g'); 
-        plot3([S_G(1) P2_G(1)], [S_G(2) P2_G(2)], [S_G(3) P2_G(3)], 'g');
-        plot3([P1_G(1) P2_G(1)], [P1_G(2) P2_G(2)], [P1_G(3) P2_G(3)], 'g');  
-        text(S_G(1), S_G(2), S_G(3), ... 
-            sprintf('    phi2_M = %0.2f deg \n     phi2_{M2} = %0.2f deg \n     phi2_S = %0.2f deg', ... 
-            phi2_M*180/pi, phi2_M2*180/pi, phi2_S*180/pi))
-        title('Chord Trigonometry, Phi around S') 
-        xlabel('P perp_G') 
-        ylabel('Pi_G')
-        zlabel('e_G') 
-end 
+phi1_check_vectors 
 
 %%
 
@@ -145,91 +108,48 @@ t2 = t1 - (1/wMax) * ...
     ( phi1 - w0*(t1 - t0) - 0.5*aMax*(t1 - t0)^2 ... 
     - wMax*(wMax - wf)/aMax + (wMax - wf)^2/(2*aMax) );  
 
-% % Phi1 times 
-% t1_Phi1 = wMax/aMax; 
-% t2_Phi1 = Phi1/wMax; 
-% t3_Phi1 = t1_Phi1 + t2_Phi1; 
-
 t3 = t2 - (wf - wMax)/aMax; 
+
+t1 = round(t1, 2); 
+t2 = round(t2, 2); 
+t3 = round(t3, 3); 
 
 
 %% Solve for attitude determination - first slew 
         
 % t0 --> t1 
-tEnd = t1 - t0; 
 w0 = [    0;    0;      0]; 
-q0 = [    0;    0;      0;      1];               % wrt G frame 
+q0 = [    0;    0;      0;      1];                 % wrt G frame 
 a = [ aMax;  0;  0];  
 torque = inertia*a;                                 % wrt G frame 
 
-[t1_phi1_GC, y1_phi1_GC] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w0; q0]); 
-w1_phi1_GC = y1_phi1_GC(:, 1:3); 
-q1_phi1_GC = y1_phi1_GC(:, 4:7); 
-
 dt = 1/100; 
+[t1_phi1, q1_phi1, w1_phi1] = gyrostat_discrete(dt, t0, t1, inertia, torque, w0, q0); 
 
-w = w0; 
-Q = q0; 
-int = 1; 
-q1_phi1 = [ Q'; zeros(length(dt:dt:t1), 4)]; 
-w1_phi1 = [ w'; zeros(length(dt:dt:t1), 3)]; 
-t1_phi1 = zeros(length(0:dt:t1), 1); 
-
-for t = dt:dt:t1 
-    
-    nsteps = 10;
-    
-    for i = 1:nsteps
-        dw = inv(inertia)*(torque - cross(w, inertia*w));
-        dQ = 1/2*[Q(4), -Q(3), Q(2);
-                  Q(3), Q(4), -Q(1);
-                  -Q(2), Q(1), Q(4);
-                  -Q(1), -Q(2), -Q(3)]*w;
-        w = w + dw*dt/nsteps;
-        Q = Q + dQ*dt/nsteps;
-    end
-    
-    DCM = SpinCalc('QtoDCM', Q', eps, 0); 
-    torque = DCM*torque; 
-%     inertia = DCM*inertia; 
-    
-    int = int + 1; 
-    q1_phi1(int, :) = Q'; 
-    w1_phi1(int, :) = w'; 
-    t1_phi1(int) = t; 
-    
-end 
-
-[t1_phi1_d, q1_phi1_d, w1_phi1_d] = gyrostat_discrete(dt, 0, t1, inertia, torque, w0, q0); 
-
-% t1 --> t2 
-tEnd = t2 - t1; 
-w0 = y1_phi1(end, 1:3)'; 
-q0 = y1_phi1(end, 4:7)'; 
+% t1 --> t2 =
+w0 = w1_phi1(end, :)'; 
+q0 = q1_phi1(end, :)'; 
 a = [0; 0; 0]; 
 torque = inertia*a; 
 
-[t2_phi1, y2_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w0; q0]); 
+[t2_phi1, q2_phi1, w2_phi1] = gyrostat_discrete(dt, t1, t2, inertia, torque, w0, q0); 
 
 % t2 --> t3 
-tEnd = t3 - t2; 
-w0 = y2_phi2(end, 1:3)'; 
-q0 = y2_phi2(end, 4:7)'; 
+w0 = w2_phi1(end, :)'; 
+q0 = q2_phi1(end, :)'; 
 a = [ -aMax; 0; 0]; 
 torque = inertia*a; 
 
-[t3_phi1, y3_phi1] = ode45(@(t, Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w0; q0]); 
+[t3_phi1, q3_phi1, w3_phi1] = gyrostat_discrete(dt, t2, t3+dt, inertia, torque, w0, q0); 
 
-y_phi1 = [y1_phi1; y2_phi2(2:end, :); y3_phi1(2:end, :)]; 
-w_phi1 = y_phi1(:, 1:3); 
-q_phi1 = y_phi1(:, 4:7); 
+t_phi1 = [t1_phi1; t2_phi1(2:end); t3_phi1(2:end)]; 
+w_phi1 = [w1_phi1; w2_phi1(2:end ,:); w3_phi1(2:end, :)]; 
+q_phi1 = [q1_phi1; q2_phi1(2:end ,:); q3_phi1(2:end, :)]; 
 
 ypr_phi1 = zeros(length(q_phi1), 3); 
 for i = 1:max(size(q_phi1))
     ypr_phi1(i, :) = SpinCalc('QtoEA321', q_phi1(i, :), eps, 0); 
 end 
-
-t_phi1 = [t1_phi1; t1_phi1(end)+t2_phi1(2:end); t1_phi1(end)+t2_phi1(end)+t3_phi1(2:end)]; 
 
 %% Plot phi1
 % ylimits = get_ylimits(q); 
@@ -237,29 +157,30 @@ t_phi1 = [t1_phi1; t1_phi1(end)+t2_phi1(2:end); t1_phi1(end)+t2_phi1(end)+t3_phi
 
 % Plot 
 
+plot_option = 1; 
 if plot_option == 1
-figure()
-    plot(t_phi1, w_phi1) 
-%     ylim(ylimits)
-    legend('w1', 'w2', 'w3'); 
-    ylabel('w (rad/s)') 
-    xlabel('time (s)') 
-    title('Angular Velocity Phi 1') 
+    figure
+        plot(t_phi1, w_phi1) 
+    %     ylim(ylimits)
+        legend('w1', 'w2', 'w3'); 
+        ylabel('w (rad/s)') 
+        xlabel('time (s)') 
+        title('Angular Velocity Phi 1') 
 
-figure()
-    plot(t_phi1, q_phi1)
-    legend('q1', 'q2', 'q3', 'q4'); 
-%     ylim(ylimits)
-    ylabel('quats') 
-    xlabel('time (s)') 
-    title('Quaternion Phi 1') 
-    
-figure()
-    plot(t_phi1, ypr_phi1)
-    legend('Yaw', 'Pitch', 'Roll'); 
-    xlabel('time (s)') 
-    ylabel('degrees') 
-    title('Euler Angles Phi 1') 
+    figure
+        plot(t_phi1, q_phi1)
+        legend('q1', 'q2', 'q3', 'q4'); 
+    %     ylim(ylimits)
+        ylabel('quats') 
+        xlabel('time (s)') 
+        title('Quaternion Phi 1') 
+
+    figure
+        plot(t_phi1, ypr_phi1)
+        legend('Yaw', 'Pitch', 'Roll'); 
+        xlabel('time (s)') 
+        ylabel('degrees') 
+        title('Euler Angles Phi 1') 
 end 
     
 %% Determine Phi 2 slew times 
