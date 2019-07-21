@@ -2,6 +2,7 @@
 % Junette Hsin 
 % Mohammad Ayoubi 
 
+clear; 
 close all; 
 
 %% Inputs 
@@ -16,7 +17,7 @@ S_N = [cosd(45); cosd(45); cosd(45)];       % S = unit vector of sun vector in t
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
 % G_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
 G_DCM_N = eye(3);                           % DCM from the N to the G frame 
-N_DCM_G = G_DCM_N';                         % G to N frame 
+N_DCM_G = G_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
 S_G = G_DCM_N*S_N;                          % Sun vector in G frame 
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
 aMax = 1;                                  % Maximum acceleration, rad/s^2
@@ -152,16 +153,54 @@ t2 = t1 - (1/wMax) * ...
 t3 = t2 - (wf - wMax)/aMax; 
 
 
-%% Solve for attitue determination - first slew 
+%% Solve for attitude determination - first slew 
         
 % t0 --> t1 
 tEnd = t1 - t0; 
 w_in = [    0;    0;      0]; 
-q_in = [    0;      0;      0;      1];             % wrt G frame 
+q_in = [    0;    0;      0;      1];               % wrt G frame 
 a = [ aMax;  0;  0];  
-torque = inertia*a; 
+torque = inertia*a;                                 % wrt G frame 
 
-[t1_phi1, y1_phi1] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+[t1_phi1_GC, y1_phi1_GC] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]); 
+w1_phi1_GC = y1_phi1_GC(:, 1:3); 
+q1_phi1_GC = y1_phi1_GC(:, 4:7); 
+
+dt = 1/100; 
+
+w = [0; 0; 0]; 
+Q = [0; 0; 0; 1]; 
+int = 1; 
+q1_phi1 = [ Q'; zeros(length(dt:dt:t1), 4)]; 
+w1_phi1 = [ w'; zeros(length(dt:dt:t1), 3)]; 
+t1_phi1 = zeros(length(0:dt:t1), 1); 
+
+for t = dt:dt:t1 
+    
+    nsteps = 10;
+    
+    for i = 1:nsteps
+        dw = inv(inertia)*(torque - cross(w, inertia*w));
+        dQ = 1/2*[Q(4), -Q(3), Q(2);
+                  Q(3), Q(4), -Q(1);
+                  -Q(2), Q(1), Q(4);
+                  -Q(1), -Q(2), -Q(3)]*w;
+        w = w + dw*dt/nsteps;
+        Q = Q + dQ*dt/nsteps;
+    end
+    
+    DCM = SpinCalc('QtoDCM', Q', eps, 0); 
+    torque = DCM*torque; 
+%     inertia = DCM*inertia; 
+    
+    int = int + 1; 
+    q1_phi1(int, :) = Q'; 
+    w1_phi1(int, :) = w'; 
+    t1_phi1(int) = t; 
+    
+end 
+
+[t1_phi1_d, q1_phi1_d, w1_phi1_d] = gyrostat_discrete(dt, 0, t1, inertia, torque, w, Q); 
 
 % t1 --> t2 
 tEnd = t2 - t1; 
@@ -245,12 +284,6 @@ t3 = t2 - (wf - wMax)/aMax;
     
 %% Solve for attitude determination - second slew 
 
-tEnd = t1 - t0; 
-w_in = w_phi1(end, :)'; 
-q_in = q_phi1(end, :)'; 
-a = aMax*S_G; 
-torque = inertia*a; 
-
 % G --> N frame 
 % N_Q_G = SpinCalc('DCMtoQ', N_DCM_G, eps, 1); 
 % w_in = N_DCM_G*w_in; 
@@ -265,15 +298,21 @@ torque = inertia*a;
 % 
 % the direction of torque_G needs to be recalculated at every time step 
 
-w = w_in; 
-Q = q_in; 
-dt = 1/16; 
-int = 0; 
-quat = zeros(t1/dt + 1, 4); 
-ang_vel = zeros(t1/dt + 1, 3); 
+dt = 1/100; 
 
-for t = 0:dt:t1 
+a = aMax*S_G; 
+torque = inertia*a; 
+w = w_phi1(end, :)'; 
+Q = q_phi1(end, :)'; 
+int = 0; 
+q1_phi2 = zeros(length(dt:dt:t1), 4); 
+w1_phi2 = zeros(length(dt:dt:t1), 3); 
+t1_phi2 = zeros(length(dt:dt:t1), 1); 
+
+for t = dt:dt:t1 
+    
     nsteps = 10;
+    
     for i = 1:nsteps
         dw = inv(inertia)*(torque - cross(w, inertia*w));
         dQ = 1/2*[Q(4), -Q(3), Q(2);
@@ -283,50 +322,113 @@ for t = 0:dt:t1
         w = w + dw*dt/nsteps;
         Q = Q + dQ*dt/nsteps;
     end
+    
     DCM = SpinCalc('QtoDCM', Q', eps, 0); 
     torque = DCM*torque; 
     inertia = DCM*inertia; 
     
     int = int + 1; 
-    quat(int, :) = Q'; 
-    ang_vel(int, :) = w'; 
+    q1_phi2(int, :) = Q'; 
+    w1_phi2(int, :) = w'; 
+    t1_phi2(int) = t; 
     
 end 
+
+torque = [0; 0; 0]; 
+int = 0; 
+q2_phi2 = zeros(length(t1+dt:dt:t2), 4); 
+w2_phi2 = zeros(length(t1+dt:dt:t2), 3); 
+t2_phi2 = zeros(length(t1+dt:dt:t2), 1); 
+
+for t = t1+dt:dt:t2
+    
+    nsteps = 10; 
+    for i = 1:nsteps
+        dw = inv(inertia)*(torque - cross(w, inertia*w));
+        dQ = 1/2*[Q(4), -Q(3), Q(2);
+                  Q(3), Q(4), -Q(1);
+                  -Q(2), Q(1), Q(4);
+                  -Q(1), -Q(2), -Q(3)]*w;
+        w = w + dw*dt/nsteps;
+        Q = Q + dQ*dt/nsteps;
+    end
+    
+    int = int + 1; 
+    q2_phi2(int, :) = Q'; 
+    w2_phi2(int, :) = w'; 
+    t2_phi2(int) = t; 
+    
+end 
+
+a = aMax*S_G; 
+torque = inertia*a; 
+w = w_phi1(end, :)'; 
+Q = q_phi1(end, :)'; 
+int = 0; 
+q3_phi2 = zeros(length(0:dt:t1), 4); 
+w3_phi2 = zeros(length(0:dt:t1), 3); 
+t3_phi2 = zeros(length(0:dt:t1), 1); 
+
+for t = dt:dt:t1 
+    
+    nsteps = 10;
+    
+    for i = 1:nsteps
+        dw = inv(inertia)*(torque - cross(w, inertia*w));
+        dQ = 1/2*[Q(4), -Q(3), Q(2);
+                  Q(3), Q(4), -Q(1);
+                  -Q(2), Q(1), Q(4);
+                  -Q(1), -Q(2), -Q(3)]*w;
+        w = w + dw*dt/nsteps;
+        Q = Q + dQ*dt/nsteps;
+    end
+    
+    DCM = SpinCalc('QtoDCM', Q', eps, 0); 
+    torque = DCM*torque; 
+    inertia = DCM*inertia; 
+    
+    int = int + 1; 
+    q3_phi2(int, :) = Q'; 
+    w3_phi2(int, :) = w'; 
+    t3_phi2(int) = t; 
+    
+end 
+
     
 %%%%%%
 %%
-
-[t1_phi2, y1_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque_N, Z), [0, tEnd], [w_in; q_in]);
-
-tEnd = t2 - t1; 
-w_in = y1_phi2(end, 1:3)'; 
-q_in = y1_phi2(end, 4:7)'; 
-a = [0; 0; 0]; 
-torque = inertia*a; 
-
-[t2_phi2, y2_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
-
-tEnd = t3 - t1; 
-w_in = y2_phi2(end, 1:3)'; 
-q_in = y2_phi2(end ,4:7)'; 
-a = -aMax*S_G; 
-torque = inertia*a; 
-torque_N = N_DCM_G*torque; 
-
-[t3_phi2, y3_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque_N, Z), [0, tEnd], [w_in; q_in]);
-
-y_phi2 = [y1_phi2; y2_phi2(2:end, :); y3_phi2(2:end, :)]; 
-w_phi2 = y_phi2(:, 1:3); 
-q_phi2 = y_phi2(:, 4:7); 
-
-ypr_phi2 = zeros(length(q_phi2), 3); 
-
-for i = 1:max(size(q_phi2))
-    ypr_phi2(i, :) = SpinCalc('QtoEA321', q_phi2(i, :), eps, 0); 
-end 
-
-t_phi2 = [t1_phi2; t1_phi2(end) + t2_phi2(2:end); t1_phi2(end) + t2_phi2(end) + t3_phi2(2:end)]; 
-
+% 
+% [t1_phi2, y1_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+% 
+% tEnd = t2 - t1; 
+% w_in = y1_phi2(end, 1:3)'; 
+% q_in = y1_phi2(end, 4:7)'; 
+% a = [0; 0; 0]; 
+% torque = inertia*a; 
+% 
+% [t2_phi2, y2_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
+% 
+% tEnd = t3 - t1; 
+% w_in = y2_phi2(end, 1:3)'; 
+% q_in = y2_phi2(end ,4:7)'; 
+% a = -aMax*S_G; 
+% torque = inertia*a; 
+% torque_N = N_DCM_G*torque; 
+% 
+% [t3_phi2, y3_phi2] = ode45(@(t,Z) gyrostat_cont(inertia, torque_N, Z), [0, tEnd], [w_in; q_in]);
+% 
+% y_phi2 = [y1_phi2; y2_phi2(2:end, :); y3_phi2(2:end, :)]; 
+% w_phi2 = y_phi2(:, 1:3); 
+% q_phi2 = y_phi2(:, 4:7); 
+% 
+% ypr_phi2 = zeros(length(q_phi2), 3); 
+% 
+% for i = 1:max(size(q_phi2))
+%     ypr_phi2(i, :) = SpinCalc('QtoEA321', q_phi2(i, :), eps, 0); 
+% end 
+% 
+% t_phi2 = [t1_phi2; t1_phi2(end) + t2_phi2(2:end); t1_phi2(end) + t2_phi2(end) + t3_phi2(2:end)]; 
+% 
 %% Plot phi2
 
 w = y_phi2(:, 1:3); 
@@ -335,7 +437,7 @@ q = y_phi2(:, 4:7);
 if plot_option == 1
 figure()
     plot(t_phi2, w)
-%     ylim(ylimits)
+    ylim(ylimits)
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
     xlabel('time (s)') 
@@ -344,7 +446,7 @@ figure()
 figure()
     plot(t_phi2, q)
     legend('q1', 'q2', 'q3', 'q4'); 
-%     ylim(ylimits)
+    ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
     title('Quaternion Phi 2') 
@@ -419,14 +521,14 @@ end
 t_phi3 = [t1_phi3; t1_phi3(end)+t2_phi3(2:end); t1_phi3(end)+t2_phi3(end)+t3_phi3(2:end)]; 
 
 %% Plot phi3
-% ylimits = get_ylimits(q); 
-% ylimits = get_ylimits(w); 
+ylimits = get_ylimits(q); 
+ylimits = get_ylimits(w); 
 
 % Plot 
 if plot_option == 1
 figure()
     plot(t_phi3, w_phi3) 
-%     ylim(ylimits)
+    ylim(ylimits)
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
     xlabel('time (s)') 
@@ -435,7 +537,7 @@ figure()
 figure()
     plot(t_phi3, q_phi3)
     legend('q1', 'q2', 'q3', 'q4'); 
-%     ylim(ylimits)
+    ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
     title('Quaternion Phi 3') 
@@ -474,7 +576,7 @@ if plot_total == 1
 
 figure()
 plot(t_total, w_total) 
-%     ylim(ylimits)
+    ylim(ylimits)
     grid on
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
@@ -485,7 +587,7 @@ figure()
     plot(t_total, q_total)
     grid on 
     legend('q1', 'q2', 'q3', 'q4'); 
-%     ylim(ylimits)
+    ylim(ylimits)
     ylabel('quats') 
     xlabel('time (s)') 
     title('Quaternion Total') 
@@ -500,13 +602,3 @@ figure()
     
 end 
 
-%% 
-% 
-% function ylimits = get_ylimits(data) 
-% % Set y limits of axis 
-% 
-% rng = range(data(:)); 
-% midp = min(data(:)) + rng/2; 
-% ylimits = [ midp - 1.2*rng/2, midp + 1.2*rng/2 ]; 
-% 
-% end 
