@@ -131,7 +131,7 @@ q0 = q_phi1(end, :)';
 G0_DCM_G = SpinCalc('QtoDCM', q0', eps, 0); 
 G_DCM_G0 = G0_DCM_G'; 
 
-a = aMax*S_G; 
+a = aMax*G_DCM_G0*S_G; 
 torque = inertia*a; 
 
 [t1_phi2, q1_phi2, w1_phi2] = gyrostat_discrete(dt, t0, t1, inertia, torque, w0, q0); 
