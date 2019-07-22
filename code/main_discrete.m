@@ -7,8 +7,8 @@ close all;
 main_inputs             % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
-plot_option = 0; 
-phi1_check_vectors 
+plot_option = 1; 
+phi_check_vectors 
 
 %% Determine Phi 1 slew times
 
@@ -36,7 +36,7 @@ t3 = round(t3, 3);
 % t0 --> t1 
 w0 = [    0;    0;      0]; 
 q0 = [    0;    0;      0;      1];                 % wrt G frame 
-a = [ aMax;  0;  0];  
+a = [ 0;  0; aMax];  
 torque = inertia*a;                                 % wrt G frame 
 
 dt = 1/100; 
@@ -53,7 +53,7 @@ torque = inertia*a;
 % t2 --> t3 
 w0 = w2_phi1(end, :)'; 
 q0 = q2_phi1(end, :)'; 
-a = [ -aMax; 0; 0]; 
+a = [ 0; 0; -aMax]; 
 torque = inertia*a; 
 
 [t3_phi1, q3_phi1, w3_phi1] = gyrostat_discrete(dt, t2, t3+dt, inertia, torque, w0, q0); 
