@@ -68,9 +68,37 @@ for i = 1:max(size(q_phi1))
 end 
 
 %% Plot phi1
-plot_option = 1; 
+ylimits_q = get_ylimits(q_phi1); 
+ylimits_w = get_ylimits(w_phi1); 
+ylimits_ypr = get_ylimits(ypr_phi1); 
+
+% Plot 
+
+plot_option = 0; 
 if plot_option == 1
-    plot_everything(t_phi1, q_phi1, w_phi1, ypr_phi1, 1)
+    figure
+        plot(t_phi1, w_phi1) 
+        ylim(ylimits_w)
+        legend('w1', 'w2', 'w3'); 
+        ylabel('w (rad/s)') 
+        xlabel('time (s)') 
+        title('Angular Velocity Phi 1') 
+
+    figure
+        plot(t_phi1, q_phi1)
+        legend('q1', 'q2', 'q3', 'q4'); 
+        ylim(ylimits_q)
+        ylabel('quats') 
+        xlabel('time (s)') 
+        title('Quaternion Phi 1') 
+
+    figure
+        plot(t_phi1, ypr_phi1)
+        legend('Yaw', 'Pitch', 'Roll'); 
+        ylim(ylimits_ypr)
+        xlabel('time (s)') 
+        ylabel('degrees') 
+        title('Euler Angles Phi 1') 
 end 
     
 %% Determine Phi 2 slew times 
@@ -123,7 +151,7 @@ q0 = q2_phi2(end, :)';
 G0_DCM_G = SpinCalc('QtoDCM', q0', eps, 0); 
 G_DCM_G0 = G0_DCM_G'; 
 
-a = -aMax*G_DCM_G0*S_G0; 
+a = aMax*G_DCM_G0*S_G0; 
 torque = inertia*a; 
 
 [t3_phi2, q3_phi2, w3_phi2] = gyrostat_discrete(dt, t2, t3, inertia, torque, w0, q0); 
@@ -138,10 +166,41 @@ for i = 1:max(size(q_phi2))
 end 
 
 %% Plot phi2
+
+plot_everything(q_phi2, w_phi2, ypr_phi2)
+%%
+
+ylimits_q = get_ylimits(q_phi2); 
+ylimits_w = get_ylimits(w_phi2); 
+ylimits_ypr = get_ylimits(ypr_phi2); 
+
 plot_option = 1; 
 if plot_option == 1
-    plot_everything(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
+figure()
+    plot(t_phi2, w_phi2)
+    ylim(ylimits_w)
+    legend('w1', 'w2', 'w3'); 
+    ylabel('w (rad/s)') 
+    xlabel('time (s)') 
+    title('Angular Velocity Phi 2') 
+
+figure()
+    plot(t_phi2, q_phi2)
+    legend('q1', 'q2', 'q3', 'q4'); 
+    ylim(ylimits_q)
+    ylabel('quats') 
+    xlabel('time (s)') 
+    title('Quaternion Phi 2') 
+    
+figure()
+    plot(t_phi2, ypr_phi2)
+    legend('Yaw', 'Pitch', 'Roll'); 
+    ylim(ylimits_ypr)
+    xlabel('time (s)') 
+    ylabel('degrees') 
+    title('Euler Angles Phi 2') 
 end 
+
 
 %% Determine Phi 3 slew times
 
