@@ -16,23 +16,15 @@ end
 w = [Z(1); Z(2); Z(3)]; 
 q = [Z(4); Z(5); Z(6); Z(7)]; 
 
-dw = inv(inertia)*( ... 
-    - [ 0      -w(3)    w(2); 
-        w(3)    0      -w(1); 
-       -w(2)    w(1)    0 ] ... 
-    * inertia * [Z(1); Z(2); Z(3)] + torque);
-dq = 1/2* ... 
-    [ q(4)     -q(3)       q(2);
-      q(3)      q(4)      -q(1);
-     -q(2)      q(1)       q(4);
-     -q(1)     -q(2)      -q(3)] * w ;
-% dq = 0.5*[  0       w(3)   -w(2)    w(1);     % Interesting - this 
+dw = inv(inertia)*(torque - cross(w, inertia*w));
+dq = 1/2*[ q(4)     -q(3)       q(2);
+           q(3)      q(4)      -q(1);
+          -q(2)      q(1)       q(4);
+          -q(1)     -q(2)   -q(3)]*w;
+% dq = 0.5*[  0       w(3)   -w(2)    w(1);     % Interesting - this kind
 %            -w(3)    0      -w(1)    w(2);     % skew matrix results in 
 %             w(2)   -w(1)    0       w(3);     % q's blowing up 
 %            -w(1)    w(2)   -w(3)    0]*q; 
-
-%     DCM = SpinCalc('QtoDCM', q', eps, 0); 
-%     torque = DCM*torque; 
 
 dZdt = [dw; dq]; 
 

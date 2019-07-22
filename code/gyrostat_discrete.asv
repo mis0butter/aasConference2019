@@ -40,11 +40,8 @@ for t = t_start+dt : dt : t_end
     
     % Break into steps for attitude determination 
     for i = 1:nsteps
-%         dw = inv(inertia)*(torque - cross(w, inertia*w));
-        dw = inv(inertia) * ( -[ 0      -w(3)    w(2); 
-                                 w(3)    0      -w(1); 
-                                -w(2)    w(1)    0 ] * inertia * w + torque); 
-            
+        dw = inv(inertia)*(torque - cross(w, inertia*w));
+        dw = inv(inertia) * 
         dq = 1/2*[ q(4)     -q(3)       q(2);
                    q(3)      q(4)      -q(1);
                   -q(2)      q(1)       q(4);

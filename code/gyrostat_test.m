@@ -2,21 +2,21 @@
 
 w_in = [0.5; 0; 0]; 
 q_in = [0; 0; 0; 1]; 
-torque_x = [1; 2; 0.1]; 
+torque = [1; 2; 3]; 
 inertia = [ 408     0       0; 
             0       427     0; 
             0       0       305]; 
 tEnd = 20; 
 
-% Continuous may not be correct - direction of torque changes with each
+% Continuous may NOT be correct - direction of torque changes with each
 % step. 
-[t_c, y_c] = ode45(@(t,Z) gyrostat_cont(inertia, torque_x, Z), [0, tEnd], [w_in; q_in]);
+[t_c, y_c] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w_in; q_in]);
 w_c = y_c(:, 1:3); 
 q_c = y_c(:, 4:7); 
 
 dt = 1/100; 
 
-[t_d, q_d, w_d] = gyrostat_discrete(dt, 0, tEnd, inertia, torque_x, w_in, q_in); 
+[t_d, q_d, w_d] = gyrostat_discrete(dt, 0, tEnd, inertia, torque, w_in, q_in); 
 
 %% Plots 
 
