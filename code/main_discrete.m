@@ -138,7 +138,7 @@ for i = 1:max(size(q_phi2))
 end 
 
 %% Plot phi2
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
 end 
@@ -204,35 +204,9 @@ end
 t_phi3 = [t1_phi3; t1_phi3(end)+t2_phi3(2:end); t1_phi3(end)+t2_phi3(end)+t3_phi3(2:end)]; 
 
 %% Plot phi3
-ylimits_q = get_ylimits(q_phi3); 
-ylimits_w = get_ylimits(w_phi3); 
-ylimits_ypr = get_ylimits(ypr_phi3); 
-
-% Plot 
+plot_option = 0; 
 if plot_option == 1
-figure()
-    plot(t_phi3, w_phi3) 
-    ylim(ylimits_w)
-    legend('w1', 'w2', 'w3'); 
-    ylabel('w (rad/s)') 
-    xlabel('time (s)') 
-    title('Angular Velocity Phi 3') 
-
-figure()
-    plot(t_phi3, q_phi3)
-    legend('q1', 'q2', 'q3', 'q4'); 
-    ylim(ylimits_q)
-    ylabel('quats') 
-    xlabel('time (s)') 
-    title('Quaternion Phi 3') 
-    
-figure()
-    plot(t_phi3, ypr_phi3)
-    legend('Yaw', 'Pitch', 'Roll'); 
-    ylim(ylimits_ypr) 
-    xlabel('time (s)') 
-    ylabel('degrees') 
-    title('Euler Angles Phi 3') 
+    plot_qwypr(t_phi3, q_phi3, w_phi3, ypr_phi3, 3)
 end 
 
 %% total slew stuff 
@@ -256,39 +230,7 @@ end
         
 %% plot total stuff 
 
-ylimits_q = get_ylimits(q_total); 
-ylimits_w = get_ylimits(w_total); 
-ylmits_ypr = get_ylimits(ypr_total); 
-        
-plot_total = 1; 
-if plot_total == 1
-
-figure()
-plot(t_total, w_total) 
-    ylim(ylimits_w)
-    grid on
-    legend('w1', 'w2', 'w3'); 
-    ylabel('w (rad/s)') 
-    xlabel('time (s)') 
-    title('Angular Velocity Total') 
-
-figure()
-    plot(t_total, q_total)
-    grid on 
-    legend('q1', 'q2', 'q3', 'q4'); 
-    ylim(ylimits_q)
-    ylabel('quats') 
-    xlabel('time (s)') 
-    title('Quaternion Total') 
-    
-figure()
-    plot(t_total, ypr_total)
-    grid on 
-    legend('Yaw', 'Pitch', 'Roll'); 
-    ylim(ylimits_ypr) 
-    xlabel('time (s)') 
-    ylabel('degrees') 
-    title('Euler Angles Total') 
-    
+plot_option = 1; 
+if plot_option == 1
+    plot_qwypr(t_total, q_total, w_total, ypr_total, 'total')
 end 
-

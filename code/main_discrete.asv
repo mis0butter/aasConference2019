@@ -7,7 +7,7 @@ close all;
 main_inputs             % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
-plot_option = 1; 
+plot_option = 0; 
 phi_check_vectors 
 
 %% Determine Phi 1 slew times
@@ -68,7 +68,7 @@ for i = 1:max(size(q_phi1))
 end 
 
 %% Plot phi1
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi1, q_phi1, w_phi1, ypr_phi1, 1)
 end 
@@ -169,7 +169,7 @@ t3 = t2 - (wf - wMax)/aMax;
 tEnd = t1 - t0; 
 w0 = w_phi2(end, :)'; 
 q0 = q_phi2(end, :)'; 
-a = [ aMax;  0;  0];  
+a = [ 0;  0; aMax];  
 torque = inertia*a; 
 
 [t1_phi3, y1_phi3] = ode45(@(t,Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w0; q0]);
@@ -187,7 +187,7 @@ torque = inertia*a;
 tEnd = t3 - t2; 
 w0 = y2_phi3(end, 1:3)'; 
 q0 = y2_phi3(end, 4:7)'; 
-a = [ -aMax; 0; 0]; 
+a = [ 0; 0; -aMax]; 
 torque = inertia*a; 
 
 [t3_phi3, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia, torque, Z), [0, tEnd], [w0; q0]); 
@@ -204,36 +204,10 @@ end
 t_phi3 = [t1_phi3; t1_phi3(end)+t2_phi3(2:end); t1_phi3(end)+t2_phi3(end)+t3_phi3(2:end)]; 
 
 %% Plot phi3
-ylimits_q = get_ylimits(q_phi3); 
-ylimits_w = get_ylimits(w_phi3); 
-ylimits_ypr = get_ylimits(ypr_phi3); 
-
-% Plot 
+plot_option = 1; 
 if plot_option == 1
-figure()
-    plot(t_phi3, w_phi3) 
-    ylim(ylimits_w)
-    legend('w1', 'w2', 'w3'); 
-    ylabel('w (rad/s)') 
-    xlabel('time (s)') 
-    title('Angular Velocity Phi 3') 
-
-figure()
-    plot(t_phi3, q_phi3)
-    legend('q1', 'q2', 'q3', 'q4'); 
-    ylim(ylimits)
-    ylabel('quats') 
-    xlabel('time (s)') 
-    title('Quaternion Phi 3') 
-    
-figure()
-    plot(t_phi3, ypr_phi3)
-    legend('Yaw', 'Pitch', 'Roll'); 
-    xlabel('time (s)') 
-    ylabel('degrees') 
-    title('Euler Angles Phi 3') 
+    plot_qwypr(t_phi3, q_phi3, w_phi3, ypr_phi2, 2)
 end 
-
 %% total slew stuff 
 
 t_total = [ t_phi1; ... 
@@ -254,13 +228,17 @@ for i = 1:max(size(q_total))
 end 
         
 %% plot total stuff 
+
+ylimits_q = get_ylimits(q_total); 
+ylimits_w = get_ylimits(w_total); 
+ylmits_ypr = get_ylimits(ypr_total); 
         
 plot_total = 1; 
 if plot_total == 1
 
 figure()
 plot(t_total, w_total) 
-    ylim(ylimits)
+    ylim(ylimits_w)
     grid on
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
@@ -271,7 +249,7 @@ figure()
     plot(t_total, q_total)
     grid on 
     legend('q1', 'q2', 'q3', 'q4'); 
-    ylim(ylimits)
+    ylim(ylimits_q)
     ylabel('quats') 
     xlabel('time (s)') 
     title('Quaternion Total') 
@@ -280,6 +258,7 @@ figure()
     plot(t_total, ypr_total)
     grid on 
     legend('Yaw', 'Pitch', 'Roll'); 
+    ylim(ylimits_ypr) 
     xlabel('time (s)') 
     ylabel('degrees') 
     title('Euler Angles Total') 

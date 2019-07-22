@@ -1,4 +1,4 @@
-function plot_everything(t, q, w, ypr, phi_num)
+function plot_qwypr(t, q, w, ypr, phi_num)
 %% Plot q, w, ypr 
 
 phi_num = num2str(phi_num); 
@@ -15,7 +15,7 @@ figure()
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
     xlabel('time (s)') 
-    title(strcat('Angular Velocity: Phi ', phi_num))
+    title(strcat('Angular Velocity: Phi=', phi_num))
 
 figure()
     plot(t, q)
@@ -23,7 +23,7 @@ figure()
     ylim(ylimits_q)
     ylabel('quats') 
     xlabel('time (s)') 
-    title(strcat('Quaternion: Phi ', phi_num)) 
+    title(strcat('Quaternion: Phi=', phi_num)) 
     
 figure()
     plot(t, ypr)
@@ -31,5 +31,5 @@ figure()
     ylim(ylimits_ypr)
     xlabel('time (s)') 
     ylabel('degrees') 
-    title(strcat('Euler Angles: Phi ', phi_num)) 
+    title(strcat('Euler Angles: Phi=', phi_num)) 
 end 
