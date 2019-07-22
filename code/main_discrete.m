@@ -70,7 +70,7 @@ end
 %% Plot phi1
 plot_option = 1; 
 if plot_option == 1
-    plot_everything(t_phi1, q_phi1, w_phi1, ypr_phi1, 1)
+    plot_qwypr(t_phi1, q_phi1, w_phi1, ypr_phi1, 1)
 end 
     
 %% Determine Phi 2 slew times 
@@ -140,7 +140,7 @@ end
 %% Plot phi2
 plot_option = 1; 
 if plot_option == 1
-    plot_everything(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
+    plot_qwypr(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
 end 
 
 %% Determine Phi 3 slew times
