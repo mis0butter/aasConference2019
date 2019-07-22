@@ -106,6 +106,7 @@ G0_DCM_G = SpinCalc('QtoDCM', q0', eps, 0);
 G_DCM_G0 = G0_DCM_G'; 
 
 a = aMax*G_DCM_G0*S_G0; 
+a1_phi2 = a; 
 torque = inertia*a; 
 
 [t1_phi2, q1_phi2, w1_phi2] = gyrostat_discrete(dt, t0, t1, inertia, torque, w0, q0); 
@@ -113,7 +114,8 @@ torque = inertia*a;
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
 q0 = q1_phi2(end, :)'; 
-torque = [0; 0; 0]; 
+a = [0; 0; 0]; 
+torque = inertia*a; 
 
 [t2_phi2, q2_phi2, w2_phi2] = gyrostat_discrete(dt, t1, t2, inertia, torque, w0, q0); 
 
@@ -123,7 +125,7 @@ q0 = q2_phi2(end, :)';
 G0_DCM_G = SpinCalc('QtoDCM', q0', eps, 0); 
 G_DCM_G0 = G0_DCM_G'; 
 
-a = -aMax*G_DCM_G0*S_G0; 
+a = -a1_phi2; 
 torque = inertia*a; 
 
 [t3_phi2, q3_phi2, w3_phi2] = gyrostat_discrete(dt, t2, t3, inertia, torque, w0, q0); 

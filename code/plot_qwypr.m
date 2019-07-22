@@ -12,6 +12,7 @@ if plot_option == 1
 figure()
     plot(t, w)
     ylim(ylimits_w)
+    grid on 
     legend('w1', 'w2', 'w3'); 
     ylabel('w (rad/s)') 
     xlabel('time (s)') 
@@ -20,6 +21,7 @@ figure()
 figure()
     plot(t, q)
     legend('q1', 'q2', 'q3', 'q4'); 
+    grid on 
     ylim(ylimits_q)
     ylabel('quats') 
     xlabel('time (s)') 
@@ -28,6 +30,7 @@ figure()
 figure()
     plot(t, ypr)
     legend('Yaw', 'Pitch', 'Roll'); 
+    grid on 
     ylim(ylimits_ypr)
     xlabel('time (s)') 
     ylabel('degrees') 

@@ -41,21 +41,22 @@ for t = t_start+dt : dt : t_end
     % Break into steps for attitude determination 
     for i = 1:nsteps
 %         dw = inv(inertia)*(torque - cross(w, inertia*w));
-        dw = inv(inertia) * ( -[ 0      -w(3)    w(2); 
-                                 w(3)    0      -w(1); 
-                                -w(2)    w(1)    0 ] * inertia * w + torque); 
-            
-        dq = 1/2*[ q(4)     -q(3)       q(2);
+        w_skew = [  0      -w(3)    w(2); 
+                    w(3)    0      -w(1); 
+                   -w(2)    w(1)    0 ] ; 
+        dw = inv(inertia) * ( -w_skew * inertia * w + torque); 
+        q_skew = [ q(4)     -q(3)       q(2);
                    q(3)      q(4)      -q(1);
                   -q(2)      q(1)       q(4);
-                  -q(1)     -q(2)      -q(3)] * w ;
+                  -q(1)     -q(2)      -q(3)]; 
+        dq = 1/2 * q_skew * w ;
         w = w + dw*dt/nsteps;
         q = q + dq*dt/nsteps;
     end
     
     % Find rotation from previous 
     DCM = SpinCalc('QtoDCM', q', eps, 0); 
-    torque = DCM*torque; 
+%     torque = DCM*torque; 
 %     inertia = DCM*inertia; 
     
     int = int + 1; 
