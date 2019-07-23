@@ -28,8 +28,8 @@ end
 w = w0; 
 q = q0;                     % G0_q_G
 
-DCM = quat2DCM(q);          % G0_DCM_G
-torque = DCM'*torqueN; 
+N_DCM_G = quat2DCM(q);          % G0_DCM_G
+torque = N_DCM_G'*torqueN; 
 
 int = 1; 
 w_out = [ w0'; zeros(length(dt : dt : (t_end - t_start)), 3 )]; 
