@@ -8,7 +8,7 @@ inertia = [ 408     0       0;
             0       0       305]; 
 Pi_G0 = [0; 1; 0];                           % Pi = unit vector of initial point in the G frame 
 Pf_G0 = [1; 0; 0];                           % Pf = unit vector of the final point in the G frame 
-S_N = [cosd(45); cosd(45); 0];       % S = unit vector of sun vector in the N frame 
+S_N = [2; 1; 1];       % S = unit vector of sun vector in the N frame 
 % S_N = [0; 0; 1]; 
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
 % G_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
@@ -22,8 +22,8 @@ wMax = 1;                                  % Maximum angular velocity, rad/s
 %% Calculate slew angles 
 
 % Calculate normal vector of slew plane 
-e_G0 = cross(Pi_G0, Pf_G0) / norm(cross(Pi_G0, Pf_G0));  % eigenaxis of PiPf plane, in G frame 
-Pperp_G0 = cross(e_G0, Pi_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
+e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
+Pperp_G0 = cross(Pi_G0, e_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
 P_DCM_G0 = [Pi_G0'; Pperp_G0'; e_G0'];     % DCM from G frame to P (slew plane) frame 
 G0_DCM_P = P_DCM_G0';                         % P to G frame 
 
@@ -41,13 +41,9 @@ S_PiPf_G0 = -cross(cross(S_G0, e_G0), e_G0);    % sun projection vector G frame
 S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
 
 % First slew around eigenaxis
-if alpha < ep 
-    phi1 = acos(dot(Pi_G0, S_PiPf_G0)) - ep;      % dot product of unit vectors 
-    if phi1 > pi/2 
-        phi1_rem = phi1 - pi/2; 
-    end 
-else
-    phi1 = acos(dot(Pi_G0, Pf_G0)); 
+phi1 = acos(dot(Pi_G0, S_PiPf_G0)) - ep;      % dot product of unit vectors 
+if phi1 > pi/2 
+    phi1_rem = phi1 - pi/2; 
 end 
 
 % Find P1 vector 

@@ -1,7 +1,7 @@
 % gyrostat test functions 
 
 w0 = [-0.1; -0.2; 0.3]; 
-q0 = [cosd(45); 0; 0; cosd(45)]; 
+q0 = [cosd(45); 0; 0; cosd(45)];        % N_q_B 
 a = [-1; 0.5; -0.3]; 
 inertia = [ 100     0       0; 
             0       100     0; 
@@ -21,8 +21,8 @@ dt = 1/100;
 % Following discrete solvers apply constant torque in the INERTIAL frame 
 [t_d, q_d, w_d, torque_d] = gyrostat_discrete(dt, 0, tEnd, inertia, torque0, w0, q0);               % torque in --> body frame 
 [t_cd, q_cd, w_cd, torque_cd] = gyrostat_CD(dt, 0, tEnd, inertia, torque0, w0, q0);                 % torque in --> body frame 
-[t_cdN, q_cdN, w_cdN, torque_cdN] = gyrostat_CD_torqueN(dt, 0, tEnd, inertia, torque0, w0, q0);     % torque in --> inertial frame 
 [t_dN, q_dN, w_dN, torque_dN] = gyrostat_discrete_torqueN(dt, 0, tEnd, inertia, torque0, w0, q0);   % torque in --> inertial frame 
+[t_cdN, q_cdN, w_cdN, torque_cdN] = gyrostat_CD_torqueN(dt, 0, tEnd, inertia, torque0, w0, q0);     % torque in --> inertial frame 
     
 %% Plots 
 
@@ -55,3 +55,23 @@ for i = 1:3
         end 
 end 
 xlabel('Time (sec)')
+
+%% Slew times test 
+
+phi = pi/2; 
+w0 = 0; 
+wf = 0; 
+t0 = 0; 
+
+for i = 1:100
+    
+    aMax = rand(1); 
+    wMax = rand(1); 
+    [t1(i, 1), t2(i, 1), t3(i, 1)] = find_slew_times(aMax, wMax, phi, w0, wf, t0); 
+    a_max(i, 1) = aMax; 
+    w_max(i, 1) = wMax; 
+    
+end 
+
+
+
