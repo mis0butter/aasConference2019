@@ -48,7 +48,6 @@ for t = t_start+dt : dt : t_end
     else 
 
         nsteps = 10;
-        q_old = q;      % G0_q_G(old)
 
         % Break into steps for attitude determination 
         for i = 1:nsteps
@@ -64,8 +63,6 @@ for t = t_start+dt : dt : t_end
             dq = 1/2 * q_skew * w ;
             w = w + dw*dt/nsteps;
             q = q + dq*dt/nsteps;
-    %         w = w + dw;
-    %         q = q + dq;
         end
         
         N_DCM_G = quat2DCM(q);

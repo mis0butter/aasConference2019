@@ -110,13 +110,6 @@ dt = 1/100;
 
 % This is the quaternion of current G in initial G0 frame. G0_q_G
 q0 = q_phi1(end, :)';    
-% % quaternion --> FROM G0 TO current G 
-% G0_DCM_G = quat2DCM(q0); 
-% G_DCM_G0 = G0_DCM_G'; 
-% S_G = G_DCM_G0*S_G0;            % sun vector in current G frame 
-% a = aMax*S_G/norm(S_G);         % acceleration in current G frame
-% a1_phi2 = a; 
-% torque = inertia*a;             % torque in current G frame 
 torque_G0 = inertia*aMax*S_G0; 
 
 w0 = w_phi1(end, :)'; 
@@ -134,14 +127,6 @@ torque = inertia*a;
 % t2 --> t3 
 w0 = w2_phi2(end, :)'; 
 q0 = q2_phi2(end, :)'; 
-
-% % torque stuff 
-% G0_DCM_G = quat2DCM(q0); 
-% G_DCM_G0 = G0_DCM_G'; 
-% S_G = G_DCM_G0*S_G0;            % sun vector in current G frame 
-% a = -aMax*S_G/norm(S_G);         % acceleration in current G frame
-% a3_phi2 = a; 
-% torque = inertia*a;             % torque in current G frame 
 torque_G0 = inertia*-aMax*S_G0; 
 
 % a = -a1_phi2; 
