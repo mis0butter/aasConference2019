@@ -18,7 +18,7 @@ t0 = 0;
 wf = 0; 
 
 t1 = t0 + (wMax-w0)/aMax; 
-% t1_test = t1/2; 
+t1_test = t1/2; 
 
 % Mohammad's equation 
 t2 = t1 - (1/wMax) * ... 
@@ -35,21 +35,21 @@ t3 = round(t3, 3);
 %% Solve for attitude determination - first slew 
         
 % t0 --> t1 
-w0 = [    0;    0;      0];                         % wrt G0 frame 
-q0 = [    0;    0;      0;      1];                 % wrt G0 frame 
+w0 = [    0;    0;      0]; 
+q0 = [    0;    0;      0;      1];                 % wrt G frame 
 a = [ 0;  0; aMax];  
-torque = inertia*a;                                 % wrt G0 frame 
+torque = inertia*a;                                 % wrt G frame 
 
 dt = 1/100; 
-[t1_phi1, q1_phi1, w1_phi1, torque1_phi1] = gyrostat_discrete(dt, t0, t1, inertia, torque, w0, q0); 
+[t1_phi1, q1_phi1, w1_phi1] = gyrostat_discrete(dt, t0, t1_test, inertia, torque, w0, q0); 
 
 % t1 --> t2 
 w0 = w1_phi1(end, :)'; 
 q0 = q1_phi1(end, :)'; 
-a = [0; 0; 0]; 
+a = [ 0; 0; -aMax]; 
 torque = inertia*a; 
 
-[t2_phi1, q2_phi1, w2_phi1, torque2_phi1] = gyrostat_discrete(dt, t1, t2, inertia, torque, w0, q0); 
+[t2_phi1, q2_phi1, w2_phi1] = gyrostat_discrete(dt, t1_test, t1, inertia, torque, w0, q0); 
 
 % t2 --> t3 
 w0 = w2_phi1(end, :)'; 
@@ -57,12 +57,11 @@ q0 = q2_phi1(end, :)';
 a = [ 0; 0; -aMax]; 
 torque = inertia*a; 
 
-[t3_phi1, q3_phi1, w3_phi1, torque3_phi1] = gyrostat_discrete(dt, t2, t3+dt, inertia, torque, w0, q0); 
+[t3_phi1, q3_phi1, w3_phi1] = gyrostat_discrete(dt, t2, t3+dt, inertia, torque, w0, q0); 
 
 t_phi1 = [t1_phi1; t2_phi1(2:end); t3_phi1(2:end)]; 
 w_phi1 = [w1_phi1; w2_phi1(2:end ,:); w3_phi1(2:end, :)]; 
 q_phi1 = [q1_phi1; q2_phi1(2:end ,:); q3_phi1(2:end, :)]; 
-torque_phi1 = [torque1_phi1; torque2_phi1(2:end ,:); torque3_phi1(2:end, :)]; 
 
 ypr_phi1 = zeros(length(q_phi1), 3); 
 for i = 1:max(size(q_phi1))
@@ -70,18 +69,10 @@ for i = 1:max(size(q_phi1))
 end 
 
 %% Plot phi1
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     plot_qwypr(t_phi1, q_phi1, w_phi1, ypr_phi1, 1)
 end 
-
-time_torque = linspace(t0, t3, length(torque_phi1)); 
-figure
-    plot(time_torque, torque_phi1); 
-    grid on 
-    ylabel('Torque (Nm)') 
-    xlabel('Time (sec)') 
-    title('Torque (Nm)') 
     
 %% Determine Phi 2 slew times 
 
@@ -108,20 +99,18 @@ t3 = t2 - (wf - wMax)/aMax;
 
 dt = 1/100; 
 
-% This is the quaternion of current G in initial G0 frame. G0_q_G
-q0 = q_phi1(end, :)';    
-% % quaternion --> FROM G0 TO current G 
-% G0_DCM_G = quat2DCM(q0); 
-% G_DCM_G0 = G0_DCM_G'; 
-% S_G = G_DCM_G0*S_G0;            % sun vector in current G frame 
-% a = aMax*S_G/norm(S_G);         % acceleration in current G frame
-% a1_phi2 = a; 
-% torque = inertia*a;             % torque in current G frame 
-torque_G0 = inertia*aMax*S_G0; 
-
 w0 = w_phi1(end, :)'; 
 
-[t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete(dt, t0, t1, inertia, torque_G0, w0, q0); 
+% This is the quaternion of current in initial G0 frame. 
+q0 = q_phi1(end, :)';    
+G0_DCM_G = SpinCalc('QtoDCM', q0', eps, 0); 
+G_DCM_G0 = G0_DCM_G'; 
+
+a = aMax*G_DCM_G0*S_G0; 
+a1_phi2 = a; 
+torque = inertia*a; 
+
+[t1_phi2, q1_phi2, w1_phi2] = gyrostat_discrete(dt, t0, t1, inertia, torque, w0, q0); 
 
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
@@ -129,31 +118,22 @@ q0 = q1_phi2(end, :)';
 a = [0; 0; 0]; 
 torque = inertia*a; 
 
-[t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete(dt, t1, t2, inertia, torque, w0, q0); 
+[t2_phi2, q2_phi2, w2_phi2] = gyrostat_discrete(dt, t1, t2, inertia, torque, w0, q0); 
 
 % t2 --> t3 
 w0 = w2_phi2(end, :)'; 
 q0 = q2_phi2(end, :)'; 
+G0_DCM_G = SpinCalc('QtoDCM', q0', eps, 0); 
+G_DCM_G0 = G0_DCM_G'; 
 
-% % torque stuff 
-% G0_DCM_G = quat2DCM(q0); 
-% G_DCM_G0 = G0_DCM_G'; 
-% S_G = G_DCM_G0*S_G0;            % sun vector in current G frame 
-% a = -aMax*S_G/norm(S_G);         % acceleration in current G frame
-% a3_phi2 = a; 
-% torque = inertia*a;             % torque in current G frame 
-torque_G0 = inertia*-aMax*S_G0; 
+a = -a1_phi2; 
+torque = inertia*a; 
 
-% a = -a1_phi2; 
-% torque = inertia*a; 
-
-[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete(dt, t2, t3, inertia, torque_G0, w0, q0); 
-
+[t3_phi2, q3_phi2, w3_phi2] = gyrostat_discrete(dt, t2, t3, inertia, torque, w0, q0); 
+    
 t_phi2 = [t1_phi2; t2_phi2(2:end); t3_phi2(2:end)]; 
-% t_phi2 = [t1_phi2; t1_phi2(end) + t2_phi2(2:end); t1_phi2(end) + t2_phi2(end) + t3_phi2(2:end)]; 
 w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)]; 
 q_phi2 = [q1_phi2; q2_phi2(2:end ,:); q3_phi2(2:end, :)]; 
-torque_phi2 = [torque1_phi2; torque2_phi2(2:end, :); torque3_phi2(2:end, :)]; 
 
 ypr_phi2 = zeros(length(q_phi2), 3); 
 for i = 1:max(size(q_phi2))
@@ -161,18 +141,10 @@ for i = 1:max(size(q_phi2))
 end 
 
 %% Plot phi2
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
 end 
-
-time_torque = linspace(t0, t3, length(torque_phi2)); 
-figure
-    plot(time_torque, torque_phi2); 
-    grid on 
-    ylabel('Torque (Nm)') 
-    xlabel('Time (sec)') 
-    title('Torque (Nm)') 
 
 %% Determine Phi 3 slew times
 

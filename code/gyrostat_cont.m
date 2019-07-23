@@ -26,9 +26,6 @@ q_skew = [ q(4)     -q(3)       q(2);
           -q(1)     -q(2)      -q(3)]; 
 dq = 1/2 * q_skew * w ;
 
-%     DCM = SpinCalc('QtoDCM', q', eps, 0); 
-%     torque = DCM*torque; 
-
 dZdt = [dw; dq]; 
 
 % Previous formula 

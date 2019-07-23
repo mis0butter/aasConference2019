@@ -1,4 +1,4 @@
-function [time, q_out, w_out, torque_out] = gyrostat_discrete(dt, t_start, t_end, inertia, torque0, w0, q0)
+function [time, q_out, w_out, torque_out] = gyrostat_discrete_torqueN(dt, t_start, t_end, inertia, torqueN, w0, q0)
 % Junette Hsin 
 % Discrete attitude determination for gyrostat 
 % 
@@ -26,12 +26,15 @@ end
     
 % Initialize 
 w = w0; 
-q = q0; 
-torque = torque0; 
+q = q0;                     % G0_q_G
+
+DCM = quat2DCM(q);          % G0_DCM_G
+torque = DCM'*torqueN; 
+
 int = 1; 
 w_out = [ w0'; zeros(length(dt : dt : (t_end - t_start)), 3 )]; 
 q_out = [ q0'; zeros(length(dt : dt : (t_end - t_start)), 4 )];
-torque_out = [torque0'; zeros(length(dt : dt : (t_end - t_start)), 3)]; 
+torque_out = [torqueN'; zeros(length(dt : dt : (t_end - t_start)), 3)]; 
 time = [t_start; zeros(length(dt : dt : (t_end - t_start)), 1)]; 
 
 % Outer for loop, t_start + dt --> t_end 
@@ -65,13 +68,8 @@ for t = t_start+dt : dt : t_end
     %         q = q + dq;
         end
 
-        q_new = q;      % G0_q_G(new) 
-        % B_q_C = quat_diff(A_q_B, A_q_C)
-        old_q_new = quat_diff(q_old, q_new);        
-        old_DCM_new = quat2DCM(old_q_new); 
-        new_DCM_old = old_DCM_new'; 
-
-        torque = new_DCM_old*torque; 
+        G0_DCM_G = quat2DCM(q); 
+        
 
     end 
     
