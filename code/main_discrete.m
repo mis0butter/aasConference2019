@@ -134,16 +134,16 @@ w0 = w2_phi2(end, :)';
 q0 = q2_phi2(end, :)';  
 
 % Finding direction of torque in inertial G0 frame 
-a_G0 = aMax*S_G0; 
-G0_DCM_G = quat2DCM(q0); G_DCM_G0 = G0_DCM_G'; 
-a_G = G_DCM_G0*a_G0; 
-torque_G = inertia*a_G;               % inertia always in G frame 
-torque_G0 = G0_DCM_G*torque_G; 
+% a_G0 = -aMax*S_G0; 
+% G0_DCM_G = quat2DCM(q0); G_DCM_G0 = G0_DCM_G'; 
+% a_G = G_DCM_G0*a_G0; 
+% torque_G = inertia*a_G;               % inertia always in G frame 
+% torque_G0 = G0_DCM_G*torque_G; 
 
 % a = -a1_phi2; 
 % torque = inertia*a; 
 
-[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN(dt, t2, t3, inertia, torque_G0, w0, q0); 
+[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN(dt, t2, t3, inertia, -torque_G0, w0, q0); 
 
 t_phi2 = [t1_phi2; t2_phi2(2:end); t3_phi2(2:end)]; 
 % t_phi2 = [t1_phi2; t1_phi2(end) + t2_phi2(2:end); t1_phi2(end) + t2_phi2(end) + t3_phi2(2:end)]; 
