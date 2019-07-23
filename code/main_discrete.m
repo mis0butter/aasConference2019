@@ -131,7 +131,7 @@ torque = inertia*a;
 
 % t2 --> t3 
 w0 = w2_phi2(end, :)'; 
-q0 = q2_phi2(end, :)'; 
+q0 = q2_phi2(end, :)';  
 
 % Finding direction of torque in inertial G0 frame 
 a_G0 = aMax*S_G0; 
