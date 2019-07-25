@@ -3,9 +3,12 @@
 %% Inputs 
 
 % Non-changing parameters; should be function inputs 
-inertia = [ 408     0       0; 
-            0       427     0; 
-            0       0       305]; 
+inertia_SC = [ 408     0       0; 
+               0       427     0; 
+               0       0       305]; 
+inertia_w = [  20   0    0; 
+               0    20   0; 
+               0    0    20  ]; 
 Pi_G0 = [0; 1; 0];                           % Pi = unit vector of initial point in the G frame 
 Pf_G0 = [1; 0; 0];                           % Pf = unit vector of the final point in the G frame 
 S_N = [cosd(45); cosd(45); cosd(45)];       % S = unit vector of sun vector in the N frame 
@@ -19,6 +22,9 @@ aMax = 1;                                  % Maximum acceleration, rad/s^2
 wMax = 1;                                  % Maximum angular velocity, rad/s
 
 %% Calculate slew angles 
+
+% Calculate the treshold triangle 
+phi_tt = 2*wMax*sqrt(aMax^2 + wMax^2);      % Threshold triangle!!! 
 
 % Calculate normal vector of slew plane 
 e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
