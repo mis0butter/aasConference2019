@@ -13,7 +13,7 @@ aMax = 1;                                  % Maximum acceleration, rad/s^2
 wMax = 1;                                  % Maximum angular velocity, rad/s
 
 % Initial points / vectors 
-Pi_G0 = [1; 0; 0];                           % Pi = unit vector of initial point in the G frame 
+Pi_G0 = [1; 0.5; -0.2];                           % Pi = unit vector of initial point in the G frame 
 Pi_G0 = Pi_G0/norm(Pi_G0); 
 Pf_G0 = [-0.8; 0.2; 0];                           % Pf = unit vector of the final point in the G frame 
 Pf_G0 = Pf_G0/norm(Pf_G0); 

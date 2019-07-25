@@ -138,7 +138,7 @@ for i = 1:max(size(q_phi2))
 end 
 
 %% Plot phi2
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
 end 
