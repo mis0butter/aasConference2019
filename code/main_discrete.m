@@ -29,11 +29,12 @@ t3 = round(t3, 3);
 % t0 --> t1 
 w0 = [    0;    0;      0];                         % wrt G0 frame 
 q0 = [    0;    0;      0;      1];                 % wrt G0 frame 
-a = [ 0;  0; aMax];  
-torque = inertia_SC*a;                                 % wrt G0 frame 
+a_P = [ 0;  0; aMax];                               % acceleration around eigenaxis of P frame 
+a_G0 = G0_DCM_P*a_P; 
+torque_G0 = inertia_SC*a_G0;                                 % wrt G0 frame 
 
 dt = 1/100; 
-[t1_phi1, q1_phi1, w1_phi1, torque1_phi1] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque, w0, q0); 
+[t1_phi1, q1_phi1, w1_phi1, torque1_phi1] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
 
 % t1 --> t2 
 w0 = w1_phi1(end, :)'; 
@@ -46,10 +47,10 @@ torque = inertia_SC*a;
 % t2 --> t3 
 w0 = w2_phi1(end, :)'; 
 q0 = q2_phi1(end, :)'; 
-a = [ 0; 0; -aMax]; 
-torque = inertia_SC*a; 
+% a = [ 0; 0; -aMax]; 
+% torque = inertia_SC*a; 
 
-[t3_phi1, q3_phi1, w3_phi1, torque3_phi1] = gyrostat_discrete(dt, t2, t3, inertia_SC, torque, w0, q0); 
+[t3_phi1, q3_phi1, w3_phi1, torque3_phi1] = gyrostat_discrete(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
 
 t_phi1 = [t1_phi1; t2_phi1(2:end); t3_phi1(2:end)]; 
 w_phi1 = [w1_phi1; w2_phi1(2:end ,:); w3_phi1(2:end, :)]; 
@@ -62,7 +63,7 @@ for i = 1:max(size(q_phi1))
 end 
 
 %% Plot phi1
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi1, q_phi1, w_phi1, ypr_phi1, 1)
 
@@ -167,12 +168,13 @@ wf = 0;
 % t0 --> t1 
 tEnd = t1 - t0; 
 w0 = w_phi2(end, :)'; 
-q0 = q_phi2(end, :)'; 
-a = [ 0;  0; aMax];             % G frame 
-torque = inertia_SC*a; 
+q0 = q_phi2(end, :)';  
+a_P = [0; 0; aMax]; 
+a_G0 = G0_DCM_P*a_P; 
+torque_G0 = inertia_SC*a_G0;                                 % wrt G0 frame 
 
 % [t1_phi3, y1_phi3] = ode45(@(t,Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]);
-[t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque, w0, q0); 
+[t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
 
 % t1 --> t2 
 tEnd = t2 - t1; 
@@ -188,11 +190,11 @@ torque = inertia_SC*a;
 tEnd = t3 - t2; 
 w0 = w2_phi3(end, :)'; 
 q0 = q2_phi3(end, :)'; 
-a = [ 0; 0; -aMax]; 
-torque = inertia_SC*a; 
+% a = [ 0; 0; -aMax]; 
+% torque = inertia_SC*a; 
 
 % [t3_phi3, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]); 
-[t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete(dt, t2, t3, inertia_SC, torque, w0, q0); 
+[t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
 
 % y_phi3 = [y1_phi3; y2_phi3(2:end, :); y3_phi3(2:end, :)]; 
 % w_phi3 = y_phi3(:, 1:3); 
