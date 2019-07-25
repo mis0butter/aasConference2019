@@ -39,16 +39,13 @@ dt = 1/100;
 % t1 --> t2 
 w0 = w1_phi1(end, :)'; 
 q0 = q1_phi1(end, :)'; 
-a = [0; 0; 0]; 
-torque = inertia_SC*a; 
+torque = [0; 0; 0]; 
 
 [t2_phi1, q2_phi1, w2_phi1, torque2_phi1] = gyrostat_discrete(dt, t1, t2, inertia_SC, torque, w0, q0); 
 
 % t2 --> t3 
 w0 = w2_phi1(end, :)'; 
 q0 = q2_phi1(end, :)'; 
-% a = [ 0; 0; -aMax]; 
-% torque = inertia_SC*a; 
 
 [t3_phi1, q3_phi1, w3_phi1, torque3_phi1] = gyrostat_discrete(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
 
@@ -110,8 +107,7 @@ torque_G0 = G0_DCM_G*torque_G;
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
 q0 = q1_phi2(end, :)'; 
-a = [0; 0; 0]; 
-torque = inertia_SC*a; 
+torque = [0; 0; 0]; 
 
 [t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0); 
 
@@ -180,8 +176,7 @@ torque_G0 = inertia_SC*a_G0;                                 % wrt G0 frame
 tEnd = t2 - t1; 
 w0 = w1_phi3(end, :)'; 
 q0 = q1_phi3(end, :)'; 
-a = [0; 0; 0]; 
-torque = inertia_SC*a; 
+torque = [0; 0; 0]; 
 
 % [t2_phi3, y2_phi3] = ode45(@(t,Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]); 
 [t2_phi3, q2_phi3, w2_phi3, torque2_phi3] = gyrostat_discrete(dt, t1, t2, inertia_SC, torque, w0, q0); 
@@ -190,22 +185,9 @@ torque = inertia_SC*a;
 tEnd = t3 - t2; 
 w0 = w2_phi3(end, :)'; 
 q0 = q2_phi3(end, :)'; 
-% a = [ 0; 0; -aMax]; 
-% torque = inertia_SC*a; 
 
 % [t3_phi3, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]); 
 [t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
-
-% y_phi3 = [y1_phi3; y2_phi3(2:end, :); y3_phi3(2:end, :)]; 
-% w_phi3 = y_phi3(:, 1:3); 
-% q_phi3 = y_phi3(:, 4:7); 
-% 
-% ypr_phi3 = zeros(length(q_phi3), 3); 
-% for i = 1:max(size(q_phi3))
-%     ypr_phi3(i, :) = SpinCalc('QtoEA321', q_phi3(i, :), eps, 0); 
-% end 
-% 
-% t_phi3 = [t1_phi3; t1_phi3(end)+t2_phi3(2:end); t1_phi3(end)+t2_phi3(end)+t3_phi3(2:end)]; 
 
 t_phi3 = [t1_phi3; t2_phi3(2:end); t3_phi3(2:end)]; 
 w_phi3 = [w1_phi3; w2_phi3(2:end ,:); w3_phi3(2:end, :)]; 
