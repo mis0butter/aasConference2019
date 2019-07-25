@@ -162,7 +162,7 @@ wf = 0;
 %% Solve for attitue determination - third slew 
         
 % t0 --> t1 
-tEnd = t1 - t0; 
+% tEnd = t1 - t0; 
 w0 = w_phi2(end, :)'; 
 q0 = q_phi2(end, :)';  
 a_P = [0; 0; aMax]; 
@@ -170,24 +170,27 @@ a_G0 = G0_DCM_P*a_P;
 torque_G0 = inertia_SC*a_G0;                                 % wrt G0 frame 
 
 % [t1_phi3, y1_phi3] = ode45(@(t,Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]);
-[t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
+% [t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
+[t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
 
 % t1 --> t2 
-tEnd = t2 - t1; 
+% tEnd = t2 - t1; 
 w0 = w1_phi3(end, :)'; 
 q0 = q1_phi3(end, :)'; 
 torque = [0; 0; 0]; 
 
 % [t2_phi3, y2_phi3] = ode45(@(t,Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]); 
-[t2_phi3, q2_phi3, w2_phi3, torque2_phi3] = gyrostat_discrete(dt, t1, t2, inertia_SC, torque, w0, q0); 
+% [t2_phi3, q2_phi3, w2_phi3, torque2_phi3] = gyrostat_discrete(dt, t1, t2, inertia_SC, torque, w0, q0); 
+[t2_phi3, q2_phi3, w2_phi3, torque2_phi3] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0); 
 
 % t2 --> t3 
-tEnd = t3 - t2; 
+% tEnd = t3 - t2; 
 w0 = w2_phi3(end, :)'; 
 q0 = q2_phi3(end, :)'; 
 
 % [t3_phi3, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]); 
-[t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
+% [t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete(dt, t2, t3, inertia_SC, -torque_G, w0, q0); 
+[t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete_torqueN(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
 
 t_phi3 = [t1_phi3; t2_phi3(2:end); t3_phi3(2:end)]; 
 w_phi3 = [w1_phi3; w2_phi3(2:end ,:); w3_phi3(2:end, :)]; 
