@@ -13,11 +13,11 @@ aMax = 1;                                  % Maximum acceleration, rad/s^2
 wMax = 1;                                  % Maximum angular velocity, rad/s
 
 % Initial points / vectors 
-Pi_G0 = [1; 0.5; -0.2];                           % Pi = unit vector of initial point in the G frame 
+Pi_G0 = [1; 0; 0];                           % Pi = unit vector of initial point in the G frame 
 Pi_G0 = Pi_G0/norm(Pi_G0); 
-Pf_G0 = [-0.8; 0.2; 0];                           % Pf = unit vector of the final point in the G frame 
+Pf_G0 = [0; cosd(45); cosd(45)];                           % Pf = unit vector of the final point in the G frame 
 Pf_G0 = Pf_G0/norm(Pf_G0); 
-S_N = [cosd(45); cosd(45); 0];       % S = unit vector of sun vector in the N frame 
+S_N = [cosd(75); sind(75); 1];              % S = unit vector of sun vector in the N frame 
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
 
 % Defining frames 
@@ -26,6 +26,11 @@ G0_DCM_N = eye(3);
 N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
 S_G0 = G0_DCM_N*S_N;                          % Sun vector in G frame 
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
+
+%%
+
+% Check angular separation between sun vector S and slew plane 
+alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check
 
 %% Calculate slew angles 
 
@@ -38,10 +43,6 @@ e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf pla
 Pperp_G0 = cross(Pi_G0, e_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
 P_DCM_G0 = [Pi_G0'; Pperp_G0'; e_G0'];     % DCM from G frame to P (slew plane) frame 
 G0_DCM_P = P_DCM_G0';                         % P to G frame 
-
-% Check angular separation between sun vector S and slew plane 
-alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check
-% alpha = pi/4; 
 
 %%%%%%
 % IF angular separation is less than payload half-cone angle --> find phi2
