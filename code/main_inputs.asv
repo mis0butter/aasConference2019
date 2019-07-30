@@ -16,7 +16,7 @@ ep = pi/12;                                 % payload half-cone angle. pi/12 rad
 % Initial points / vectors 
 Pi_G0 = [1; 0; 0];                           % Pi = unit vector of initial point in the G frame 
 Pi_G0 = Pi_G0/norm(Pi_G0); 
-Pf_G0 = [-1; 0; cosd(45)];                           % Pf = unit vector of the final point in the G frame 
+Pf_G0 = [0; cosd(45); cosd(45)];                           % Pf = unit vector of the final point in the G frame 
 Pf_G0 = Pf_G0/norm(Pf_G0); 
 S_N = [cosd(75); sind(75); 1];              % S = unit vector of sun vector in the N frame 
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
@@ -47,9 +47,6 @@ S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector
 
 while alpha*180/pi > ep 
     disp('alpha > ep') 
-    S_N = [rand(1); rand(1); rand(1)];  
-    S_G0 = G0_DCM_N*S_N;               
-    alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check           
 end 
 
 %% Calculate slew angles 
