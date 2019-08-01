@@ -1,4 +1,4 @@
-function [time, q_out, w_out, torque_out] = gyrostat_discrete_torqueN(dt, t_start, t_end, inertia, torqueN, w0, q0)
+function [time, q_out, w_out, torque_out] = gyrostat_discrete(dt, t_start, t_end, inertia, torque0, w0, q0)
 % Junette Hsin 
 % Discrete attitude determination for gyrostat 
 % 
@@ -26,41 +26,26 @@ end
     
 % Initialize 
 w = w0; 
-q = q0;                     % G0_q_G
-
-N_DCM_G = quat2DCM(q);          % G0_DCM_G
-torque = N_DCM_G'*torqueN; 
-
+q = q0; 
+torque = torque0; 
 int = 1; 
 w_out = [ w0'; zeros(length(dt : dt : (t_end - t_start)), 3 )]; 
 q_out = [ q0'; zeros(length(dt : dt : (t_end - t_start)), 4 )];
-torque_out = [torqueN'; zeros(length(dt : dt : (t_end - t_start)), 3)]; 
+torque_out = [torque0'; zeros(length(dt : dt : (t_end - t_start)), 3)]; 
 time = [t_start; zeros(length(dt : dt : (t_end - t_start)), 1)]; 
-
-nsteps = 10; 
 
 % Outer for loop, t_start + dt --> t_end 
 for t = t_start+dt : dt : t_end 
 % for t = t_start : dt : t_end 
 
-%     if norm(torque) == 0
-% 
-%         for i = 1:nsteps
-% %             dw = inv(inertia)*(torque - cross(w, inertia*w));
-% %             w_skew = [  0      -w(3)    w(2); 
-% %                         w(3)    0      -w(1); 
-% %                        -w(2)    w(1)    0 ] ; 
-% %             dw = inv(inertia) * ( -w_skew * inertia * w + torque); 
-%             q_skew = [ q(4)     -q(3)       q(2);
-%                        q(3)      q(4)      -q(1);
-%                       -q(2)      q(1)       q(4);
-%                       -q(1)     -q(2)      -q(3)]; 
-%             dq = 1/2 * q_skew * w ;
-% %             w = w + dw*dt/nsteps;
-%             q = q + dq*dt/nsteps;
-%         end
-%         
-%     else 
+    if norm(torque) == 0
+
+        % do nothing; don't calculate dw or dq or new torque 
+        
+    else 
+
+        nsteps = 10;
+        q_old = q;      % G0_q_G(old)
 
         % Break into steps for attitude determination 
         for i = 1:nsteps
@@ -76,12 +61,19 @@ for t = t_start+dt : dt : t_end
             dq = 1/2 * q_skew * w ;
             w = w + dw*dt/nsteps;
             q = q + dq*dt/nsteps;
+    %         w = w + dw;
+    %         q = q + dq;
         end
-        
-        N_DCM_G = quat2DCM(q);
-        torque = N_DCM_G'*torqueN; 
-        
-%     end 
+
+        q_new = q;      % G0_q_G(new) 
+        % B_q_C = quat_diff(A_q_B, A_q_C)
+        old_q_new = quat_diff(q_old, q_new);        
+        old_DCM_new = quat2DCM(old_q_new); 
+        new_DCM_old = old_DCM_new'; 
+
+        torque = new_DCM_old*torque; 
+
+    end 
     
     int = int + 1; 
     q_out(int, :) = q'; 

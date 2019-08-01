@@ -4,7 +4,7 @@
 
 % clear; 
 close all; 
-% main_inputs             % Creates all inputs and variables in workspace 
+main_inputs             % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 
@@ -110,16 +110,12 @@ torque_G0 = G0_DCM_G*torque_G;
 
 [t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
 
-% t1 --> t2/2
+% t1 --> t2 
 w0 = w1_phi2(end, :)'; 
 q0 = q1_phi2(end, :)'; 
-% torque = [0; 0; 0]; 
+torque = [0; 0; 0]; 
 
-[t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque_G0, w0, q0); 
-
-% t2/2 --> t3 
-
-
+[t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0); 
 
 % t2 --> t3 
 w0 = w2_phi2(end, :)'; 
