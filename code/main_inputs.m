@@ -14,24 +14,29 @@ wMax = 1;                                  % Maximum angular velocity, rad/s
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
 
 % Initial points / vectors 
-Pi_G0 = [1; 0; 0];                           % Pi = unit vector of initial point in the G frame 
+Pi_G0 = [rand(1); rand(1); rand(1)];                           % Pi = unit vector of initial point in the G frame 
 Pi_G0 = Pi_G0/norm(Pi_G0); 
-Pf_G0 = [-1; 0; cosd(45)];                           % Pf = unit vector of the final point in the G frame 
+Pf_G0 = [rand(1); rand(1); rand(1)];                           % Pf = unit vector of the final point in the G frame 
 Pf_G0 = Pf_G0/norm(Pf_G0); 
-S_N = [cosd(75); sind(75); 1];              % S = unit vector of sun vector in the N frame 
-S_N = S_N/norm(S_N);                        % normalizing sun vector 
-
-% Defining frames 
-% G0_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
-G0_DCM_N = eye(3); 
-N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
-S_G0 = G0_DCM_N*S_N;                          % Sun vector in G frame 
+while acos(dot(Pi_G0, Pf_G0)) < ep*2
+    Pf_G0 = [rand(1); rand(1); rand(1)]; 
+    Pf_G0 = Pf_G0/norm(Pf_G0); 
+end 
 
 % Calculate normal vector of slew plane 
 e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
 Pperp_G0 = cross(Pi_G0, e_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
 P_DCM_G0 = [Pi_G0'; Pperp_G0'; e_G0'];     % DCM from G frame to P (slew plane) frame 
 G0_DCM_P = P_DCM_G0';                         % P to G frame 
+% Defining inertial frames 
+% G0_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
+G0_DCM_N = eye(3); 
+N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
+
+% Sun vector stuff 
+S_N = [cosd(75); sind(75); 1];              % S = unit vector of sun vector in the N frame 
+S_N = S_N/norm(S_N);                        % normalizing sun vector 
+S_G0 = G0_DCM_N*S_N;                          % Sun vector in G frame 
 
 % Check angular separation between sun vector S and slew plane 
 alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check
@@ -41,16 +46,16 @@ alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check
 % until alpha < ep. for simulation!!! 
 %%%%%%
 
-% unit_S = S_G/norm(S_G); 
-S_PiPf_G0 = -cross(cross(S_G0, e_G0), e_G0);    % sun projection vector G frame
-S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
-
 while alpha*180/pi > ep 
     disp('alpha > ep') 
     S_N = [rand(1); rand(1); rand(1)];  
     S_G0 = G0_DCM_N*S_N;               
     alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check           
 end 
+
+% FINALLY - Sun projection onto G frame 
+S_PiPf_G0 = -cross(cross(S_G0, e_G0), e_G0);    % sun projection vector G frame
+S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
 
 %% Calculate slew angles 
 
