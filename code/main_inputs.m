@@ -12,10 +12,17 @@ inertia_w = [  20   0    0;
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
 
 % % Initial points / vectors 
-Pi_G0 = [rand(1); rand(1); rand(1)]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
-Pf_G0 = [rand(1); rand(1); rand(1)]; Pf_G0 = Pf_G0 / norm(Pf_G0);          
+% Pi_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
+% Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
+% while acos(dot(Pi_G0, Pf_G0)) < pi/3
+%     Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; 
+%     Pf_G0 = Pf_G0 / norm(Pf_G0); 
+% end 
+
+Pi_G0 = [rand; rand; rand]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
+Pf_G0 = [rand; rand; rand]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
 while acos(dot(Pi_G0, Pf_G0)) < ep*2
-    Pf_G0 = [rand(1); rand(1); rand(1)]; 
+    Pf_G0 = [rand; rand; rand]; 
     Pf_G0 = Pf_G0 / norm(Pf_G0); 
 end 
 

@@ -110,12 +110,19 @@ torque_G0 = G0_DCM_G*torque_G;
 
 [t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
 
-% t1 --> t2 
+% t1 --> t2 half 
 w0 = w1_phi2(end, :)'; 
 q0 = q1_phi2(end, :)'; 
-torque = [0; 0; 0]; 
+% torque = [0; 0; 0]; 
+t2_half = t1 + (t2 - t1)/2; 
 
-[t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0); 
+[t2_phi2_1, q2_phi2_1, w2_phi2_1, torque2_phi2_1] = gyrostat_discrete_torqueN(dt, t1, t2_half, inertia_SC, torque_G0, w0, q0); 
+
+% t2 half --> t2 
+w0 = w2_phi2_1(end, :)'; 
+q0 = q2_phi2_1(end, :)'; 
+
+[t2_phi2_2, q2_phi2_2, w2_phi2_2, torque2_phi2_2] = gyrostat_discrete_torqueN(dt, t2_half, t2, inertia_SC, torque_G0, w0, q0); 
 
 % t2 --> t3 
 w0 = w2_phi2(end, :)'; 
