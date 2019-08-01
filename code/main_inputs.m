@@ -32,12 +32,15 @@ G0_DCM_N = eye(3);
 N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
 
 % Sun vector stuff 
-[alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
+[alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
+    sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
 
 % IF angular separation is less than payload half-cone angle --> while loop
 % until alpha < ep. for simulation!!! 
-while abs(alpha) > ep  || theta_Sproj_Pf + ep > theta_Pi_Pf
-    [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
+while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ... 
+        theta_Pi_Sproj > theta_Pi_Pf || theta_Sproj_Pf > theta_Pi_Pf 
+    [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
+        sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
 end 
 
 %% Calculate slew angles 
@@ -94,7 +97,8 @@ if phi3 > pi/2
 end 
 
 %%
-function [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0)
+function [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
+    sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0)
 % Generate sun vector 
 
         S_N = [rand(1); rand(1); rand(1)];  
@@ -102,8 +106,11 @@ function [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_
         S_G0 = G0_DCM_N*S_N;               
         alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check    
 
+        % Sun projection onto slew plane 
+        S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0)); 
+        
         % FINALLY - Sun projection onto G frame 
-        S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0));    % sun projection vector G frame
+%         S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0));    % sun projection vector G frame
         S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
 
         theta_Sproj_Pf = acos(dot(S_PiPf_G0, Pf_G0)); 
