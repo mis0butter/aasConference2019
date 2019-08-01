@@ -15,12 +15,12 @@ ep = pi/12;                                 % payload half-cone angle. pi/12 rad
 
 % Initial points / vectors 
 Pi_G0 = [rand(1); rand(1); rand(1)];                           % Pi = unit vector of initial point in the G frame 
-Pi_G0 = Pi_G0/norm(Pi_G0); 
+Pi_G0 = Pi_G0 / norm(Pi_G0); 
 Pf_G0 = [rand(1); rand(1); rand(1)];                           % Pf = unit vector of the final point in the G frame 
-Pf_G0 = Pf_G0/norm(Pf_G0); 
+Pf_G0 = Pf_G0 / norm(Pf_G0); 
 while acos(dot(Pi_G0, Pf_G0)) < ep*2
     Pf_G0 = [rand(1); rand(1); rand(1)]; 
-    Pf_G0 = Pf_G0/norm(Pf_G0); 
+    Pf_G0 = Pf_G0 / norm(Pf_G0); 
 end 
 
 % Calculate normal vector of slew plane 
@@ -49,6 +49,7 @@ alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check
 while alpha*180/pi > ep 
     disp('alpha > ep') 
     S_N = [rand(1); rand(1); rand(1)];  
+    S_N = S_N/norm(S_N); 
     S_G0 = G0_DCM_N*S_N;               
     alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check           
 end 
@@ -59,7 +60,7 @@ S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector
 
 %% Calculate slew angles 
 
-% Calculate the treshold triangle 
+% Calculate the threshold triangle 
 % phi_tt = 2*wMax*sqrt(aMax^2 + wMax^2);      % Threshold triangle!!! 
 phi_tt = wMax^2/aMax; 
 
@@ -70,7 +71,7 @@ if phi1 > pi/2
 end 
 
 % Find P1 vector in G0 frame 
-P1_P = [cos(phi1); sin(phi1); 0];           % P1 in P frame 
+P1_P = [ cos(phi1); sin(phi1); 0 ];           % P1 in P frame 
 P1_G0 = G0_DCM_P*P1_P;                        % P1 in G frame 
 
 % Find P2 vector 

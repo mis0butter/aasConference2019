@@ -7,8 +7,10 @@ close all;
 main_inputs             % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
-plot_option = 0; 
-phi_check_vectors 
+plot_option = 1; 
+if plot_option == 1
+    phi_check_vectors 
+end 
 
 %% Determine Phi 1 slew times
 
