@@ -14,10 +14,8 @@ wMax = 1;                                  % Maximum angular velocity, rad/s
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
 
 % Initial points / vectors 
-Pi_G0 = [rand(1); rand(1); rand(1)];                           % Pi = unit vector of initial point in the G frame 
-Pi_G0 = Pi_G0 / norm(Pi_G0); 
-Pf_G0 = [rand(1); rand(1); rand(1)];                           % Pf = unit vector of the final point in the G frame 
-Pf_G0 = Pf_G0 / norm(Pf_G0); 
+Pi_G0 = [rand(1); rand(1); rand(1)]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
+Pf_G0 = [rand(1); rand(1); rand(1)]; Pf_G0 = Pf_G0 / norm(Pf_G0);          
 while acos(dot(Pi_G0, Pf_G0)) < ep*2
     Pf_G0 = [rand(1); rand(1); rand(1)]; 
     Pf_G0 = Pf_G0 / norm(Pf_G0); 
@@ -34,29 +32,13 @@ G0_DCM_N = eye(3);
 N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
 
 % Sun vector stuff 
-S_N = [cosd(75); sind(75); 1];              % S = unit vector of sun vector in the N frame 
-S_N = S_N/norm(S_N);                        % normalizing sun vector 
-S_G0 = G0_DCM_N*S_N;                          % Sun vector in G frame 
+[alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
 
-% Check angular separation between sun vector S and slew plane 
-alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check
-
-%%%%%%
 % IF angular separation is less than payload half-cone angle --> while loop
 % until alpha < ep. for simulation!!! 
-%%%%%%
-
-while alpha*180/pi > ep 
-    disp('alpha > ep') 
-    S_N = [rand(1); rand(1); rand(1)];  
-    S_N = S_N/norm(S_N); 
-    S_G0 = G0_DCM_N*S_N;               
-    alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check           
+while abs(alpha) > ep  || theta_Sproj_Pf + ep > theta_Pi_Pf
+    [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
 end 
-
-% FINALLY - Sun projection onto G frame 
-S_PiPf_G0 = -cross(cross(S_G0, e_G0), e_G0);    % sun projection vector G frame
-S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
 
 %% Calculate slew angles 
 
@@ -99,7 +81,7 @@ else
     SP1_G0 = P1_G0 - S_G0; 
     SP2_G0 = P2_G0 - S_G0; 
     phi2_S = acos(dot(SP1_G0/norm(SP1_G0), SP2_G0/norm(SP2_G0))); 
-    phi2 = phi2_S; 
+    phi2 = phi2_P3; 
 end 
 
 %%
@@ -109,4 +91,22 @@ end
 phi3 = acos(dot(Pf_G0, P2_G0)); 
 if phi3 > pi/2 
     phi3_rem = phi3 - pi/2; 
+end 
+
+%%
+function [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0)
+% Generate sun vector 
+
+        S_N = [rand(1); rand(1); rand(1)];  
+        S_N = S_N/norm(S_N); 
+        S_G0 = G0_DCM_N*S_N;               
+        alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check    
+
+        % FINALLY - Sun projection onto G frame 
+        S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0));    % sun projection vector G frame
+        S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
+
+        theta_Sproj_Pf = acos(dot(S_PiPf_G0, Pf_G0)); 
+        theta_Pi_Pf = acos(dot(Pi_G0, Pf_G0)); 
+        theta_Pi_Sproj = acos(dot(Pi_G0, S_PiPf_G0)); 
 end 

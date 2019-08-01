@@ -15,12 +15,12 @@ ep = pi/12;                                 % payload half-cone angle. pi/12 rad
 
 % Initial points / vectors 
 Pi_G0 = [rand(1); rand(1); rand(1)];                           % Pi = unit vector of initial point in the G frame 
-Pi_G0 = Pi_G0/norm(Pi_G0); 
+Pi_G0 = Pi_G0 / norm(Pi_G0); 
 Pf_G0 = [rand(1); rand(1); rand(1)];                           % Pf = unit vector of the final point in the G frame 
-Pf_G0 = Pf_G0/norm(Pf_G0); 
+Pf_G0 = Pf_G0 / norm(Pf_G0); 
 while acos(dot(Pi_G0, Pf_G0)) < ep*2
     Pf_G0 = [rand(1); rand(1); rand(1)]; 
-    Pf_G0 = Pf_G0/norm(Pf_G0); 
+    Pf_G0 = Pf_G0 / norm(Pf_G0); 
 end 
 
 % Calculate normal vector of slew plane 
@@ -33,6 +33,7 @@ G0_DCM_P = P_DCM_G0';                         % P to G frame
 G0_DCM_N = eye(3); 
 N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
 
+% Sun vector stuff 
 S_N = [cosd(75); sind(75); 1];              % S = unit vector of sun vector in the N frame 
 S_N = S_N/norm(S_N);                        % normalizing sun vector 
 S_G0 = G0_DCM_N*S_N;                          % Sun vector in G frame 
@@ -45,20 +46,30 @@ alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check
 % until alpha < ep. for simulation!!! 
 %%%%%%
 
-% unit_S = S_G/norm(S_G); 
-S_PiPf_G0 = -cross(cross(S_G0, e_G0), e_G0);    % sun projection vector G frame
-S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
-
 while alpha*180/pi > ep 
     disp('alpha > ep') 
     S_N = [rand(1); rand(1); rand(1)];  
+    S_N = S_N/norm(S_N); 
     S_G0 = G0_DCM_N*S_N;               
-    alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check           
+    alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check    
+
+    % FINALLY - Sun projection onto G frame 
+    S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0));    % sun projection vector G frame
+    S_PiPf_G0 = S_PiPf_G0/norm(S_PiPf_G0);         % sun projection --> unit vector 
+    
+    theta_S_Pf = acos(dot(S_PiPf_G0, Pf_G0)); 
+    theta_Pi_Pf = acos(dot(Pi_G0, Pf_G0)); 
+    
+    while theta_S_Pf > theta_Pi_Pf
+        
+    end 
+    
+
 end 
 
 %% Calculate slew angles 
 
-% Calculate the treshold triangle 
+% Calculate the threshold triangle 
 % phi_tt = 2*wMax*sqrt(aMax^2 + wMax^2);      % Threshold triangle!!! 
 phi_tt = wMax^2/aMax; 
 
@@ -69,7 +80,7 @@ if phi1 > pi/2
 end 
 
 % Find P1 vector in G0 frame 
-P1_P = [cos(phi1); sin(phi1); 0];           % P1 in P frame 
+P1_P = [ cos(phi1); sin(phi1); 0 ];           % P1 in P frame 
 P1_G0 = G0_DCM_P*P1_P;                        % P1 in G frame 
 
 % Find P2 vector 
@@ -97,7 +108,7 @@ else
     SP1_G0 = P1_G0 - S_G0; 
     SP2_G0 = P2_G0 - S_G0; 
     phi2_S = acos(dot(SP1_G0/norm(SP1_G0), SP2_G0/norm(SP2_G0))); 
-    phi2 = phi2_S; 
+    phi2 = phi2_P3; 
 end 
 
 %%
