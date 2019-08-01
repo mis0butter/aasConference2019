@@ -3,9 +3,12 @@
 %% Inputs 
 
 % Non-changing parameters; should be function inputs 
-inertia_SC = [ 408     0       0; 
-               0       427     0; 
-               0       0       305]; 
+% inertia_SC = [ 408     0       0; 
+%                0       427     0; 
+%                0       0       305]; 
+inertia_SC = [ 100     0       0; 
+               0       100     0; 
+               0       0       100]; 
 inertia_w = [  20   0    0; 
                0    20   0; 
                0    0    20  ]; 
@@ -48,7 +51,7 @@ while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ...
         sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
 end 
 
-aMax = 1.5;                                  % Maximum acceleration, rad/s^2
+aMax = 1;                                  % Maximum acceleration, rad/s^2
 wMax = 1;                                  % Maximum angular velocity, rad/s
 
 %% Calculate slew angles 
