@@ -43,6 +43,7 @@ end
 
 figure()
     plot3(P_G(:, 1), P_G(:, 2), P_G(:,3)); 
+    plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:, 3), '-.')
     grid on; hold on
     plot3(P_G1_phi2(:, 1), P_G1_phi2(:, 2), P_G1_phi2(:, 3), 'g'); 
     plot3(P_G2_phi2(:, 1), P_G2_phi2(:, 2), P_G2_phi2(:, 3), 'r');
@@ -66,13 +67,13 @@ figure()
     
     plot3([0 S_G0(1)], [0 S_G0(2)], [0 S_G0(3)], 'r'); 
     plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'r'); 
-    plot3([0 P3_G0(1)], [0 P3_G0(2)], [0 P3_G0(3)], 'b'); 
+%     plot3([0 P3_G0(1)], [0 P3_G0(2)], [0 P3_G0(3)], 'b'); 
     
-    plot3([P3_G0(1) P1_G0(1)], [P3_G0(2) P1_G0(2)], [P3_G0(3) P1_G0(3)], 'r'); 
-    plot3([P3_G0(1) P2_G0(1)], [P3_G0(2) P2_G0(2)], [P3_G0(3) P2_G0(3)], 'r'); 
+%     plot3([P3_G0(1) P1_G0(1)], [P3_G0(2) P1_G0(2)], [P3_G0(3) P1_G0(3)], 'r'); 
+%     plot3([P3_G0(1) P2_G0(1)], [P3_G0(2) P2_G0(2)], [P3_G0(3) P2_G0(3)], 'r'); 
     
-    text(P3_G0(1), P3_G0(2), P3_G0(3), ... 
-        sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
+%     text(P3_G0(1), P3_G0(2), P3_G0(3), ... 
+%         sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
     text(Pi_G0(1), Pi_G0(2), Pi_G0(3), sprintf(' Pi')) 
     text(Pf_G0(1), Pf_G0(2), Pf_G0(3), sprintf(' Pf')) 
     text(e_G0(1), e_G0(2), e_G0(3), sprintf(' e')) 

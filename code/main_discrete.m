@@ -4,7 +4,7 @@
 
 % clear; 
 close all; 
-main_inputs             % Creates all inputs and variables in workspace 
+% main_inputs             % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 
@@ -254,7 +254,7 @@ for i = 1:length(w_total) - 1
     a_total(i, :) = (w_total(i + 1, :) - w_total(i, :))*100; 
 end 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, ypr_total, 'total')
 end 
