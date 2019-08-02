@@ -98,6 +98,8 @@ else
     phi2 = phi2_P3; 
 end 
 
+phi2_curve
+
 %%
 
 % Slew around eigenvector via phi3 

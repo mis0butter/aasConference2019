@@ -311,5 +311,7 @@ for i = 1:max(size(q_phi1))
     ypr_phiNom(i, :) = SpinCalc('QtoEA321', q_phiNom(i, :), eps, 0); 
 end 
 
+%%
 
+post_processing
 
