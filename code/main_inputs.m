@@ -98,7 +98,23 @@ else
     phi2 = phi2_P3; 
 end 
 
-phi2_curve
+%%%
+[phi2_P, phi2_P_sum, P_S] = phi2_curve(S_G0, P1_G0, P2_G0, phi2); 
+phi2_P; 
+%%%
+
+%%%
+top = dot(S_G0, cross(P1_G0, P2_G0)); 
+bot = dot(P1_G0, P2_G0) - dot(S_G0, P1_G0)*dot(S_G0, P2_G0);
+phi2_M3 = abs( atan2 ( top, bot ) ); 
+%%%
+theta = acos(dot(P1_G0, S_G0)); 
+top = (pi/2 - alpha)*sin(ep); 
+bot = cos(ep) - cos(theta)*cos(alpha); 
+phi2_M4 = 2*abs(atan2(top, bot)); 
+%%%
+phi2 = phi2_M4; 
+
 
 %%
 

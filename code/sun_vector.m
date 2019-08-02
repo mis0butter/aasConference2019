@@ -8,7 +8,11 @@ function [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_
         alpha = pi/2 - acos(dot(S_G0, e_G0));         % coming out to 0 - check    
 
         % Sun projection onto slew plane 
-        S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0)); 
+        S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0));
+        
+        %%%
+        
+        %%%
         
         % FINALLY - Sun projection onto G frame 
 %         S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0));    % sun projection vector G frame
