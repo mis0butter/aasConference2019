@@ -22,12 +22,12 @@ ep = pi/12;                                 % payload half-cone angle. pi/12 rad
 %     Pf_G0 = Pf_G0 / norm(Pf_G0); 
 % end 
 
-Pi_G0 = [rand; rand; rand]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
-Pf_G0 = [rand; rand; rand]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
-while acos(dot(Pi_G0, Pf_G0)) < ep*2
-    Pf_G0 = [rand; rand; rand]; 
-    Pf_G0 = Pf_G0 / norm(Pf_G0); 
-end 
+% Pi_G0 = [rand; rand; rand]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
+% Pf_G0 = [rand; rand; rand]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
+% while acos(dot(Pi_G0, Pf_G0)) < ep*2
+%     Pf_G0 = [rand; rand; rand]; 
+%     Pf_G0 = Pf_G0 / norm(Pf_G0); 
+% end 
 
 % Calculate normal vector of slew plane 
 e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
