@@ -1,5 +1,6 @@
 % Script to check phi 1 vectors 
-
+plot_option = 1; 
+if plot_option == 1
 figure()
     
     plot3([0 Pi_G0(1)], [0 Pi_G0(2)], [0 Pi_G0(3)], 'b'); 
@@ -7,7 +8,7 @@ figure()
     plot3([0 Pf_G0(1)], [0 Pf_G0(2)], [0 Pf_G0(3)], 'b'); 
     plot3([0 P1_G0(1)], [0 P1_G0(2)], [0 P1_G0(3)], 'b'); 
     plot3([0 P2_G0(1)], [0 P2_G0(2)], [0 P2_G0(3)], 'b'); 
-    plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'b'); 
+    plot3([0 e_G0(1)*0.5], [0 e_G0(2)*0.5], [0 e_G0(3)*0.5], 'b'); 
 
     plot(theta,sin(theta)./theta,'LineWidth',3) 
 
@@ -22,7 +23,7 @@ figure()
         sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
     text(Pi_G0(1), Pi_G0(2), Pi_G0(3), sprintf(' Pi')) 
     text(Pf_G0(1), Pf_G0(2), Pf_G0(3), sprintf(' Pf')) 
-    text(e_G0(1), e_G0(2), e_G0(3), sprintf(' e')) 
+    text(e_G0(1)*0.5, e_G0(2)*0.5, e_G0(3)*0.5, sprintf(' e')) 
     text(P1_G0(1), P1_G0(2), P1_G0(3), sprintf(' P1')) 
     text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P2')) 
     text(S_G0(1), S_G0(2), S_G0(3), sprintf(' sun')) 
@@ -34,7 +35,10 @@ figure()
 %     xlabel('P perp_G0') 
 %     ylabel('Pi_G0')
 %     zlabel('e_G0') 
+end 
 
+plot_option = 0; 
+if plot_option == 1
 figure()
     plot3([0 P1_G0(1)], [0 P1_G0(2)], [0 P1_G0(3)], 'b'); 
     grid on; hold on; 
@@ -65,7 +69,7 @@ figure()
 %     xlabel('P perp_G0') 
 %     ylabel('Pi_G0')
 %     zlabel('e_G0') 
-        
+end         
 
 
 

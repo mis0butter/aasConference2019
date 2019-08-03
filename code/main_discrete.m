@@ -171,7 +171,7 @@ for i = 1:max(size(q_phi2))
 end 
 
 %% Plot phi2
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
 end 
@@ -272,7 +272,7 @@ for i = 1:length(w_total) - 1
     a_total(i, :) = (w_total(i + 1, :) - w_total(i, :))*100; 
 end 
 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, ypr_total, 'total')
 end 

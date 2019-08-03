@@ -73,19 +73,24 @@ end
 %%
 
 figure()
-    plot3(P_G(:, 1), P_G(:, 2), P_G(:,3)); 
-    plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:, 3), '-.')
+%     plot3(P_G(:, 1), P_G(:, 2), P_G(:,3)); 
+%     plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:, 3), '-.')
     grid on; hold on
-    plot3(P_G1_phi2(:, 1), P_G1_phi2(:, 2), P_G1_phi2(:, 3), 'r'); 
-    plot3(P_G2_phi2(:, 1), P_G2_phi2(:, 2), P_G2_phi2(:, 3), 'g');
-    plot3(P_G3_phi2(:, 1), P_G3_phi2(:, 2), P_G3_phi2(:, 3), 'r');
+%     plot3(P_G1_phi2(:, 1), P_G1_phi2(:, 2), P_G1_phi2(:, 3), 'r'); 
+%     plot3(P_G2_phi2(:, 1), P_G2_phi2(:, 2), P_G2_phi2(:, 3), 'g');
+%     plot3(P_G3_phi2(:, 1), P_G3_phi2(:, 2), P_G3_phi2(:, 3), 'r');
 %     plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:,3)); 
+
+    plot3(P_phi3_G0(:, 1), P_phi3_G0(:, 2), P_phi3_G0(:, 3), '-.'); 
+    plot3(P_phi1_G0(:, 1), P_phi1_G0(:, 2), P_phi1_G0(:, 3), '-.'); 
     
     plot3([0 Pi_G0(1)], [0 Pi_G0(2)], [0 Pi_G0(3)], 'b'); 
     plot3([0 Pf_G0(1)], [0 Pf_G0(2)], [0 Pf_G0(3)], 'b'); 
     plot3([0 P1_G0(1)], [0 P1_G0(2)], [0 P1_G0(3)], 'b'); 
     plot3([0 P2_G0(1)], [0 P2_G0(2)], [0 P2_G0(3)], 'b'); 
-    plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'b'); 
+    plot3([0 e_G0(1)*0.5], [0 e_G0(2)*0.5], [0 e_G0(3)*0.5], 'b'); 
+    
+    plot3(P_G0(:, 1), P_G0(:, 2), P_G0(:, 3), '-.')
      
 %     plot3([0 S1_G0(1)], [0 S1_G0(2)], [0 S1_G0(3)])
 %     plot3([0 S2_G0(1)], [0 S2_G0(2)], [0 S2_G0(3)])
@@ -107,7 +112,7 @@ figure()
 %         sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
     text(Pi_G0(1), Pi_G0(2), Pi_G0(3), sprintf(' Pi')) 
     text(Pf_G0(1), Pf_G0(2), Pf_G0(3), sprintf(' Pf')) 
-    text(e_G0(1), e_G0(2), e_G0(3), sprintf(' e')) 
+    text(e_G0(1)*0.5, e_G0(2)*0.5, e_G0(3)*0.5, sprintf(' e')) 
     text(P1_G0(1), P1_G0(2), P1_G0(3), sprintf(' P1')) 
     text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P2')) 
     text(S_G0(1), S_G0(2), S_G0(3), sprintf(' sun')) 
@@ -116,6 +121,7 @@ figure()
     xlabel('G0_x')
     ylabel('G0_y') 
     zlabel('G0_z') 
+    title('phi1, phi2, and phi3 Slews') 
     
     
     
