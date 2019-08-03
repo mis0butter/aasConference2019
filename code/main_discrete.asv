@@ -260,8 +260,7 @@ q_total = [ q_phi1; ...
             q_phi3(2:end, :)]; 
         
 torque_total = [torque_phi1; ... 
-            torque_phi2(2:end, :); ... 
-            torque_phi3(2:end, :)]; 
+            torque_phi2(2:end, :)
 
         
 ypr_total = zeros(length(q_total), 3); 
@@ -278,7 +277,7 @@ end
 
 plot_option = 1; 
 if plot_option == 1
-    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, ypr_total, 'total')
+    plot_qwypr(t_total, q_total, w_total, torque_total, ypr_total, 'total')
 end 
 
 %% PHI NOMINAL - IF THERE WAS NO SUN INTRUSION 
