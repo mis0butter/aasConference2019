@@ -15,6 +15,7 @@ function [time, q_out, w_out, torque_out] = gyrostat_discrete_torqueN(dt, t_star
 %   time        = time vector at dt steps 
 %   q_out       = output quaternions
 %   w_out       = output angular velocity 
+%   torque_out  = output torque (inertial, or G0) 
 
 % w and Q need to be columns 
 if isrow(w0) == 1
@@ -79,7 +80,8 @@ for t = t_start+dt : dt : t_end
         end
         
         N_DCM_G = quat2DCM(q);
-        torque = N_DCM_G'*torqueN; 
+        G_DCM_N = N_DCM_G'; 
+        torque = G_DCM_N*torqueN; 
         
 %     end 
     

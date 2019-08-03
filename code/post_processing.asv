@@ -16,17 +16,38 @@ for i = 1:length(t1_phi2)
     G_DCM_G0 = G0_DCM_G'; 
     P_G1_phi2(i, :) = G_DCM_G0*Pi_G0; 
 end 
+
+for i = 1:length(t1_phi2) - 1
+    a = G0_DCM_G*P_G1_phi2(i, :)'; 
+    a = P1_G1_phi2(i, :)'; 
+    b = S_G0; 
+    angle1_phi2(i) = acos(dot(a, b)); 
+end 
+
 P_G2_phi2 = zeros(length(t2_phi2), 3); 
 for i = 1:length(t2_phi2)
     G0_DCM_G = quat2DCM(q2_phi2(i, :)); 
     G_DCM_G0 = G0_DCM_G'; 
     P_G2_phi2(i, :) = G_DCM_G0*Pi_G0; 
 end 
+
+for i = 1:length(t2_phi2) - 1
+    a = G0_DCM_G*P_G2_phi2(i, :)'; 
+    b = S_G0; 
+    angle2_phi2(i) = acos(dot(a, b)); 
+end 
+
 P_G3_phi2 = zeros(length(t3_phi2), 3); 
 for i = 1:length(t3_phi2)
     G0_DCM_G = quat2DCM(q3_phi2(i, :)); 
     G_DCM_G0 = G0_DCM_G'; 
     P_G3_phi2(i, :) = G_DCM_G0*Pi_G0; 
+end 
+
+for i = 1:length(t3_phi2) - 1
+    a = G0_DCM_G*P_G3_phi2(i, :)'; 
+    b = S_G0; 
+    angle3_phi2(i) = acos(dot(a, b)); 
 end 
 
 %% NO sun intrusion slew - nominal 
@@ -45,9 +66,9 @@ figure()
     plot3(P_G(:, 1), P_G(:, 2), P_G(:,3)); 
     plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:, 3), '-.')
     grid on; hold on
-    plot3(P_G1_phi2(:, 1), P_G1_phi2(:, 2), P_G1_phi2(:, 3), 'g'); 
-    plot3(P_G2_phi2(:, 1), P_G2_phi2(:, 2), P_G2_phi2(:, 3), 'r');
-    plot3(P_G3_phi2(:, 1), P_G3_phi2(:, 2), P_G3_phi2(:, 3), 'g');
+    plot3(P_G1_phi2(:, 1), P_G1_phi2(:, 2), P_G1_phi2(:, 3), 'r'); 
+    plot3(P_G2_phi2(:, 1), P_G2_phi2(:, 2), P_G2_phi2(:, 3), 'g');
+    plot3(P_G3_phi2(:, 1), P_G3_phi2(:, 2), P_G3_phi2(:, 3), 'r');
 %     plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:,3)); 
     
     plot3([0 Pi_G0(1)], [0 Pi_G0(2)], [0 Pi_G0(3)], 'b'); 

@@ -21,35 +21,35 @@ ep = pi/12;                                 % payload half-cone angle. pi/12 rad
 %     Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; 
 %     Pf_G0 = Pf_G0 / norm(Pf_G0); 
 % end 
-
+% 
 % Pi_G0 = [rand; rand; rand]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
 % Pf_G0 = [rand; rand; rand]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
 % while acos(dot(Pi_G0, Pf_G0)) < ep*2
 %     Pf_G0 = [rand; rand; rand]; 
 %     Pf_G0 = Pf_G0 / norm(Pf_G0); 
 % end 
-
-% Calculate normal vector of slew plane 
-e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
-Pperp_G0 = cross(Pi_G0, e_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
-P_DCM_G0 = [Pi_G0'; Pperp_G0'; e_G0'];     % DCM from G frame to P (slew plane) frame 
-G0_DCM_P = P_DCM_G0';                         % P to G frame 
-% Defining inertial frames 
-% G0_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
-G0_DCM_N = eye(3); 
-N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
-
-% Sun vector stuff 
-[alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
-    sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
-
-% IF angular separation is less than payload half-cone angle --> while loop
-% until alpha < ep. for simulation!!! 
-while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ... 
-        theta_Pi_Sproj > theta_Pi_Pf || theta_Sproj_Pf > theta_Pi_Pf 
-    [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
-        sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
-end 
+% 
+% % Calculate normal vector of slew plane 
+% e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
+% Pperp_G0 = cross(Pi_G0, e_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
+% P_DCM_G0 = [Pi_G0'; Pperp_G0'; e_G0'];     % DCM from G frame to P (slew plane) frame 
+% G0_DCM_P = P_DCM_G0';                         % P to G frame 
+% % Defining inertial frames 
+% % G0_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
+% G0_DCM_N = eye(3); 
+% N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
+% 
+% % Sun vector stuff 
+% [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
+%     sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
+% 
+% % IF angular separation is less than payload half-cone angle --> while loop
+% % until alpha < ep. for simulation!!! 
+% while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ... 
+%         theta_Pi_Sproj > theta_Pi_Pf || theta_Sproj_Pf > theta_Pi_Pf 
+%     [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
+%         sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
+% end 
 
 aMax = 1;                                  % Maximum acceleration, rad/s^2
 wMax = 1;                                  % Maximum angular velocity, rad/s
@@ -157,7 +157,7 @@ phi2_M4 = 2*abs(atan2(top, bot));
             plot3([0 P2_G0(1)], [0 P2_G0(2)], [0 P2_G0(3)], 'b'); 
             plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'b'); 
 
-            plot3(S_G0 + V_G0(:, 1), S_G0 + V_G0(:, 2), S_G0 + V_G0(:, 3), '-.')
+%             plot3(S_G0 + V_G0(:, 1), S_G0 + V_G0(:, 2), S_G0 + V_G0(:, 3), '-.')
             plot3(P_G0(:, 1), P_G0(:, 2), P_G0(:, 3), '-.')
         %     plot3(GP_G0(:, 1), GP_G0(:, 2), GP_G0(:, 3)) 
     end 

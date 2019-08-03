@@ -103,15 +103,24 @@ dt = 1/100;
 q0 = q_phi1(end, :)';               % G0_q_G
 w0 = w_phi1(end, :)'; 
 
-% Finding direction of torque in inertia_SCl G0 frame 
-a_G0 = -aMax*S_G0; 
-G0_DCM_G = quat2DCM(q0); G_DCM_G0 = G0_DCM_G'; 
-a_G = G_DCM_G0*a_G0; 
-torque_G = inertia_SC*a_G;               % inertia_SC always in G frame 
-torque_G0 = G0_DCM_G*torque_G; 
+
+
+
+
+% Finding direction of torque in G0 frame 
+a_G0 = aMax*S_G0;                       % acceleration around sun vector (G0 frame) 
+G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
+G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
+a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
+torque_G = inertia_SC*a_G;              % inertia_SC always in G frame 
+torque_G0 = G0_DCM_G*torque_G;          % torque transformed into G0 frame  
 
 [t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN(dt, ... 
     t0, t1, inertia_SC, torque_G0, w0, q0); 
+
+
+
+
 
 % t1 --> t2 half 
 w0 = w1_phi2(end, :)'; 
@@ -244,6 +253,7 @@ w_total = [ w_phi1; ...
 q_total = [ q_phi1; ... 
             q_phi2(2:end, :); ...  
             q_phi3(2:end, :)]; 
+
         
 ypr_total = zeros(length(q_total), 3); 
 for i = 1:max(size(q_total))
