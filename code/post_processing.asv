@@ -19,7 +19,7 @@ for i = 1:length(t1_phi2)
     P_G1_phi2(i, :) = G_DCM_G0*Pi_G0; 
 end 
 
-% Phi2 angle - part 1 (torque) 
+% Phi2 slew angle - par
 for i = 1:length(t1_phi2) - 1
 %     a = G0_DCM_G*P_G1_phi2(i, :)'; 
     a = P_G1_phi2(i, :)'; 
@@ -30,7 +30,6 @@ for i = 1:length(t1_phi2) - 1
     
 end 
 
-% Phi2 slew profile - part 2 (no torque) 
 P_G2_phi2 = zeros(length(t2_phi2), 3); 
 for i = 1:length(t2_phi2)
     G0_DCM_G = quat2DCM(q2_phi2(i, :)); 
@@ -38,7 +37,6 @@ for i = 1:length(t2_phi2)
     P_G2_phi2(i, :) = G_DCM_G0*Pi_G0; 
 end 
 
-% Phi2 angle - part 2 (no torque) 
 for i = 1:length(t2_phi2) - 1
 %     a = G0_DCM_G*P_G2_phi2(i, :)'; 
     a = P_G2_phi2(i, :)'; 
@@ -48,7 +46,6 @@ for i = 1:length(t2_phi2) - 1
     angle2_phi2_P2G0(i) = acos(dot(a, b)); 
 end 
 
-% Phi2 slew profile - part 3 (-torque) 
 P_G3_phi2 = zeros(length(t3_phi2), 3); 
 for i = 1:length(t3_phi2)
     G0_DCM_G = quat2DCM(q3_phi2(i, :)); 
@@ -56,7 +53,6 @@ for i = 1:length(t3_phi2)
     P_G3_phi2(i, :) = G_DCM_G0*Pi_G0; 
 end 
 
-% Phi2 angle - part 3 (-torque) 
 for i = 1:length(t3_phi2) - 1
 %     a = G0_DCM_G*P_G3_phi2(i, :)'; 
     a = P_G3_phi2(i, :)'; 

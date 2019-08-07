@@ -4,7 +4,7 @@
 
 % clear; 
 close all; 
-main_inputs_P3_G0         % Creates all inputs and variables in workspace 
+% main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 
@@ -108,7 +108,7 @@ w0 = w_phi1(end, :)';
 
 
 % Finding direction of torque in G0 frame 
-a_G0 = aMax*S_G0;                       % acceleration around sun vector (G0 frame) 
+a_G0 = -aMax*S_G0;                       % acceleration around sun vector (G0 frame) 
 G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
 G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
 a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
