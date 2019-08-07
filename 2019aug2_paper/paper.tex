@@ -45,21 +45,23 @@
 	
 	\section{Simulation}
 				
-		A simulation is shown in the following figures. The initial, final, and sun position vectors were randomized for each run. 
+		A simulation is shown in the following figures. The initial, final, and sun position vectors were randomized for each run. Two cases are shown here - one in which the sun angle is greater than 0 from the slew plane. The other case is one in which the sun vector lies directly on the slew plane, so that $\phi_2$ = 180 degrees. 
 		
-		$\phi_1$, $\phi_2$, and $\phi_3$ were found using the methods discussed in the algorithm description. Several intermediate frames had to be calculated for the simulation to run. In addition to the slew plane, a sun-to-position frame was constructed in order to calculate the path that the spacecraft takes around the sun vector. SP This path had to be traced by rotating the vector that connects the sun and $P_1$ vectors, which is the green line on the right in the figure below and will be called $V$. $V$ was rotated from $P_1$ to $P_2$ by angle $\phi_2$. 
+		\subsection{Case: alpha > 0} 
+		
+		$\phi_1$, $\phi_2$, and $\phi_3$ were found using the methods discussed in the description of the algorithm. Several intermediate frames had to be calculated for the simulation to run. In addition to the slew plane, a sun-to-position frame was constructed in order to calculate the path that the spacecraft takes around the sun vector. SP This path had to be traced by rotating the vector that connects the sun and $P_1$ vectors, which is the green line on the right in the figure below and will be called $V$. $V$ was rotated from $P_1$ to $P_2$ by angle $\phi_2$. 
 		
 			\begin{figure}[H]
 				\label{fig:phi2_geometry}
-				\includegraphics[width=6.25in]{figures/chord_geometry_phi2.png}
+				\includegraphics[width=6.25in]{figures/alphaNot0/chord_geometry_phi2.png}
 				\caption{Chord geometry for finding $\phi_2$}
 			\end{figure}
 		
-		For the first leg of the slew, the spacecraft was rotated around the eigenaxis of the slew plane by $\phi_1$. For the second leg of the slew, the spacecraft was rotated around the sun vector fixed in inertial space by $\phi_2$. For the third leg of the slew, the spacecraft was rotated around the eigenaxis of the slew plane by $\phi_3$. The attitude generated would look like the profile in Figure \ref{fig:phi1_phi2_phi3}. 
+		For the first phase of the slew, the spacecraft was rotated around the eigenaxis of the slew plane by $\phi_1$. For the second phase of the slew, the spacecraft was rotated around the sun vector fixed in inertial space by $\phi_2$. For the third phase of the slew, the spacecraft was rotated around the eigenaxis of the slew plane by $\phi_3$. The attitude generated would look like the profile in Figure \ref{fig:phi1_phi2_phi3}. 
 		
 			\begin{figure}[H]
 				\label{fig:phi1_phi2_phi3}
-				\includegraphics[width=6.25in]{figures/phi1_phi2_phi3.png}
+				\includegraphics[width=6.25in]{figures/alphaNot0/phi1_phi2_phi3.png}
 				\caption{Attitude Profile of the Entire Slew}
 			\end{figure}
 		
@@ -86,7 +88,7 @@
 			\begin{figure}[H]
 				\label{fig:ang_vel_phi_total}
 				\begin{center}
-				\includegraphics[width=4.5in]{figures/ang_vel_phi_total.png}
+				\includegraphics[width=4.5in]{figures/alphaNot0/ang_vel_phi_total.png}
 				\end{center}
 				\caption{Angular Velocity in Spacecraft Frame}
 			\end{figure}
@@ -95,7 +97,7 @@
 			\begin{figure}[H]
 				\label{fig:ang_accel_total}
 				\begin{center}
-					\includegraphics[width=4.5in]{figures/ang_accel_total.png}
+					\includegraphics[width=4.5in]{figures/alphaNot0/ang_accel_total.png}
 				\end{center}
 				\caption{Angular Acceleration}
 			\end{figure}
@@ -103,7 +105,7 @@
 			\begin{figure}[H]
 				\label{fig:quats_phi_total}
 				\begin{center}
-				\includegraphics[width=4.5in]{figures/quats_phi_total.png}
+				\includegraphics[width=4.5in]{figures/alphaNot0/quats_phi_total.png}
 				\end{center}
 				\caption{Quaternion Attitude}
 			\end{figure}
@@ -111,7 +113,7 @@
 			\begin{figure}[H]
 				\label{fig:euler_ang_phi_total}
 				\begin{center}
-				\includegraphics[width=4.5in]{figures/euler_ang_phi_total.png}
+				\includegraphics[width=4.5in]{figures/alphaNot0/euler_ang_phi_total.png}
 				\end{center}
 				\caption{Attitude in Euler Angles}
 			\end{figure}
@@ -119,11 +121,85 @@
 			\begin{figure}[H]
 				\label{fig:torque_total}
 				\begin{center}
-				\includegraphics[width=4.5in]{figures/torque_total.png}
+				\includegraphics[width=4.5in]{figures/alphaNot0/torque_total.png}
 				\end{center}
 				\caption{Torque Applied from Actuator System}
 			\end{figure}
-		
+			
+			
+			
+			\subsection{Case: alpha = 0} 
+			
+			For the case in which the sun vector lies directly on the slew plane, $\phi_2$ = 180 degrees. For this case, $P_2$ and $P_f$ were almost superimposed; therefore, $\phi_3$, the angle between the two vectors appears 0. 
+			
+			
+			
+			%				\newcommand*{\MyIndent}{\hspace*{0.5cm}}%
+			\begin{table}[H]
+				\centering
+				\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
+				\begin{tabular}{llll}
+					\toprule
+					\midrule
+					$\phi$ & 1 & 2 & 3 \\
+					\midrule
+					Angle (rad) & 0.02 & 3.14 & 0.00 \\
+					Angle (deg) & 10.80 & 180 & 0.00 \\ 
+					\midrule
+					\bottomrule
+				\end{tabular}%
+				\label{tab:FOG_SF}%
+			\end{table}% 
+			
+					\begin{figure}[H]
+				\label{fig:phi1_phi2_phi3_alpha0}
+				\includegraphics[width=6.25in]{figures/alpha0/phi1_phi2_phi3.png}
+				\caption{Attitude Profile of the Entire Slew}
+			\end{figure}
+			
+			
+			\begin{figure}[H]
+				\label{fig:ang_vel_phi_total_alpha0}
+				\begin{center}
+					\includegraphics[width=4.5in]{figures/alpha0/ang_vel.png}
+				\end{center}
+				\caption{Angular Velocity in Spacecraft Frame}
+			\end{figure}
+			
+			
+			\begin{figure}[H]
+				\label{fig:ang_accel_total_alpha0}
+				\begin{center}
+					\includegraphics[width=4.5in]{figures/alpha0/ang_accel.png}
+				\end{center}
+				\caption{Angular Acceleration}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\label{fig:quats_phi_total_alpha0}
+				\begin{center}
+					\includegraphics[width=4.5in]{figures/alpha0/quats.png}
+				\end{center}
+				\caption{Quaternion Attitude}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\label{fig:euler_ang_phi_total_alpha0}
+				\begin{center}
+					\includegraphics[width=4.5in]{figures/alpha0/euler_angles.png}
+				\end{center}
+				\caption{Attitude in Euler Angles}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\label{fig:torque_total_alpha0}
+				\begin{center}
+					\includegraphics[width=4.5in]{figures/alpha0/torque.png}
+				\end{center}
+				\caption{Torque Applied from Actuator System}
+			\end{figure}
+			
+			
 			
 	
 \end{document}
