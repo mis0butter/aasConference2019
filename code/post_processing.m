@@ -22,11 +22,11 @@ end
 % Phi2 angle - part 1 (torque) 
 for i = 1:length(t1_phi2) - 1
 %     a = G0_DCM_G*P_G1_phi2(i, :)'; 
-    a = P_G1_phi2(i, :)'; 
-    b = S_G0; 
-    angle1_phi2_SG0(i) = acos(dot(a, b)); 
-    b = P2_G0; 
-    angle1_phi2_P2G0(i) = acos(dot(a, b)); 
+    a = P_G1_phi2(i, :)';           a = a/norm(a); 
+    b = S_G0;                       b = b/norm(b); 
+    angle1_phi2_SG0(i, 1) = acos(dot(a, b)); 
+    b = P_G1_phi2(i + 1, :)';       b = b/norm(b); 
+    angle1_phi2_P2G0(i, 1) = acos(dot(a, b)); 
     
 end 
 
@@ -41,11 +41,11 @@ end
 % Phi2 angle - part 2 (no torque) 
 for i = 1:length(t2_phi2) - 1
 %     a = G0_DCM_G*P_G2_phi2(i, :)'; 
-    a = P_G2_phi2(i, :)'; 
-    b = S_G0; 
-    angle2_phi2_SG0(i) = acos(dot(a, b)); 
-    b = P2_G0; 
-    angle2_phi2_P2G0(i) = acos(dot(a, b)); 
+    a = P_G2_phi2(i, :)';           a = a/norm(a); 
+    b = S_G0;                       b = b/norm(b); 
+    angle2_phi2_SG0(i, 1) = acos(dot(a, b)); 
+    b = P_G2_phi2(i + 1, :)';       b = b/norm(b); 
+    angle2_phi2_P2G0(i, 1) = acos(dot(a, b)); 
 end 
 
 % Phi2 slew profile - part 3 (-torque) 
@@ -59,11 +59,11 @@ end
 % Phi2 angle - part 3 (-torque) 
 for i = 1:length(t3_phi2) - 1
 %     a = G0_DCM_G*P_G3_phi2(i, :)'; 
-    a = P_G3_phi2(i, :)'; 
-    b = S_G0; 
-    angle3_phi2_SG0(i) = acos(dot(a, b)); 
-    b = P2_G0; 
-    angle3_phi2_P2G0(i) = acos(dot(a, b)); 
+    a = P_G3_phi2(i, :)';           a = a/norm(a); 
+    b = S_G0;                       b = b/norm(b); 
+    angle3_phi2_SG0(i, 1) = acos(dot(a, b)); 
+    b = P_G3_phi2(i + 1, :)';       b = b/norm(b); 
+    angle3_phi2_P2G0(i, 1) = acos(dot(a, b)); 
 end 
 
 %% NO sun intrusion slew - nominal 
@@ -119,6 +119,8 @@ figure()
     plot3([0 S_G0(1)], [0 S_G0(2)], [0 S_G0(3)], 'r'); 
     % Sun projection 
     plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'r'); 
+    % Monte Carlo sun vector 
+    plot3([0 S_G0_MC(1)], [0 S_G0_MC(2)], [0 S_G0_MC(3)], '-.'); 
     
     % Phi2 - P3 (P1,P2 proj onto Sun vector) lines 
     plot3([0 P3_G0(1)], [0 P3_G0(2)], [0 P3_G0(3)], 'b'); 
@@ -133,6 +135,9 @@ figure()
     text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P2')) 
     text(S_G0(1), S_G0(2), S_G0(3), sprintf(' sun')) 
     text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun proj')) 
+    
+    % Monte Carlo sun vector 
+    text(S_G0_MC(1), S_G0_MC(2), S_G0_MC(3), ' sun MC '); 
     
     xlabel('G0_x')
     ylabel('G0_y') 

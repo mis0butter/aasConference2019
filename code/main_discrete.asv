@@ -4,7 +4,7 @@
 
 % clear; 
 % close all; 
-main_inputs_P3_G0         % Creates all inputs and variables in workspace 
+% main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 
@@ -88,7 +88,7 @@ wf = 0;
 
 % phi2 = 2.5; 
 phi2 = 1.9043;      % hard-coded just for this 
-phi2 = 2.25; 
+p
 
 [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi2, phi_tt); 
     
@@ -112,9 +112,8 @@ w0 = w_phi1(end, :)';
 % Finding direction of torque in G0 frame 
 
 % Monte Carlo slew eigenaxis 
-% S_G0_MC = S_G0.*(1 + 0.2*rand(3,1)); 
-% S_G0_MC = S_G0_MC/norm(S_G0_MC); 
-S_G0_MC = [0.3898; 0.4558; 0.8001]; 
+S_G0_MC = S_G0.*(1 + 0.2*rand(3,1)); 
+S_G0_MC = S_G0_MC/norm(S_G0_MC); 
 
 a_G0 = aMax*S_G0_MC;                       % acceleration around sun vector (G0 frame) 
 G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 

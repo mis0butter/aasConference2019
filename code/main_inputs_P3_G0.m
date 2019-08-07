@@ -14,6 +14,7 @@ inertia_w = [  20   0    0;
                0    0    20  ]; 
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
 
+%%% RANDOM MONTE CARLO STUFF 
 % Initial points / vectors 
 Pi_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
 Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
@@ -50,6 +51,7 @@ while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ...
     [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
         sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
 end 
+%%% END RANDOM STUFF 
 
 aMax = 1;                                  % Maximum acceleration, rad/s^2
 wMax = 1;                                  % Maximum angular velocity, rad/s
@@ -100,7 +102,6 @@ else
     SP1_G0 = P1_G0 - S_G0; 
     SP2_G0 = P2_G0 - S_G0; 
     phi2_S = acos(dot(SP1_G0/norm(SP1_G0), SP2_G0/norm(SP2_G0))); 
-    phi2 = phi2_P3; 
 end 
 
 %%%
@@ -164,6 +165,10 @@ phi2_M4 = 2*abs(atan2(top, bot));
     end 
 
     phi2_P_sum = sum(phi2_P); 
+    
+    %%
+    
+    phi2 = phi2_M2; 
     
     %%
 

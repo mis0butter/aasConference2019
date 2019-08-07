@@ -48,37 +48,23 @@ for t = t_start+dt : dt : t_end
         q_save = q; 
         w_save = w; 
  
-        % Part One 
-        for i = 1:nsteps
-            dw = inv(inertia)*(torque - cross(w, inertia*w));
-            w_skew = [  0      -w(3)    w(2); 
-                        w(3)    0      -w(1); 
-                       -w(2)    w(1)    0 ] ; 
-            dw = inv(inertia) * ( -w_skew * inertia * w + torque); 
-            q_skew = [ q(4)     -q(3)       q(2);
-                       q(3)      q(4)      -q(1);
-                      -q(2)      q(1)       q(4);
-                      -q(1)     -q(2)      -q(3)]; 
-            dq = 1/2 * q_skew * w ;
-            w = w + dw*dt/nsteps;
-            q = q + dq*dt/nsteps;
-        end
-
-        % Part Two 
-        for i = 1:nsteps
-            dw = inv(inertia)*(torque - cross(w, inertia*w));
-            w_skew = [  0      -w(3)    w(2); 
-                        w(3)    0      -w(1); 
-                       -w(2)    w(1)    0 ] ; 
-            dw = inv(inertia) * ( -w_skew * inertia * w + torque); 
-            q_skew = [ q(4)     -q(3)       q(2);
-                       q(3)      q(4)      -q(1);
-                      -q(2)      q(1)       q(4);
-                      -q(1)     -q(2)      -q(3)]; 
-            dq = 1/2 * q_skew * w ;
-            w = w + dw*dt/nsteps;
-            q = q + dq*dt/nsteps;
-        end
+        % Part ... however many times 
+        for n = 1:100
+            for i = 1:nsteps
+                dw = inv(inertia)*(torque - cross(w, inertia*w));
+                w_skew = [  0      -w(3)    w(2); 
+                            w(3)    0      -w(1); 
+                           -w(2)    w(1)    0 ] ; 
+                dw = inv(inertia) * ( -w_skew * inertia * w + torque); 
+                q_skew = [ q(4)     -q(3)       q(2);
+                           q(3)      q(4)      -q(1);
+                          -q(2)      q(1)       q(4);
+                          -q(1)     -q(2)      -q(3)]; 
+                dq = 1/2 * q_skew * w ;
+                w = w + dw*dt/nsteps;
+                q = q + dq*dt/nsteps;
+            end
+        end 
         
         % Aligning torque in body with Part Two 
         N_DCM_G = quat2DCM(q);
