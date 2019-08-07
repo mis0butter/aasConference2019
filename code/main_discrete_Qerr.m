@@ -28,6 +28,8 @@ t3 = round(t3, 3);
 
 %% Solve for attitude determination - first slew 
         
+dt = 1/100; 
+
 % t0 --> t1 
 w0 = [    0;    0;      0];                         % wrt G0 frame 
 q0 = [    0;    0;      0;      1];                 % wrt G0 frame 
@@ -35,7 +37,6 @@ a_P = [ 0;  0; aMax];                               % acceleration around eigena
 a_G0 = G0_DCM_P*a_P; 
 torque_G0 = inertia_SC*a_G0;                                 % wrt G0 frame 
 
-dt = 1/100; 
 % [t1_phi1, q1_phi1, w1_phi1, torque1_phi1] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
 [t1_phi1, q1_phi1, w1_phi1, torque1_phi1] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0);
 
@@ -87,8 +88,8 @@ t0 = 0;
 wf = 0; 
 
 % phi2 = 2.5; 
-phi2 = sum(phi2_P);         % 0.6348 for this run 
-phi2 = phi2*3; 
+% phi2 = 1.9043;      % hard-coded just for this 
+% phi2 = 2.25; 
 
 [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi2, phi_tt); 
     
@@ -99,7 +100,7 @@ phi2 = phi2*3;
 % 
 % the direction of torque_G needs to be recalculated at every time step. 
 
-dt = 1/100; 
+dt = 1/1000; 
 
 % This is the quaternion of current G in initial G0 frame. G0_q_G
 q0 = q_phi1(end, :)';               % G0_q_G
@@ -112,7 +113,7 @@ S_G0_MC = S_G0.*(1 + 0.3*rand(3,1));
 S_G0_MC = S_G0_MC/norm(S_G0_MC); 
 % S_G0_MC = [0.3898; 0.4558; 0.8001]; 
 
-a_G0 = -aMax*S_G0;                       % acceleration around sun vector (G0 frame) 
+a_G0 = -aMax*S_G0_MC;                       % acceleration around sun vector (G0 frame) 
 G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
 G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
 a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
@@ -120,28 +121,31 @@ torque_G = inertia_SC*a_G;              % inertia_SC always in G frame
 torque_G0 = G0_DCM_G*torque_G;          % torque transformed into G0 frame  
 torque_G0 = torque_G0; 
 
-[t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN_2step_feed_forward(dt, ... 
-    t0, t1, inertia_SC, torque_G0, w0, q0); 
+[t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+    t0, t1, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
 
-% t1 --> t2 
+% % t1 --> t2 
 % w0 = w1_phi2(end, :)'; 
 % q0 = q1_phi2(end, :)'; 
 % torque = [0; 0; 0]; 
-
-% [t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN_2step_feed_forward(dt, t1, t2, inertia_SC, torque, w0, q0); 
+% 
+% [t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, ... 
+%     t1, t2, inertia_SC, torque, w0, q0); 
 
 % t1 --> t2_half 
 t2_half = t1 + (t2 - t1)/2; 
 w0 = w1_phi2(end, :)'; 
 q0 = q1_phi2(end, :)'; 
 
-[t2_phi2_1, q2_phi2_1, w2_phi2_1, torque2_phi2_1] = gyrostat_discrete_torqueN_2step_feed_forward(dt, t1, t2_half, inertia_SC, torque_G0, w0, q0); 
+[t2_phi2_1, q2_phi2_1, w2_phi2_1, torque2_phi2_1] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+    t1, t2_half, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
 
 % t2_half --> t2 
 w0 = w2_phi2_1(end, :)'; 
 q0 = q2_phi2_1(end, :)'; 
 
-[t2_phi2_2, q2_phi2_2, w2_phi2_2, torque2_phi2_2] = gyrostat_discrete_torqueN_2step_feed_forward(dt, t2_half, t2, inertia_SC, -torque_G0, w0, q0); 
+[t2_phi2_2, q2_phi2_2, w2_phi2_2, torque2_phi2_2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+    t2_half, t2, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
 
 % combining phi2 stuff 
 t2_phi2 = [t2_phi2_1; t2_phi2_2(2:end)]; 
@@ -160,7 +164,8 @@ q0 = q2_phi2(end, :)';
 % torque_G = inertia_SC*a_G;               % inertia_SC always in G frame 
 % torque_G0 = G0_DCM_G*torque_G; 
 
-[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_2step_feed_forward(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
+[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+    t2, t3, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
 
 t_phi2 = [t1_phi2; t2_phi2(2:end); t3_phi2(2:end)]; 
 w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)]; 
@@ -188,6 +193,8 @@ wf = 0;
 
 %% Solve for attitue determination - third slew 
         
+dt = 1/100; 
+
 % t0 --> t1 
 % tEnd = t1 - t0; 
 w0 = w_phi2(end, :)'; 

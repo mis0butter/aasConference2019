@@ -4,7 +4,7 @@
 
 % clear; 
 % close all; 
-main_inputs_P3_G0         % Creates all inputs and variables in workspace 
+% main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 
@@ -87,8 +87,12 @@ t0 = 0;
 wf = 0; 
 
 % phi2 = 2.5; 
-phi2 = 1.9043;      % hard-coded just for this 
-phi2 = 2.25; 
+% phi2 = 1.9043;      % hard-coded just for this 
+% phi2 = 2.25; 
+% phi2 = phi2_M2; 
+% phi2 = phi2_M; 
+% phi2 = phi2_M3; 
+phi2 = 2.13; 
 
 [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi2, phi_tt); 
     
@@ -105,18 +109,14 @@ dt = 1/100;
 q0 = q_phi1(end, :)';               % G0_q_G
 w0 = w_phi1(end, :)'; 
 
-
-
-
-
 % Finding direction of torque in G0 frame 
 
 % Monte Carlo slew eigenaxis 
-% S_G0_MC = S_G0.*(1 + 0.2*rand(3,1)); 
+% S_G0_MC = S_G0.*(1 + 0.3*rand(3,1)); 
 % S_G0_MC = S_G0_MC/norm(S_G0_MC); 
-S_G0_MC = [0.3898; 0.4558; 0.8001]; 
+% S_G0_MC = [0.3898; 0.4558; 0.8001]; 
 
-a_G0 = aMax*S_G0_MC;                       % acceleration around sun vector (G0 frame) 
+a_G0 = -aMax*S_G0_MC;                       % acceleration around sun vector (G0 frame) 
 G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
 G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
 a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
@@ -126,10 +126,6 @@ torque_G0 = torque_G0;
 
 [t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN(dt, ... 
     t0, t1, inertia_SC, torque_G0, w0, q0); 
-
-
-
-
 
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
@@ -199,6 +195,7 @@ wf = 0;
 % t0 --> t1 
 % tEnd = t1 - t0; 
 w0 = w_phi2(end, :)'; 
+w0 = [0; 0; 0]; 
 q0 = q_phi2(end, :)';  
 a_P = [0; 0; -aMax]; 
 a_G0 = G0_DCM_P*a_P; 
@@ -207,6 +204,10 @@ G_DCM_G0 = G0_DCM_G';
 a_G = G_DCM_G0*a_G0; 
 torque_G = inertia_SC*a_G;              % inertia_SC always in G frame 
 torque_G0 = G0_DCM_G*torque_G; 
+
+% a_P = [ 0;  0; -aMax];                               % acceleration around eigenaxis of P frame 
+% a_G0 = G0_DCM_P*a_P; 
+% torque_G0 = inertia_SC*a_G0;                                 % wrt G0 frame 
 
 % [t1_phi3, y1_phi3] = ode45(@(t,Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]);
 % [t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 

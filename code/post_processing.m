@@ -66,6 +66,8 @@ for i = 1:length(t3_phi2) - 1
     angle3_phi2_P2G0(i, 1) = acos(dot(a, b)); 
 end 
 
+
+
 %% NO sun intrusion slew - nominal 
 
 P_Gnom = zeros(length(t_phiNom), 3); 
@@ -75,6 +77,8 @@ for i = 1:length(t_phiNom)
     G_DCM_G0 = G0_DCM_G'; 
     P_Gnom(i, :) = G_DCM_G0*Pi_G0; 
 end 
+
+% Phi3 angle - 
 
 %%
 
