@@ -272,8 +272,9 @@ end
 %% plot total stuff 
 
 % acceleration stuff 
+a_total = zeros(length(w_total) - 1, 3); 
 for i = 1:length(w_total) - 1 
-    a_total(i, :) = (w_total(i + 1, :) - w_total(i, :))*100; 
+    a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
 end 
 
 plot_option = 1; 
@@ -283,7 +284,7 @@ end
 
 %% PHI NOMINAL - IF THERE WAS NO SUN INTRUSION 
 
-%% Determine Phi Nom slew times
+% Determine Phi Nom slew times
 
 % Initial conditions 
 w0 = 0; 
