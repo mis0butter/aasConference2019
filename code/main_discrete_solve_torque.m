@@ -113,45 +113,49 @@ S_G0_MC = S_G0.*(1 + 0.3*rand(3,1));
 S_G0_MC = S_G0_MC/norm(S_G0_MC); 
 % S_G0_MC = [0.3898; 0.4558; 0.8001]; 
 
-a_G0 = -aMax*S_G0_MC;                       % acceleration around sun vector (G0 frame) 
-G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
-G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
-a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
-torque_G = inertia_SC*a_G;              % inertia_SC always in G frame 
-torque_G0 = G0_DCM_G*torque_G;          % torque transformed into G0 frame  
-torque_G0 = torque_G0; 
+% a_G0 = -aMax*S_G0_MC;                       % acceleration around sun vector (G0 frame) 
+% G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
+% G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
+% a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
+% torque_G = inertia_SC*a_G;              % inertia_SC always in G frame 
+% torque_G0 = G0_DCM_G*torque_G;          % torque transformed into G0 frame  
+% torque_G0 = torque_G0; 
 
-[t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-    t0, t1, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
+% [t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+%     t0, t1, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
+[t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
+    S_G0, a_max, inertia_SC, w0, q0); 
 
-% % t1 --> t2 
-% w0 = w1_phi2(end, :)'; 
-% q0 = q1_phi2(end, :)'; 
-% torque = [0; 0; 0]; 
-% 
-% [t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, ... 
-%     t1, t2, inertia_SC, torque, w0, q0); 
-
-% t1 --> t2_half 
-t2_half = t1 + (t2 - t1)/2; 
+% t1 --> t2 
 w0 = w1_phi2(end, :)'; 
 q0 = q1_phi2(end, :)'; 
+% a_max is now 0 
 
-[t2_phi2_1, q2_phi2_1, w2_phi2_1, torque2_phi2_1] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-    t1, t2_half, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
+% [t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, ... 
+%     t1, t2, inertia_SC, torque, w0, q0); 
+[t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t1, t2, ... 
+    S_G0, 0, inertia_SC, w0, q0); 
 
-% t2_half --> t2 
-w0 = w2_phi2_1(end, :)'; 
-q0 = q2_phi2_1(end, :)'; 
-
-[t2_phi2_2, q2_phi2_2, w2_phi2_2, torque2_phi2_2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-    t2_half, t2, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
-
-% combining phi2 stuff 
-t2_phi2 = [t2_phi2_1; t2_phi2_2(2:end)]; 
-w2_phi2 = [w2_phi2_1; w2_phi2_2(2:end ,:)]; 
-q2_phi2 = [q2_phi2_1; q2_phi2_2(2:end ,:)]; 
-torque2_phi2 = [torque2_phi2_1; torque2_phi2_2(2:end, :)]; 
+% % t1 --> t2_half 
+% t2_half = t1 + (t2 - t1)/2; 
+% w0 = w1_phi2(end, :)'; 
+% q0 = q1_phi2(end, :)'; 
+% 
+% [t2_phi2_1, q2_phi2_1, w2_phi2_1, torque2_phi2_1] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+%     t1, t2_half, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
+% 
+% % t2_half --> t2 
+% w0 = w2_phi2_1(end, :)'; 
+% q0 = q2_phi2_1(end, :)'; 
+% 
+% [t2_phi2_2, q2_phi2_2, w2_phi2_2, torque2_phi2_2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+%     t2_half, t2, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
+% 
+% % combining phi2 stuff 
+% t2_phi2 = [t2_phi2_1; t2_phi2_2(2:end)]; 
+% w2_phi2 = [w2_phi2_1; w2_phi2_2(2:end ,:)]; 
+% q2_phi2 = [q2_phi2_1; q2_phi2_2(2:end ,:)]; 
+% torque2_phi2 = [torque2_phi2_1; torque2_phi2_2(2:end, :)]; 
 
 % t2 --> t3 
 w0 = w2_phi2(end, :)'; 
@@ -164,8 +168,10 @@ q0 = q2_phi2(end, :)';
 % torque_G = inertia_SC*a_G;               % inertia_SC always in G frame 
 % torque_G0 = G0_DCM_G*torque_G; 
 
-[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-    t2, t3, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
+% [t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
+%     t2, t3, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
+[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t2, t3, ... 
+    S_G0, -a_max, inertia_SC, w0, q0); 
 
 t_phi2 = [t1_phi2; t2_phi2(2:end); t3_phi2(2:end)]; 
 w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)]; 
