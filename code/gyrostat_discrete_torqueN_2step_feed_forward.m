@@ -48,6 +48,7 @@ for t = t_start+dt : dt : t_end
         q_save = q; 
         w_save = w; 
  
+        % Part One 
         for i = 1:nsteps
             dw = inv(inertia)*(torque - cross(w, inertia*w));
             w_skew = [  0      -w(3)    w(2); 
@@ -63,8 +64,7 @@ for t = t_start+dt : dt : t_end
             q = q + dq*dt/nsteps;
         end
 
-
-        % Break into steps for attitude determination 
+        % Part Two 
         for i = 1:nsteps
             dw = inv(inertia)*(torque - cross(w, inertia*w));
             w_skew = [  0      -w(3)    w(2); 
@@ -80,22 +80,34 @@ for t = t_start+dt : dt : t_end
             q = q + dq*dt/nsteps;
         end
         
+        % Aligning torque in body with Part Two 
         N_DCM_G = quat2DCM(q);
         G_DCM_N = N_DCM_G'; 
         torque = G_DCM_N*torqueN; 
         
+        % Reverting w and q to Part One state 
+        w = w_save; 
+        q = q_save; 
         
+        for i = 1:nsteps
+            dw = inv(inertia)*(torque - cross(w, inertia*w));
+            w_skew = [  0      -w(3)    w(2); 
+                        w(3)    0      -w(1); 
+                       -w(2)    w(1)    0 ] ; 
+            dw = inv(inertia) * ( -w_skew * inertia * w + torque); 
+            q_skew = [ q(4)     -q(3)       q(2);
+                       q(3)      q(4)      -q(1);
+                      -q(2)      q(1)       q(4);
+                      -q(1)     -q(2)      -q(3)]; 
+            dq = 1/2 * q_skew * w ;
+            w = w + dw*dt/nsteps;
+            q = q + dq*dt/nsteps;
+        end
         
-%     end 
-
-
-
-
-
-
-
-
-
+        % Setting up torque for next iteration 
+        N_DCM_G = quat2DCM(q);
+        G_DCM_N = N_DCM_G'; 
+        torque = G_DCM_N*torqueN; 
     
     int = int + 1; 
     q_out(int, :) = q'; 

@@ -48,6 +48,7 @@ for t = t_start+dt : dt : t_end
         q_save = q; 
         w_save = w; 
  
+        % Part One 
         for i = 1:nsteps
             dw = inv(inertia)*(torque - cross(w, inertia*w));
             w_skew = [  0      -w(3)    w(2); 
@@ -63,8 +64,7 @@ for t = t_start+dt : dt : t_end
             q = q + dq*dt/nsteps;
         end
 
-
-        % Break into steps for attitude determination 
+        % Part Two 
         for i = 1:nsteps
             dw = inv(inertia)*(torque - cross(w, inertia*w));
             w_skew = [  0      -w(3)    w(2); 
@@ -80,9 +80,13 @@ for t = t_start+dt : dt : t_end
             q = q + dq*dt/nsteps;
         end
         
+        % A
         N_DCM_G = quat2DCM(q);
         G_DCM_N = N_DCM_G'; 
         torque = G_DCM_N*torqueN; 
+        
+        w = w_save; 
+        q = q_save; 
         
         
         

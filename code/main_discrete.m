@@ -3,7 +3,7 @@
 % Mohammad Ayoubi 
 
 % clear; 
-close all; 
+% close all; 
 % main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
@@ -108,7 +108,7 @@ w0 = w_phi1(end, :)';
 
 
 % Finding direction of torque in G0 frame 
-a_G0 = -aMax*S_G0;                       % acceleration around sun vector (G0 frame) 
+a_G0 = aMax*S_G0;                       % acceleration around sun vector (G0 frame) 
 G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
 G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
 a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
@@ -176,14 +176,6 @@ if plot_option == 1
     plot_qwypr(t_phi2, q_phi2, w_phi2, ypr_phi2, 2)
 end 
 
-time_torque = linspace(t0, t3, length(torque_phi2)); 
-figure
-    plot(time_torque, torque_phi2); 
-    grid on 
-    ylabel('Torque (Nm)') 
-    xlabel('Time (sec)') 
-    title('Torque (Nm)') 
-
 %% Determine Phi 3 slew times
 
 w0 = 0; 
@@ -198,7 +190,7 @@ wf = 0;
 % tEnd = t1 - t0; 
 w0 = w_phi2(end, :)'; 
 q0 = q_phi2(end, :)';  
-a_P = [0; 0; aMax]; 
+a_P = [0; 0; -aMax]; 
 a_G0 = G0_DCM_P*a_P; 
 G0_DCM_G = quat2DCM(q0); 
 G_DCM_G0 = G0_DCM_G'; 
@@ -277,7 +269,7 @@ for i = 1:length(w_total) - 1
     a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
 end 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, torque_total, a_total, ypr_total, 'total')
 end 
