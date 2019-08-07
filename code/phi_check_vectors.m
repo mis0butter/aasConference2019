@@ -19,8 +19,8 @@ figure()
     plot3([P3_G0(1) P1_G0(1)], [P3_G0(2) P1_G0(2)], [P3_G0(3) P1_G0(3)], 'g'); 
     plot3([P3_G0(1) P2_G0(1)], [P3_G0(2) P2_G0(2)], [P3_G0(3) P2_G0(3)], 'g'); 
     
-    text(P3_G0(1), P3_G0(2), P3_G0(3), ... 
-        sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
+%     text(P3_G0(1), P3_G0(2), P3_G0(3), ... 
+%         sprintf('    phi2 = %0.2f deg', phi2_P3*180/pi))
     text(Pi_G0(1), Pi_G0(2), Pi_G0(3), sprintf(' Pi')) 
     text(Pf_G0(1), Pf_G0(2), Pf_G0(3), sprintf(' Pf')) 
     text(e_G0(1)*0.5, e_G0(2)*0.5, e_G0(3)*0.5, sprintf(' e')) 

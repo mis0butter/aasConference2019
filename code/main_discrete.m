@@ -4,7 +4,7 @@
 
 % clear; 
 close all; 
-% main_inputs             % Creates all inputs and variables in workspace 
+main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 

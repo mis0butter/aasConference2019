@@ -79,10 +79,11 @@ figure()
 %     plot3(P_G1_phi2(:, 1), P_G1_phi2(:, 2), P_G1_phi2(:, 3), 'r'); 
 %     plot3(P_G2_phi2(:, 1), P_G2_phi2(:, 2), P_G2_phi2(:, 3), 'g');
 %     plot3(P_G3_phi2(:, 1), P_G3_phi2(:, 2), P_G3_phi2(:, 3), 'r');
-%     plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:,3)); 
+%     plot3(P_Gnom(:, 1), P_Gnom(:, 2), P_Gnom(:,3), '-.'); 
+%     plot3(phi1_P(:, 1), phi1_P(:, 2), phi1_P(:, 3), '-.'); 
 
-    plot3(P_phi3_G0(:, 1), P_phi3_G0(:, 2), P_phi3_G0(:, 3), '-.'); 
-    plot3(P_phi1_G0(:, 1), P_phi1_G0(:, 2), P_phi1_G0(:, 3), '-.'); 
+%     plot3(P_phi3_G0(:, 1), P_phi3_G0(:, 2), P_phi3_G0(:, 3), '-.'); 
+%     plot3(P_phi1_G0(:, 1), P_phi1_G0(:, 2), P_phi1_G0(:, 3), '-.'); 
     
     plot3([0 Pi_G0(1)], [0 Pi_G0(2)], [0 Pi_G0(3)], 'b'); 
     plot3([0 Pf_G0(1)], [0 Pf_G0(2)], [0 Pf_G0(3)], 'b'); 

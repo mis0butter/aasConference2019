@@ -1,4 +1,4 @@
-function plot_qwypr(t, q, w, torque, ypr, a, phi_num)
+function plot_qwypr(t, q, w, torque, a, ypr, phi_num)
 % Plot q, w, torque, ypr 
 
 phi_num = num2str(phi_num); 
