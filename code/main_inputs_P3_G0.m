@@ -143,22 +143,22 @@ phi2_M4 = 2*abs(atan2(top, bot));
     V_SP(1, :) = [1 0 0]*v_length;
     P_SP(1, :) = SP_DCM_G0*P1_G0; 
     V_G0(1, :) = G0_DCM_SP * V_SP(1, :)'; 
-    P_G0(1, :) = P1_G0; 
+    P_phi2_G0(1, :) = P1_G0; 
     
     i = 1; 
-    P_G0(i, :) = P1_G0'; 
-    while dot(P_G0(i, :), P2_G0') < 0.9999
+    P_phi2_G0(i, :) = P1_G0'; 
+    while dot(P_phi2_G0(i, :), P2_G0') < 0.9999
         
         i = i + 1; 
         V_SP(i, :) = [cos(i*dphi), sin(i*dphi), 0 ] * v_length; 
         P_SP(i, :) = P3_SP' + V_SP(i, :); 
         
         V_G0(i, :) = G0_DCM_SP * V_SP(i, :)'; 
-        P_G0(i, :) = P3_G0' + V_G0(i, :); 
-        P_G0(i, :) = P_G0(i, :) / norm(P_G0(i, :)); 
+        P_phi2_G0(i, :) = P3_G0' + V_G0(i, :); 
+        P_phi2_G0(i, :) = P_phi2_G0(i, :) / norm(P_phi2_G0(i, :)); 
 
-        a = P_G0(i, :); 
-        b = P_G0(i - 1, :); 
+        a = P_phi2_G0(i, :); 
+        b = P_phi2_G0(i - 1, :); 
         phi2_P(i) = acos(dot(a, b)/(norm(a)*norm(b)));  
         
     end 
@@ -185,7 +185,7 @@ phi2_M4 = 2*abs(atan2(top, bot));
             plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'b'); 
 
 %             plot3(S_G0 + V_G0(:, 1), S_G0 + V_G0(:, 2), S_G0 + V_G0(:, 3), '-.')
-            plot3(P_G0(:, 1), P_G0(:, 2), P_G0(:, 3), '-.')
+            plot3(P_phi2_G0(:, 1), P_phi2_G0(:, 2), P_phi2_G0(:, 3), '-.')
         %     plot3(GP_G0(:, 1), GP_G0(:, 2), GP_G0(:, 3)) 
         
         
