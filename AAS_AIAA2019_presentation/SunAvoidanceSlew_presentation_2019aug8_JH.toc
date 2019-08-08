@@ -4,5 +4,5 @@
 \beamer@sectionintoc {4}{Sun-Avoidance Slew (SAS) Algorithm}{6}{0}{4}
 \beamer@sectionintoc {5}{Computing Steering Profiles}{17}{0}{5}
 \beamer@sectionintoc {6}{Numerical Simulations}{26}{0}{6}
-\beamer@sectionintoc {7}{Summary and Conclusion}{39}{0}{7}
-\beamer@sectionintoc {8}{Q\& A }{41}{0}{8}
+\beamer@sectionintoc {7}{Summary and Conclusion}{32}{0}{7}
+\beamer@sectionintoc {8}{Q\& A }{34}{0}{8}

@@ -119,7 +119,7 @@ figure()
     plot(theta,sin(theta)./theta,'LineWidth',3) 
     
     % Sun vector 
-    plot3(S_G0(1), S_G0(2), S_G0(3), 'h', 'LineWidth', 2); 
+    plot3(S_G0(1), S_G0(2), S_G0(3), 'p', 'LineWidth', 2); 
     % Sun projection 
     plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'g-.'); 
     

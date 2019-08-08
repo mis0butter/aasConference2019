@@ -472,12 +472,12 @@ where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to
 	\item State Eqs.:
 		\begin{equation}
 			\left\{
-			                \begin{array}{l}
-			                \dot{x}_1=x_2, \\
-			                \dot{x}_2=u, \\
-			                \dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
-			                \end{array}
-			              \right.
+               \begin{array}{l}
+               \dot{x}_1=x_2, \\
+               \dot{x}_2=u, \\
+               \dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
+               \end{array}
+             \right.
 		\end{equation}
 		where the unit step function, $\mathbb{U}$, is defined as
 		
@@ -678,28 +678,28 @@ and
 	\end{block}
 \end{frame}
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-\begin{block}{alpha $>$ 0}
-	
-	%				\newcommand*{\MyIndent}{\hspace*{0.5cm}}%
-	\begin{table}[H]
-		\centering
-		\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
-		\begin{tabular}{llll}
-			\toprule
-			\midrule
-			$\phi$ & 1 & 2 & 3 \\
-			\midrule
-			Angle (rad) & 0.29 & 2.70 & 0.13 \\
-			Angle (deg) & 16.61 & 154.80 & 7.33 \\ 
-			\midrule
-			\bottomrule
-		\end{tabular}%
-		\label{tab:FOG_SF}%
-	\end{table}%
-	
-\end{block}
-\end{frame}
+%\begin{frame}{Numerical Simulations}
+%\begin{block}{alpha $>$ 0}
+%	
+%	%				\newcommand*{\MyIndent}{\hspace*{0.5cm}}%
+%	\begin{table}[H]
+%		\centering
+%		\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
+%		\begin{tabular}{llll}
+%			\toprule
+%			\midrule
+%			$\phi$ & 1 & 2 & 3 \\
+%			\midrule
+%			Angle (rad) & 0.29 & 2.70 & 0.13 \\
+%			Angle (deg) & 16.61 & 154.80 & 7.33 \\ 
+%			\midrule
+%			\bottomrule
+%		\end{tabular}%
+%		\label{tab:FOG_SF}%
+%	\end{table}%
+%	
+%\end{block}
+%\end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Numerical Simulations}
 	\begin{block}{$\alpha$ $>$ 0}
@@ -712,7 +712,7 @@ and
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
+	\begin{block}{\alpha $>$ 0}
 		
 		\begin{figure}
 			\centering
@@ -775,113 +775,6 @@ and
 		
 	\end{block}
 \end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-%\begin{frame}{Numerical Simulations}
-%	\begin{block}{alpha $=$ 0}
-%		
-%		\begin{table}[H]
-%			\centering
-%			\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
-%			\begin{tabular}{llll}
-%				\toprule
-%				\midrule
-%				$\phi$ & 1 & 2 & 3 \\
-%				\midrule
-%				Angle (rad) & 0.02 & 3.14 & 0.00 \\
-%				Angle (deg) & 10.80 & 180 & 0.00 \\ 
-%				\midrule
-%				\bottomrule
-%			\end{tabular}%
-%			\label{tab:FOG_SF}%
-%		\end{table}% 
-%		
-%	\end{block}
-%\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{$\alpha$ $=$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:phi1_phi2_phi3_alpha0}
-			\includegraphics[width=3in]{figures/alpha0/phi1_phi2_phi3.png}
-			\caption{Attitude Profile of the Entire Slew}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{$\alpha$ $=$ 0}
-		
-		
-		\begin{figure}[H]
-			\label{fig:ang_vel_phi_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/ang_vel.png}
-			\end{center}
-			\caption{Angular Velocity in Spacecraft Frame}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{$\alpha$ $=$ 0}
-		
-		
-		\begin{figure}[H]
-			\label{fig:ang_accel_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/ang_accel.png}
-			\end{center}
-			\caption{Angular Acceleration}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-\begin{block}{$\alpha$ $=$ 0}
-	
-	\begin{figure}[H]
-		\label{fig:torque_total_alpha0}
-		\begin{center}
-			\includegraphics[width=3in]{figures/alpha0/torque.png}
-		\end{center}
-		\caption{Torque Applied from Actuator System}
-	\end{figure}
-	
-\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{$\alpha$ $=$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:quats_phi_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/quats.png}
-			\end{center}
-			\caption{Quaternion Attitude}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{$\alpha$ $=$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:euler_ang_phi_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/euler_angles.png}
-			\end{center}
-			\caption{Attitude in Euler Angles}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Summary and Conclusion}
 \begin{frame}{Summary and Conclusion}
 \begin{block}{}
@@ -1060,6 +953,99 @@ t_{f3}=t_0-\frac{\dot{\phi}_{f}}{\ddot{\phi}_{max}}+\frac{\sqrt{2\ddot{\phi}_{ma
 The $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$,  can be found by substituting the boundary conditions given by (\ref{Bc3}) and $t_{13}$ and $t_{f3}$ in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively.
 \end{block}
 \end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}{Numerical Simulations}
+%	\begin{block}{alpha $=$ 0}
+%		
+%		\begin{table}[H]
+%			\centering
+%			\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
+%			\begin{tabular}{llll}
+%				\toprule
+%				\midrule
+%				$\phi$ & 1 & 2 & 3 \\
+%				\midrule
+%				Angle (rad) & 0.02 & 3.14 & 0.00 \\
+%				Angle (deg) & 10.80 & 180 & 0.00 \\ 
+%				\midrule
+%				\bottomrule
+%			\end{tabular}%
+%			\label{tab:FOG_SF}%
+%		\end{table}% 
+%		
+%	\end{block}
+%\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+		
+		\begin{figure}[H]
+			\label{fig:phi1_phi2_phi3_alpha0}
+			\includegraphics[width=3in]{figures/alpha0/phi1_phi2_phi3.png}
+			\caption{Attitude Profile of the Entire Slew}
+		\end{figure}
+		
+	\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+		
+		
+		\begin{figure}[H]
+			\label{fig:ang_vel_phi_total_alpha0}
+			\begin{center}
+				\includegraphics[width=3in]{figures/alpha0/ang_vel.png}
+			\end{center}
+			\caption{Angular Velocity in Spacecraft Frame}
+		\end{figure}
+		
+	\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+		
+		
+		\begin{figure}[H]
+			\label{fig:ang_accel_total_alpha0}
+			\begin{center}
+				\includegraphics[width=3in]{figures/alpha0/ang_accel.png}
+			\end{center}
+			\caption{Angular Acceleration}
+		\end{figure}
+		
+	\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+		
+		\begin{figure}[H]
+			\label{fig:torque_total_alpha0}
+			\begin{center}
+				\includegraphics[width=3in]{figures/alpha0/torque.png}
+			\end{center}
+			\caption{Torque Applied from Actuator System}
+		\end{figure}
+		
+	\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+		
+		\begin{figure}[H]
+			\label{fig:quats_phi_total_alpha0}
+			\begin{center}
+				\includegraphics[width=3in]{figures/alpha0/quats.png}
+			\end{center}
+			\caption{Quaternion Attitude}
+		\end{figure}
+		
+	\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
