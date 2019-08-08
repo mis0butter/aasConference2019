@@ -12,10 +12,8 @@ ylimits_a = get_ylimits(a);
 plot_option = 1; 
 if plot_option == 1
 figure()
-    plot(t, w(:, 1), 'LineWidth', 1.1)
-    hold on; 
-    plot(t, w(:, 2), 'r--', 'LineWidth', 1.1)
-    plot(t, w(:, 3), 'g-.', 'LineWidth', 1.1)
+    plot(t, w(:, 1), 'b', 'LineWidth', 2, ... 
+        t, w(:, 2), 'r--', t, w(:, 3), 'g-.')
     ylim(ylimits_w)
     grid on 
     legend('w1', 'w2', 'w3'); 
@@ -24,11 +22,7 @@ figure()
     title(strcat('Angular Velocity: \phi_{', phi_num, '}'))
 
 figure()
-    plot(t, q(:, 1), 'b', 'LineWidth', 1.1)
-    hold on; 
-    plot(t, q(:, 2), 'r--', 'LineWidth', 1.1)
-    plot(t, q(:, 3), 'g-.', 'LineWidth', 1.1)
-    plot(t, q(:, 4), 'k:', 'LineWidth', 1.2)
+    plot(t, q(:, 1), 'b', t, q(:, 2), 'r--', t, q(:, 3), 'g-.', t, q(:, 4), 'k:')
     legend('q1', 'q2', 'q3', 'q4'); 
     grid on 
     ylim(ylimits_q)
@@ -37,10 +31,7 @@ figure()
     title(strcat('Quaternion: \phi_{', phi_num, '}'))
     
 figure()
-    plot(t, ypr(:, 1), 'LineWidth', 1.1)
-    hold on; 
-    plot(t, ypr(:, 2), 'r--', 'LineWidth', 1.1)
-    plot(t, ypr(:, 3), 'g-.', 'LineWidth', 1.1)
+    plot(t, ypr)
     legend('Yaw', 'Pitch', 'Roll'); 
     grid on 
     ylim(ylimits_ypr)
@@ -49,10 +40,7 @@ figure()
     title(strcat('Euler Angles: \phi_{', phi_num, '}'))
     
 figure()
-    plot(t, torque(:, 1), 'LineWidth', 1.1)
-    hold on; 
-    plot(t, torque(:, 2), 'r--', 'LineWidth', 1.1) 
-    plot(t, torque(:, 3), 'g-.', 'LineWidth', 1.1)
+    plot(t, torque)
     legend('Gx', 'Gy', 'Gz'); 
     grid on 
     ylim(ylimits_torque)
@@ -61,10 +49,7 @@ figure()
     title(strcat('Torque: \phi_{', phi_num, '}'))
     
 figure()
-    plot(t(1:end - 1), a(:,1), 'LineWidth', 1.1)
-    hold on; 
-    plot(t(1:end - 1), a(:, 2), 'r--', 'LineWidth', 1.1)
-    plot(t(1:end - 1), a(:, 3), 'g-.', 'LineWidth', 1.1) 
+    plot(t(1:end - 1), a)
     legend('Gx', 'Gy', 'Gz'); 
     grid on 
     ylim(ylimits_a)

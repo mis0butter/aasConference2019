@@ -4,7 +4,7 @@
 
 % clear; 
 % close all; 
-main_inputs_P3_G0         % Creates all inputs and variables in workspace 
+% main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 
@@ -92,6 +92,20 @@ wf = 0;
 % phi2 = 2.25; 
 
 [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi2, phi_tt); 
+
+%% Direction of phi2
+
+sun_e = cross(S_G0, e_G0); 
+a = sun_e/norm(sun_e); 
+b = Pf_G0/norm(Pf_G0); 
+c = Pi_G0/norm(Pi_G0); 
+
+% if angle from sun_e and Pf is larger than sun_e and Pi 
+if acos(dot(a,b)) > acos(dot(a, c))
+    sign = -1; 
+else 
+    sign = 1; 
+end 
     
 %% Solve for attitude determination - second slew 
 % 
@@ -100,79 +114,29 @@ wf = 0;
 % 
 % the direction of torque_G needs to be recalculated at every time step. 
 
-dt = 1/1000; 
+dt = 1/100; 
 
 % This is the quaternion of current G in initial G0 frame. G0_q_G
 q0 = q_phi1(end, :)';               % G0_q_G
 w0 = w_phi1(end, :)'; 
 phi_w0 = 0; 
 
-% Finding direction of torque in G0 frame 
-
-% Monte Carlo slew eigenaxis 
-S_G0_MC = S_G0.*(1 + 0.3*rand(3,1)); 
-S_G0_MC = S_G0_MC/norm(S_G0_MC); 
-% S_G0_MC = [0.3898; 0.4558; 0.8001]; 
-
-% a_G0 = -aMax*S_G0_MC;                       % acceleration around sun vector (G0 frame) 
-% G0_DCM_G = quat2DCM(q0);                % q is in G0_q_G frame 
-% G_DCM_G0 = G0_DCM_G';                   % from G0 to current G frame 
-% a_G = G_DCM_G0*a_G0;                    % acceleration transformed into current G frame 
-% torque_G = inertia_SC*a_G;              % inertia_SC always in G frame 
-% torque_G0 = G0_DCM_G*torque_G;          % torque transformed into G0 frame  
-% torque_G0 = torque_G0; 
-
-% [t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-%     t0, t1, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
 [t1_phi2, q1_phi2, w1_phi2, torque1_phi2, phi1_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
-    S_G0, -aMax, inertia_SC, w0, q0, phi_w0); 
+    S_G0, sign*aMax, inertia_SC, w0, q0, phi_w0); 
 
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
 q0 = q1_phi2(end, :)'; 
-% a_max is now 0 
 
-% [t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, ... 
-%     t1, t2, inertia_SC, torque, w0, q0); 
 [t2_phi2, q2_phi2, w2_phi2, torque2_phi2, phi2_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t1, t2, ... 
     S_G0, 0, inertia_SC, w0, q0, wMax); 
-
-% % t1 --> t2_half 
-% t2_half = t1 + (t2 - t1)/2; 
-% w0 = w1_phi2(end, :)'; 
-% q0 = q1_phi2(end, :)'; 
-% 
-% [t2_phi2_1, q2_phi2_1, w2_phi2_1, torque2_phi2_1] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-%     t1, t2_half, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
-% 
-% % t2_half --> t2 
-% w0 = w2_phi2_1(end, :)'; 
-% q0 = q2_phi2_1(end, :)'; 
-% 
-% [t2_phi2_2, q2_phi2_2, w2_phi2_2, torque2_phi2_2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-%     t2_half, t2, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
-% 
-% % combining phi2 stuff 
-% t2_phi2 = [t2_phi2_1; t2_phi2_2(2:end)]; 
-% w2_phi2 = [w2_phi2_1; w2_phi2_2(2:end ,:)]; 
-% q2_phi2 = [q2_phi2_1; q2_phi2_2(2:end ,:)]; 
-% torque2_phi2 = [torque2_phi2_1; torque2_phi2_2(2:end, :)]; 
 
 % t2 --> t3 
 w0 = w2_phi2(end, :)'; 
 q0 = q2_phi2(end, :)';  
 
-% Finding direction of torque in inertia_SCl G0 frame 
-% a_G0 = aMax*S_G0; 
-% G0_DCM_G = quat2DCM(q0); G_DCM_G0 = G0_DCM_G'; 
-% a_G = G_DCM_G0*a_G0; 
-% torque_G = inertia_SC*a_G;               % inertia_SC always in G frame 
-% torque_G0 = G0_DCM_G*torque_G; 
-
-% [t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
-%     t2, t3, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
 [t3_phi2, q3_phi2, w3_phi2, torque3_phi2, phi3_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t2, t3, ... 
-    S_G0, aMax, inertia_SC, w0, q0, wMax); 
+    S_G0, -sign*aMax, inertia_SC, w0, q0, wMax); 
 
 t_phi2 = [t1_phi2; t2_phi2(2:end); t3_phi2(2:end)]; 
 w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)]; 
@@ -216,7 +180,9 @@ torque_G0 = G0_DCM_G*torque_G;
 
 % [t1_phi3, y1_phi3] = ode45(@(t,Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]);
 % [t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
-[t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
+% [t1_phi3, q1_phi3, w1_phi3, torque1_phi3] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0); 
+[t1_phi3, q1_phi3, w1_phi3, torque1_phi3, phi1_phi3] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
+    e_G0, aMax, inertia_SC, w0, q0, wMax); 
 
 % t1 --> t2 
 % tEnd = t2 - t1; 
@@ -226,7 +192,9 @@ torque = [0; 0; 0];
 
 % [t2_phi3, y2_phi3] = ode45(@(t,Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]); 
 % [t2_phi3, q2_phi3, w2_phi3, torque2_phi3] = gyrostat_discrete(dt, t1, t2, inertia_SC, torque, w0, q0); 
-[t2_phi3, q2_phi3, w2_phi3, torque2_phi3] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0); 
+% [t2_phi3, q2_phi3, w2_phi3, torque2_phi3] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0); 
+[t2_phi3, q2_phi3, w2_phi3, torque2_phi3, phi2_phi3] = gyrostat_discrete_torqueN_solve_torque(dt, t1, t2, ... 
+    e_G0, 0, inertia_SC, w0, q0, wMax); 
 
 % t2 --> t3 
 % tEnd = t3 - t2; 
@@ -235,7 +203,9 @@ q0 = q2_phi3(end, :)';
 
 % [t3_phi3, y3_phi3] = ode45(@(t, Z) gyrostat_cont(inertia_SC, torque, Z), [0, tEnd], [w0; q0]); 
 % [t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete(dt, t2, t3, inertia_SC, -torque_G, w0, q0); 
-[t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete_torqueN(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
+% [t3_phi3, q3_phi3, w3_phi3, torque3_phi3] = gyrostat_discrete_torqueN(dt, t2, t3, inertia_SC, -torque_G0, w0, q0); 
+[t3_phi3, q3_phi3, w3_phi3, torque3_phi3, phi3_phi3] = gyrostat_discrete_torqueN_solve_torque(dt, t2, t3, ... 
+    e_G0, -aMax, inertia_SC, w0, q0, wMax); 
 
 t_phi3 = [t1_phi3; t2_phi3(2:end); t3_phi3(2:end)]; 
 w_phi3 = [w1_phi3; w2_phi3(2:end ,:); w3_phi3(2:end, :)]; 

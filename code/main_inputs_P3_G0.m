@@ -168,11 +168,11 @@ phi2_M4 = 2*abs(atan2(top, bot));
     
     %%
     
-    phi2 = phi2_M2; 
+    phi2 = phi2_M; 
     
     %%
 
-    plot_option = 1; 
+    plot_option = 0; 
     if plot_option == 1
         figure()
             plot3([0 SP1_G0(1)], [0 SP1_G0(2)], [0 SP1_G0(3)], 'r')
@@ -187,7 +187,7 @@ phi2_M4 = 2*abs(atan2(top, bot));
             plot3([0 Pf_G0(1)], [0 Pf_G0(2)], [0 Pf_G0(3)], 'b'); 
             plot3([0 P1_G0(1)], [0 P1_G0(2)], [0 P1_G0(3)], 'b'); 
             plot3([0 P2_G0(1)], [0 P2_G0(2)], [0 P2_G0(3)], 'b'); 
-            plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'b'); 
+            plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'g'); 
 
 %             plot3(S_G0 + V_G0(:, 1), S_G0 + V_G0(:, 2), S_G0 + V_G0(:, 3), '-.')
             plot3(P_phi2_G0(:, 1), P_phi2_G0(:, 2), P_phi2_G0(:, 3), '-.')
@@ -205,12 +205,6 @@ phi2_M4 = 2*abs(atan2(top, bot));
     %%
         
     end 
-
-%%%
-phi2 = phi2_M4; 
-%%%
-
-
 
 
 %%
