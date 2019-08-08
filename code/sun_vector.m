@@ -11,10 +11,10 @@ function [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_
         S_PiPf_G0 = cross(e_G0, cross(S_G0, e_G0));
         
         %%% HACK JUST SO THAT WE CAN FINISH THIS PAPER 
-        S_G0 = S_PiPf_G0;
-        S_G0 = S_G0/norm(S_G0); 
-        S_N = G0_DCM_N'*S_G0; 
-        alpha = 0; 
+%         S_G0 = S_PiPf_G0;
+%         S_G0 = S_G0/norm(S_G0); 
+%         S_N = G0_DCM_N'*S_G0; 
+%         alpha = 0; 
         %%%
         
         % FINALLY - Sun projection onto G frame 

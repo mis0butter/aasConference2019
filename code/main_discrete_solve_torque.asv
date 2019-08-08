@@ -95,12 +95,16 @@ wf = 0;
 
 %% Direction of phi2
 
-sun_e = cross(sun_G0, e_G0); 
-a = sun_e; 
-b = Pf_G0; 
-c = Pi_G0; 
+sun_e = cross(S_G0, e_G0); 
+a = sun_e/norm(sun_e); 
+b = Pf_G0/norm(Pf_G0); 
+c = Pi_G0/norm(Pi_G0); 
+
+% if angle from sun_e and Pf is larger than sun_e and Pi 
 if acos(dot(a,b)) > acos(dot(a, c))
-    
+    sign = -1; 
+else 
+    sign = 1; 
 end 
     
 %% Solve for attitude determination - second slew 
@@ -118,7 +122,7 @@ w0 = w_phi1(end, :)';
 phi_w0 = 0; 
 
 [t1_phi2, q1_phi2, w1_phi2, torque1_phi2, phi1_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
-    S_G0, aMax, inertia_SC, w0, q0, phi_w0); 
+    S_G0, sign*aMax, inertia_SC, w0, q0, phi_w0); 
 
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
@@ -132,7 +136,7 @@ w0 = w2_phi2(end, :)';
 q0 = q2_phi2(end, :)';  
 
 [t3_phi2, q3_phi2, w3_phi2, torque3_phi2, phi3_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t2, t3, ... 
-    S_G0, -aMax, inertia_SC, w0, q0, wMax); 
+    S_G0, -sign*aMax, inertia_SC, w0, q0, wMax); 
 
 t_phi2 = [t1_phi2; t2_phi2(2:end); t3_phi2(2:end)]; 
 w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)]; 
@@ -251,7 +255,7 @@ for i = 1:length(w_total) - 1
     a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
 end 
 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, torque_total, a_total, ypr_total, 'total')
 end 

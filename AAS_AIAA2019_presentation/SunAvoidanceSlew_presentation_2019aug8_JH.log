@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.17)  8 AUG 2019 06:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.17)  8 AUG 2019 13:28
 entering extended mode
 **./SunAvoidanceSlew_presentation_2019aug8_JH.tex
 (SunAvoidanceSlew_presentation_2019aug8_JH.tex
@@ -783,21 +783,21 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 ) (SunAvoidanceSlew_presentation_2019aug8_JH.aux)
 \openout1 = `SunAvoidanceSlew_presentation_2019aug8_JH.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Try loading font information for OT1+pag on input line 110.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Try loading font information for OT1+pag on input line 117.
 
 
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1pag.fd"
@@ -869,7 +869,7 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 ) ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box55
-Package hyperref Info: Link coloring OFF on input line 110.
+Package hyperref Info: Link coloring OFF on input line 117.
 
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.s
 ty"
@@ -881,56 +881,56 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count167
 )
-LaTeX Info: Redefining \ref on input line 110.
-LaTeX Info: Redefining \pageref on input line 110.
-LaTeX Info: Redefining \nameref on input line 110.
+LaTeX Info: Redefining \ref on input line 117.
+LaTeX Info: Redefining \pageref on input line 117.
+LaTeX Info: Redefining \nameref on input line 117.
  (SunAvoidanceSlew_presentation_2019aug8_JH.out)
 (SunAvoidanceSlew_presentation_2019aug8_JH.out)
 \@outlinefile=\write5
 \openout5 = `SunAvoidanceSlew_presentation_2019aug8_JH.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 110.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 117.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 110.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 117.
 \symnumbers=\mathgroup7
 \sympureletters=\mathgroup8
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/pbk/m/n on input line 110.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 110.
+(Font)                  OT1/cmss/m/n --> OT1/pbk/m/n on input line 117.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/pag/bx/n on input line 110.
+(Font)                  OT1/cmr/bx/n --> OT1/pag/bx/n on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/pag/bx/n on input line 110.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 110.
+(Font)                  OT1/cmr/bx/n --> OT1/pag/bx/n on input line 117.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/pag/m/n on input line 110.
+(Font)                  OT1/cmss/m/n --> OT1/pag/m/n on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/pag/m/n on input line 110.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 110.
+(Font)                  OT1/cmss/bx/n --> OT1/pag/m/n on input line 117.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/pag/m/it on input line 110.
+(Font)                  OT1/cmr/m/it --> OT1/pag/m/it on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/pag/m/it on input line 110.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 110.
+(Font)                  OT1/cmr/bx/it --> OT1/pag/m/it on input line 117.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 110.
+(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 110.
+(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 117.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/pag/m/n --> OT1/pag/bx/n on input line 110.
+(Font)                  OT1/pag/m/n --> OT1/pag/bx/n on input line 117.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/pag/m/it --> OT1/pag/bx/it on input line 110.
+(Font)                  OT1/pag/m/it --> OT1/pag/bx/it on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/pbk/bx/n on input line 110.
+(Font)                  OT1/cmss/bx/n --> OT1/pbk/bx/n on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/pag/bx/n --> OT1/pag/bx/n on input line 110.
+(Font)                  OT1/pag/bx/n --> OT1/pag/bx/n on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/pag/m/n --> OT1/pag/bx/n on input line 110.
+(Font)                  OT1/pag/m/n --> OT1/pag/bx/n on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/pag/m/it --> OT1/pag/bx/it on input line 110.
+(Font)                  OT1/pag/m/it --> OT1/pag/bx/it on input line 117.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/pcr/m/n --> OT1/pcr/bx/n on input line 110.
+(Font)                  OT1/pcr/m/n --> OT1/pcr/bx/n on input line 117.
 
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/translator\transla
 tor-basic-dictionary-English.dict"
@@ -957,27 +957,27 @@ tor-theorem-dictionary-English.dict"
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 (SunAvoidanceSlew_presentation_2019aug8_JH.nav)
-LaTeX Font Info:    Try loading font information for U+msa on input line 113.
+LaTeX Font Info:    Try loading font information for U+msa on input line 120.
 
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 113.
+LaTeX Font Info:    Try loading font information for U+msb on input line 120.
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 113.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 120.
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 113.
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 120.
 LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <8> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 113.
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 120.
 LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <6> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 113.
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 120.
 LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <5> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 113.
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 120.
  [1
 
 {C:/Users/junet/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
@@ -985,186 +985,348 @@ LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <5> not available
 
 ] [3
 
+] [4
+
 ]
-<./Figures/SASSchematic1.pdf, id=135, 580.63428pt x 533.20212pt>
-File: ./Figures/SASSchematic1.pdf Graphic file (type pdf)
-<use ./Figures/SASSchematic1.pdf>
-Package pdftex.def Info: ./Figures/SASSchematic1.pdf  used on input line 146.
-(pdftex.def)             Requested size: 108.405pt x 99.54393pt.
- [4
-
- <./Figures/SASSchematic1.pdf>]
-File: ./Figures/SASSchematic1.pdf Graphic file (type pdf)
-<use ./Figures/SASSchematic1.pdf>
-Package pdftex.def Info: ./Figures/SASSchematic1.pdf  used on input line 155.
-(pdftex.def)             Requested size: 216.81pt x 199.09601pt.
-
-Overfull \vbox (9.13321pt too high) detected at line 155
+Overfull \vbox (8.41617pt too high) detected at line 174
  []
 
 [5
 
-] [6
+]
+<./Figures/SASSchematic1.pdf, id=203, 580.63428pt x 533.20212pt>
+File: ./Figures/SASSchematic1.pdf Graphic file (type pdf)
+<use ./Figures/SASSchematic1.pdf>
+Package pdftex.def Info: ./Figures/SASSchematic1.pdf  used on input line 191.
+(pdftex.def)             Requested size: 108.405pt x 99.54393pt.
+ [6
 
-] [7
+ <./Figures/SASSchematic1.pdf>]
+File: ./Figures/SASSchematic1.pdf Graphic file (type pdf)
+<use ./Figures/SASSchematic1.pdf>
+Package pdftex.def Info: ./Figures/SASSchematic1.pdf  used on input line 200.
+(pdftex.def)             Requested size: 216.81pt x 199.09601pt.
+
+Overfull \vbox (9.13321pt too high) detected at line 200
+ []
+
+[7
+
+] [8
+
+] [9
 
 ]
-LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <12> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 667.
-<figures/alphaNot0/phi1_phi2_phi3.png, id=288, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/phi1_phi2_phi3.png Graphic file (type png)
-<use figures/alphaNot0/phi1_phi2_phi3.png>
-Package pdftex.def Info: figures/alphaNot0/phi1_phi2_phi3.png  used on input li
-ne 667.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [8
+<./Figures/SVAS_1r_modified.pdf, id=359, 416.64609pt x 299.70067pt>
+File: ./Figures/SVAS_1r_modified.pdf Graphic file (type pdf)
+<use ./Figures/SVAS_1r_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_1r_modified.pdf  used on input line 256
+.
+(pdftex.def)             Requested size: 144.54pt x 103.96848pt.
+<./Figures/SVAS_1rb_modified.pdf, id=360, 467.77823pt x 480.8635pt>
+File: ./Figures/SVAS_1rb_modified.pdf Graphic file (type pdf)
+<use ./Figures/SVAS_1rb_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_1rb_modified.pdf  used on input line 25
+6.
+(pdftex.def)             Requested size: 144.54pt x 148.58186pt.
 
- <./figures/alphaNot0/phi1_phi2_phi3.png (PNG copy)>]
-<figures/alphaNot0/ang_vel_phi_total.png, id=317, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/ang_vel_phi_total.png Graphic file (type png)
-<use figures/alphaNot0/ang_vel_phi_total.png>
-Package pdftex.def Info: figures/alphaNot0/ang_vel_phi_total.png  used on input
- line 681.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [9
+Overfull \vbox (14.02007pt too high) detected at line 256
+ []
 
- <./figures/alphaNot0/ang_vel_phi_total.png (PNG copy)>]
-<figures/alphaNot0/ang_accel_total.png, id=345, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/ang_accel_total.png Graphic file (type png)
-<use figures/alphaNot0/ang_accel_total.png>
-Package pdftex.def Info: figures/alphaNot0/ang_accel_total.png  used on input l
-ine 696.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [10
+[10
 
- <./figures/alphaNot0/ang_accel_total.png (PNG copy)>]
-<figures/alphaNot0/torque_total.png, id=373, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/torque_total.png Graphic file (type png)
-<use figures/alphaNot0/torque_total.png>
-Package pdftex.def Info: figures/alphaNot0/torque_total.png  used on input line
- 710.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [11
+ <./Figures/SVAS_1r_modified.pdf> <./Figures/SVAS_1rb_modified.pdf
 
- <./figures/alphaNot0/torque_total.png (PNG copy)>]
-<figures/alphaNot0/quats_phi_total.png, id=401, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/quats_phi_total.png Graphic file (type png)
-<use figures/alphaNot0/quats_phi_total.png>
-Package pdftex.def Info: figures/alphaNot0/quats_phi_total.png  used on input l
-ine 725.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [12
+pdfTeX warning: pdflatex.exe (file ./Figures/SVAS_1rb_modified.pdf): PDF inclus
+ion: multiple pdfs with page group included in a single page
+>]
 
- <./figures/alphaNot0/quats_phi_total.png (PNG copy)>]
-<figures/alphaNot0/euler_ang_phi_total.png, id=429, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/euler_ang_phi_total.png Graphic file (type png)
-<use figures/alphaNot0/euler_ang_phi_total.png>
-Package pdftex.def Info: figures/alphaNot0/euler_ang_phi_total.png  used on inp
-ut line 739.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [13
+LaTeX Warning: The counter will not be printed.
+             The label is: 2 on input line 274.
 
- <./figures/alphaNot0/euler_ang_phi_total.png (PNG copy)>]
-<figures/alpha0/phi1_phi2_phi3.png, id=458, 526.96875pt x 395.22656pt>
-File: figures/alpha0/phi1_phi2_phi3.png Graphic file (type png)
-<use figures/alpha0/phi1_phi2_phi3.png>
-Package pdftex.def Info: figures/alpha0/phi1_phi2_phi3.png  used on input line 
-773.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [14
+LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <10> not available
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 274.
+LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <7> not available
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 274.
+<./Figures/SVAS_2r_modified.pdf, id=494, 489.04126pt x 487.40593pt>
+File: ./Figures/SVAS_2r_modified.pdf Graphic file (type pdf)
+<use ./Figures/SVAS_2r_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_2r_modified.pdf  used on input line 274
+.
+(pdftex.def)             Requested size: 144.54pt x 144.05867pt.
 
- <./figures/alpha0/phi1_phi2_phi3.png (PNG copy)>]
-<figures/alpha0/ang_vel.png, id=487, 526.96875pt x 395.22656pt>
-File: figures/alpha0/ang_vel.png Graphic file (type png)
-<use figures/alpha0/ang_vel.png>
-Package pdftex.def Info: figures/alpha0/ang_vel.png  used on input line 788.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [15
+Overfull \vbox (19.77469pt too high) detected at line 274
+ []
 
- <./figures/alpha0/ang_vel.png (PNG copy)>]
-<figures/alpha0/ang_accel.png, id=515, 526.96875pt x 395.22656pt>
-File: figures/alpha0/ang_accel.png Graphic file (type png)
-<use figures/alpha0/ang_accel.png>
-Package pdftex.def Info: figures/alpha0/ang_accel.png  used on input line 803.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [16
+[11
 
- <./figures/alpha0/ang_accel.png (PNG copy)>]
-<figures/alpha0/torque.png, id=543, 526.96875pt x 395.22656pt>
-File: figures/alpha0/torque.png Graphic file (type png)
-<use figures/alpha0/torque.png>
-Package pdftex.def Info: figures/alpha0/torque.png  used on input line 817.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [17
+ <./Figures/SVAS_2r_modified.pdf>]
 
- <./figures/alpha0/torque.png (PNG copy)>]
-<figures/alpha0/quats.png, id=571, 526.96875pt x 395.22656pt>
-File: figures/alpha0/quats.png Graphic file (type png)
-<use figures/alpha0/quats.png>
-Package pdftex.def Info: figures/alpha0/quats.png  used on input line 831.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [18
+LaTeX Warning: The counter will not be printed.
+             The label is: 2 on input line 288.
 
- <./figures/alpha0/quats.png (PNG copy)>]
-<figures/alpha0/euler_angles.png, id=598, 526.96875pt x 395.22656pt>
-File: figures/alpha0/euler_angles.png Graphic file (type png)
-<use figures/alpha0/euler_angles.png>
-Package pdftex.def Info: figures/alpha0/euler_angles.png  used on input line 84
-5.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [19
 
- <./figures/alpha0/euler_angles.png (PNG copy)>] [20
+LaTeX Warning: The counter will not be printed.
+             The label is: b) on input line 288.
 
-] [21
+<./Figures/SVAS_3r_modified.pdf, id=581, 500.49043pt x 492.31227pt>
+File: ./Figures/SVAS_3r_modified.pdf Graphic file (type pdf)
+<use ./Figures/SVAS_3r_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_3r_modified.pdf  used on input line 288
+.
+(pdftex.def)             Requested size: 144.54pt x 142.17345pt.
+[12
 
-] [22
+ <./Figures/SVAS_3r_modified.pdf>]
 
-] [23
+LaTeX Warning: The counter will not be printed.
+             The label is: 3 on input line 311.
 
-] [24
+<./Figures/SVAS_4r.pdf, id=657, 454.97849pt x 299.73782pt>
+File: ./Figures/SVAS_4r.pdf Graphic file (type pdf)
+<use ./Figures/SVAS_4r.pdf>
+Package pdftex.def Info: ./Figures/SVAS_4r.pdf  used on input line 311.
+(pdftex.def)             Requested size: 144.54pt x 95.22287pt.
+
+LaTeX Warning: The counter will not be printed.
+             The label is: 4 on input line 311.
+
+[13
+
+ <./Figures/SVAS_4r.pdf>]
+Overfull \hbox (2.13828pt too wide) detected at line 351
+[][]\OML/cmm/m/it/10.95 [] \OT1/cmss/m/n/10.95 = []
+ []
+
+
+Overfull \vbox (46.20227pt too high) detected at line 351
+ []
+
+[14
+
+]
+<./Figures/SASSchematic3.pdf, id=764, 587.17598pt x 335.29565pt>
+File: ./Figures/SASSchematic3.pdf Graphic file (type pdf)
+<use ./Figures/SASSchematic3.pdf>
+Package pdftex.def Info: ./Figures/SASSchematic3.pdf  used on input line 360.
+(pdftex.def)             Requested size: 350.50993pt x 200.1557pt.
+
+Overfull \hbox (8.21463pt too wide) in paragraph at lines 360--360
+ [] 
+ []
+
+[15
+
+ <./Figures/SASSchematic3.pdf>] [16
+
+]
+<./Figures/Spacecraft.pdf, id=872, 471.04985pt x 482.49872pt>
+File: ./Figures/Spacecraft.pdf Graphic file (type pdf)
+<use ./Figures/Spacecraft.pdf>
+Package pdftex.def Info: ./Figures/Spacecraft.pdf  used on input line 404.
+(pdftex.def)             Requested size: 162.6075pt x 166.55794pt.
+
+Overfull \hbox (42.80206pt too wide) in paragraph at lines 404--404
+ [] 
+ []
+
+
+Overfull \vbox (12.5517pt too high) detected at line 404
+ []
+
+[17
+
+ <./Figures/Spacecraft.pdf>] [18
 
 ]
 LaTeX Font Info:    Font shape `OT1/pag/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/pag/b/n' tried instead on input line 914.
+(Font)              Font shape `OT1/pag/b/n' tried instead on input line 462.
 LaTeX Font Info:    Font shape `OT1/pag/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/pag/db/n' tried instead on input line 914.
-
-
-LaTeX Warning: Reference `costfunction' on page 25 undefined on input line 914.
-
-
-
-LaTeX Warning: Reference `system' on page 25 undefined on input line 914.
-
-
-LaTeX Warning: Reference `Bcs' on page 25 undefined on input line 914.
-
-[25
+(Font)              Font shape `OT1/pag/db/n' tried instead on input line 462.
+ [19
 
 ]
-<./Figures/Bang_bang.pdf, id=789, 232.25359pt x 161.92294pt>
+Overfull \vbox (12.89117pt too high) detected at line 514
+ []
+
+[20
+
+]
+
+! LaTeX Error: Illegal character in array arg.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.552 \end{frame}
+                 
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \vbox (8.2739pt too high) detected at line 552
+ []
+
+[21
+
+] [22
+
+]
+<./Figures/bang_off_bang.pdf, id=1119, 356.55789pt x 166.83028pt>
+File: ./Figures/bang_off_bang.pdf Graphic file (type pdf)
+<use ./Figures/bang_off_bang.pdf>
+Package pdftex.def Info: ./Figures/bang_off_bang.pdf  used on input line 624.
+(pdftex.def)             Requested size: 108.405pt x 50.7215pt.
+
+Overfull \vbox (3.39047pt too high) detected at line 624
+ []
+
+[23
+
+ <./Figures/bang_off_bang.pdf>] [24
+
+] [25
+
+] [26
+
+]
+LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <12> not available
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 702.
+ [27
+
+]
+<figures/alphaNot0/phi1_phi2_phi3.png, id=1290, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/phi1_phi2_phi3.png Graphic file (type png)
+<use figures/alphaNot0/phi1_phi2_phi3.png>
+Package pdftex.def Info: figures/alphaNot0/phi1_phi2_phi3.png  used on input li
+ne 712.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [28
+
+ <./figures/alphaNot0/phi1_phi2_phi3.png (PNG copy)>]
+<figures/alphaNot0/ang_vel_phi_total.png, id=1318, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/ang_vel_phi_total.png Graphic file (type png)
+<use figures/alphaNot0/ang_vel_phi_total.png>
+Package pdftex.def Info: figures/alphaNot0/ang_vel_phi_total.png  used on input
+ line 734.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [29
+
+ <./figures/alphaNot0/ang_vel_phi_total.png (PNG copy)>]
+<figures/alphaNot0/ang_accel_total.png, id=1346, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/ang_accel_total.png Graphic file (type png)
+<use figures/alphaNot0/ang_accel_total.png>
+Package pdftex.def Info: figures/alphaNot0/ang_accel_total.png  used on input l
+ine 748.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [30
+
+ <./figures/alphaNot0/ang_accel_total.png (PNG copy)>]
+<figures/alphaNot0/torque_total.png, id=1374, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/torque_total.png Graphic file (type png)
+<use figures/alphaNot0/torque_total.png>
+Package pdftex.def Info: figures/alphaNot0/torque_total.png  used on input line
+ 762.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+
+[31
+
+ <./figures/alphaNot0/torque_total.png (PNG copy)>]
+<figures/alphaNot0/quats_phi_total.png, id=1403, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/quats_phi_total.png Graphic file (type png)
+<use figures/alphaNot0/quats_phi_total.png>
+Package pdftex.def Info: figures/alphaNot0/quats_phi_total.png  used on input l
+ine 777.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [32
+
+ <./figures/alphaNot0/quats_phi_total.png (PNG copy)>]
+<figures/alpha0/phi1_phi2_phi3.png, id=1431, 526.96875pt x 395.22656pt>
+File: figures/alpha0/phi1_phi2_phi3.png Graphic file (type png)
+<use figures/alpha0/phi1_phi2_phi3.png>
+Package pdftex.def Info: figures/alpha0/phi1_phi2_phi3.png  used on input line 
+811.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [33
+
+ <./figures/alpha0/phi1_phi2_phi3.png (PNG copy)>]
+<figures/alpha0/ang_vel.png, id=1460, 526.96875pt x 395.22656pt>
+File: figures/alpha0/ang_vel.png Graphic file (type png)
+<use figures/alpha0/ang_vel.png>
+Package pdftex.def Info: figures/alpha0/ang_vel.png  used on input line 826.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [34
+
+ <./figures/alpha0/ang_vel.png (PNG copy)>]
+<figures/alpha0/ang_accel.png, id=1488, 526.96875pt x 395.22656pt>
+File: figures/alpha0/ang_accel.png Graphic file (type png)
+<use figures/alpha0/ang_accel.png>
+Package pdftex.def Info: figures/alpha0/ang_accel.png  used on input line 841.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [35
+
+ <./figures/alpha0/ang_accel.png (PNG copy)>]
+<figures/alpha0/torque.png, id=1516, 526.96875pt x 395.22656pt>
+File: figures/alpha0/torque.png Graphic file (type png)
+<use figures/alpha0/torque.png>
+Package pdftex.def Info: figures/alpha0/torque.png  used on input line 855.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [36
+
+ <./figures/alpha0/torque.png (PNG copy)>]
+<figures/alpha0/quats.png, id=1544, 526.96875pt x 395.22656pt>
+File: figures/alpha0/quats.png Graphic file (type png)
+<use figures/alpha0/quats.png>
+Package pdftex.def Info: figures/alpha0/quats.png  used on input line 869.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+
+[37
+
+ <./figures/alpha0/quats.png (PNG copy)>]
+<figures/alpha0/euler_angles.png, id=1572, 526.96875pt x 395.22656pt>
+File: figures/alpha0/euler_angles.png Graphic file (type png)
+<use figures/alpha0/euler_angles.png>
+Package pdftex.def Info: figures/alpha0/euler_angles.png  used on input line 88
+3.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [38
+
+ <./figures/alpha0/euler_angles.png (PNG copy)>] [39
+
+] [40
+
+] [41
+
+] [42
+
+] [43
+
+] [44
+
+]
+<./Figures/Bang_bang.pdf, id=1758, 232.25359pt x 161.92294pt>
 File: ./Figures/Bang_bang.pdf Graphic file (type pdf)
 <use ./Figures/Bang_bang.pdf>
-Package pdftex.def Info: ./Figures/Bang_bang.pdf  used on input line 938.
+Package pdftex.def Info: ./Figures/Bang_bang.pdf  used on input line 976.
 (pdftex.def)             Requested size: 144.54pt x 100.77167pt.
 
-Overfull \vbox (0.33136pt too high) detected at line 938
+Overfull \vbox (0.33136pt too high) detected at line 976
  []
 
-[26
+[45
 
- <./Figures/Bang_bang.pdf>] [27
+ <./Figures/Bang_bang.pdf>] [46
 
 ]
-Overfull \vbox (0.579pt too high) detected at line 984
+Overfull \vbox (0.579pt too high) detected at line 1022
  []
 
-[28
+[47
 
-] [29
+] [48
 
-] [30
+] [49
 
 ]
 \tf@nav=\write6
@@ -1176,55 +1338,51 @@ Overfull \vbox (0.579pt too high) detected at line 984
 \tf@snm=\write8
 \openout8 = `SunAvoidanceSlew_presentation_2019aug8_JH.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1028.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1028.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1066.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1066.
  (SunAvoidanceSlew_presentation_2019aug8_JH.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1028.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1028.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1066.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1066.
 
 Package rerunfilecheck Info: File `SunAvoidanceSlew_presentation_2019aug8_JH.ou
 t' has not changed.
-(rerunfilecheck)             Checksum: B051AC43556AB9AC147804E6ACB27542;279.
-
-
-LaTeX Warning: There were undefined references.
-
+(rerunfilecheck)             Checksum: AD5FB8F7FB87036B7971C376C8EA33B7;445.
  ) 
 Here is how much of TeX's memory you used:
- 17713 strings out of 492946
- 345497 string characters out of 3126266
- 415074 words of memory out of 3000000
- 21071 multiletter control sequences out of 15000+200000
- 37464 words of font info for 76 fonts, out of 3000000 for 9000
+ 17926 strings out of 492946
+ 349193 string characters out of 3126266
+ 421142 words of memory out of 3000000
+ 21217 multiletter control sequences out of 15000+200000
+ 47879 words of font info for 93 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,20n,63p,832b,906s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{Bcs} has been referenced but does not exist, repl
-aced by a fixed one
-
-pdfTeX warning (dest): name{system} has been referenced but does not exist, rep
-laced by a fixed one
-
-pdfTeX warning (dest): name{costfunction} has been referenced but does not exis
-t, replaced by a fixed one
-
-{C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<
-C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmex10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/junet/AppData/Local/Programs/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/junet/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/junet
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
+ 56i,23n,63p,832b,957s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
+}<C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmex10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/junet/AppData/Local/Programs/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/junet/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/junet
+/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss10.pfb><C
 :/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmsy8.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-amsfonts/symbols/msbm10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/f
-onts/type1/urw/avantgar/uagd8a.pfb><C:/Users/junet/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/urw/avantgar/uagk8a.pfb><C:/Users/junet/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/urw/avantgar/uagko8a.pfb>
-Output written on SunAvoidanceSlew_presentation_2019aug8_JH.pdf (30 pages, 8159
-47 bytes).
+cmss12.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmss8.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/junet/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/junet/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/junet/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Use
+rs/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/
+msam10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
+/amsfonts/symbols/msbm10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/rsfs/rsfs10.pfb><C:/Users/junet/AppData/Local/Programs/MiKTe
+X 2.9/fonts/type1/public/rsfs/rsfs7.pfb><C:/Users/junet/AppData/Local/Programs/
+MiKTeX 2.9/fonts/type1/urw/avantgar/uagd8a.pfb><C:/Users/junet/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/urw/avantgar/uagk8a.pfb><C:/Users/junet/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/urw/avantgar/uagko8a.pfb>
+Output written on SunAvoidanceSlew_presentation_2019aug8_JH.pdf (49 pages, 2279
+188 bytes).
 PDF statistics:
- 1033 PDF objects out of 1200 (max. 8388607)
- 93 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2038 PDF objects out of 2073 (max. 8388607)
+ 147 named destinations out of 1000 (max. 500000)
+ 248 words of extra memory for PDF output out of 10000 (max. 10000000)
 

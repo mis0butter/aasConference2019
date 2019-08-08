@@ -53,12 +53,12 @@ figure()
     hold on; 
     plot(t, torque(:, 2), 'r--', 'LineWidth', 1.1) 
     plot(t, torque(:, 3), 'g-.', 'LineWidth', 1.1)
-    legend('Gx', 'Gy', 'Gz'); 
+    legend('\tau_x', '\tau_y', '\tau_z'); 
     grid on 
     ylim(ylimits_torque)
     xlabel('time (s)') 
     ylabel('Nm') 
-    title(strcat('Torque_{', phi_num, '}'))
+    title(strcat('Torque: \tau_{', phi_num, '}'))
     
 figure()
     plot(t(1:end - 1), a(:,1), 'LineWidth', 1.1)

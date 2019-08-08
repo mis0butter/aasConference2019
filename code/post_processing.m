@@ -114,13 +114,12 @@ figure()
 %     plot3([0 S1_G0(1)], [0 S1_G0(2)], [0 S1_G0(3)])
 %     plot3([0 S2_G0(1)], [0 S2_G0(2)], [0 S2_G0(3)])
 %     plot3([0 S3_G0(1)], [0 S3_G0(2)], [0 S3_G0(3)])
-
 %     plot3(P_S(:, 1), P_S(:, 2), P_S(:, 3))
     
     plot(theta,sin(theta)./theta,'LineWidth',3) 
     
     % Sun vector 
-    plot3(S_G0(1), S_G0(2), S_G0(3), 'p'); 
+    plot3(S_G0(1), S_G0(2), S_G0(3), 'h', 'LineWidth', 2); 
     % Sun projection 
     plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'g-.'); 
     
@@ -136,7 +135,7 @@ figure()
     text(P1_G0(1), P1_G0(2), P1_G0(3), sprintf(' P_1')) 
     text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P_2')) 
     text(S_G0(1), S_G0(2), S_G0(3), sprintf(' sun')) 
-%     text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun_{proj}')) 
+    text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun_{proj}')) 
     
     xlabel('G0_x')
     ylabel('G0_y') 
