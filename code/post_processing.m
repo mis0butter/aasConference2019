@@ -136,7 +136,7 @@ figure()
     text(P1_G0(1), P1_G0(2), P1_G0(3), sprintf(' P_1')) 
     text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P_2')) 
     text(S_G0(1), S_G0(2), S_G0(3), sprintf(' sun')) 
-    text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun_{proj}')) 
+%     text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun_{proj}')) 
     
     xlabel('G0_x')
     ylabel('G0_y') 

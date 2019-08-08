@@ -18,10 +18,10 @@ figure()
     plot(t, w(:, 3), 'g-.', 'LineWidth', 1.1)
     ylim(ylimits_w)
     grid on 
-    legend('w1', 'w2', 'w3'); 
-    ylabel('w (rad/s)') 
+    legend('\omega_1', '\omega_2', '\omega_3'); 
+    ylabel('\omega (rad/s)') 
     xlabel('time (s)') 
-    title(strcat('Angular Velocity: \phi_{', phi_num, '}'))
+    title(strcat('Angular Velocity: \omega_{', phi_num, '}'))
 
 figure()
     plot(t, q(:, 1), 'b', 'LineWidth', 1.1)
@@ -29,12 +29,12 @@ figure()
     plot(t, q(:, 2), 'r--', 'LineWidth', 1.1)
     plot(t, q(:, 3), 'g-.', 'LineWidth', 1.1)
     plot(t, q(:, 4), 'k:', 'LineWidth', 1.2)
-    legend('q1', 'q2', 'q3', 'q4'); 
+    legend('q_1', 'q_2', 'q_3', 'q_4'); 
     grid on 
     ylim(ylimits_q)
     ylabel('quats') 
     xlabel('time (s)') 
-    title(strcat('Quaternion: \phi_{', phi_num, '}'))
+    title(strcat('Quaternion: q_{', phi_num, '}'))
     
 figure()
     plot(t, ypr(:, 1), 'LineWidth', 1.1)
@@ -58,17 +58,17 @@ figure()
     ylim(ylimits_torque)
     xlabel('time (s)') 
     ylabel('Nm') 
-    title(strcat('Torque: \phi_{', phi_num, '}'))
+    title(strcat('Torque_{', phi_num, '}'))
     
 figure()
     plot(t(1:end - 1), a(:,1), 'LineWidth', 1.1)
     hold on; 
     plot(t(1:end - 1), a(:, 2), 'r--', 'LineWidth', 1.1)
     plot(t(1:end - 1), a(:, 3), 'g-.', 'LineWidth', 1.1) 
-    legend('Gx', 'Gy', 'Gz'); 
+    legend('\alpha_x', '\alpha_y', '\alpha_z'); 
     grid on 
     ylim(ylimits_a)
     xlabel('time (s)') 
     ylabel('rad/s^2') 
-    title(strcat('Angular Acceleration: \phi_{', phi_num, '}'))
+    title(strcat('Angular Acceleration: \alpha_{', phi_num, '}'))
 end 
