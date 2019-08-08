@@ -1,5 +1,5 @@
-function [time_out, q_out, w_out, torque_out] = gyrostat_discrete_torqueN_solve_torque(dt, t_start, t_end, ... 
-    e, a_max, inertia, w0, q0)
+function [time_out, q_out, w_out, torque_out, phi] = gyrostat_discrete_torqueN_solve_torque(dt, t_start, t_end, ... 
+    e, a_max, inertia, w0, q0, phi_w0)
 % Junette Hsin 
 % Discrete attitude determination for gyrostat 
 % 
@@ -19,6 +19,7 @@ function [time_out, q_out, w_out, torque_out] = gyrostat_discrete_torqueN_solve_
 %   q_out       = output attitude 
 %   torque_out  = output torque 
 %   time_out    = output time 
+%   phi         = output phi angle 
 
 % Ensure eigenaxis is column not row 
 if isrow(e) == 1
@@ -33,20 +34,23 @@ e_skew = [  0      -e(3)     e(2);
 
 % Initializing 
 nsteps = 10;                % Resolution for attitude solving 
-dphi = 0.5*a_max*dt^2;      % FIRST dphi --> how much angle to slew 
+phi = 0;                    % FIRST dphi --> how much angle to slew 
 index = 1;                  % outputs index 
 w = w0; 
 q = q0; 
 w_out = [ w0'; zeros(length(dt : dt : (t_end - t_start)), 3 )]; 
 q_out = [ q0'; zeros(length(dt : dt : (t_end - t_start)), 4 )];
-torque_out = [torqueN'; zeros(length(dt : dt : (t_end - t_start)), 3)]; 
+torque_out = zeros(length(dt : dt : (t_end - t_start)) + 1, 3); 
 time_out = [t_start; zeros(length(dt : dt : (t_end - t_start)), 1)]; 
 
 % Outer for loop, t_start + dt --> t_end 
 for t = t_start+dt : dt : t_end 
+    
+    % Desired phi angle 
+    phi = phi_w0*(t - t_start) + 0.5*a_max*(t - t_start)^2; 
        
-    % rotation around eigenaxis into DCM 
-    B_DCM_N = [ cos(dphi)*eye(3) + (1 - cos(dphi))*(e*e') - sin(dphi)*e_skew ]; 
+    % rotation around eigenaxis by phi into DCM 
+    B_DCM_N = [ cos(phi).*eye(3) + (1 - cos(phi)).*(e*e') - sin(phi).*e_skew ]; 
     N_DCM_B = B_DCM_N'; 
     
     % Desired dw from inertial to body 
@@ -69,10 +73,7 @@ for t = t_start+dt : dt : t_end
         dq = 1/2 * q_skew * w ;
         w = w + dw*dt/nsteps;
         q = q + dq*dt/nsteps;
-    end
-    
-    % Next dphi angle to slew 
-    dphi = w*dt + 0.5*a_max*dt^2; 
+    end 
     
     % Outputs 
     index = index + 1; 

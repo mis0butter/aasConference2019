@@ -4,7 +4,7 @@
 
 % clear; 
 % close all; 
-main_inputs_P3_G0         % Creates all inputs and variables in workspace 
+% main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
 % optional plotting routine to check things 
 plot_option = 0; 
@@ -124,8 +124,8 @@ S_G0_MC = S_G0_MC/norm(S_G0_MC);
 
 % [t1_phi2, q1_phi2, w1_phi2, torque1_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
 %     t0, t1, inertia_SC, torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
-[t1_phi2, q1_phi2, w1_phi2, torque1_phi2, phi1_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
-    S_G0, -aMax, inertia_SC, w0, q0, phi_w0); 
+[t1_phi2, q1_phi2, w1_phi2, torque1_phi2, phi] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
+    S_G0, aMax, inertia_SC, w0, q0, phi_w0); 
 
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
@@ -134,7 +134,7 @@ q0 = q1_phi2(end, :)';
 
 % [t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN(dt, ... 
 %     t1, t2, inertia_SC, torque, w0, q0); 
-[t2_phi2, q2_phi2, w2_phi2, torque2_phi2, phi2_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t1, t2, ... 
+[t2_phi2, q2_phi2, w2_phi2, torque2_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t1, t2, ... 
     S_G0, 0, inertia_SC, w0, q0, wMax); 
 
 % % t1 --> t2_half 
@@ -171,8 +171,8 @@ q0 = q2_phi2(end, :)';
 
 % [t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_Qerr(dt, ... 
 %     t2, t3, inertia_SC, -torque_G0, w0, q0, P_phi2_G0, Pi_G0); 
-[t3_phi2, q3_phi2, w3_phi2, torque3_phi2, phi3_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t2, t3, ... 
-    S_G0, aMax, inertia_SC, w0, q0, wMax); 
+[t3_phi2, q3_phi2, w3_phi2, torque3_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t2, t3, ... 
+    S_G0, -aMax, inertia_SC, w0, q0, phi_w0); 
 
 t_phi2 = [t1_phi2; t2_phi2(2:end); t3_phi2(2:end)]; 
 w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)]; 
@@ -285,7 +285,7 @@ for i = 1:length(w_total) - 1
     a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
 end 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, torque_total, a_total, ypr_total, 'total')
 end 
