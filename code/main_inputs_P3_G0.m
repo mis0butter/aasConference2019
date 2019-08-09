@@ -1,18 +1,6 @@
-
-
-%% Inputs 
-
-% Non-changing parameters; should be function inputs 
-% inertia_SC = [ 408     0       0; 
-%                0       427     0; 
-%                0       0       305]; 
-inertia_SC = [ 100     0       0; 
-               0       100     0; 
-               0       0       100]; 
-inertia_w = [  20   0    0; 
-               0    20   0; 
-               0    0    20  ]; 
-ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
+% Junette Hsin 
+% 2019 August 9 
+% Inputs 
 
 %%% RANDOM MONTE CARLO STUFF 
 % Initial points / vectors 
@@ -58,8 +46,21 @@ while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ...
 end 
 %%% END RANDOM STUFF 
 
-aMax = 1;                                  % Maximum acceleration, rad/s^2
-wMax = 1;                                  % Maximum angular velocity, rad/s
+%% Non-changing parameters; should be function inputs 
+
+% inertia_SC = [ 408     0       0; 
+%                0       427     0; 
+%                0       0       305]; 
+inertia_SC = [ 100     0       0; 
+               0       100     0; 
+               0       0       100]; 
+inertia_w = [  20   0    0; 
+               0    20   0; 
+               0    0    20  ]; 
+
+ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
+aMax = 5*pi/180;                                  % Maximum acceleration, rad/s^2
+wMax = 5*pi/180;                                  % Maximum angular velocity, rad/s
 
 %% Calculate slew angles 
 

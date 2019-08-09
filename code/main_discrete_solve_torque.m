@@ -102,9 +102,9 @@ c = Pi_G0/norm(Pi_G0);
 
 % if angle from sun_e and Pf is larger than sun_e and Pi 
 if acos(dot(a,b)) > acos(dot(a, c))
-    sign = 1; 
-else 
     sign = -1; 
+else 
+    sign = 1; 
 end 
     
 %% Solve for attitude determination - second slew 
@@ -255,9 +255,9 @@ for i = 1:length(w_total) - 1
     a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
 end 
 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
-    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, ypr_total, 'total')
+    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, ypr_total, 'total', aMax, wMax)
 end 
 
 %% PHI NOMINAL - IF THERE WAS NO SUN INTRUSION 
