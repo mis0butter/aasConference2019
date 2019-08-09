@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.17)  8 AUG 2019 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.17)  8 AUG 2019 16:49
 entering extended mode
 **./SunAvoidanceSlew_presentation_2019aug8_JH.tex
 (SunAvoidanceSlew_presentation_2019aug8_JH.tex
@@ -988,49 +988,55 @@ LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <5> not available
 ] [4
 
 ]
-Overfull \vbox (8.41617pt too high) detected at line 174
+Overfull \vbox (8.41617pt too high) detected at line 173
  []
 
 [5
 
 ]
-<./Figures/SASSchematic1.pdf, id=203, 580.63428pt x 533.20212pt>
+<./Figures/SASSchematic1.pdf, id=199, 580.63428pt x 533.20212pt>
 File: ./Figures/SASSchematic1.pdf Graphic file (type pdf)
 <use ./Figures/SASSchematic1.pdf>
-Package pdftex.def Info: ./Figures/SASSchematic1.pdf  used on input line 191.
-(pdftex.def)             Requested size: 108.405pt x 99.54393pt.
- [6
-
- <./Figures/SASSchematic1.pdf>]
-File: ./Figures/SASSchematic1.pdf Graphic file (type pdf)
-<use ./Figures/SASSchematic1.pdf>
-Package pdftex.def Info: ./Figures/SASSchematic1.pdf  used on input line 200.
+Package pdftex.def Info: ./Figures/SASSchematic1.pdf  used on input line 182.
 (pdftex.def)             Requested size: 216.81pt x 199.09601pt.
 
-Overfull \vbox (9.13321pt too high) detected at line 200
+Overfull \vbox (9.13321pt too high) detected at line 182
  []
 
-[7
+[6
 
-] [8
-
-] [9
+ <./Figures/SASSchematic1.pdf>] [7
 
 ]
-<./Figures/SVAS_1r_modified.pdf, id=359, 416.64609pt x 299.70067pt>
+<./Figures/SASSchematic3.pdf, id=299, 588.81223pt x 336.93178pt>
+File: ./Figures/SASSchematic3.pdf Graphic file (type pdf)
+<use ./Figures/SASSchematic3.pdf>
+Package pdftex.def Info: ./Figures/SASSchematic3.pdf  used on input line 221.
+(pdftex.def)             Requested size: 350.50993pt x 200.57713pt.
+
+Overfull \hbox (8.21463pt too wide) in paragraph at lines 221--221
+ [] 
+ []
+
+[8
+
+ <./Figures/SASSchematic3.pdf>] [9
+
+]
+<./Figures/SVAS_1r_modified.pdf, id=415, 416.64609pt x 299.70067pt>
 File: ./Figures/SVAS_1r_modified.pdf Graphic file (type pdf)
 <use ./Figures/SVAS_1r_modified.pdf>
-Package pdftex.def Info: ./Figures/SVAS_1r_modified.pdf  used on input line 256
+Package pdftex.def Info: ./Figures/SVAS_1r_modified.pdf  used on input line 263
 .
-(pdftex.def)             Requested size: 144.54pt x 103.96848pt.
-<./Figures/SVAS_1rb_modified.pdf, id=360, 467.77823pt x 480.8635pt>
+(pdftex.def)             Requested size: 126.47249pt x 90.97183pt.
+<./Figures/SVAS_1rb_modified.pdf, id=416, 444.87996pt x 474.32108pt>
 File: ./Figures/SVAS_1rb_modified.pdf Graphic file (type pdf)
 <use ./Figures/SVAS_1rb_modified.pdf>
-Package pdftex.def Info: ./Figures/SVAS_1rb_modified.pdf  used on input line 25
-6.
-(pdftex.def)             Requested size: 144.54pt x 148.58186pt.
+Package pdftex.def Info: ./Figures/SVAS_1rb_modified.pdf  used on input line 26
+3.
+(pdftex.def)             Requested size: 144.54pt x 154.10185pt.
 
-Overfull \vbox (14.02007pt too high) detected at line 256
+Overfull \vbox (19.54005pt too high) detected at line 263
  []
 
 [10
@@ -1042,114 +1048,240 @@ ion: multiple pdfs with page group included in a single page
 >]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: 2 on input line 274.
+             The label is: 2 on input line 287.
 
 LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <10> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 274.
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 287.
 LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <7> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 274.
-<./Figures/SVAS_2r_modified.pdf, id=494, 489.04126pt x 487.40593pt>
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 287.
+<./Figures/SVAS_2r_modified.pdf, id=552, 482.4989pt x 492.31248pt>
 File: ./Figures/SVAS_2r_modified.pdf Graphic file (type pdf)
 <use ./Figures/SVAS_2r_modified.pdf>
-Package pdftex.def Info: ./Figures/SVAS_2r_modified.pdf  used on input line 274
+Package pdftex.def Info: ./Figures/SVAS_2r_modified.pdf  used on input line 287
 .
-(pdftex.def)             Requested size: 144.54pt x 144.05867pt.
+(pdftex.def)             Requested size: 144.54pt x 147.47704pt.
 
-Overfull \vbox (19.77469pt too high) detected at line 274
+
+pdfTeX warning: pdflatex.exe (file ./Figures/SASSchematic4.pdf): PDF inclusion:
+ found PDF version <1.6>, but at most version <1.5> allowed
+<./Figures/SASSchematic4.pdf, id=553, 268.99799pt x 270.2376pt>
+File: ./Figures/SASSchematic4.pdf Graphic file (type pdf)
+<use ./Figures/SASSchematic4.pdf>
+Package pdftex.def Info: ./Figures/SASSchematic4.pdf  used on input line 287.
+(pdftex.def)             Requested size: 108.405pt x 108.90544pt.
+
+Overfull \vbox (23.19305pt too high) detected at line 287
  []
 
 [11
 
- <./Figures/SVAS_2r_modified.pdf>]
+ <./Figures/SVAS_2r_modified.pdf> <./Figures/SASSchematic4.pdf
+
+pdfTeX warning: pdflatex.exe (file ./Figures/SASSchematic4.pdf): PDF inclusion:
+ multiple pdfs with page group included in a single page
+>]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: 2 on input line 288.
+             The label is: 2 on input line 301.
 
 
 LaTeX Warning: The counter will not be printed.
-             The label is: b) on input line 288.
+             The label is: b) on input line 301.
 
-<./Figures/SVAS_3r_modified.pdf, id=581, 500.49043pt x 492.31227pt>
+<./Figures/SVAS_3r_modified.pdf, id=691, 495.5838pt x 475.95618pt>
 File: ./Figures/SVAS_3r_modified.pdf Graphic file (type pdf)
 <use ./Figures/SVAS_3r_modified.pdf>
-Package pdftex.def Info: ./Figures/SVAS_3r_modified.pdf  used on input line 288
+Package pdftex.def Info: ./Figures/SVAS_3r_modified.pdf  used on input line 301
 .
-(pdftex.def)             Requested size: 144.54pt x 142.17345pt.
+(pdftex.def)             Requested size: 144.54pt x 138.81535pt.
 [12
 
  <./Figures/SVAS_3r_modified.pdf>]
 
 LaTeX Warning: The counter will not be printed.
-             The label is: 3 on input line 311.
+             The label is: 3 on input line 324.
 
-<./Figures/SVAS_4r.pdf, id=657, 454.97849pt x 299.73782pt>
+<./Figures/SVAS_4r.pdf, id=766, 454.97849pt x 299.73782pt>
 File: ./Figures/SVAS_4r.pdf Graphic file (type pdf)
 <use ./Figures/SVAS_4r.pdf>
-Package pdftex.def Info: ./Figures/SVAS_4r.pdf  used on input line 311.
+Package pdftex.def Info: ./Figures/SVAS_4r.pdf  used on input line 324.
 (pdftex.def)             Requested size: 144.54pt x 95.22287pt.
+<./Figures/SVAS_4r_modified.pdf, id=767, 469.41351pt x 276.41467pt>
+File: ./Figures/SVAS_4r_modified.pdf Graphic file (type pdf)
+<use ./Figures/SVAS_4r_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_4r_modified.pdf  used on input line 324
+.
+(pdftex.def)             Requested size: 144.54pt x 85.10982pt.
 
 LaTeX Warning: The counter will not be printed.
-             The label is: 4 on input line 311.
+             The label is: 4 on input line 324.
 
 [13
 
- <./Figures/SVAS_4r.pdf>]
-Overfull \hbox (2.13828pt too wide) detected at line 351
+ <./Figures/SVAS_4r.pdf> <./Figures/SVAS_4r_modified.pdf
+
+pdfTeX warning: pdflatex.exe (file ./Figures/SVAS_4r_modified.pdf): PDF inclusi
+on: multiple pdfs with page group included in a single page
+>]
+Overfull \hbox (2.13828pt too wide) detected at line 364
 [][]\OML/cmm/m/it/10.95 [] \OT1/cmss/m/n/10.95 = []
  []
 
 
-Overfull \vbox (46.20227pt too high) detected at line 351
+Overfull \vbox (46.20227pt too high) detected at line 364
  []
 
 [14
 
-]
-<./Figures/SASSchematic3.pdf, id=764, 587.17598pt x 335.29565pt>
-File: ./Figures/SASSchematic3.pdf Graphic file (type pdf)
-<use ./Figures/SASSchematic3.pdf>
-Package pdftex.def Info: ./Figures/SASSchematic3.pdf  used on input line 360.
-(pdftex.def)             Requested size: 350.50993pt x 200.1557pt.
-
-Overfull \hbox (8.21463pt too wide) in paragraph at lines 360--360
- [] 
- []
-
-[15
-
- <./Figures/SASSchematic3.pdf>] [16
+] [15
 
 ]
-<./Figures/Spacecraft.pdf, id=872, 471.04985pt x 482.49872pt>
+<./Figures/Spacecraft.pdf, id=944, 471.04985pt x 482.49872pt>
 File: ./Figures/Spacecraft.pdf Graphic file (type pdf)
 <use ./Figures/Spacecraft.pdf>
-Package pdftex.def Info: ./Figures/Spacecraft.pdf  used on input line 404.
+Package pdftex.def Info: ./Figures/Spacecraft.pdf  used on input line 409.
 (pdftex.def)             Requested size: 162.6075pt x 166.55794pt.
 
-Overfull \hbox (42.80206pt too wide) in paragraph at lines 404--404
+Overfull \hbox (42.80206pt too wide) in paragraph at lines 409--409
  [] 
  []
 
 
-Overfull \vbox (12.5517pt too high) detected at line 404
+Overfull \vbox (12.5517pt too high) detected at line 409
  []
 
-[17
+[16
 
- <./Figures/Spacecraft.pdf>] [18
-
-]
+ <./Figures/Spacecraft.pdf>]
 LaTeX Font Info:    Font shape `OT1/pag/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/pag/b/n' tried instead on input line 462.
+(Font)              Font shape `OT1/pag/b/n' tried instead on input line 467.
 LaTeX Font Info:    Font shape `OT1/pag/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/pag/db/n' tried instead on input line 462.
- [19
+(Font)              Font shape `OT1/pag/db/n' tried instead on input line 467.
+ [17
 
 ]
-Overfull \vbox (12.89117pt too high) detected at line 514
+<./Figures/bang_off_bang.pdf, id=1080, 356.55789pt x 166.83028pt>
+File: ./Figures/bang_off_bang.pdf Graphic file (type pdf)
+<use ./Figures/bang_off_bang.pdf>
+Package pdftex.def Info: ./Figures/bang_off_bang.pdf  used on input line 516.
+(pdftex.def)             Requested size: 108.405pt x 50.7215pt.
+
+Overfull \vbox (3.39047pt too high) detected at line 516
  []
 
-[20
+[18
+
+ <./Figures/bang_off_bang.pdf>] [19
+
+] [20
+
+] [21
+
+]
+LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <12> not available
+(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 604.
+<figures/alphaNot0/phi1_phi2_phi3.png, id=1223, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/phi1_phi2_phi3.png Graphic file (type png)
+<use figures/alphaNot0/phi1_phi2_phi3.png>
+Package pdftex.def Info: figures/alphaNot0/phi1_phi2_phi3.png  used on input li
+ne 604.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [22
+
+ <./figures/alphaNot0/phi1_phi2_phi3.png (PNG copy)>]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.626 \end{frame}
+                 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.626 \end{frame}
+                 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+<figures/alphaNot0/ang_vel_phi_total.png, id=1252, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/ang_vel_phi_total.png Graphic file (type png)
+<use figures/alphaNot0/ang_vel_phi_total.png>
+Package pdftex.def Info: figures/alphaNot0/ang_vel_phi_total.png  used on input
+ line 626.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+[23
+
+ <./figures/alphaNot0/ang_vel_phi_total.png (PNG copy)>]
+<figures/alphaNot0/ang_accel_total.png, id=1280, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/ang_accel_total.png Graphic file (type png)
+<use figures/alphaNot0/ang_accel_total.png>
+Package pdftex.def Info: figures/alphaNot0/ang_accel_total.png  used on input l
+ine 640.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [24
+
+ <./figures/alphaNot0/ang_accel_total.png (PNG copy)>]
+<figures/alphaNot0/torque_total.png, id=1308, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/torque_total.png Graphic file (type png)
+<use figures/alphaNot0/torque_total.png>
+Package pdftex.def Info: figures/alphaNot0/torque_total.png  used on input line
+ 654.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [25
+
+ <./figures/alphaNot0/torque_total.png (PNG copy)>]
+<figures/alphaNot0/quats_phi_total.png, id=1336, 526.96875pt x 395.22656pt>
+File: figures/alphaNot0/quats_phi_total.png Graphic file (type png)
+<use figures/alphaNot0/quats_phi_total.png>
+Package pdftex.def Info: figures/alphaNot0/quats_phi_total.png  used on input l
+ine 669.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [26
+
+ <./figures/alphaNot0/quats_phi_total.png (PNG copy)>]
+[27
+
+] [28
+
+] [29
+
+] [30
+
+] [31
+
+] [32
+
+]
+<./Figures/Bang_bang.pdf, id=1522, 232.25359pt x 161.92294pt>
+File: ./Figures/Bang_bang.pdf Graphic file (type pdf)
+<use ./Figures/Bang_bang.pdf>
+Package pdftex.def Info: ./Figures/Bang_bang.pdf  used on input line 761.
+(pdftex.def)             Requested size: 144.54pt x 100.77167pt.
+
+Overfull \vbox (0.33136pt too high) detected at line 761
+ []
+
+[33
+
+ <./Figures/Bang_bang.pdf>] [34
+
+]
+Overfull \vbox (0.579pt too high) detected at line 807
+ []
+
+[35
+
+] [36
+
+] [37
+
+]
+Overfull \vbox (12.89117pt too high) detected at line 899
+ []
+
+[38
 
 ]
 
@@ -1159,178 +1291,60 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.552 \end{frame}
+l.937 \end{frame}
                  
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \vbox (8.2739pt too high) detected at line 552
+Overfull \vbox (8.2739pt too high) detected at line 937
  []
 
-[21
+[39
 
-] [22
-
-]
-<./Figures/bang_off_bang.pdf, id=1119, 356.55789pt x 166.83028pt>
-File: ./Figures/bang_off_bang.pdf Graphic file (type pdf)
-<use ./Figures/bang_off_bang.pdf>
-Package pdftex.def Info: ./Figures/bang_off_bang.pdf  used on input line 624.
-(pdftex.def)             Requested size: 108.405pt x 50.7215pt.
-
-Overfull \vbox (3.39047pt too high) detected at line 624
- []
-
-[23
-
- <./Figures/bang_off_bang.pdf>] [24
-
-] [25
-
-] [26
+] [40
 
 ]
-LaTeX Font Info:    Font shape `OT1/pag/m/it' in size <12> not available
-(Font)              Font shape `OT1/pag/m/sl' tried instead on input line 712.
-<figures/alphaNot0/phi1_phi2_phi3.png, id=1262, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/phi1_phi2_phi3.png Graphic file (type png)
-<use figures/alphaNot0/phi1_phi2_phi3.png>
-Package pdftex.def Info: figures/alphaNot0/phi1_phi2_phi3.png  used on input li
-ne 712.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [27
-
- <./figures/alphaNot0/phi1_phi2_phi3.png (PNG copy)>]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.734 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.734 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-<figures/alphaNot0/ang_vel_phi_total.png, id=1291, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/ang_vel_phi_total.png Graphic file (type png)
-<use figures/alphaNot0/ang_vel_phi_total.png>
-Package pdftex.def Info: figures/alphaNot0/ang_vel_phi_total.png  used on input
- line 734.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
-[28
-
- <./figures/alphaNot0/ang_vel_phi_total.png (PNG copy)>]
-<figures/alphaNot0/ang_accel_total.png, id=1319, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/ang_accel_total.png Graphic file (type png)
-<use figures/alphaNot0/ang_accel_total.png>
-Package pdftex.def Info: figures/alphaNot0/ang_accel_total.png  used on input l
-ine 748.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [29
-
- <./figures/alphaNot0/ang_accel_total.png (PNG copy)>]
-<figures/alphaNot0/torque_total.png, id=1347, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/torque_total.png Graphic file (type png)
-<use figures/alphaNot0/torque_total.png>
-Package pdftex.def Info: figures/alphaNot0/torque_total.png  used on input line
- 762.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [30
-
- <./figures/alphaNot0/torque_total.png (PNG copy)>]
-<figures/alphaNot0/quats_phi_total.png, id=1374, 526.96875pt x 395.22656pt>
-File: figures/alphaNot0/quats_phi_total.png Graphic file (type png)
-<use figures/alphaNot0/quats_phi_total.png>
-Package pdftex.def Info: figures/alphaNot0/quats_phi_total.png  used on input l
-ine 777.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [31
-
- <./figures/alphaNot0/quats_phi_total.png (PNG copy)>]
-[32
-
-] [33
-
-] [34
-
-] [35
-
-] [36
-
-] [37
-
-]
-<./Figures/Bang_bang.pdf, id=1561, 232.25359pt x 161.92294pt>
-File: ./Figures/Bang_bang.pdf Graphic file (type pdf)
-<use ./Figures/Bang_bang.pdf>
-Package pdftex.def Info: ./Figures/Bang_bang.pdf  used on input line 869.
-(pdftex.def)             Requested size: 144.54pt x 100.77167pt.
-
-Overfull \vbox (0.33136pt too high) detected at line 869
- []
-
-[38
-
- <./Figures/Bang_bang.pdf>] [39
-
-]
-Overfull \vbox (0.579pt too high) detected at line 915
- []
-
-[40
-
-] [41
-
-] [42
-
-]
-<figures/alpha0/phi1_phi2_phi3.png, id=1748, 526.96875pt x 395.22656pt>
+<figures/alpha0/phi1_phi2_phi3.png, id=1793, 526.96875pt x 395.22656pt>
 File: figures/alpha0/phi1_phi2_phi3.png Graphic file (type png)
 <use figures/alpha0/phi1_phi2_phi3.png>
 Package pdftex.def Info: figures/alpha0/phi1_phi2_phi3.png  used on input line 
-989.
+994.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [41
+
+ <./figures/alpha0/phi1_phi2_phi3.png (PNG copy)>]
+<figures/alpha0/ang_vel.png, id=1821, 526.96875pt x 395.22656pt>
+File: figures/alpha0/ang_vel.png Graphic file (type png)
+<use figures/alpha0/ang_vel.png>
+Package pdftex.def Info: figures/alpha0/ang_vel.png  used on input line 1009.
+(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
+ [42
+
+ <./figures/alpha0/ang_vel.png (PNG copy)>]
+<figures/alpha0/ang_accel.png, id=1849, 526.96875pt x 395.22656pt>
+File: figures/alpha0/ang_accel.png Graphic file (type png)
+<use figures/alpha0/ang_accel.png>
+Package pdftex.def Info: figures/alpha0/ang_accel.png  used on input line 1024.
+
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
  [43
 
- <./figures/alpha0/phi1_phi2_phi3.png (PNG copy)>]
-<figures/alpha0/ang_vel.png, id=1777, 526.96875pt x 395.22656pt>
-File: figures/alpha0/ang_vel.png Graphic file (type png)
-<use figures/alpha0/ang_vel.png>
-Package pdftex.def Info: figures/alpha0/ang_vel.png  used on input line 1004.
+ <./figures/alpha0/ang_accel.png (PNG copy)>]
+<figures/alpha0/torque.png, id=1878, 526.96875pt x 395.22656pt>
+File: figures/alpha0/torque.png Graphic file (type png)
+<use figures/alpha0/torque.png>
+Package pdftex.def Info: figures/alpha0/torque.png  used on input line 1038.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
  [44
 
- <./figures/alpha0/ang_vel.png (PNG copy)>]
-<figures/alpha0/ang_accel.png, id=1805, 526.96875pt x 395.22656pt>
-File: figures/alpha0/ang_accel.png Graphic file (type png)
-<use figures/alpha0/ang_accel.png>
-Package pdftex.def Info: figures/alpha0/ang_accel.png  used on input line 1019.
-
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [45
-
- <./figures/alpha0/ang_accel.png (PNG copy)>]
-<figures/alpha0/torque.png, id=1833, 526.96875pt x 395.22656pt>
-File: figures/alpha0/torque.png Graphic file (type png)
-<use figures/alpha0/torque.png>
-Package pdftex.def Info: figures/alpha0/torque.png  used on input line 1033.
-(pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [46
-
  <./figures/alpha0/torque.png (PNG copy)>]
-<figures/alpha0/quats.png, id=1860, 526.96875pt x 395.22656pt>
+<figures/alpha0/quats.png, id=1905, 526.96875pt x 395.22656pt>
 File: figures/alpha0/quats.png Graphic file (type png)
 <use figures/alpha0/quats.png>
-Package pdftex.def Info: figures/alpha0/quats.png  used on input line 1047.
+Package pdftex.def Info: figures/alpha0/quats.png  used on input line 1052.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
- [47
+ [45
 
  <./figures/alpha0/quats.png (PNG copy)>]
 \tf@nav=\write6
@@ -1342,21 +1356,21 @@ Package pdftex.def Info: figures/alpha0/quats.png  used on input line 1047.
 \tf@snm=\write8
 \openout8 = `SunAvoidanceSlew_presentation_2019aug8_JH.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1052.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1052.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1057.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1057.
  (SunAvoidanceSlew_presentation_2019aug8_JH.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1052.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1052.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1057.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1057.
 
 Package rerunfilecheck Info: File `SunAvoidanceSlew_presentation_2019aug8_JH.ou
 t' has not changed.
-(rerunfilecheck)             Checksum: AD5FB8F7FB87036B7971C376C8EA33B7;445.
+(rerunfilecheck)             Checksum: CE0A5598310038EFA196AE09BA13A380;397.
  ) 
 Here is how much of TeX's memory you used:
- 17907 strings out of 492946
- 348847 string characters out of 3126266
- 420897 words of memory out of 3000000
- 21205 multiletter control sequences out of 15000+200000
+ 17902 strings out of 492946
+ 349053 string characters out of 3126266
+ 421454 words of memory out of 3000000
+ 21204 multiletter control sequences out of 15000+200000
  47879 words of font info for 93 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,23n,63p,832b,957s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1383,10 +1397,10 @@ X 2.9/fonts/type1/public/rsfs/rsfs7.pfb><C:/Users/junet/AppData/Local/Programs/
 MiKTeX 2.9/fonts/type1/urw/avantgar/uagd8a.pfb><C:/Users/junet/AppData/Local/Pr
 ograms/MiKTeX 2.9/fonts/type1/urw/avantgar/uagk8a.pfb><C:/Users/junet/AppData/L
 ocal/Programs/MiKTeX 2.9/fonts/type1/urw/avantgar/uagko8a.pfb>
-Output written on SunAvoidanceSlew_presentation_2019aug8_JH.pdf (47 pages, 2239
-689 bytes).
+Output written on SunAvoidanceSlew_presentation_2019aug8_JH.pdf (45 pages, 2587
+145 bytes).
 PDF statistics:
- 1980 PDF objects out of 2073 (max. 8388607)
- 141 named destinations out of 1000 (max. 500000)
- 243 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2024 PDF objects out of 2073 (max. 8388607)
+ 135 named destinations out of 1000 (max. 500000)
+ 245 words of extra memory for PDF output out of 10000 (max. 10000000)
 

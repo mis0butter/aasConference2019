@@ -109,7 +109,7 @@
 %11-- 15 August 2019}
 
 \subtitle{AIAA/AAS Astrodynamics Specialist Conference,\\ Portland, ME, 11-- 15 August 2019}
-\institute[]{\inst{1} Associate Professor, Department of Mechanical Engineering, Santa Clara University, \\ \inst{2} Engineer, Dynamics and Control Analysis Group, Maxar Space Solutions (Formerly Space Systems/Loral)}
+\institute[]{\inst{1} Associate Professor, Department of Mechanical Engineering, Santa Clara University, \\ \inst{2} Engineer, Dynamics and Control Analysis Group, Maxar Space Infrastructure (Formerly Space Systems/Loral)}
 
 \date{}		
 
@@ -145,11 +145,11 @@
 \end{block}
 \end{frame}
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Introduction}
 \begin{frame}
-	\section{Introduction}
 		\begin{block}{Previous Literature}
 			\begin{enumerate}
-				\item Spiller (2016): Pparticle swarm optimization (PSO) technique to find a sub-optimal solution with keep-out constraints. 
+				\item Spiller (2016): Particle swarm optimization (PSO) technique to find a sub-optimal solution with keep-out constraints. 
 				\item Another approach casted the problem as a convex optimization problem and used semi-definite programming (SDP) or quadratically constrained quadratic programming (QCQP) in its solution (see for instance Kim and Mesbahi, Kim et al., Sun and Dai, and Lee and Mesbahi.
 				\item Recently, Ramos and Schaub proposed a method based on the Lyapunov stability theorem and logarithmic barrier potential function to derive a steering law for attitude control of a spacecraft subject to conically constrained inclusion and exclusion regions. They also considered the control-torque constraint in their algorithm.  
 		\end{enumerate}
@@ -157,7 +157,6 @@
 \end{frame}
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}
-\section{Introduction}
 \begin{block}{SAS Algorithm}
 	\begin{enumerate} 
 		\item The SAS algorithm is a geometric approach for a sun (or any bright object) avoidance slew maneuver with pointing and actuator constraints. 
@@ -172,6 +171,15 @@
 	\end{enumerate} 
 \end{block}
 \end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+\begin{block}{}
+	\begin{figure}
+		\includegraphics[width=3in]{./Figures/SASSchematic1}
+		\caption{The gyrostat-centered unit sphere.}
+	\end{figure}
+\end{block}
+\end{frame}
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Sun-Avoidance Slew (SAS) Algorithm}
 
@@ -184,32 +192,31 @@
 			\item A sequence of slew maneuvers to avoid sun vector.
 			\item the commanded angular velocity, angular acceleration, and quaternion profiles.
 		\end{enumerate} 
-		\begin{figure}
-			\includegraphics[width=1.5in]{./Figures/SASSchematic1}
-		\end{figure}
+%		\begin{figure}
+%			\includegraphics[width=1.5in]{./Figures/SASSchematic1}
+%		\end{figure}
 	\end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
-	\begin{block}{}
+%\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+%\begin{block}{Nomenclature}
+%\begin{itemize}
+%\item $\mathcal{G}$ frame: Unit sphere attached to the gyrostat.
+%\item $\mathcal{N}$: frame: The Newtonian frame fixed in the inertial space.
+%\item $_\mathcal{G}\hat{P}$: Unit vector along the bore sight of payload in the $\mathcal{G}$ frame.
+%\item $_\mathcal{G}\hat{P}_i$: Unit vector of the initial point in the $\mathcal{G}$ frame.
+%\item $_\mathcal{G}\hat{P}_f$: Unit vector of the final point in the $\mathcal{G}$ frame.
+%\item $_\mathcal{N}\hat{S}$: Unit vector of the sun vector in the $\mathcal{N}$ frame.
+% \item $\epsilon_p$: Payload half-cone angle.
+%\end{itemize}
+%\end{block}
+%\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Summary of the Algorithm}
+\begin{block}{}
 	\begin{figure}
-	\includegraphics[width=3in]{./Figures/SASSchematic1}
-	\caption{The gyrostat-centered unit sphere.}
+		\includegraphics[width=4.85in]{./Figures/SASSchematic3}
 	\end{figure}
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
-\begin{block}{Nomenclature}
-\begin{itemize}
-\item $\mathcal{G}$ frame: Unit sphere attached to the gyrostat.
-\item $\mathcal{N}$: frame: The Newtonian frame fixed in the inertial space.
-\item $_\mathcal{G}\hat{P}$: Unit vector along the bore sight of payload in the $\mathcal{G}$ frame.
-\item $_\mathcal{G}\hat{P}_i$: Unit vector of the initial point in the $\mathcal{G}$ frame.
-\item $_\mathcal{G}\hat{P}_f$: Unit vector of the final point in the $\mathcal{G}$ frame.
-\item $_\mathcal{N}\hat{S}$: Unit vector of the sun vector in the $\mathcal{N}$ frame.
- \item $\epsilon_p$: Payload half-cone angle.
-\end{itemize}
 \end{block}
 \end{frame}
 %
@@ -217,7 +224,7 @@
 \begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
 \begin{block}{Check the Sun Vector Intrusion}
 \begin{enumerate}
-\item Check the angular separation between the sun vector, $\hat{S}$, and the $\hat{P}_i-\hat{P}_f$ or ``slew'' plane.
+\item Check the angular separation, $\alpha$, between the sun vector, $\hat{S}$, and the $\hat{P}_i-\hat{P}_f$ or ``slew'' plane.
 \begin{equation}
 \alpha=\frac{\pi}{2}-\cos^{-1}(\hat{S}\cdot_\mathcal{N}\hat{e})
 \end{equation}
@@ -250,7 +257,7 @@ where the eigenaxis is determined by
               \right.
  \end{equation}
 \begin{figure}
-\includegraphics[width=2in]{./Figures/SVAS_1r_modified}\includegraphics[width=2in]{./Figures/SVAS_1rb_modified}
+\includegraphics[width=1.75in]{./Figures/SVAS_1r_modified}\includegraphics[width=2in]{./Figures/SVAS_1rb_modified}
 \end{figure}
 \end{block}
 \end{frame}
@@ -265,11 +272,17 @@ where the eigenaxis is determined by
 \end{enumerate}
 \end{enumerate}
 \begin{equation}
-\phi_2=\phi_2=2\tan^{-1}\Big[ \frac{\hat{S}\cdot (\hat{P}_1\times\hat{S}_{||})}{(\hat{P}_1\cdot\hat{S}_{||})-(\hat{S}\cdot\hat{P}_1)(\hat{S}\cdot\hat{S}_{||})}\Big],
+\phi_2=2\tan^{-1}\Big[ \frac{\hat{S}\cdot (\hat{P}_1\times\hat{S}_{||})}{(\hat{P}_1\cdot\hat{S}_{||})-(\hat{S}\cdot\hat{P}_1)(\hat{S}\cdot\hat{S}_{||})}\Big],
 \end{equation}
 \begin{figure}
-\includegraphics[width=2in]{./Figures/SVAS_2r_modified}
+\includegraphics[width=2in]{./Figures/SVAS_2r_modified}\includegraphics[width=1.5in]{./Figures/SASSchematic4}
 \end{figure}
+
+
+%		\begin{figure}
+%			\includegraphics[width=1.5in]{./Figures/SASSchematic4}
+%		\end{figure}
+
 \end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -301,7 +314,7 @@ where the eigenaxis is determined by
               \right.
  \end{equation}
 \begin{figure}
-\includegraphics[width=2in]{./Figures/SVAS_4r}
+\includegraphics[width=2in]{./Figures/SVAS_4r}\includegraphics[width=2in]{./Figures/SVAS_4r_modified.pdf}
 \end{figure}
 \end{enumerate}
 \begin{enumerate}[4]
@@ -350,14 +363,6 @@ where the eigenaxis is determined by
 \end{block}
 \end{frame}
 %
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Summary of the Algorithm}
-\begin{block}{}
-\begin{figure}
-\includegraphics[width=4.85in]{./Figures/SASSchematic3}
-\end{figure}
-\end{block}
-\end{frame}
 %
 %
 %
@@ -424,31 +429,31 @@ and velocity (state) and acceleration (control) constraints are
                 \end{array}
               \right.
  \end{equation}
-in which
-\begin{equation}
-\dot{\phi}_{max}=[I^{w/w^*}]^{-1}[^NH^{G/G*}-(I^{G/G*}+I^{w/w*})^N\omega^G]/(e_x+e_y+e_z),
-\end{equation}
-
-
-%\end{minipage}
-%\begin{minipage}{0.35\textwidth}
-%\begin{center}
-%\includegraphics[width=2in]{./Spacecraft3}      
-%\end{center}
-%\end{minipage}
-%\end{columns}
-\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Computing Steering Profiles}
-\begin{block}{ Problem Statement Continued}
- and
- \begin{equation}\label{phiddotmax}
-\ddot{\phi}_{max}=_B\hat{e}^T\  _BM_{max}/I_{\hat{e}}^{G/G*},
-\end{equation}
-where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to its center of mass, $G^*$, in the $N$-frame. $I^{G/G^*}$ and $I^{w/w*}$ represent the inertia dyadic of the gyrostat and reaction wheel with respect to their center of masses, respectively. $_BM_{max}$ is the maximum generated torque along the body-axes in the body frame.\\
-%Find the optimal steering laws: $^Bq^R$, $^B\omega^R$, and $^B\alpha^R$.
-\vspace{0.5in}
+%in which
+%\begin{equation}
+%\dot{\phi}_{max}=[I^{w/w^*}]^{-1}[^NH^{G/G*}-(I^{G/G*}+I^{w/w*})^N\omega^G]/(e_x+e_y+e_z),
+%\end{equation}
+%
+%
+%%\end{minipage}
+%%\begin{minipage}{0.35\textwidth}
+%%\begin{center}
+%%\includegraphics[width=2in]{./Spacecraft3}      
+%%\end{center}
+%%\end{minipage}
+%%\end{columns}
+%\end{block}
+%\end{frame}
+%%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}{Computing Steering Profiles}
+%\begin{block}{ Problem Statement Continued}
+% and
+% \begin{equation}\label{phiddotmax}
+%\ddot{\phi}_{max}=_B\hat{e}^T\  _BM_{max}/I_{\hat{e}}^{G/G*},
+%\end{equation}
+%where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to its center of mass, $G^*$, in the $N$-frame. $I^{G/G^*}$ and $I^{w/w*}$ represent the inertia dyadic of the gyrostat and reaction wheel with respect to their center of masses, respectively. $_BM_{max}$ is the maximum generated torque along the body-axes in the body frame.\\
+%%Find the optimal steering laws: $^Bq^R$, $^B\omega^R$, and $^B\alpha^R$.
+%\vspace{0.5in}
 
 {\bf Find:} $\phi(t)$, $\dot{\phi}(t)$, and $\ddot{\phi}(t)$.
 %\end{minipage}
@@ -459,119 +464,6 @@ where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to
 %\end{minipage}
 %\end{columns}
 \end{block}
-\end{frame}
-%
-%
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Computing Steering Profiles}
-
-	\begin{block}{ }
-	\small{
-	Using the Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
-	\begin{enumerate}
-	\item State Eqs.:
-		\begin{equation}
-			\left\{
-               \begin{array}{l}
-               \dot{x}_1=x_2, \\
-               \dot{x}_2=u, \\
-               \dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
-               \end{array}
-             \right.
-		\end{equation}
-		where the unit step function, $\mathbb{U}$, is defined as
-		
-%		\begin{equation}
-%			\mathbb{U}(X)=\left\{
-%			                \begin{array}{lI}
-%			           1, & X > 0, \\
-%			           0, & X \leq 0.
-%			                \end{array}
-%			              \right.
-%		 \end{equation}
-
-		\begin{equation}
-			\mathbb{U}(X)=\left\{
-			\begin{array}{l}
-			1, X > 0, \\
-			0, X \leq 0. \\
-			\end{array}
-			\right.
-		\end{equation}
-
-		Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \forall t\in[t_0, t_f]. $  
-		\item Hamiltonian:
-		\begin{equation}
-			\begin{split}
-			\mathscr{H}=& 1+\lambda_1x_2+\lambda_2 u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
-			& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
-			\end{split}
-		\end{equation}
-	\end{enumerate}
-	}
-	\seti
-	\end{block}
-\end{frame}
-%
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Computing Steering Profiles}
-
-\begin{block}{ }
-	\begin{enumerate}
-	\conti
-	\small{
-	\item Costate Eqs.:
-	\begin{equation}
-	\left\{\begin{array}{l}
-	               \dot{\lambda}_1=-\frac{\partial{\mathscr{H}}}{\partial{x_1}}=0,\\
-	               \dot{\lambda}_2=-\frac{\partial{\mathscr{H}}}{\partial{x_2}}=-\lambda_1-2\lambda_3(x_2+\dot{\phi}_{max})\mathbb{U}(-x_2-\dot{\phi}_{max})\\
-	+2\lambda_3(\dot{\phi}_{max}-x_2)\mathbb{U}(x_2-\dot{\phi}_{max}),\\
-	              \dot{\lambda}_3=-\frac{\partial{\mathscr{H}}}{\partial{x_3}}=0.\\
-	                \end{array}
-	              \right.
-	\end{equation}
-	\item Applying the Pontryagin's minimum principle (PMP),
-	\begin{equation}
-	u^*=arg \underset{u\in\mathcal{U}}{min} \mathscr{H},
-	\end{equation}
-	where $\mathcal{U}$ defines the domain of feasible controls. The optimal control can be determined as
-	\begin{equation}
-	u^*(t)=\left\{
-	           \begin{array}{I}
-	           \ddot{\phi}_{max}    \lambda_2<0,\\
-	           ?    \lambda_2=0,\\
-	           -\ddot{\phi}_{max}    \lambda_2>0. \\
-	                \end{array}
-	              \right.
-	\end{equation}
-	 }
-	\end{enumerate}
-	\seti
-	This is a {\it singular arc} optimal control problem.
-	\end{block}
-\end{frame}
-%%
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Computing Steering Profiles}
-
-	\begin{block}{ }
-	\begin{enumerate}
-	\conti
-	\item Determining the optimal control in the singular arc:
-	\begin{equation}
-	\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)=\ddot{\lambda}_2=0\rightarrow \dot{x}_2=0\rightarrow u^*=0
-	\end{equation}
-	\item Checking the Generalized Legendre-Clebsch condition for optimality:
-	\begin{equation}
-	(-1)^2\frac{\partial}{\partial u}\Big[\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)\Big]=1\geq 0
-	\end{equation}
-	\item The transversality condition:
-	\begin{equation}
-	\mathscr{H}|_{(*,t_f)}=0\  \text{and} \ \mathscr{H}\neq\mathscr{H}(t)\rightarrow \mathscr{H}=0, \forall t\in[t_0, t_f].
-	\end{equation}
-	\end{enumerate}
-	\seti
-	\end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Computing Steering Profiles}
@@ -951,6 +843,119 @@ t_{13}=t_0+\frac{\sqrt{\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_3+\dot{\phi}_{
 t_{f3}=t_0-\frac{\dot{\phi}_{f}}{\ddot{\phi}_{max}}+\frac{\sqrt{2\ddot{\phi}_{max}^2(2\ddot{\phi}_{max}\phi_3+\dot{\phi}_{f}^2)}}{\ddot{\phi}_{max}^2}
 \end{equation}
 The $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$,  can be found by substituting the boundary conditions given by (\ref{Bc3}) and $t_{13}$ and $t_{f3}$ in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively.
+\end{block}
+\end{frame}
+%
+%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Computing Steering Profiles}
+
+\begin{block}{ }
+	\small{
+		Using the Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
+		\begin{enumerate}
+			\item State Eqs.:
+			\begin{equation}
+			\left\{
+			\begin{array}{l}
+			\dot{x}_1=x_2, \\
+			\dot{x}_2=u, \\
+			\dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
+			\end{array}
+			\right.
+			\end{equation}
+			where the unit step function, $\mathbb{U}$, is defined as
+			
+			%		\begin{equation}
+			%			\mathbb{U}(X)=\left\{
+			%			                \begin{array}{lI}
+			%			           1, & X > 0, \\
+			%			           0, & X \leq 0.
+			%			                \end{array}
+			%			              \right.
+			%		 \end{equation}
+			
+			\begin{equation}
+			\mathbb{U}(X)=\left\{
+			\begin{array}{l}
+			1, X > 0, \\
+			0, X \leq 0. \\
+			\end{array}
+			\right.
+			\end{equation}
+			
+			Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \forall t\in[t_0, t_f]. $  
+			\item Hamiltonian:
+			\begin{equation}
+			\begin{split}
+			\mathscr{H}=& 1+\lambda_1x_2+\lambda_2 u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+			& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
+			\end{split}
+			\end{equation}
+		\end{enumerate}
+	}
+	\seti
+\end{block}
+\end{frame}
+%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Computing Steering Profiles}
+
+\begin{block}{ }
+	\begin{enumerate}
+		\conti
+		\small{
+			\item Costate Eqs.:
+			\begin{equation}
+			\left\{\begin{array}{l}
+			\dot{\lambda}_1=-\frac{\partial{\mathscr{H}}}{\partial{x_1}}=0,\\
+			\dot{\lambda}_2=-\frac{\partial{\mathscr{H}}}{\partial{x_2}}=-\lambda_1-2\lambda_3(x_2+\dot{\phi}_{max})\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+			+2\lambda_3(\dot{\phi}_{max}-x_2)\mathbb{U}(x_2-\dot{\phi}_{max}),\\
+			\dot{\lambda}_3=-\frac{\partial{\mathscr{H}}}{\partial{x_3}}=0.\\
+			\end{array}
+			\right.
+			\end{equation}
+			\item Applying the Pontryagin's minimum principle (PMP),
+			\begin{equation}
+			u^*=arg \underset{u\in\mathcal{U}}{min} \mathscr{H},
+			\end{equation}
+			where $\mathcal{U}$ defines the domain of feasible controls. The optimal control can be determined as
+			\begin{equation}
+			u^*(t)=\left\{
+			\begin{array}{I}
+			\ddot{\phi}_{max}    \lambda_2<0,\\
+			?    \lambda_2=0,\\
+			-\ddot{\phi}_{max}    \lambda_2>0. \\
+			\end{array}
+			\right.
+			\end{equation}
+		}
+	\end{enumerate}
+	\seti
+	This is a {\it singular arc} optimal control problem.
+\end{block}
+\end{frame}
+%%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Computing Steering Profiles}
+
+\begin{block}{ }
+	\begin{enumerate}
+		\conti
+		\item Determining the optimal control in the singular arc:
+		\begin{equation}
+		\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)=\ddot{\lambda}_2=0\rightarrow \dot{x}_2=0\rightarrow u^*=0
+		\end{equation}
+		\item Checking the Generalized Legendre-Clebsch condition for optimality:
+		\begin{equation}
+		(-1)^2\frac{\partial}{\partial u}\Big[\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)\Big]=1\geq 0
+		\end{equation}
+		\item The transversality condition:
+		\begin{equation}
+		\mathscr{H}|_{(*,t_f)}=0\  \text{and} \ \mathscr{H}\neq\mathscr{H}(t)\rightarrow \mathscr{H}=0, \forall t\in[t_0, t_f].
+		\end{equation}
+	\end{enumerate}
+	\seti
 \end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------

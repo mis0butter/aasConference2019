@@ -4,11 +4,13 @@
 
 % Actual slew profile 
 P_G = zeros(length(t_total), 3); 
+P_N = zeros(length(t_total), 3); 
 % convert quaternions --> DCMs --> vectors 
 for i = 1:length(t_total)
     G0_DCM_G = quat2DCM(q_total(i, :)); 
     G_DCM_G0 = G0_DCM_G'; 
     P_G(i, :) = G_DCM_G0*Pi_G0; 
+    P_N(i, :) = N_DCM_G0*P_G(i, :); 
 end 
 
 % Phi2 slew profile - part 1 (torque) 
@@ -85,9 +87,15 @@ end
 figure()
 
     % Actual Slew Profile 
-    plot3(P_G(:, 1), P_G(:, 2), P_G(:,3), 'r', 'LineWidth', 1.1); 
+    
+    % Transparent sphere 
+    [x, y, z] = sphere(100);
+    h = surfl(x, y, z); 
+    set(h, 'FaceAlpha', 0.1)
+    shading interp
     
     grid on; hold on
+    plot3(P_G(:, 1), P_G(:, 2), P_G(:,3), 'r', 'LineWidth', 2); 
     
 %     % Phi2 Slew Profile 
 %     plot3(P_G1_phi2(:, 1), P_G1_phi2(:, 2), P_G1_phi2(:, 3), 'r'); 
@@ -109,7 +117,7 @@ figure()
     plot3([0 Pf_G0(1)], [0 Pf_G0(2)], [0 Pf_G0(3)], 'b:', 'LineWidth', 1.1); 
     plot3([0 P1_G0(1)], [0 P1_G0(2)], [0 P1_G0(3)], 'b:', 'LineWidth', 1.1); 
     plot3([0 P2_G0(1)], [0 P2_G0(2)], [0 P2_G0(3)], 'b:', 'LineWidth', 1.1); 
-    plot3([0 e_G0(1)*0.5], [0 e_G0(2)*0.5], [0 e_G0(3)*0.5], 'g-.'); 
+    plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'g-.'); 
      
 %     plot3([0 S1_G0(1)], [0 S1_G0(2)], [0 S1_G0(3)])
 %     plot3([0 S2_G0(1)], [0 S2_G0(2)], [0 S2_G0(3)])
@@ -119,9 +127,9 @@ figure()
     plot(theta,sin(theta)./theta,'LineWidth',3) 
     
     % Sun vector 
-    plot3(S_G0(1), S_G0(2), S_G0(3), 'p', 'LineWidth', 2); 
+    plot3(S_G0(1), S_G0(2), S_G0(3), 'p', 'LineWidth', 3); 
     % Sun projection 
-    plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'g-.'); 
+%     plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'g-.'); 
     
     % Phi2 - P3 (P1,P2 proj onto Sun vector) lines 
     plot3([0 P3_G0(1)], [0 P3_G0(2)], [0 P3_G0(3)], 'b:', 'LineWidth', 1.1); 
@@ -131,11 +139,11 @@ figure()
     % Initial, final, P2, P2 vectors 
     text(Pi_G0(1), Pi_G0(2), Pi_G0(3), sprintf(' P_i')) 
     text(Pf_G0(1), Pf_G0(2), Pf_G0(3), sprintf(' P_f')) 
-    text(e_G0(1)*0.5, e_G0(2)*0.5, e_G0(3)*0.5, sprintf(' e')) 
+    text(e_G0(1), e_G0(2), e_G0(3), sprintf(' e')) 
     text(P1_G0(1), P1_G0(2), P1_G0(3), sprintf(' P_1')) 
     text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P_2')) 
-    text(S_G0(1), S_G0(2), S_G0(3), sprintf(' sun')) 
-    text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun_{proj}')) 
+    text(S_G0(1), S_G0(2), S_G0(3), sprintf('   sun')) 
+%     text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun_{proj}')) 
     
     xlabel('G0_x')
     ylabel('G0_y') 
