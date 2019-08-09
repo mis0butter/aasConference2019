@@ -2,50 +2,6 @@
 % 2019 August 9 
 % Inputs 
 
-%%% RANDOM MONTE CARLO STUFF 
-% Initial points / vectors 
-Pi_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
-Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
-while acos(dot(Pi_G0, Pf_G0)) < pi/3
-    Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; 
-    Pf_G0 = Pf_G0 / norm(Pf_G0); 
-end 
-
-% Pi_G0 = [rand; rand; rand]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
-% Pf_G0 = [rand; rand; rand]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
-% while acos(dot(Pi_G0, Pf_G0)) < ep*2
-%     Pf_G0 = [rand; rand; rand]; 
-%     Pf_G0 = Pf_G0 / norm(Pf_G0); 
-% end 
-
-% Calculate normal vector of slew plane 
-e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
-Pperp_G0 = cross(Pi_G0, e_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
-P_DCM_G0 = [Pi_G0'; Pperp_G0'; e_G0'];     % DCM from G frame to P (slew plane) frame 
-G0_DCM_P = P_DCM_G0';                         % P to G frame 
-% Defining inertial frames 
-% G0_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
-G0_DCM_N = eye(3); 
-N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
-
-% Convert things back to inertial frame 
-e_N = N_DCM_G0*e_G0;                        % eigenaxis in N frame 
-Pi_N = N_DCM_G0*Pi_G0; 
-Pf_N = N_DCM_G0*Pf_G0; 
-
-% Sun vector stuff 
-[alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
-    sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
-
-% IF angular separation is less than payload half-cone angle --> while loop
-% until alpha < ep. for simulation!!! 
-while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ... 
-        theta_Pi_Sproj > theta_Pi_Pf || theta_Sproj_Pf > theta_Pi_Pf 
-    [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
-        sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
-end 
-%%% END RANDOM STUFF 
-
 %% Non-changing parameters; should be function inputs 
 
 % inertia_SC = [ 408     0       0; 
@@ -59,8 +15,54 @@ inertia_w = [  20   0    0;
                0    0    20  ]; 
 
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
-aMax = 5*pi/180;                                  % Maximum acceleration, rad/s^2
-wMax = 5*pi/180;                                  % Maximum angular velocity, rad/s
+aMax = 0.02;                                  % Maximum acceleration, rad/s^2
+wMax = 0.01;                                  % Maximum angular velocity, rad/s
+
+% %% RANDOM MONTE CARLO STUFF 
+% 
+% % Initial points / vectors 
+% Pi_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
+% Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
+% while acos(dot(Pi_G0, Pf_G0)) < pi/3
+%     Pf_G0 = [rand*(-1)^round(rand); rand*(-1)^round(rand); rand*(-1)^round(rand)]; 
+%     Pf_G0 = Pf_G0 / norm(Pf_G0); 
+% end 
+% 
+% % Pi_G0 = [rand; rand; rand]; Pi_G0 = Pi_G0 / norm(Pi_G0);          
+% % Pf_G0 = [rand; rand; rand]; Pf_G0 = Pf_G0 / norm(Pf_G0);  
+% % while acos(dot(Pi_G0, Pf_G0)) < ep*2
+% %     Pf_G0 = [rand; rand; rand]; 
+% %     Pf_G0 = Pf_G0 / norm(Pf_G0); 
+% % end 
+% 
+% % Calculate normal vector of slew plane 
+% e_G0 = cross(Pf_G0, Pi_G0) / norm(cross(Pf_G0, Pi_G0));  % eigenaxis of PiPf plane, in G frame 
+% Pperp_G0 = cross(Pi_G0, e_G0);              % perpendicular vector to e and Pi, slew plane, G frame 
+% P_DCM_G0 = [Pi_G0'; Pperp_G0'; e_G0'];     % DCM from G frame to P (slew plane) frame 
+% G0_DCM_P = P_DCM_G0';                         % P to G frame 
+% % Defining inertial frames 
+% % G0_DCM_N = angle2dcm(1, 1, 1);         % DCM from the N to the G frame 
+% G0_DCM_N = eye(3); 
+% N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G frame will change throughout sim 
+% 
+% % Sun vector stuff 
+% [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
+%     sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
+% 
+% % IF angular separation is less than payload half-cone angle --> while loop
+% % until alpha < ep. for simulation!!! 
+% while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ... 
+%         theta_Pi_Sproj > theta_Pi_Pf || theta_Sproj_Pf > theta_Pi_Pf 
+%     [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
+%         sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
+% end 
+% %%% END RANDOM STUFF 
+
+%% Convert things back to inertial frame 
+
+e_N = N_DCM_G0*e_G0;                        % eigenaxis in N frame 
+Pi_N = N_DCM_G0*Pi_G0; 
+Pf_N = N_DCM_G0*Pf_G0; 
 
 %% Calculate slew angles 
 
@@ -178,7 +180,7 @@ phi2_M4 = 2*abs(atan2(top, bot));
     
     %%
     
-    phi2 = phi2_M; 
+%     phi2 = phi2_M; 
     
     %%
 

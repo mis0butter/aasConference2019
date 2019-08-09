@@ -143,10 +143,10 @@ w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)];
 q_phi2 = [q1_phi2; q2_phi2(2:end ,:); q3_phi2(2:end, :)]; 
 torque_phi2 = [torque1_phi2; torque2_phi2(2:end, :); torque3_phi2(2:end, :)]; 
 
-ypr_phi2 = zeros(length(q_phi2), 3); 
-for i = 1:max(size(q_phi2))
-    ypr_phi2(i, :) = SpinCalc('QtoEA321', q_phi2(i, :), eps, 0); 
-end 
+% ypr_phi2 = zeros(length(q_phi2), 3); 
+% for i = 1:max(size(q_phi2))
+%     ypr_phi2(i, :) = SpinCalc('QtoEA321', q_phi2(i, :), eps, 0); 
+% end 
 
 %% Plot phi2
 plot_option = 0; 
@@ -212,10 +212,10 @@ w_phi3 = [w1_phi3; w2_phi3(2:end ,:); w3_phi3(2:end, :)];
 q_phi3 = [q1_phi3; q2_phi3(2:end ,:); q3_phi3(2:end, :)]; 
 torque_phi3 = [torque1_phi3; torque2_phi3(2:end ,:); torque3_phi3(2:end, :)]; 
 
-ypr_phi3 = zeros(length(q_phi3), 3); 
-for i = 1:max(size(q_phi3))
-    ypr_phi3(i, :) = SpinCalc('QtoEA321', q_phi3(i, :), eps, 0); 
-end 
+% ypr_phi3 = zeros(length(q_phi3), 3); 
+% for i = 1:max(size(q_phi3))
+%     ypr_phi3(i, :) = SpinCalc('QtoEA321', q_phi3(i, :), eps, 0); 
+% end 
 
 %% Plot phi3
 plot_option = 0; 
@@ -242,10 +242,10 @@ torque_total = [torque_phi1; ...
             torque_phi3(2:end, :)]; 
 
         
-ypr_total = zeros(length(q_total), 3); 
-for i = 1:max(size(q_total))
-    ypr_total(i, :) = SpinCalc('QtoEA321', q_total(i, :), eps, 0); 
-end 
+% ypr_total = zeros(length(q_total), 3); 
+% for i = 1:max(size(q_total))
+%     ypr_total(i, :) = SpinCalc('QtoEA321', q_total(i, :), eps, 0); 
+% end 
         
 %% plot total stuff 
 
@@ -257,7 +257,7 @@ end
 
 plot_option = 1; 
 if plot_option == 1
-    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, ypr_total, 'total', aMax, wMax)
+    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, 'total', aMax, wMax)
 end 
 
 %% PHI NOMINAL - IF THERE WAS NO SUN INTRUSION 
@@ -307,10 +307,10 @@ w_phiNom = [w1_phiNom; w2_phiNom(2:end ,:); w3_phiNom(2:end, :)];
 q_phiNom = [q1_phiNom; q2_phiNom(2:end ,:); q3_phiNom(2:end, :)]; 
 torque_phiNom = [torque1_phiNom; torque2_phiNom(2:end ,:); torque3_phiNom(2:end, :)]; 
 
-ypr_phiNom = zeros(length(q_phiNom), 3); 
-for i = 1:max(size(q_phi1))
-    ypr_phiNom(i, :) = SpinCalc('QtoEA321', q_phiNom(i, :), eps, 0); 
-end 
+% ypr_phiNom = zeros(length(q_phiNom), 3); 
+% for i = 1:max(size(q_phi1))
+%     ypr_phiNom(i, :) = SpinCalc('QtoEA321', q_phiNom(i, :), eps, 0); 
+% end 
 
 %%
 

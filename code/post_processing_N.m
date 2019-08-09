@@ -65,7 +65,7 @@ figure
     grid on; hold on
     
     % Plot phi1, phi2, phi3 slew 
-    plot3(P_N(:, 1), P_N(:, 2), P_N(:,3), 'r', 'LineWidth', 2); 
+%     plot3(P_N(:, 1), P_N(:, 2), P_N(:,3), 'r', 'LineWidth', 2); 
     plot3(P_phi1_N(:, 1), P_phi1_N(:, 2), P_phi1_N(:,3), 'm', 'LineWidth', 2); 
     plot3(P_phi2_N(:, 1), P_phi2_N(:, 2), P_phi2_N(:,3), 'c', 'LineWidth', 2); 
     plot3(P_phi3_N(:, 1), P_phi3_N(:, 2), P_phi3_N(:,3), 'y', 'LineWidth', 2); 
@@ -98,15 +98,15 @@ figure
     plot3([P3_N(1) P2_N(1)], [P3_N(2) P2_N(2)], [P3_N(3) P2_N(3)], 'r:', 'LineWidth', 1.1); 
     
     % Initial, final, P2, P2 vectors 
-    t(1) = text(Pi_N(1), Pi_N(2), Pi_N(3), sprintf('   P_i')); 
-    t(2) = text(Pf_N(1), Pf_N(2), Pf_N(3), sprintf('   P_f')); 
+    t(2) = text(Pi_N(1), Pi_N(2), Pi_N(3), strcat('\phantom{   }', sprintf('   $P_i$'))); 
+    t(2) = text(Pf_N(1), Pf_N(2), Pf_N(3), strcat('\phantom{   }', sprintf('   $P_f$'))); 
     t(3) = text(e_N(1), e_N(2), e_N(3), sprintf('   e')); 
-    t(4) = text(P1_N(1), P1_N(2), P1_N(3), sprintf('   P_1')); 
-    t(5) = text(P2_N(1), P2_N(2), P2_N(3), sprintf('   P_2')); 
-    t(6) = text(S_N(1), S_N(2), S_N(3), sprintf('   sun')); 
+    t(4) = text(P1_N(1), P1_N(2), P1_N(3), strcat('\phantom{   }', sprintf('   $P_1$'))); 
+    t(5) = text(P2_N(1), P2_N(2), P2_N(3), strcat('\phantom{   }', sprintf('   $P_2$'))); 
+    t(6) = text(S_N(1), S_N(2), S_N(3), strcat('\phantom{   }', sprintf('    sun'))); 
 %     text(S_PiPf_N(1), S_PiPf_N(2), S_PiPf_N(3), sprintf(' sun_{proj}')) 
     
-    xlabel('N_x')
-    ylabel('N_y') 
-    zlabel('N_z') 
-    title('\phi_1, \phi_2, and \phi_3 Slews') 
+    xlabel('$N_x$')
+    ylabel('$N_y$') 
+    zlabel('$N_z$') 
+    title('$\phi_1$, $\phi_2$, and $\phi_3$ Slews', 'Interpreter', 'latex') 
