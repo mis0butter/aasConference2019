@@ -76,12 +76,14 @@ end
 % Find P1 vector in G0 frame 
 P1_P = [ cos(phi1); sin(phi1); 0 ];           % P1 in P frame 
 P1_G0 = G0_DCM_P*P1_P;                        % P1 in G frame 
+P1_N = N_DCM_G0*P1_G0;                          % P1 in N frame 
 
 % Find P2 vector 
 phiS = acos(dot(S_PiPf_G0, Pi_G0));           % angle btwn sun projection and Pi 
 phiP2 = phiS + ep;                          % angle btwn P2 and Pi 
 P2_P = [cos(phiP2); sin(phiP2); 0];         % P2 in P frame 
 P2_G0 = G0_DCM_P*P2_P;                        % P2 in G frame 
+P2_N = N_DCM_G0*P2_G0;                      % P2 in N frame 
 
 %% EVERYTHING THERE IS TO FIND PHI2
 
@@ -90,7 +92,8 @@ if alpha == 0
     phi2 = pi; 
     theta = acos(dot(S_G0, P1_G0));           % angle btwn sun and P1 vectors 
     P3_G0 = S_G0*norm(P1_G0)*cos(theta);       % P3 vector in G frame (S and P1 already unit vectors)
-
+    P3_N = N_DCM_G0*P3_G0;                      % P3 in N frame 
+    
 else 
     % Not sure how to get the one below: 
     theta = acos(dot(P1_G0, S_G0)); 
@@ -100,6 +103,7 @@ else
     % Junette's derived: 
     theta = acos(dot(S_G0, P1_G0));           % angle btwn sun and P1 vectors 
     P3_G0 = S_G0*norm(P1_G0)*cos(theta);       % P3 vector in G frame (S and P1 already unit vectors)
+    P3_N = N_DCM_G0*P3_G0; 
     P3P1_G0 = P1_G0 - P3_G0;                   % vector from P3 to P1 
     P3P2_G0 = P2_G0 - P3_G0;                   % vector from P3 to P2 
     phi2_P3 = acos(dot(P3P1_G0/norm(P3P1_G0), P3P2_G0/norm(P3P2_G0)));       % slew around sun vector 

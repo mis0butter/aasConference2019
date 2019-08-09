@@ -72,12 +72,14 @@ end
 
 %% NO sun intrusion slew - nominal 
 
-P_Gnom = zeros(length(t_phiNom), 3); 
+P_Gnom_G = zeros(length(t_phiNom), 3); 
+P_Gnom_G = zeros(length(t_phiNom), 3); 
 % convert quaternions --> DCMs --> vectors 
 for i = 1:length(t_phiNom)
     G0_DCM_G = quat2DCM(q_phiNom(i, :)); 
     G_DCM_G0 = G0_DCM_G'; 
-    P_Gnom(i, :) = G_DCM_G0*Pi_G0; 
+    P_Gnom_G(i, :) = G_DCM_G0*Pi_G0; 
+    P_Gnom_N(i, :) = N_DCM_G0*P_Gnom_G(i, :)'; 
 end 
 
 % Phi3 angle - 

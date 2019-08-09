@@ -72,17 +72,20 @@ end
 
 %% NO sun intrusion slew - nominal 
 
-P_Gnom = zeros(length(t_phiNom), 3); 
+P_Gnom_G = zeros(length(t_phiNom), 3); 
+P_Gnom_G = zeros(length(t_phiNom), 3); 
 % convert quaternions --> DCMs --> vectors 
 for i = 1:length(t_phiNom)
     G0_DCM_G = quat2DCM(q_phiNom(i, :)); 
     G_DCM_G0 = G0_DCM_G'; 
-    P_Gnom(i, :) = G_DCM_G0*Pi_G0; 
+    P_Gnom_G(i, :) = G_DCM_G0*Pi_G0; 
+    P_Gnom_N(i, :) = N_DCM_G0*P_Gnom_G(i, :)'; 
 end 
 
 % Phi3 angle - 
 
 %%
+
 
 figure
 
@@ -95,13 +98,13 @@ figure
     shading interp
     
     grid on; hold on
-    plot3(P_G(:, 1), P_G(:, 2), P_G(:,3), 'r', 'LineWidth', 2); 
+    plot3(P_N(:, 1), P_N(:, 2), P_N(:,3), 'r', 'LineWidth', 2); 
     
-    plot3([0 Pi_G0(1)], [0 Pi_G0(2)], [0 Pi_G0(3)], 'b:', 'LineWidth', 1.1); 
-    plot3([0 Pf_G0(1)], [0 Pf_G0(2)], [0 Pf_G0(3)], 'b:', 'LineWidth', 1.1); 
-    plot3([0 P1_G0(1)], [0 P1_G0(2)], [0 P1_G0(3)], 'b:', 'LineWidth', 1.1); 
-    plot3([0 P2_G0(1)], [0 P2_G0(2)], [0 P2_G0(3)], 'b:', 'LineWidth', 1.1); 
-    plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'g-.'); 
+    plot3([0 Pi_N(1)], [0 Pi_N(2)], [0 Pi_N(3)], 'b:', 'LineWidth', 1.1); 
+    plot3([0 Pf_N(1)], [0 Pf_N(2)], [0 Pf_N(3)], 'b:', 'LineWidth', 1.1); 
+    plot3([0 P1_N(1)], [0 P1_N(2)], [0 P1_N(3)], 'b:', 'LineWidth', 1.1); 
+    plot3([0 P2_N(1)], [0 P2_N(2)], [0 P2_N(3)], 'b:', 'LineWidth', 1.1); 
+    plot3([0 e_N(1)], [0 e_N(2)], [0 e_N(3)], 'g-.'); 
      
 %     plot3([0 S1_G0(1)], [0 S1_G0(2)], [0 S1_G0(3)])
 %     plot3([0 S2_G0(1)], [0 S2_G0(2)], [0 S2_G0(3)])
@@ -111,28 +114,27 @@ figure
     plot(theta,sin(theta)./theta,'LineWidth',3) 
     
     % Sun vector 
-    plot3(S_G0(1), S_G0(2), S_G0(3), 'p', 'LineWidth', 3); 
+    plot3(S_N(1), S_N(2), S_N(3), 'p', 'LineWidth', 3); 
     % Sun projection 
-%     plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'g-.'); 
+%     plot3([0 S_PiPf_N(1)], [0 S_PiPf_N(2)], [0 S_PiPf_N(3)], 'g-.'); 
     
     % Phi2 - P3 (P1,P2 proj onto Sun vector) lines 
-    plot3([0 P3_G0(1)], [0 P3_G0(2)], [0 P3_G0(3)], 'b:', 'LineWidth', 1.1); 
-    plot3([P3_G0(1) P1_G0(1)], [P3_G0(2) P1_G0(2)], [P3_G0(3) P1_G0(3)], 'r:'); 
-    plot3([P3_G0(1) P2_G0(1)], [P3_G0(2) P2_G0(2)], [P3_G0(3) P2_G0(3)], 'r:'); 
+    plot3([0 P3_N(1)], [0 P3_N(2)], [0 P3_N(3)], 'b:', 'LineWidth', 1.1); 
+    plot3([P3_N(1) P1_N(1)], [P3_N(2) P1_N(2)], [P3_N(3) P1_N(3)], 'r:'); 
+    plot3([P3_N(1) P2_N(1)], [P3_N(2) P2_N(2)], [P3_N(3) P2_N(3)], 'r:'); 
     
     % Initial, final, P2, P2 vectors 
-    text(Pi_G0(1), Pi_G0(2), Pi_G0(3), sprintf(' P_i')) 
-    text(Pf_G0(1), Pf_G0(2), Pf_G0(3), sprintf(' P_f')) 
-    text(e_G0(1), e_G0(2), e_G0(3), sprintf(' e')) 
-    text(P1_G0(1), P1_G0(2), P1_G0(3), sprintf(' P_1')) 
-    text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P_2')) 
-    text(S_G0(1), S_G0(2), S_G0(3), sprintf('   sun')) 
-%     text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun_{proj}')) 
+    text(Pi_N(1), Pi_N(2), Pi_N(3), sprintf(' P_i')) 
+    text(Pf_N(1), Pf_N(2), Pf_N(3), sprintf(' P_f')) 
+    text(e_N(1), e_N(2), e_N(3), sprintf(' e')) 
+    text(P1_N(1), P1_N(2), P1_N(3), sprintf(' P_1')) 
+    text(P2_N(1), P2_N(2), P2_N(3), sprintf(' P_2')) 
+    text(S_N(1), S_N(2), S_N(3), sprintf('   sun')) 
+%     text(S_PiPf_N(1), S_PiPf_N(2), S_PiPf_N(3), sprintf(' sun_{proj}')) 
     
-    xlabel('G0_x')
-    ylabel('G0_y') 
-    zlabel('G0_z') 
+    xlabel('N_x')
+    ylabel('N_y') 
+    zlabel('N_z') 
     title('\phi_1, \phi_2, and \phi_3 Slews') 
-    
     
     
