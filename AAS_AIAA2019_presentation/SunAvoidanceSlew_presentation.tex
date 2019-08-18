@@ -83,22 +83,36 @@
 \usepackage{mathrsfs}
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{amsmath}
+%\usepackage{tensor}
 %\usepackage{fontspec}
+%\usepackage{enumitem}
+
+%\usepackage{array}
+
+%\usepackage[demo]{graphicx}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%\usepackage{subfig}
+
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Sun-Avoidance Slew (SAS) Maneuver ]{Sun-Avoidance Slew Planning Algorithm with Pointing and Actuator Constraints\\
-AAS 10-801 } % The short title appears at the bottom of every slide, the full title is only on the title page
+\title[Sun-Avoidance Slew (SAS) Maneuver ]{Sun-Avoidance Slew Planning Algorithm with Pointing and Actuator Constraints
+\\(AAS 19-801) } % The short title appears at the bottom of every slide, the full title is only on the title page
+\subtitle{}
+\author[M. Ayoubi\ \& J. Hsin]{Mohammad. A. Ayoubi\inst{1} \and Junette Hsin\inst{2}}
+%Maxar Space Solutions\\ (Formerly Space Systems/Loral)}
+%\author[M. Ayoubi\ \& J. Hsin]{Mohammad. A. Ayoubi\inst{\dagger} \ and Junette Hsin \inst{2}}
+%\institute[]{\inst[1]{Department of Mechanical Engineering} Associate Professor \and %
+%                      \inst[2]{Dynamics and Control Analysis Group} Engineer}
 
-\institute{AIAA/AAS Astrodynamics Specialist Conference, Portland, ME\\
-11-- 15 August 2019}
+%\institute[]{AIAA/AAS Astrodynamics Specialist Conference, Portland, ME\\
+%11-- 15 August 2019}
 
-
-\author{Mohammad. A. Ayoubi\\Santa Clara University\\
-\&\\Junette Hsin\\
-Maxar Space Solutions\\ (Formerly Space Systems/Loral)}
+\subtitle{AIAA/AAS Astrodynamics Specialist Conference,\\ Portland, ME, 11 -- 15 August 2019}
+\institute[]{\inst{1} Associate Professor, Department of Mechanical Engineering, Santa Clara University, \\ \inst{2} Engineer, Dynamics and Control Analysis Group, Maxar Space Infrastructure (Formerly Space Systems/Loral)}
 
 \date{}		
 
@@ -109,7 +123,7 @@ Maxar Space Solutions\\ (Formerly Space Systems/Loral)}
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Outlines}
+\begin{frame}{Outline}
 \begin{block}{}
 \tableofcontents
 \end{block}
@@ -118,60 +132,106 @@ Maxar Space Solutions\\ (Formerly Space Systems/Loral)}
 \begin{frame}
 \section{Introduction}
 \begin{block}{Introduction}
-	\begin{enumerate} 
-		\item Geometric approach for large-angle slew maneuvers with pointing and actuator constraints 
-		\item Assumed single light-sensitive payload with control-torque and reaction wheel's angular momentum constraints 
-		\item Assumed initial and final attitudes, instrument boresight vector, and sun vector are known 
-		\item 
-	\end{enumerate} 
+	\begin{itemize}
+		\item Large-angle slew maneuvers are required during any Earth-pointing or interplanetary missions. 
+		\item For safety in many space missions, a sensitive payload such as an imaging camera or telescope needs to be retargeted while avoiding the sun or other bright objects in the sky.
+	\end{itemize}
 \end{block}
 \end{frame}
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{Sun-Avoidance Slew (SAS) Algorithm}
+\section{Previous Literature}
 
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+\begin{frame}
+\begin{block}{Previous Literature}
+	
+	The attitude reorientation problem in the presence of attitude constrained zones has been studied in the last three decades:
+	\begin{itemize} 
+		
+		\item \textit{McInnes (1994)}: artificial potential function in the form of an analytical guidance law suitable for onboard implementation. 
+		\begin{itemize}
+			\item Euler angles were used, which are singular for large slew angles. 
+		\end{itemize}
+		\item \textit{Spindle (1998), Hablani (1998), Biggs and Colley (2016), Frazzoli (2001)}: geometric approach where a feasible attitude maneuver is precomputed based on avoidance zone constraints for attitude. 
+		\begin{itemize}
+			\item Depending on the number of constraints and initial and final attitudes, this approach can be computationally expensive. 
+		\end{itemize}
+		\item \textit{Spiller (2016)}: Particle swarm optimization (PSO) technique to find a sub-optimal solution with keep-out constraints. 
+	\end{itemize} 
+
+\end{block}
+\end{frame}
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}
+\begin{block}{SAS Algorithm}
+	\begin{itemize}
+	\item The proposed Sun Avoidance Slew (SAS) algorithm is an intuitive geometric approach for a sun (or any bright object) avoidance slew maneuver with pointing and actuator constraints.
+	\item The algorithm is deterministic, easy to implement, and includes the control-torque and reaction wheels' angular momentum constraints. 
+	\end{itemize}
+\end{block}
+\end{frame}
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}
+\begin{block}{SAS Algorithm}	
+	Assumptions in this algorithm: 
+	\begin{itemize} 
+		\item Spacecraft has a single light-sensitive payload with control-torque and reaction wheels' angular momentum constraints. 
+		\item The initial and final attitudes, instrument boresight vector, and sun vector are known. 
+	\end{itemize}
+\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{SAS Algorithm}
+\begin{block}{}
+	\begin{figure}
+		\includegraphics[width=3in]{./Figures/SASSchematic1}
+		\caption{The gyrostat-centered unit sphere.}
+	\end{figure}
+\end{block}
+\end{frame}
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{SAS Algorithm}
+
+\begin{frame}{SAS Algorithm}
 	\begin{block}{Problem Statement:}
 		Given:$_\mathcal{N}\hat{P}_i$, $_\mathcal{N}\hat{P}_f$, $_\mathcal{N}\hat{S}$, $_\mathcal{G}\hat{P}$, $\epsilon_p$, $^\mathcal{N}q^\mathcal{G}$, $^\mathcal{N}_\mathcal{G}\omega^\mathcal{G}(t_i)$, and $^\mathcal{N}_\mathcal{G}\omega^\mathcal{G}(t_f)$ .\\
-		Assumption: The spacecraft is rigid.\\
 		Find: 
 		\begin{enumerate}
 			\item A sequence of slew maneuvers to avoid sun vector.
-			\item the commanded angular velocity, angular acceleration, and quaternion profiles.
+			\item The commanded angular velocity, angular acceleration, and quaternion profiles.
 		\end{enumerate} 
-		\begin{figure}
-			\includegraphics[width=1.5in]{./Figures/SASSchematic1}
-		\end{figure}
+%		\begin{figure}
+%			\includegraphics[width=1.5in]{./Figures/SASSchematic1}
+%		\end{figure}
 	\end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
-	\begin{block}{}
+%\begin{frame}{SAS Algorithm}
+%\begin{block}{Nomenclature}
+%\begin{itemize}
+%\item $\mathcal{G}$ frame: Unit sphere attached to the gyrostat.
+%\item $\mathcal{N}$: frame: The Newtonian frame fixed in the inertial space.
+%\item $_\mathcal{G}\hat{P}$: Unit vector along the bore sight of payload in the $\mathcal{G}$ frame.
+%\item $_\mathcal{G}\hat{P}_i$: Unit vector of the initial point in the $\mathcal{G}$ frame.
+%\item $_\mathcal{G}\hat{P}_f$: Unit vector of the final point in the $\mathcal{G}$ frame.
+%\item $_\mathcal{N}\hat{S}$: Unit vector of the sun vector in the $\mathcal{N}$ frame.
+% \item $\epsilon_p$: Payload half-cone angle.
+%\end{itemize}
+%\end{block}
+%\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{SAS Algorithm}
+\begin{block}{Summary}
 	\begin{figure}
-	\includegraphics[width=3in]{./Figures/SASSchematic1}
-	\caption{The gyrostat-centered unit sphere.}
+		\includegraphics[width=4.85in]{./Figures/SASSchematic3}
 	\end{figure}
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
-\begin{block}{Nomenclature}
-\begin{itemize}
-\item $\mathcal{G}$ frame: Unit sphere attached to the gyrostat.
-\item $\mathcal{N}$: frame: The Newtonian frame fixed in the inertial space.
-\item $_\mathcal{G}\hat{P}$: Unit vector along the bore sight of payload in the $\mathcal{G}$ frame.
-\item $_\mathcal{G}\hat{P}_i$: Unit vector of the initial point in the $\mathcal{G}$ frame.
-\item $_\mathcal{G}\hat{P}_f$: Unit vector of the final point in the $\mathcal{G}$ frame.
-\item $_\mathcal{N}\hat{S}$: Unit vector of the sun vector in the $\mathcal{N}$ frame.
- \item $\epsilon_p$: Payload half-cone angle.
-\end{itemize}
 \end{block}
 \end{frame}
 %
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+\begin{frame}{SAS Algorithm}
 \begin{block}{Check the Sun Vector Intrusion}
-\begin{enumerate}
-\item Check the angular separation between the sun vector, $\hat{S}$, and the $\hat{P}_i-\hat{P}_f$ or ``slew'' plane.
+\begin{itemize}
+\item Check the angular separation, $\alpha$, between the sun vector, $\hat{S}$, and the $\hat{P}_i-\hat{P}_f$ or ``slew'' plane.
 \begin{equation}
 \alpha=\frac{\pi}{2}-\cos^{-1}(\hat{S}\cdot_\mathcal{N}\hat{e})
 \end{equation}
@@ -185,133 +245,211 @@ where the eigenaxis is determined by
 \vec{S}_{||}=\hat{S}\cos\alpha
 \end{equation}
 
-\end{enumerate}
+\end{itemize}
 \end{block}
 \end{frame}
 
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+\begin{frame}{SAS Algorithm}
 \begin{block}{Slew Maneuvers}
-\begin{enumerate}
-\item The $1^{st}$ slew around the eigenaxis,$\hat{e}$, through angle:
+\begin{enumerate}[I]
+\item The $1^{st}$ slew around the eigenaxis, $\hat{e}$, through angle:
 \end{enumerate}
- \begin{equation}
- \phi_1=\left\{
-                \begin{array}{ll}
-                 \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p& when\  \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p\leq \pi\\
-                 \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p-2\pi& when\ \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p>\pi\\
-                \end{array}
-              \right.
- \end{equation}
-\begin{figure}
-\includegraphics[width=2in]{./Figures/SVAS_1r_modified}\includegraphics[width=2in]{./Figures/SVAS_1rb_modified}
-\end{figure}
+\begin{equation}
+	\begin{array}{lr}
+		\phi_1 = \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p & {\scriptstyle when}\  \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p\leq \pi
+	\end{array}
+\end{equation}
+% \begin{equation}
+% \phi_1=\left\{
+%                \begin{array}{ll}
+%                 \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p& {\scriptstyle when}\  \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p\leq \pi\\
+%                 \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p-2\pi& {\scriptstyle when}\ \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p>\pi\\
+%                \end{array}
+%              \right.
+% \end{equation}
+ %\begin{figure}
+ %\includegraphics[width=1.75in]{./Figures/SVAS_1r_modified}\includegraphics[width=2in]{./Figures/SVAS_1rb_modified}
+ %\end{figure}
+\begin{columns}
+	\begin{column}{0.5\textwidth}  %%<--- here
+		\begin{center}
+			\includegraphics[width=1.75in]{./Figures/SVAS_1rb_modified}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[width=1.5in]{./Figures/SASSchematic4}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{block}
 \end{frame}
 %
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+\begin{frame}{SAS Algorithm}
 \begin{block}{Slew Maneuvers}
-\begin{enumerate}[2]
+\begin{enumerate}[II]
 \item The $2^{nd}$ slew around the unit sun vector, $\hat{S}$, via $\phi_2$.
 \begin{enumerate}[a]
 \item when $\alpha\neq0$
 \end{enumerate}
 \end{enumerate}
 \begin{equation}
-\phi_2=\phi_2=2\tan^{-1}\Big[ \frac{\hat{S}\cdot (\hat{P}_1\times\hat{S}_{||})}{(\hat{P}_1\cdot\hat{S}_{||})-(\hat{S}\cdot\hat{P}_1)(\hat{S}\cdot\hat{S}_{||})}\Big],
+\phi_2=2\tan^{-1}\Big[ \frac{\hat{S}\cdot (\hat{P}_1\times\hat{S}_{||})}{(\hat{P}_1\cdot\hat{S}_{||})-(\hat{S}\cdot\hat{P}_1)(\hat{S}\cdot\hat{S}_{||})}\Big],
 \end{equation}
-\begin{figure}
-\includegraphics[width=2in]{./Figures/SVAS_2r_modified}
-\end{figure}
+
+
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[width=1.75in]{./Figures/SVAS_2r_modified}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}  %%<--- here
+		\begin{center}
+			\includegraphics[width=1.5in]{./Figures/SASSchematic4}
+		\end{center}
+	\end{column}
+\end{columns}
+
+%\begin{figure}
+%\includegraphics[width=2in]{./Figures/SVAS_2r_modified}\includegraphics[width=1.5in]{./Figures/SASSchematic4}
+%\end{figure}
+
+%		\begin{figure}
+%			\includegraphics[width=1.5in]{./Figures/SASSchematic4}
+%		\end{figure}
+
 \end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+\begin{frame}{SAS Algorithm}
 \begin{block}{Slew Maneuvers}
-\begin{enumerate}[2]
+\begin{enumerate}[II]
 \item The $2^{nd}$ slew around the unit sun vector, $\hat{S}$, via $\phi_2=180^{\circ}$.
 \begin{enumerate}[b)]
 \item when $\alpha=0$
 \end{enumerate}
 \end{enumerate}
-\begin{figure}
-\includegraphics[width=2in]{./Figures/SVAS_3r_modified}
-\end{figure}
+
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[width=1.75in]{./Figures/SVAS_3r_modified}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}  %%<--- here
+		\begin{center}
+			\includegraphics[width=1.75in]{./Figures/SASSchematic3_alpha0}
+		\end{center}
+	\end{column}
+\end{columns}
+
+%\begin{figure}
+%\includegraphics[width=2in]{./Figures/SVAS_3r_modified}
+%\end{figure}
+
+
+
 \end{block}
 \end{frame}
 
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Sun-Avoidance Slew (SAS) Algorithm}
+\begin{frame}{SAS Algorithm}
 \begin{block}{Slew Maneuvers}
-\begin{enumerate}[3]
+\begin{enumerate}[III]
 \item The $3^{rd}$ slew about the $\hat{e}$ through angle:
- \begin{equation}
- \phi_3=\left\{
-                \begin{array}{ll}
-                  \cos^{-1}(_G\hat{P}_f.\hat{P}_2)& when\  _G\hat{P}_f.\hat{P}_2\geq 0\\
-                 \cos^{-1}(_G\hat{P}_f.\hat{P}_2)-2\pi& when\ _G\hat{P}_f.\hat{P}_2<0\\
-                \end{array}
-              \right.
- \end{equation}
-\begin{figure}
-\includegraphics[width=2in]{./Figures/SVAS_4r}
-\end{figure}
+\begin{equation}
+	\begin{array}{lr}
+	\phi_3 = \cos^{-1}(_G\hat{P}_f.\hat{P}_2) & {\scriptstyle when} \  _G\hat{P}_f.\hat{P}_2\geq 0\\
+	\end{array}
+\end{equation}
+% \begin{equation}
+% \phi_3=\left\{
+%                \begin{array}{ll}
+%                  \cos^{-1}(_G\hat{P}_f.\hat{P}_2)& {\scriptstyle when} \  _G\hat{P}_f.\hat{P}_2\geq 0\\
+%                 \cos^{-1}(_G\hat{P}_f.\hat{P}_2)-2\pi& {\scriptstyle when} \ _G\hat{P}_f.\hat{P}_2<0\\
+%                \end{array}
+%              \right.
+% \end{equation}
+
+%\begin{figure}
+%\includegraphics[width=2in]{./Figures/SVAS_4r}\includegraphics[width=2in]{./Figures/SVAS_4r_modified.pdf}
+%\end{figure}
 \end{enumerate}
-\begin{enumerate}[4]
-\item The final slew is about the instrument boresight axis to go to the final attitude. 
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\includegraphics[width=2in]{./Figures/SVAS_4r_modified.pdf}
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}  %%<--- here
+		\begin{center}
+			\includegraphics[width=1.5in]{./Figures/SASSchematic4}
+		\end{center}
+	\end{column}
+\end{columns}
+\begin{enumerate}[IV]
+\item Optional: The final slew is about the instrument boresight axis to rotate into final attitude. 
 \end{enumerate}
 \end{block}
 \end{frame}
 %
 %
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Summary of the Algorithm}
+\begin{frame}{Summary of SAS Algorithm}
 \begin{block}{}
-\begin{enumerate}
+\begin{enumerate}[I]
 \item Slew around the eigenaxis,$\hat{e}$, through angle:
-
- \begin{equation}\label{phi1}
- \phi_1=\left\{
-                \begin{array}{ll}
-                 \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p& when\  \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p\leq \pi\\
-                 \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p-2\pi& when\ \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p>\pi\\
-                \end{array}
-              \right.
- \end{equation}
+\begin{equation}
+	\begin{array}{lr}
+	\phi_1 = \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p & {\scriptstyle when}\  \cos^{-1}(\hat{P}_i\cdot_G\hat{S}_{||})-\epsilon_p\leq \pi
+	\end{array}
+\end{equation}
+% \begin{equation}\label{phi1}
+% \phi_1=\left\{
+%                \begin{array}{ll}
+%                 \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p& {\scriptstyle when} \  \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p\leq \pi\\
+%                 \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p-2\pi& {\scriptstyle when} \ \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p>\pi\\
+%                \end{array}
+%              \right.
+% \end{equation}
+\end{enumerate}
+\begin{enumerate}[I]
 \item Slew around the $\hat{S}$ via:
 
  \begin{equation}\label{phi2}
  \phi_2=\left\{
                 \begin{array}{ll}
-                \phi_2=2\tan^{-1}\Big[ \frac{\hat{S}\cdot (\hat{P}_1\times\hat{S}_{||})}{(\hat{P}_1\cdot\hat{S}_{||})-(\hat{S}\cdot\hat{P}_1)(\hat{S}\cdot\hat{S}_{||})}\Big],& when\  \alpha\neq 0\\
-                 \pi& when\ \alpha=0\\
+                \phi_2=2\tan^{-1}\Big[ \frac{\hat{S}\cdot (\hat{P}_1\times\hat{S}_{||})}{(\hat{P}_1\cdot\hat{S}_{||})-(\hat{S}\cdot\hat{P}_1)(\hat{S}\cdot\hat{S}_{||})}\Big],& {\scriptstyle when} \  \alpha\neq 0\\
+                 \pi& {\scriptstyle when} \ \alpha=0\\
                 \end{array}
               \right.
  \end{equation}
+\end{enumerate}
+\begin{enumerate}[III]
  \item Slew about the $\hat{e}$ through angle:
- \begin{equation}\label{phi3}
- \phi_3=\left\{
-                \begin{array}{ll}
-                  \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)& when\  _\mathcal{G}\hat{P}_f.\hat{P}_2\geq 0\\
-                 \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)-2\pi& when\ _\mathcal{G}\hat{P}_f.\hat{P}_2<0\\
-                \end{array}
-              \right.
+ \begin{equation}
+	 \begin{array}{lr}
+	 \phi_3 = \cos^{-1}(_G\hat{P}_f.\hat{P}_2) & {\scriptstyle when} \  _G\hat{P}_f.\hat{P}_2\geq 0\\
+	 \end{array}
  \end{equation}
-
-\item Perform the final rotation, $\phi_4$, about the instrument boresight axis to adjust the attitude. 
+% \begin{equation}\label{phi3}
+% \phi_3=\left\{
+%                \begin{array}{ll}
+%                  \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)& {\scriptstyle when} \  _\mathcal{G}\hat{P}_f.\hat{P}_2\geq 0\\
+%                 \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)-2\pi& {\scriptstyle when} \ _\mathcal{G}\hat{P}_f.\hat{P}_2<0\\
+%                \end{array}
+%              \right.
+% \end{equation}
+\end{enumerate}
+\begin{enumerate}[IV]
+\item Optional: perform the final rotation, $\phi_4$, about the instrument boresight axis to adjust the attitude. 
 \end{enumerate}
 \end{block}
 \end{frame}
 %
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Summary of the Algorithm}
-\begin{block}{}
-\begin{figure}
-\includegraphics[width=4.85in]{./Figures/SASSchematic3}
-\end{figure}
-\end{block}
-\end{frame}
 %
 %
 %
@@ -378,12 +516,33 @@ and velocity (state) and acceleration (control) constraints are
                 \end{array}
               \right.
  \end{equation}
-in which
-\begin{equation}
-\dot{\phi}_{max}=[I^{w/w^*}]^{-1}[^NH^{G/G*}-(I^{G/G*}+I^{w/w*})^N\omega^G]/(e_x+e_y+e_z),
-\end{equation}
+%in which
+%\begin{equation}
+%\dot{\phi}_{max}=[I^{w/w^*}]^{-1}[^NH^{G/G*}-(I^{G/G*}+I^{w/w*})^N\omega^G]/(e_x+e_y+e_z),
+%\end{equation}
+%
+%
+%%\end{minipage}
+%%\begin{minipage}{0.35\textwidth}
+%%\begin{center}
+%%\includegraphics[width=2in]{./Spacecraft3}      
+%%\end{center}
+%%\end{minipage}
+%%\end{columns}
+%\end{block}
+%\end{frame}
+%%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}{Computing Steering Profiles}
+%\begin{block}{ Problem Statement Continued}
+% and
+% \begin{equation}\label{phiddotmax}
+%\ddot{\phi}_{max}=_B\hat{e}^T\  _BM_{max}/I_{\hat{e}}^{G/G*},
+%\end{equation}
+%where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to its center of mass, $G^*$, in the $N$-frame. $I^{G/G^*}$ and $I^{w/w*}$ represent the inertia dyadic of the gyrostat and reaction wheel with respect to their center of masses, respectively. $_BM_{max}$ is the maximum generated torque along the body-axes in the body frame.\\
+%%Find the optimal steering laws: $^Bq^R$, $^B\omega^R$, and $^B\alpha^R$.
+%\vspace{0.5in}
 
-
+{\bf Find:} $\phi^*(t)$, $\dot{\phi}^*(t)$, and $\ddot{\phi}^*(t)$.
 %\end{minipage}
 %\begin{minipage}{0.35\textwidth}
 %\begin{center}
@@ -393,140 +552,18 @@ in which
 %\end{columns}
 \end{block}
 \end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Computing Steering Profiles}
-\begin{block}{ Problem Statement Continued}
- and
- \begin{equation}\label{phiddotmax}
-\ddot{\phi}_{max}=_B\hat{e}^T\  _BM_{max}/I_{\hat{e}}^{G/G*},
-\end{equation}
-where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to its center of mass, $G^*$, in the $N$-frame. $I^{G/G^*}$ and $I^{w/w*}$ represent the inertia dyadic of the gyrostat and reaction wheel with respect to their center of masses, respectively. $_BM_{max}$ is the maximum generated torque along the body-axes in the body frame.\\
-%Find the optimal steering laws: $^Bq^R$, $^B\omega^R$, and $^B\alpha^R$.
-\vspace{0.5in}
-
-{\bf Find:} $\phi(t)$, $\dot{\phi}(t)$, and $\ddot{\phi}(t)$.
-%\end{minipage}
-%\begin{minipage}{0.35\textwidth}
-%\begin{center}
-%\includegraphics[width=2in]{./Spacecraft3}      
-%\end{center}
-%\end{minipage}
-%\end{columns}
+\begin{block}{SAS Algorithm}	
+	Pontryagin's minimum principle (PMP) is used to derive the desired or target-frame quaternions, angular velocity and acceleration for two cases: 
+	\begin{enumerate}
+		\item with control-torque and reaction wheels' angular momentum constraints
+		\item with control-torque constraints
+	\end{enumerate} 
+	Numerical simulation is performed to show the viability of the proposed algorithm with control-torque and angular momentum constraints.
 \end{block}
 \end{frame}
-%
-%
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Computing Steering Profiles}
 
-	\begin{block}{ }
-	\small{
-	Using the Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
-	\begin{enumerate}
-	\item State Eqs.:
-		\begin{equation}
-			\left\{
-			                \begin{array}{l}
-			                \dot{x}_1=x_2, \\
-			                \dot{x}_2=u, \\
-			                \dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
-			                \end{array}
-			              \right.
-		\end{equation}
-		where the unit step function, $\mathbb{U}$, is defined as
-		
-%		\begin{equation}
-%			\mathbb{U}(X)=\left\{
-%			                \begin{array}{lI}
-%			           1, & X > 0, \\
-%			           0, & X \leq 0.
-%			                \end{array}
-%			              \right.
-%		 \end{equation}
-
-		\begin{equation}
-			\mathbb{U}(X)=\left\{
-			\begin{array}{l}
-			1, X > 0, \\
-			0, X \leq 0. \\
-			\end{array}
-			\right.
-		\end{equation}
-
-		Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \forall t\in[t_0, t_f]. $  
-		\item Hamiltonian:
-		\begin{equation}
-			\begin{split}
-			\mathscr{H}=& 1+\lambda_1x_2+\lambda_2 u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
-			& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
-			\end{split}
-		\end{equation}
-	\end{enumerate}
-	}
-	\seti
-	\end{block}
-\end{frame}
-%
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Computing Steering Profiles}
-
-\begin{block}{ }
-	\begin{enumerate}
-	\conti
-	\small{
-	\item Costate Eqs.:
-	\begin{equation}
-	\left\{\begin{array}{l}
-	               \dot{\lambda}_1=-\frac{\partial{\mathscr{H}}}{\partial{x_1}}=0,\\
-	               \dot{\lambda}_2=-\frac{\partial{\mathscr{H}}}{\partial{x_2}}=-\lambda_1-2\lambda_3(x_2+\dot{\phi}_{max})\mathbb{U}(-x_2-\dot{\phi}_{max})\\
-	+2\lambda_3(\dot{\phi}_{max}-x_2)\mathbb{U}(x_2-\dot{\phi}_{max}),\\
-	              \dot{\lambda}_3=-\frac{\partial{\mathscr{H}}}{\partial{x_3}}=0.\\
-	                \end{array}
-	              \right.
-	\end{equation}
-	\item Applying the Pontryagin's minimum principle (PMP),
-	\begin{equation}
-	u^*=arg \underset{u\in\mathcal{U}}{min} \mathscr{H},
-	\end{equation}
-	where $\mathcal{U}$ defines the domain of feasible controls. The optimal control can be determined as
-%	\begin{equation}
-%	u^*(t)=\left\{
-%	           \begin{array}{I}
-%	           \ddot{\phi}_{max}    \lambda_2<0,\\
-%	           ?    \lambda_2=0,\\
-%	           -\ddot{\phi}_{max}    \lambda_2>0. \\
-%	                \end{array}
-%	              \right.
-%	\end{equation}
-%	 }
-	\end{enumerate}
-	\seti
-	This is a {\it singular arc} optimal control problem.
-	\end{block}
-\end{frame}
-%
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Computing Steering Profiles}
-
-	\begin{block}{ }
-	\begin{enumerate}
-	\conti
-	\item Determining the optimal control in the singular arc:
-	\begin{equation}
-	\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)=\ddot{\lambda}_2=0\rightarrow \dot{x}_2=0\rightarrow u^*=0
-	\end{equation}
-	\item Checking the Generalized Legendre-Clebsch condition for optimality:
-	\begin{equation}
-	(-1)^2\frac{\partial}{\partial u}\Big[\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)\Big]=1\geq 0
-	\end{equation}
-	\item The transversality condition:
-	\begin{equation}
-	\mathscr{H}|_{(*,t_f)}=0\  \text{and} \ \mathscr{H}\neq\mathscr{H}(t)\rightarrow \mathscr{H}=0, \forall t\in[t_0, t_f].
-	\end{equation}
-	\end{enumerate}
-	\seti
-	\end{block}
-\end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Computing Steering Profiles}
 
@@ -538,9 +575,9 @@ where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to
  \begin{equation}\label{phidd_cons}
  \ddot{\phi}(t)=u=\left\{
                 \begin{array}{ll}
-                \ddot{\phi}_{max}& when\  t_0\leq t\leq t_1,\\
-                 0& when\  t_1\leq t \leq t_2,\\
-                 -\ddot{\phi}_{max}& when \ t_2\leq t\leq t_f.
+                \ddot{\phi}_{max}& {\scriptstyle when} \  t_0\leq t\leq t_1,\\
+                 0& {\scriptstyle when} \  t_1\leq t \leq t_2,\\
+                 -\ddot{\phi}_{max}& {\scriptstyle when}  \ t_2\leq t\leq t_f.
                 \end{array}
               \right.
 \begin{minipage}{0.35\textwidth}
@@ -555,9 +592,9 @@ where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to
  \begin{equation}\label{phid_cons}
  \dot{\phi}(t)=\left\{
                 \begin{array}{ll}
-                \dot{\phi}_0+\ddot{\phi}_{max}(t-t_0)& when\  t_0\leq t\leq t_1,\\
-                 \dot{\phi}_{max}& when\  t_1\leq t \leq t_2,\\
-                 \dot{\phi}_{max}-\ddot{\phi}_{max}(t-t_2)& when \ t_2\leq t\leq t_f.
+                \dot{\phi}_0+\ddot{\phi}_{max}(t-t_0)& {\scriptstyle when} \  t_0\leq t\leq t_1,\\
+                 \dot{\phi}_{max}& {\scriptstyle when} \  t_1\leq t \leq t_2,\\
+                 \dot{\phi}_{max}-\ddot{\phi}_{max}(t-t_2)& {\scriptstyle when} \ t_2\leq t\leq t_f.
                 \end{array}
               \right.
  \end{equation}
@@ -567,9 +604,9 @@ where $^NH^{G/G*}$ is the total angular momentum of the gyrostat with respect to
  \begin{equation}\label{phi_cons}
  \phi(t)=\left\{
                 \begin{array}{ll}
-                \dot{\phi}_0(t-t_0)+\frac{1}{2}\ddot{\phi}_{max}(t-t_0)^2& when\  t_0\leq t\leq t_1,\\
-                \phi(t_1)+ \dot{\phi}_{max}(t-t_1)& when\  t_1\leq t \leq t_2,\\
-                 \phi(t_2)+\dot{\phi}_{max}(t-t_2)-\frac{1}{2}\ddot{\phi}_{max}(t-t_2)^2& when \ t_2\leq t\leq t_f.
+                \dot{\phi}_0(t-t_0)+\frac{1}{2}\ddot{\phi}_{max}(t-t_0)^2& {\scriptstyle when} \  t_0\leq t\leq t_1,\\
+                \phi(t_1)+ \dot{\phi}_{max}(t-t_1)& {\scriptstyle when} \  t_1\leq t \leq t_2,\\
+                 \phi(t_2)+\dot{\phi}_{max}(t-t_2)-\frac{1}{2}\ddot{\phi}_{max}(t-t_2)^2& {\scriptstyle when} \ t_2\leq t\leq t_f.
                 \end{array}
               \right.
  \end{equation}
@@ -602,74 +639,139 @@ and
 \end{frame}
 
 %-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}{Computing Steering Profiles}
+%
+%\begin{block}{ }
+%\begin{itemize}
+%\item Steering profiles:
+%\begin{equation}
+%^Nq^D(t)=[e_x\sin\frac{\phi(t)}{2}, e_y\sin\frac{\phi(t)}{2}, e_z\sin\frac{\phi(t)}{2}, \cos\frac{\phi(t)}{2}]^T
+%\end{equation}
+%\begin{equation}
+%^N_G\omega^D(t)=\dot{\phi}(t)_G\hat{e}
+%\end{equation}
+%\begin{equation}
+%^N_G\alpha^D(t)=\ddot{\phi}(t)_G\hat{e}
+%\end{equation}
+%\end{itemize}
+%\end{block}
+%\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Computing Steering Profiles}
 
 \begin{block}{ }
-\begin{itemize}
-\item Steering profiles:
-\begin{equation}
-^Nq^D(t)=[e_x\sin\frac{\phi(t)}{2}, e_y\sin\frac{\phi(t)}{2}, e_z\sin\frac{\phi(t)}{2}, \cos\frac{\phi(t)}{2}]^T
-\end{equation}
-\begin{equation}
-^N_G\omega^D(t)=\dot{\phi}(t)_G\hat{e}
-\end{equation}
-\begin{equation}
-^N_G\alpha^D(t)=\ddot{\phi}(t)_G\hat{e}
-\end{equation}
+	\begin{itemize}
+%	Desired acceleration, $_\mathcal{N}\dot{\omega}^{D}$, in the inertial frame: 
+%	\begin{equation}
+%	_\mathcal{N}\dot{\omega}^{D} = \ddot{\phi}_{max}\cdot _\mathcal{N}\hat{e}
+%	\end{equation}
+	\item Desired acceleration, $_\mathcal{B}\dot{\omega}^{D}$, in the body frame: 
+	\begin{equation}
+	_\mathcal{B}\dot{\omega}^{D} = {}^DR^N \ddot{\phi}_{max} \cdot _\mathcal{N}\hat{e}
+	\end{equation}
+	\item Find rotation from inertial to desired body frame, where $E^x$ is the skew-symmetric matrix form of the cross product with $_\mathcal{N}\hat{e}$: 
+	\begin{equation}
+	{}^DR^N = \big[(cos\phi)I_{3x3} + (1 - cos\phi)\hat{e}\hat{e}^T - (sin\alpha)E^x \big]
+	\end{equation}
+	
+%\end{block}
+%
+%\end{frame}
+%%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}{Computing Steering Profiles}
+%
+%\begin{block}{ }
+	\item Solve for desired control torque, $u$, with current velocity, $_\mathcal{B}\omega^C$, and Euler's equations for rigid body dynamics: 
+	\begin{equation}
+	J \cdot _\mathcal{B}\dot{\omega}^D = u - _\mathcal{B}\omega^C \times J \cdot _\mathcal{B}\omega^C 
+	\end{equation}
+	\item Apply the desired control torque and solve the dynamical equations and kinematic equations of motion to propagate angular velocity and attitude. 
+%	\begin{equation}
+%	J \cdot _\mathcal{B}\dot{\omega}^C = u - _\mathcal{B}\omega^C \times J \cdot _\mathcal{B}\omega^C 
+%	\end{equation}
+%	\begin{equation}
+%	_\mathcal{B}\dot{q}^C = \frac{1}{2} \Omega (_\mathcal{B}\omega^B) _\mathcal{B}q^{C}
+%	\end{equation}
 \end{itemize}
 \end{block}
+
 \end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Numerical Simulations}
 \begin{frame}{Numerical Simulations} 
-	\begin{block}{title}
-		\begin{enumerate}
-			\item Matlab was used to numerically simulate and examine the proposed algorithm. 
+	\begin{block}{Introduction}
+		\begin{itemize}
+			\item Numerical simulations were run examine the proposed algorithm. 
 			\item The initial, final, and sun position vectors were randomized for each run. 
-			\item Two cases shown in these slides - one in which the sun angle is greater than 0 from the slew plane, the other in which the sun vector lies directly on the slew plane. 
-			\item Slew angles were found using the methods discussed in the description of the algorithm. 
-		\end{enumerate}
+			\item Two cases shown in these slides - one in which the sun angle, $\alpha$, is greater than 0 from the slew plane, the other in which the sun vector lies directly on the slew plane. 
+			\begin{enumerate}
+				\item $\alpha > 0$ 
+				\item $\alpha = 0$
+			\end{enumerate}
+		\end{itemize}
 	\end{block}
 \end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Numerical Simulations}
-\begin{block}{alpha $>$ 0}
-	
-	%				\newcommand*{\MyIndent}{\hspace*{0.5cm}}%
-	\begin{table}[H]
-		\centering
-		\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
-		\begin{tabular}{llll}
-			\toprule
-			\midrule
-			$\phi$ & 1 & 2 & 3 \\
-			\midrule
-			Angle (rad) & 0.29 & 2.70 & 0.13 \\
-			Angle (deg) & 16.61 & 154.80 & 7.33 \\ 
-			\midrule
-			\bottomrule
-		\end{tabular}%
-		\label{tab:FOG_SF}%
-	\end{table}%
-	
-\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{Numerical Simulations}
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
-		\begin{figure}
-			\label{fig:phi2_geometry}
-			\includegraphics[width=3in]{figures/alphaNot0/chord_geometry_phi2.png}
-			\caption{Chord geometry for finding $\phi_2$}
-		\end{figure}
+	\begin{block}{$\alpha >$ 0}
+		
+		\begin{columns}
+			\begin{column}{0.05\textwidth}
+				\phantomsection{ }
+			\end{column}
+			\begin{column}{0.65\textwidth}
+				\begin{center}
+					\begin{table}[H]
+						\centering
+						\caption{Initial, Final, and Sun Positions in Inertial Frame and Constraints (Sample Inputs)}
+						\begin{tabular}{lr}
+							\toprule
+							\midrule
+							Unit Vector & Comp \\
+							\midrule
+							$P_i$ & [-0.50, 0.57, 0.65] \\
+							$P_f$ & [0.76, -0.48, -0.44] \\ 
+							$S$ & [0.30, -0.50, -0.81] \\
+							\midrule
+							\midrule
+							Parameter & Constraint \\ 
+							\midrule
+							$\alpha_{max}$ & 1 $rad/s^2$ \\
+							$\omega_{max}$ & 1 $rad/s$ \\ 
+							\midrule
+							\bottomrule
+						\end{tabular}%
+						\label{tab:Pi_Pf_S}%
+					\end{table}
+				\end{center}
+			\end{column}
+			\begin{column}{0.3\textwidth}
+				\begin{center}
+					\begin{table}[H]
+						\centering
+						\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
+						\begin{tabular}{ll}
+							\toprule
+							\midrule
+							$\phi$ & deg \\
+							\midrule
+							1 & 32.08 \\
+							2 & 102.56 \\ 
+							3 & 17.76 \\
+							\midrule
+							\bottomrule
+						\end{tabular}%
+						\label{tab:phi_123}%
+					\end{table}%
+				\end{center}
+			\end{column}
+		\end{columns}
 
 	\end{block}
-	
-	
 \end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
+	\begin{block}{$\alpha$ $>$ 0}
 		\begin{figure}[H]
 			\label{fig:phi1_phi2_phi3}
 			\includegraphics[width=3in]{figures/alphaNot0/phi1_phi2_phi3.png}
@@ -679,210 +781,98 @@ and
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
-		
-		
-		\begin{figure}[H]
-			\label{fig:ang_vel_phi_total}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alphaNot0/ang_vel_phi_total.png}
-			\end{center}
-			\caption{Angular Velocity in Spacecraft Frame}
-		\end{figure}
+	\begin{block}{$\alpha$ $>$ 0}
+
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{figure}
+					\centering
+					\label{fig:ang_vel_phi_total}
+					\includegraphics[width=2.25in]{figures/alphaNot0/ang_vel_phi_total.png}
+					\caption{Angular Velocity. $\omega_c$ is the velocity constraint}
+				\end{figure}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{figure}[H]
+					\label{fig:ang_accel_total}
+					\begin{center}
+						\includegraphics[width=2.25in]{figures/alphaNot0/ang_accel_total.png}
+					\end{center}
+					\caption{Angular Acceleration. $\dot{\omega}_c$ is the acceleration constraint}
+				\end{figure}
+			\end{column}
+		\end{columns}		
+
 	\end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
-		
-		
-		\begin{figure}[H]
-			\label{fig:ang_accel_total}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alphaNot0/ang_accel_total.png}
-			\end{center}
-			\caption{Angular Acceleration}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:quats_phi_total}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alphaNot0/quats_phi_total.png}
-			\end{center}
-			\caption{Quaternion Attitude}
-		\end{figure}
-		
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:euler_ang_phi_total}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alphaNot0/euler_ang_phi_total.png}
-			\end{center}
-			\caption{Attitude in Euler Angles}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $>$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:torque_total}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alphaNot0/torque_total.png}
-			\end{center}
-			\caption{Torque Applied from Actuator System}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $=$ 0}
-		
-		\begin{table}[H]
-			\centering
-			\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
-			\begin{tabular}{llll}
-				\toprule
-				\midrule
-				$\phi$ & 1 & 2 & 3 \\
-				\midrule
-				Angle (rad) & 0.02 & 3.14 & 0.00 \\
-				Angle (deg) & 10.80 & 180 & 0.00 \\ 
-				\midrule
-				\bottomrule
-			\end{tabular}%
-			\label{tab:FOG_SF}%
-		\end{table}% 
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $=$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:phi1_phi2_phi3_alpha0}
-			\includegraphics[width=3in]{figures/alpha0/phi1_phi2_phi3.png}
-			\caption{Attitude Profile of the Entire Slew}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $=$ 0}
-		
-		
-		\begin{figure}[H]
-			\label{fig:ang_vel_phi_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/ang_vel.png}
-			\end{center}
-			\caption{Angular Velocity in Spacecraft Frame}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $=$ 0}
-		
-		
-		\begin{figure}[H]
-			\label{fig:ang_accel_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/ang_accel.png}
-			\end{center}
-			\caption{Angular Acceleration}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $=$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:quats_phi_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/quats.png}
-			\end{center}
-			\caption{Quaternion Attitude}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $=$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:euler_ang_phi_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/euler_angles.png}
-			\end{center}
-			\caption{Attitude in Euler Angles}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Numerical Simulations}
-	\begin{block}{alpha $=$ 0}
-		
-		\begin{figure}[H]
-			\label{fig:torque_total_alpha0}
-			\begin{center}
-				\includegraphics[width=3in]{figures/alpha0/torque.png}
-			\end{center}
-			\caption{Torque Applied from Actuator System}
-		\end{figure}
-		
-	\end{block}
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{Summary and Conclusion}
-\begin{frame}{Summary and Conclusion}
-	\begin{enumerate}
-		\item Geometric approach for large-angle slew planning with pointing and actuator constraints 
-		\item Assumed that initial and final attitudes, instrument boresight, and sun vector are known 
-		\item Target-frame quaternions, angular velocities, and angular accelerations are derived base on the PMP 
-		\item Limitation is for single sensitive-payload 
-	\end{enumerate}
+\begin{block}{$\alpha$ $>$ 0}
 	
-	
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}{Acknowledgments}
-	The research has been supported by Maxar Space Solutions (formerly Space Systems/Loral). The second author (Junette Hsin) would like to acknowledge Luke DeGalan for his useful comments. 
-\end{frame}
-%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\begin{frame}
-\begin{block}{References}
-
-
-	\bibliographystyle{AAS_publication}   % Number the references.
-	\bibliography{references_SAA}   % Use references.bib to resolve the labels.
-
+	\begin{columns}
+		\begin{column}{0.5\textwidth}	
+			\begin{figure}[H]
+				\label{fig:torque_total}
+				\begin{center}
+					\includegraphics[width=2.25in]{figures/alphaNot0/torque_total.png}
+				\end{center}
+				\caption{Torque}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}[H]
+				\label{fig:quats_phi_total}
+				\begin{center}
+					\includegraphics[width=2.25in]{figures/alphaNot0/quats_phi_total.png}
+				\end{center}
+				\caption{Quaternion Attitude}
+			\end{figure}
+		\end{column}
+	\end{columns}	
 \end{block}
 \end{frame}
 %%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{Q\& A }
+
+\section{Summary and Conclusion}
+\begin{frame}{Summary and Conclusion}
+\begin{block}{}
+	\begin{itemize}
+		\item Developed intuitive, geometric approach for large-angle sun (or any bright object) avoidance slew with pointing and actuator constraints. 
+		\item SAS algorithm is deterministic, easy to implement, and includes the control-torque and reaction wheels' angular momentum constraints. 
+		\item Assumed that initial and final attitudes, instrument boresight, and sun vector are known. 
+		\item Target-frame quaternions, angular velocities, and angular accelerations are derived based on the PMP. 
+		\item Limitation is for single sensitive-payload. 
+	\end{itemize}
+	
+\end{block}
+\end{frame}
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Acknowledgments}
+\begin{block}{}
+	The research has been supported by Maxar Space Infrastructure (formerly Space Systems/Loral). We would also like to acknowledge Luke DeGalan for his useful comments.
+	
+	\phantomsection{ }
+	\phantomsection{ }
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=1.5in]{./figures/maxar_logo.png}
+	\end{figure}
+	 
+\end{block}
+\end{frame}
+%%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}
+%\begin{block}{References}
+%
+%
+%	\bibliographystyle{AAS_publication}   % Number the references.
+%	\bibliography{references_SAA}   % Use references.bib to resolve the labels.
+%
+%\end{block}
+%\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Q \& A }
 \begin{frame}
 \begin{block}{}
 \begin{center}
@@ -1031,6 +1021,275 @@ t_{f3}=t_0-\frac{\dot{\phi}_{f}}{\ddot{\phi}_{max}}+\frac{\sqrt{2\ddot{\phi}_{ma
 The $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$,  can be found by substituting the boundary conditions given by (\ref{Bc3}) and $t_{13}$ and $t_{f3}$ in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively.
 \end{block}
 \end{frame}
+%
+%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Computing Steering Profiles}
+
+\begin{block}{ }
+	\small{
+		Using the Pontryagin's minimum principle (PMP), we derive the necessary conditions for the optimal solution as follows:
+		\begin{enumerate}
+			\item State Eqs.:
+			\begin{equation}
+			\left\{
+			\begin{array}{l}
+			\dot{x}_1=x_2, \\
+			\dot{x}_2=u, \\
+			\dot{x}_3=(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})+(\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max}),
+			\end{array}
+			\right.
+			\end{equation}
+			where the unit step function, $\mathbb{U}$, is defined as
+			
+			%		\begin{equation}
+			%			\mathbb{U}(X)=\left\{
+			%			                \begin{array}{lI}
+			%			           1, & X > 0, \\
+			%			           0, & X \leq 0.
+			%			                \end{array}
+			%			              \right.
+			%		 \end{equation}
+			
+			\begin{equation}
+			\mathbb{U}(X)=\left\{
+			\begin{array}{l}
+			1, X > 0, \\
+			0, X \leq 0. \\
+			\end{array}
+			\right.
+			\end{equation}
+			
+			Note:  ($x_3(t_0)=x_3(t_f)=0$ \& $x_3(t)\geq 0$ ) $\rightarrow x_3(t)=0, \forall t\in[t_0, t_f]. $  
+			\item Hamiltonian:
+			\begin{equation}
+			\begin{split}
+			\mathscr{H}=& 1+\lambda_1x_2+\lambda_2 u+\lambda_3\Big[(x_2+\dot{\phi}_{max})^2\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+			& (\dot{\phi}_{max}-x_2)^2\mathbb{U}(x_2-\dot{\phi}_{max})\Big]
+			\end{split}
+			\end{equation}
+		\end{enumerate}
+	}
+	\seti
+\end{block}
+\end{frame}
+%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+% THIS IS THE SLIDE THAT DOESN'T COMPILE GOOD
+%\begin{frame}{Computing Steering Profiles}
+%
+%\begin{block}{ }
+%	\begin{enumerate}
+%		\conti
+%		\small{
+%			\item Costate Eqs.:
+%			\begin{equation}
+%			\left\{\begin{array}{l}
+%			\dot{\lambda}_1=-\frac{\partial{\mathscr{H}}}{\partial{x_1}}=0,\\
+%			\dot{\lambda}_2=-\frac{\partial{\mathscr{H}}}{\partial{x_2}}=-\lambda_1-2\lambda_3(x_2+\dot{\phi}_{max})\mathbb{U}(-x_2-\dot{\phi}_{max})\\
+%			+2\lambda_3(\dot{\phi}_{max}-x_2)\mathbb{U}(x_2-\dot{\phi}_{max}),\\
+%			\dot{\lambda}_3=-\frac{\partial{\mathscr{H}}}{\partial{x_3}}=0.\\
+%			\end{array}
+%			\right.
+%			\end{equation}
+%			\item Applying the Pontryagin's minimum principle (PMP),
+%			\begin{equation}
+%			u^*=arg \underset{u\in\mathcal{U}}{min} \mathscr{H},
+%			\end{equation}
+%			where $\mathcal{U}$ defines the domain of feasible controls. The optimal control can be determined as
+%			\begin{equation}
+%			u^*(t)=\left\{
+%			\begin{array}{I}
+%			\ddot{\phi}_{max}    \lambda_2<0,\\
+%			?    \lambda_2=0,\\
+%			-\ddot{\phi}_{max}    \lambda_2>0. \\
+%			\end{array}
+%			\right.
+%			\end{equation}
+%		}
+%	\end{enumerate}
+%	\seti
+%	This is a {\it singular arc} optimal control problem.
+%\end{block}
+%\end{frame}
+%
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Computing Steering Profiles}
+
+\begin{block}{ }
+	\begin{enumerate}
+		\conti
+		\item Determining the optimal control in the singular arc:
+		\begin{equation}
+		\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)=\ddot{\lambda}_2=0\rightarrow \dot{x}_2=0\rightarrow u^*=0
+		\end{equation}
+		\item Checking the Generalized Legendre-Clebsch condition for optimality:
+		\begin{equation}
+		(-1)^2\frac{\partial}{\partial u}\Big[\frac{d^2}{dt^2}\Big(\frac{\partial \mathscr{H}}{\partial u}\Big)\Big]=1\geq 0
+		\end{equation}
+		\item The transversality condition:
+		\begin{equation}
+		\mathscr{H}|_{(*,t_f)}=0\  \text{and} \ \mathscr{H}\neq\mathscr{H}(t)\rightarrow \mathscr{H}=0, \forall t\in[t_0, t_f].
+		\end{equation}
+	\end{enumerate}
+	\seti
+\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}{Numerical Simulations}
+%	\begin{block}{alpha $=$ 0}
+%		
+%		\begin{table}[H]
+%			\centering
+%			\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
+%			\begin{tabular}{llll}
+%				\toprule
+%				\midrule
+%				$\phi$ & 1 & 2 & 3 \\
+%				\midrule
+%				Angle (rad) & 0.02 & 3.14 & 0.00 \\
+%				Angle (deg) & 10.80 & 180 & 0.00 \\ 
+%				\midrule
+%				\bottomrule
+%			\end{tabular}%
+%			\label{tab:FOG_SF}%
+%		\end{table}% 
+%		
+%	\end{block}
+%\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+
+\begin{columns}
+	\begin{column}{0.05\textwidth}
+		\phantomsection{ }
+	\end{column}
+	\begin{column}{0.65\textwidth}
+		\begin{center}
+			\begin{table}[H]
+				\centering
+				\caption{Initial, Final, and Sun Positions in Inertial Frame and Constraints (inputs)}
+				\begin{tabular}{lr}
+					\toprule
+					\midrule
+					Unit Vector & Comp \\
+					\midrule
+					$P_i$ & [0.65, -0.35, -0.67] \\
+					$P_f$ & [-0.93, -0.25, 0.28] \\ 
+					$S$ & [-0.20, -0.78, -0.59] \\
+					\midrule
+					\midrule
+					Parameter & Constraint \\ 
+					\midrule
+					$\alpha_{max}$ & 0.02 $rad/s^2$ \\
+					$\omega_{max}$ & 0.01 $rad/s$ \\ 
+					\midrule
+					\bottomrule
+				\end{tabular}%
+				\label{tab:Pi_Pf_S}%
+			\end{table}
+		\end{center}
+	\end{column}
+	\begin{column}{0.3\textwidth}
+		\begin{center}
+			\begin{table}[H]
+				\centering
+				\caption{Slew Angles $\phi_1$, $\phi_2$, and $\phi_3$}
+				\begin{tabular}{ll}
+					\toprule
+					\midrule
+					$\phi$ & deg \\
+					\midrule
+					1 & 41.82 \\
+					2 & 180 \\ 
+					3 & 62.45 \\
+					\midrule
+					\bottomrule
+				\end{tabular}%
+				\label{tab:phi_123}%
+			\end{table}%
+		\end{center}
+	\end{column}
+\end{columns}
+
+\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+\begin{block}{$\alpha$ $=$ 0}
+	
+	\begin{figure}[H]
+		\label{fig:phi1_phi2_phi3_alpha0}
+		\includegraphics[width=3in]{figures/alpha0/phi1_phi2_phi3.png}
+		\caption{Attitude Profile of the Entire Slew}
+	\end{figure}
+	
+\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+		
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{figure}[H]
+					\label{fig:ang_vel_alpha0}
+					\begin{center}
+						\includegraphics[width=2.25in]{figures/alpha0/ang_vel.png}
+					\end{center}
+					\caption{Angular Velocity. $\omega_c$ is the velocity constraint}
+				\end{figure}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{figure}[H]
+					\label{fig:ang_accel_alpha0}
+					\begin{center}
+						\includegraphics[width=2.25in]{figures/alpha0/ang_accel.png}
+					\end{center}
+					\caption{Angular Acceleration. $\dot{\omega_c}$ is the acceleration constraint}
+				\end{figure}
+			\end{column}
+		\end{columns}
+	
+	\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\begin{frame}{Numerical Simulations}
+	\begin{block}{$\alpha$ $=$ 0}
+		
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{figure}[H]
+					\label{fig:torque_total_alpha0}
+					\begin{center}
+						\includegraphics[width=2.25in]{figures/alpha0/torque.png}
+					\end{center}
+					\caption{Torque}
+				\end{figure}
+			\end{column}
+		
+%	\end{block}
+%\end{frame}
+%%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%\begin{frame}{Numerical Simulations}
+%	\begin{block}{$\alpha$ $=$ 0}
+		
+			\begin{column}{0.5\textwidth}
+				\begin{figure}[H]
+					\label{fig:quats_phi_total_alpha0}
+					\begin{center}
+						\includegraphics[width=2.25in]{figures/alpha0/quats.png}
+					\end{center}
+					\caption{Quaternion Attitude}
+				\end{figure}
+			\end{column}
+		\end{columns}
+		
+	\end{block}
+\end{frame}
+%%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 

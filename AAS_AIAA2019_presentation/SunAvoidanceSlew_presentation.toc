@@ -1,6 +1,7 @@
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
-\beamer@sectionintoc {2}{Sun-Avoidance Slew (SAS) Algorithm}{4}{0}{2}
-\beamer@sectionintoc {3}{Computing Steering Profiles}{15}{0}{3}
-\beamer@sectionintoc {4}{Numerical Simulations}{25}{0}{4}
-\beamer@sectionintoc {5}{Summary and Conclusion}{39}{0}{5}
-\beamer@sectionintoc {6}{Q\& A }{42}{0}{6}
+\beamer@sectionintoc {2}{Previous Literature}{4}{0}{2}
+\beamer@sectionintoc {3}{SAS Algorithm}{8}{0}{3}
+\beamer@sectionintoc {4}{Computing Steering Profiles}{17}{0}{4}
+\beamer@sectionintoc {5}{Numerical Simulations}{23}{0}{5}
+\beamer@sectionintoc {6}{Summary and Conclusion}{28}{0}{6}
+\beamer@sectionintoc {7}{Q \& A }{30}{0}{7}
