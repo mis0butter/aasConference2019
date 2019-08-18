@@ -1,0 +1,902 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2019.8.2)  3 AUG 2019 00:22
+entering extended mode
+**SunAvoidanceSlew_AASpaper.tex
+(C:\Users\Home\Desktop\AAS_AIAA_Conference_2019\SunAvoidanceSlew_AASpaper.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+(C:\Users\Home\Desktop\AAS_AIAA_Conference_2019\AAS.cls
+Document Class: AAS 2010/03/01 v2.0.5 Standard LaTeX document class
+NOTE: Passing ``letterpaper" option on to the standard LaTeX article class
+NOTE: Passing ``11pt" option on to the standard LaTeX article class
+
+TYPESETTING in AAS conference PAPER format ...
+
+("C:\Program Files (x86)\MiKTex\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTex\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTex\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTex\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTex\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTex\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count79
+))
+\Gin@req@height=\dimen102
+\Gin@req@width=\dimen103
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\setspace\setspace.sty"
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\fancyhdr\fancyhdr.sty"
+\fancy@headwidth=\skip41
+\f@ncyO@elh=\skip42
+\f@ncyO@erh=\skip43
+\f@ncyO@olh=\skip44
+\f@ncyO@orh=\skip45
+\f@ncyO@elf=\skip46
+\f@ncyO@erf=\skip47
+\f@ncyO@olf=\skip48
+\f@ncyO@orf=\skip49
+)
+
+! LaTeX Error: File `tabls.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+("C:\Program Files (x86)\MiKTex\tex\latex\tools\indentfirst.sty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\psnfss\times.sty"
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTex\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\base\size11.clo"
+File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip50
+\belowcaptionskip=\skip51
+\bibindent=\dimen104
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\tools\bm.sty"
+Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup4
+\symboldletters=\mathgroup5
+\symboldsymbols=\mathgroup6
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 138.
+LaTeX Info: Redefining \bm on input line 204.
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files (x86)\MiKTex\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files (x86)\MiKTex\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks15
+\ex@=\dimen105
+))
+("C:\Program Files (x86)\MiKTex\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+LaTeX Info: Redefining \boldsymbol on input line 39.
+\pmbraise@=\dimen106
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen107
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks16
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks17
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks18
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+
+! LaTeX Error: File `subfigure.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+("C:\Program Files (x86)\MiKTex\tex\latex\hyperref\hyperref.sty"
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+
+("C:\Program Files (x86)\MiKTex\tex\generic\oberdiek\hobsub-hyperref.sty"
+Package: hobsub-hyperref 2012/04/25 v1.12 Bundle oberdiek, subset hyperref (HO)
+
+
+("C:\Program Files (x86)\MiKTex\tex\generic\oberdiek\hobsub-generic.sty"
+Package: hobsub-generic 2012/04/25 v1.12 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/04/25 v1.12 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2011/06/24 v1.1 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+("C:\Program Files (x86)\MiKTex\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\oberdiek\auxhook.sty"
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen114
+\Hy@linkcounter=\count100
+\Hy@pagecounter=\count101
+
+("C:\Program Files (x86)\MiKTex\tex\latex\hyperref\pd1enc.def"
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count102
+
+("C:\Program Files (x86)\MiKTex\tex\latex\00miktex\hyperref.cfg"
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 4319.
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4688.
+\c@Hy@tempcnt=\count103
+
+("C:\Program Files (x86)\MiKTex\tex\latex\url\url.sty"
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen115
+\Fld@menulength=\count104
+\Field@Width=\dimen116
+\Fld@charsize=\dimen117
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring ON on input line 6313.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count105
+\c@Item=\count106
+\c@Hfootnote=\count107
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+("C:\Program Files (x86)\MiKTex\tex\latex\hyperref\hpdftex.def"
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count108
+\c@bookmark@seq@number=\count109
+
+("C:\Program Files (x86)\MiKTex\tex\latex\oberdiek\rerunfilecheck.sty"
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip55
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\cite\overcite.sty"
+Package: overcite 1999/04/23  v 3.8
+)
+
+! LaTeX Error: File `footnpag.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+("C:\Program Files (x86)\MiKTex\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count110
+\float@exts=\toks20
+\float@box=\box28
+\@float@everytoks=\toks21
+\@floatcapt=\box29
+)
+("C:\Program Files (x86)\MiKTex\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Program Files (x86)\MiKTex\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup7
+\symAMSb=\mathgroup8
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+("C:\Program Files (x86)\MiKTex\tex\latex\jknappen\mathrsfs.sty"
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup9
+)
+
+LaTeX Warning: Unused global option(s):
+    [preprint,paper].
+
+(C:\Users\Home\Desktop\AAS_AIAA_Conference_2019\SunAvoidanceSlew_AASpaper.aux
+
+LaTeX Warning: Label `tab:FOG_SF' multiply defined.
+
+)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 32.
+ ("C:\Program Files (x86)\MiKTex\tex\latex\psnfss\ot1ptm.fd"
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+("C:\Program Files (x86)\MiKTex\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count111
+\scratchdimen=\dimen118
+\scratchbox=\box30
+\nofMPsegments=\count112
+\nofMParguments=\count113
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count114
+\MPscratchDim=\dimen119
+\MPnumerator=\count115
+\makeMPintoPDFobject=\count116
+\everyMPtoPDFconversion=\toks23
+)
+\AtBeginShipoutBox=\box31
+Package hyperref Info: Link coloring ON on input line 32.
+ ("C:\Program Files (x86)\MiKTex\tex\latex\hyperref\nameref.sty"
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+("C:\Program Files (x86)\MiKTex\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count117
+)
+LaTeX Info: Redefining \ref on input line 32.
+LaTeX Info: Redefining \pageref on input line 32.
+LaTeX Info: Redefining \nameref on input line 32.
+
+(C:\Users\Home\Desktop\AAS_AIAA_Conference_2019\SunAvoidanceSlew_AASpaper.out)
+(C:\Users\Home\Desktop\AAS_AIAA_Conference_2019\SunAvoidanceSlew_AASpaper.out)
+\@outlinefile=\write3
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 41.
+
+("C:\Program Files (x86)\MiKTex\tex\latex\psnfss\ot1phv.fd"
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 41.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 41.
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 41.
+LaTeX Font Info:    Try loading font information for U+msa on input line 41.
+
+("C:\Program Files (x86)\MiKTex\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 41.
+
+("C:\Program Files (x86)\MiKTex\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 41.
+
+("C:\Program Files (x86)\MiKTex\tex\latex\jknappen\ursfs.fd"
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 50.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+! Extra }, or forgotten $.
+l.60 ...3\times \mathbb{R}^3\times \mathbb{SO}(3)}
+                                                  $, final state, $x_f=$\big...
+
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.60 ..., $^\mathcal{N}q^\mathcal{G}(t_f)$\big]\in
+                                                   \mathbb{R}^3\times \mathb...
+
+? 
+! Extra }, or forgotten $.
+l.60 ...3\times \mathbb{R}^3\times \mathbb{SO}(3)}
+                                                  $, the sun unit vector in ...
+
+? 
+<./Figures/SASSchematic1.pdf, id=103, 580.63428pt x 533.20212pt>
+File: ./Figures/SASSchematic1.pdf Graphic file (type pdf)
+
+<use ./Figures/SASSchematic1.pdf>
+Package pdftex.def Info: ./Figures/SASSchematic1.pdf used on input line 64.
+(pdftex.def)             Requested size: 252.94499pt x 232.28276pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 65.
+
+Underfull \vbox (badness 7595) has occurred while \output is active []
+
+ [2 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/SASSchematic1.pdf>]
+
+
+! LaTeX Error: \begin{document} ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80 	\end{enumerate}
+                     
+? 
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.80 	\end{enumerate}
+                     
+? 
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 86.
+
+<./Figures/SVAS_1r_modified.pdf, id=160, 416.64609pt x 299.70067pt>
+File: ./Figures/SVAS_1r_modified.pdf Graphic file (type pdf)
+
+<use ./Figures/SVAS_1r_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_1r_modified.pdf used on input line 101.
+
+(pdftex.def)             Requested size: 252.94499pt x 181.94826pt.
+
+<./Figures/SVAS_1rb_modified.pdf, id=161, 467.77823pt x 480.8635pt>
+File: ./Figures/SVAS_1rb_modified.pdf Graphic file (type pdf)
+
+<use ./Figures/SVAS_1rb_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_1rb_modified.pdf used on input line 101
+.
+(pdftex.def)             Requested size: 252.94499pt x 260.02194pt.
+
+Overfull \hbox (72.26999pt too wide) in paragraph at lines 101--102
+ [][] 
+ []
+
+[3 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/SVAS_1r_modified.pdf
+> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/SVAS_1rb_modified.pdf
+
+
+pdfTeX warning: miktex-pdftex.exe (file C:/Users/Home/Desktop/AAS_AIAA_Conferen
+ce_2019/Figures/SVAS_1rb_modified.pdf): PDF inclusion: multiple pdfs with page 
+group included in a single page
+>] <./Figures/SVAS_2r_modified.pdf, id=282, 457.96465pt x 502.12563pt>
+File: ./Figures/SVAS_2r_modified.pdf Graphic file (type pdf)
+
+<use ./Figures/SVAS_2r_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_2r_modified.pdf used on input line 130.
+
+(pdftex.def)             Requested size: 252.94499pt x 277.34221pt.
+
+<./Figures/SVAS_3r_modified.pdf, id=283, 500.49043pt x 492.31227pt>
+File: ./Figures/SVAS_3r_modified.pdf Graphic file (type pdf)
+
+<use ./Figures/SVAS_3r_modified.pdf>
+Package pdftex.def Info: ./Figures/SVAS_3r_modified.pdf used on input line 138.
+
+(pdftex.def)             Requested size: 252.94499pt x 248.80728pt.
+
+Underfull \vbox (badness 1168) has occurred while \output is active []
+
+ [4 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/SVAS_2r_modified.pd
+f>]
+<./Figures/SVAS_4r.pdf, id=356, 454.97849pt x 299.73782pt>
+File: ./Figures/SVAS_4r.pdf Graphic file (type pdf)
+
+<use ./Figures/SVAS_4r.pdf>
+Package pdftex.def Info: ./Figures/SVAS_4r.pdf used on input line 157.
+(pdftex.def)             Requested size: 252.94499pt x 166.64001pt.
+ [5 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/SVAS_3r_modified.pd
+f> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/SVAS_4r.pdf
+
+pdfTeX warning: miktex-pdftex.exe (file C:/Users/Home/Desktop/AAS_AIAA_Conferen
+ce_2019/Figures/SVAS_4r.pdf): PDF inclusion: multiple pdfs with page group incl
+uded in a single page
+>] <./Figures/SASSchematic3.pdf, id=465, 587.17598pt x 335.29565pt>
+File: ./Figures/SASSchematic3.pdf Graphic file (type pdf)
+
+<use ./Figures/SASSchematic3.pdf>
+Package pdftex.def Info: ./Figures/SASSchematic3.pdf used on input line 218.
+(pdftex.def)             Requested size: 433.62pt x 247.61351pt.
+
+<./Figures/guidance_loop.pdf, id=467, 711.87354pt x 246.27007pt>
+File: ./Figures/guidance_loop.pdf Graphic file (type pdf)
+
+<use ./Figures/guidance_loop.pdf>
+Package pdftex.def Info: ./Figures/guidance_loop.pdf used on input line 229.
+(pdftex.def)             Requested size: 289.07999pt x 100.00938pt.
+ [6 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/SASSchematic3.pdf>]
+
+<./Figures/Spacecraft_earth.pdf, id=540, 695.12537pt x 580.63383pt>
+File: ./Figures/Spacecraft_earth.pdf Graphic file (type pdf)
+
+<use ./Figures/Spacecraft_earth.pdf>
+Package pdftex.def Info: ./Figures/Spacecraft_earth.pdf used on input line 263.
+
+(pdftex.def)             Requested size: 289.07999pt x 241.47241pt.
+
+Underfull \vbox (badness 4132) has occurred while \output is active []
+
+ [7 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/guidance_loop.pdf>]
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.301 ... their center of masses, respectively. M_
+                                                  {max}$ is the maximum avai...
+
+? 
+
+Underfull \hbox (badness 10000) in paragraph at lines 300--302
+
+ []
+
+[8 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/Spacecraft_earth.pdf
+>]
+
+! LaTeX Error: Illegal character in array arg.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.361 		\begin{array}{lI}
+                         
+? 
+[9] <./Figures/bang_off_bang.pdf, id=696, 356.55789pt x 166.83028pt>
+File: ./Figures/bang_off_bang.pdf Graphic file (type pdf)
+
+<use ./Figures/bang_off_bang.pdf>
+Package pdftex.def Info: ./Figures/bang_off_bang.pdf used on input line 405.
+(pdftex.def)             Requested size: 252.94499pt x 118.35358pt.
+ [10 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/bang_off_bang.pdf>
+]
+<./Figures/Bang_bang.pdf, id=749, 232.25359pt x 161.92294pt>
+File: ./Figures/Bang_bang.pdf Graphic file (type pdf)
+
+<use ./Figures/Bang_bang.pdf>
+Package pdftex.def Info: ./Figures/Bang_bang.pdf used on input line 485.
+(pdftex.def)             Requested size: 144.54pt x 100.77167pt.
+ [11 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/Figures/Bang_bang.pdf>]
+! Too many }'s.
+l.515 ...st-to-rest maneuver around the $\hat{e}$}
+                                                   with boundary conditions,
+? 
+
+Overfull \hbox (5.23645pt too wide) in paragraph at lines 515--516
+[] []\OT1/ptm/m/it/10.95 The First Slew Ma-neu-ver:[][] \OT1/ptm/m/n/10.95 This
+ is a single-axis nonrest-to-rest ma-neu-ver around the $[]$ with bound-
+ []
+
+! Too many }'s.
+l.549 ...to-nonrest maneuver around the $\hat{e}$}
+                                                   with boundary conditions,
+? 
+[12]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 566.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\alpha' on input line 566.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 566.
+
+<figures/alphaNot0/chord_geometry_phi2.png, id=815, 406.51875pt x 313.9228pt>
+File: figures/alphaNot0/chord_geometry_phi2.png Graphic file (type png)
+
+<use figures/alphaNot0/chord_geometry_phi2.png>
+Package pdftex.def Info: figures/alphaNot0/chord_geometry_phi2.png used on inpu
+t line 573.
+(pdftex.def)             Requested size: 234.87749pt x 181.37599pt.
+
+
+Package hyperref Warning: Suppressing empty link on input line 578.
+
+<figures/alphaNot0/phi1_phi2_phi3.png, id=816, 417.05812pt x 311.66437pt>
+File: figures/alphaNot0/phi1_phi2_phi3.png Graphic file (type png)
+
+<use figures/alphaNot0/phi1_phi2_phi3.png>
+Package pdftex.def Info: figures/alphaNot0/phi1_phi2_phi3.png used on input lin
+e 582.
+(pdftex.def)             Requested size: 234.87749pt x 175.52477pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alphaNot0/chord_ge
+ometry_phi2.png>]
+! Undefined control sequence.
+l.592 						\toprule
+                    
+? 
+! Undefined control sequence.
+l.593 						\midrule
+                    
+? 
+! Undefined control sequence.
+<recently read> \midrule 
+                         
+l.595 						\midrule
+                    
+? 
+! Undefined control sequence.
+<recently read> \midrule 
+                         
+l.598 						\midrule
+                    
+? 
+! Undefined control sequence.
+l.599 						\bottomrule
+                       
+? 
+<figures/alphaNot0/ang_vel_phi_total.png, id=825, 392.21532pt x 310.15875pt>
+File: figures/alphaNot0/ang_vel_phi_total.png Graphic file (type png)
+
+<use figures/alphaNot0/ang_vel_phi_total.png>
+Package pdftex.def Info: figures/alphaNot0/ang_vel_phi_total.png used on input 
+line 608.
+(pdftex.def)             Requested size: 234.87749pt x 185.74173pt.
+
+<figures/alphaNot0/ang_accel_total.png, id=826, 406.51875pt x 310.91156pt>
+File: figures/alphaNot0/ang_accel_total.png Graphic file (type png)
+
+<use figures/alphaNot0/ang_accel_total.png>
+Package pdftex.def Info: figures/alphaNot0/ang_accel_total.png used on input li
+ne 617.
+(pdftex.def)             Requested size: 234.87749pt x 179.63617pt.
+
+Underfull \vbox (badness 3098) has occurred while \output is active []
+
+ [14 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alphaNot0/phi1_phi
+2_phi3.png> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alphaNot0/a
+ng_vel_phi_total.png>]
+<figures/alphaNot0/quats_phi_total.png, id=837, 405.01312pt x 308.65312pt>
+File: figures/alphaNot0/quats_phi_total.png Graphic file (type png)
+
+<use figures/alphaNot0/quats_phi_total.png>
+Package pdftex.def Info: figures/alphaNot0/quats_phi_total.png used on input li
+ne 625.
+(pdftex.def)             Requested size: 234.87749pt x 179.00009pt.
+
+<figures/alphaNot0/euler_ang_phi_total.png, id=838, 397.485pt x 312.41719pt>
+File: figures/alphaNot0/euler_ang_phi_total.png Graphic file (type png)
+
+<use figures/alphaNot0/euler_ang_phi_total.png>
+Package pdftex.def Info: figures/alphaNot0/euler_ang_phi_total.png used on inpu
+t line 633.
+(pdftex.def)             Requested size: 234.87749pt x 184.61533pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alphaNot0/ang_acce
+l_total.png> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alphaNot0/
+quats_phi_total.png>]
+<figures/alphaNot0/torque_total.png, id=847, 410.2828pt x 310.91156pt>
+File: figures/alphaNot0/torque_total.png Graphic file (type png)
+
+<use figures/alphaNot0/torque_total.png>
+Package pdftex.def Info: figures/alphaNot0/torque_total.png used on input line 
+641.
+(pdftex.def)             Requested size: 234.87749pt x 177.98521pt.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 648.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\alpha' on input line 648.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 648.
+
+! Undefined control sequence.
+l.659 					\toprule
+                   
+? 
+! Undefined control sequence.
+l.660 					\midrule
+                   
+? 
+! Undefined control sequence.
+<recently read> \midrule 
+                         
+l.662 					\midrule
+                   
+? 
+! Undefined control sequence.
+<recently read> \midrule 
+                         
+l.665 					\midrule
+                   
+? 
+! Undefined control sequence.
+l.666 					\bottomrule
+                      
+? 
+<figures/alpha0/phi1_phi2_phi3.png, id=848, 526.96875pt x 395.22656pt>
+File: figures/alpha0/phi1_phi2_phi3.png Graphic file (type png)
+
+<use figures/alpha0/phi1_phi2_phi3.png>
+Package pdftex.def Info: figures/alpha0/phi1_phi2_phi3.png used on input line 6
+74.
+(pdftex.def)             Requested size: 234.87749pt x 176.16171pt.
+ [16 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alphaNot0/euler_an
+g_phi_total.png> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alphaN
+ot0/torque_total.png>]
+<figures/alpha0/ang_vel.png, id=859, 526.96875pt x 395.22656pt>
+File: figures/alpha0/ang_vel.png Graphic file (type png)
+
+<use figures/alpha0/ang_vel.png>
+Package pdftex.def Info: figures/alpha0/ang_vel.png used on input line 683.
+(pdftex.def)             Requested size: 234.87749pt x 176.16171pt.
+
+! Undefined control sequence.
+l.685 				\captionTime
+                       History of Angular Velocity when $\alpha=0$.}
+? 
+! Extra }, or forgotten \endgroup.
+\@endfloatbox ...pagefalse \outer@nobreak \egroup 
+                                                  \color@endbox 
+l.686 			\end{figure}
+                     
+? 
+<figures/alpha0/ang_accel.png, id=860, 526.96875pt x 395.22656pt>
+File: figures/alpha0/ang_accel.png Graphic file (type png)
+
+<use figures/alpha0/ang_accel.png>
+Package pdftex.def Info: figures/alpha0/ang_accel.png used on input line 692.
+(pdftex.def)             Requested size: 234.87749pt x 176.16171pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alpha0/phi1_phi2_p
+hi3.png (PNG copy)> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alp
+ha0/ang_vel.png (PNG copy)>]
+<figures/alpha0/quats.png, id=867, 526.96875pt x 395.22656pt>
+File: figures/alpha0/quats.png Graphic file (type png)
+
+<use figures/alpha0/quats.png>
+Package pdftex.def Info: figures/alpha0/quats.png used on input line 700.
+(pdftex.def)             Requested size: 234.87749pt x 176.16171pt.
+
+<figures/alpha0/euler_angles.png, id=868, 526.96875pt x 395.22656pt>
+File: figures/alpha0/euler_angles.png Graphic file (type png)
+
+<use figures/alpha0/euler_angles.png>
+Package pdftex.def Info: figures/alpha0/euler_angles.png used on input line 708
+.
+(pdftex.def)             Requested size: 234.87749pt x 176.16171pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [18 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alpha0/ang_accel.p
+ng (PNG copy)> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alpha0/q
+uats.png (PNG copy)>] <figures/alpha0/torque.png, id=877, 526.96875pt x 395.226
+56pt>
+File: figures/alpha0/torque.png Graphic file (type png)
+
+<use figures/alpha0/torque.png>
+Package pdftex.def Info: figures/alpha0/torque.png used on input line 716.
+(pdftex.def)             Requested size: 234.87749pt x 176.16171pt.
+ [19 <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alpha0/euler_angle
+s.png (PNG copy)> <C:/Users/Home/Desktop/AAS_AIAA_Conference_2019/figures/alpha
+0/torque.png (PNG copy)>]
+Overfull \hbox (11.19217pt too wide) in paragraph at lines 727--748
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 727--748
+
+ []
+
+(C:\Users\Home\Desktop\AAS_AIAA_Conference_2019\SunAvoidanceSlew_AASpaper.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 755.
+
+[20]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 755.
+
+(C:\Users\Home\Desktop\AAS_AIAA_Conference_2019\SunAvoidanceSlew_AASpaper.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 755.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 755.
+Package rerunfilecheck Info: File `SunAvoidanceSlew_AASpaper.out' has not chang
+ed.
+(rerunfilecheck)             Checksum: 677C6EDBDEA772726E6FD86E9D658442;1181.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 755.
+ ) 
+Here is how much of TeX's memory you used:
+ 6839 strings out of 493921
+ 98765 string characters out of 3146484
+ 180757 words of memory out of 3000000
+ 9812 multiletter control sequences out of 15000+200000
+ 40636 words of font info for 109 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 34i,19n,45p,1508b,483s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{section*.133} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.132} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.131} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.100} has been referenced but does not exis
+t, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.39} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.5} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.2} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.1} has been referenced but does not exist,
+ replaced by a fixed one
+
+{C:/Program Files (x86)/MiKTex/fonts/enc/dvips/fontname/8r.enc}<C:/Program File
+s (x86)/MiKTex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86
+)/MiKTex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKT
+ex/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTex/font
+s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTex/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTex/fonts/type1/public
+/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTex/fonts/type1/public/amsfon
+ts/cm/cmr6.pfb><C:/Program Files (x86)/MiKTex/fonts/type1/public/amsfonts/cm/cm
+r7.pfb><C:/Program Files (x86)/MiKTex/fonts/type1/public/amsfonts/cm/cmr8.pfb><
+C:/Program Files (x86)/MiKTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pro
+gram Files (x86)/MiKTex/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Fi
+les (x86)/MiKTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x8
+6)/MiKTex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKT
+ex/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files (x86)/MiKTe
+x/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiKTex
+/fonts/type1/hoekwater/rsfs/rsfs10.pfb><C:/Program Files (x86)/MiKTex/fonts/typ
+e1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTex/fonts/type1/urw/times
+/utmb8a.pfb><C:/Program Files (x86)/MiKTex/fonts/type1/urw/times/utmr8a.pfb><C:
+/Program Files (x86)/MiKTex/fonts/type1/urw/times/utmri8a.pfb>
+Output written on SunAvoidanceSlew_AASpaper.pdf (20 pages, 2119592 bytes).
+PDF statistics:
+ 990 PDF objects out of 1000 (max. 8388607)
+ 165 named destinations out of 1000 (max. 500000)
+ 257 words of extra memory for PDF output out of 10000 (max. 10000000)
+
