@@ -1,0 +1,29 @@
+% Junette's LaTeX Library 
+
+% Packages: 
+    \usepackage{graphicx}   % Allows including images
+    \usepackage{booktabs}   % Allows the use of \toprule, \midrule and \bottomrule in tables
+    \usepackage{amsmath}    % Makes math look better  
+
+% Figures: 
+    \begin{figure}[    ]
+        \begin{center}
+            \includegraphics[width=    in]{    }
+            \caption{    }
+            \label{fig:    }
+        \end{center}
+    \end{figure}
+
+% Columns: 
+    \begin{columns}
+        \begin{column}{    \textwidth}  %%<--- here
+            \begin{center}
+                \includegraphics[width=    in]{    }
+            \end{center}
+        \end{column}
+        \begin{column}{     \textwidth}
+            \begin{center}
+                \includegraphics[width=    in]{    }
+            \end{center}
+        \end{column}
+    \end{columns}
