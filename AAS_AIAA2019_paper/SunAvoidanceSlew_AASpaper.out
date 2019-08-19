@@ -2,8 +2,9 @@
 \BOOKMARK [1][-]{section*.2}{Problem Formulation}{}% 2
 \BOOKMARK [1][-]{section*.3}{Sun-Avoidance Slew \(SAS\) Algorithm Description}{}% 3
 \BOOKMARK [1][-]{section*.4}{Numerical simulation}{}% 4
-\BOOKMARK [2][-]{section*.5}{Case I: > 0}{section*.4}% 5
-\BOOKMARK [2][-]{section*.6}{Case II: = 0}{section*.4}% 6
-\BOOKMARK [1][-]{section*.7}{Conclusion}{}% 7
-\BOOKMARK [1][-]{section*.8}{Acknowledgment}{}% 8
-\BOOKMARK [1][-]{section*.9}{Notation}{}% 9
+\BOOKMARK [2][-]{section*.5}{SAS Algorithm Pseudocode}{section*.4}% 5
+\BOOKMARK [2][-]{section*.6}{Case I: > 0}{section*.4}% 6
+\BOOKMARK [2][-]{section*.7}{Case II: = 0}{section*.4}% 7
+\BOOKMARK [1][-]{section*.8}{Conclusion}{}% 8
+\BOOKMARK [1][-]{section*.9}{Acknowledgment}{}% 9
+\BOOKMARK [1][-]{section*.10}{Notation}{}% 10

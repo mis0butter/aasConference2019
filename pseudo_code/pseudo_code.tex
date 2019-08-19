@@ -7,7 +7,13 @@
 
 \begin{document}
 	
+%%%%%%%%%%%%
+
+SAS Algorithm Pseudocode: 
 	
+	\begin{enumerate}
+	
+	\item Find: sequence of slew maneuvers to avoid sun vector 
 	
 	\begin{enumerate}
 		
@@ -15,69 +21,112 @@
 		\item Check the sun vector intrusion 
 		
 		\begin{enumerate}
-			\item[a.] Find the eigenaxis of slew plane 
-				\begin{equation}\label{eaxis}
+			\item Find eigenaxis $
 				\hat{e}=\frac{\hat{P}_i\times\hat{P}_f}{|\hat{P}_i\times \hat{P}_f|}
-				\end{equation} 
-			\item[b.] Find the angular separation between the sun vector and the eigenaxis 
-				\begin{equation}
+				$
+			\item Compute $
 				\alpha=\frac{\pi}{2}-\cos^{-1}(\hat{S}\cdot_\mathcal{N}\hat{e})
-				\end{equation}
-			\item[c.] IF $|\alpha|<\epsilon_p$, THEN determine the projection of the sun vector into the slew plane.
-				\begin{equation}\label{Sbar}
+				$
+			\item IF $|\alpha|<\epsilon_p$, THEN find 
+				$
 				\vec{S}_{||}=\hat{S}\cos\alpha
-				\end{equation}
+				$
 		\end{enumerate}
 		
 		% SLEW AROUND EIGENAXIS 
-		\item Slew around the eigenaxis, $\hat{e}$, through angle $\phi_1$:
-		
-			\begin{enumerate}
-				\item[a.] If $\cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p\leq \pi$, then 
-					\begin{equation}
-					\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p
-					\end{equation}
-				\item[b.] If $\cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p>\pi$, then 
-					\begin{equation}
-					\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p-2\pi
-					\end{equation}
-			\end{enumerate}
+		\item Compute $\phi_1$:
+			$
+			\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p
+			$
 			
 		% SLEW AROUND SUN VECTOR 
-		\item Slew around the $\hat{S}$ via $\phi_2$:
+		\item Compute $\phi_2$:
 		
 			\begin{enumerate}
-				\item[a.] If $\alpha \neq 0$, then 
-					\begin{equation}
+				\item IF $\alpha \neq 0$, THEN
+					$
 					\phi_2 = 2\sin^{-1}\Big( \frac{ \sin\epsilon_p}{\sin \theta}\Big),\ \theta=\cos^{-1}(\hat{P}_1\cdot\hat{S})
-					\end{equation}
+					$
 				
-				\item[b.] If $\alpha = 0$, then 
-					\begin{equation}
+				\item IF $\alpha = 0$, THEN
+					$
 					\phi_2 = \pi
-					\end{equation}
+					$
 				
 			\end{enumerate}
 			
 		% SLEW AROUND EIGENAXIS AGAIN 
-		\item Slew about the $\hat{e}$ through angle $\phi_3$:
-		
-			\begin{enumerate}
-				\item[a.] If $_\mathcal{G}\hat{P}_f.\hat{P}_2\geq 0$, then 
-					\begin{equation}
-					\phi_3 = \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2
-					\end{equation}
-				
-				\item[b.] If $_\mathcal{G}\hat{P}_f.\hat{P}_2<0$, then 
-					\begin{equation}
-					\phi_3 = \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)-2\pi
-					\end{equation}
-				
-				
-			\end{enumerate}
-		
-		\item Perform the final rotation, $\phi_4$, about the instrument boresight axis to adjust the attitude. 
+		\item Compute $\phi_3$:
+			$
+			\phi_3 = \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)
+			$
 		
 	\end{enumerate}
+
+	\item Find: commanded angular velocity, angular acceleration, and quaternion profiles 
+	
+	\begin{enumerate}
+		
+		\item Compute $\phi_{tt} = \frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}$
+		
+		\item Compute $t_1$, $t_2$, and $t_f$. 
+		
+		IF $\phi > \phi_{tt}$, THEN : 
+		
+		$
+			t_1 = t_0 + \frac{\dot{\phi}_{max} - \dot{\phi}_0}{\ddot{\phi}_{max}}
+		$ 
+		
+		$
+			t_2 = t_1 + \frac{1}{\dot{\phi}_max} \big[ \phi_f - \dot{\phi}_0 (t_1 - t_0) - \frac{1}{2} \ddot{\phi}_{max} (t_f1 - t_0)^2 - \\ \frac{\dot{\phi}_{max} ( \dot{\phi}_{max} -  \dot{\phi}_f ) }{\ddot{\phi}_{max}} + \frac{ (\dot{\phi}_{max} - \dot{\phi}_f)^2}{2 \ddot{\phi}_{max}} \big]
+		$
+		
+		$
+			 t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
+		$
+		
+		ELSE: 
+		
+		$ t_f = \sqrt{\frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}}
+		$
+		
+		$ t_2 = t_f / 2 $ 
+		
+		$ t_1 = t_2 $ 
+		
+		\item Find ${}^DR^N$: 
+		$
+		{}^DR^N = \big[(cos\phi)I_{3x3} + (1 - cos\phi)\hat{e}\hat{e}^T - (sin\alpha)E^x \big]
+		$
+		
+		\item Find $_\mathcal{B}\dot{\omega}^{D}$: 
+		$
+		_\mathcal{B}\dot{\omega}^{D} = {}^DR^N \ddot{\phi}_{max} \cdot _\mathcal{N}\hat{e}
+		$
+		
+		\item Solve for control torque, $u$: 
+		$
+		J \cdot _\mathcal{B}\dot{\omega}^D = u - _\mathcal{B}\omega^C \times J \cdot _\mathcal{B}\omega^C 
+		$
+		
+		\item FOR each $\phi$ between switching times, propagate $\omega$ and $q$ between switching times by solving above eqn and 
+		$
+		\dot{q} = \frac{1}{2} \Omega q 
+		$
+		
+		where
+			\[ \Omega = \left[ \begin{array}{cccc}
+				0 & \omega_3 & -\omega_2 & \omega_1 \\
+				-\omega_3 & 0 & -\omega_1 & \omega_2 \\
+				\omega_2 & -\omega_1 & 0 & \omega_3 \\ 
+				-\omega_1 & \omega_2 & -\omega_3 & 0 \\ 
+			\end{array} \right] \] 
+			
+		with correct $u$ for each switching time interval. 
+			
+	\end{enumerate} 
+\end{enumerate}
+
+%%%%%%%%%%%% 
 
 \end{document}
