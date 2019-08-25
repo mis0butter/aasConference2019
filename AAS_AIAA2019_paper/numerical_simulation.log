@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.17)  19 AUG 2019 11:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.2.17)  21 AUG 2019 22:54
 entering extended mode
 **./numerical_simulation.tex
 (numerical_simulation.tex
@@ -424,6 +424,40 @@ Package: multicol 2018/11/09 v1.8u multicolumn formatting (FMi)
 \colbreak@box=\box56
 \mc@col@check@num=\count128
 )
+("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/algorithmicx\algps
+eudocode.sty"
+Package: algpseudocode 
+
+("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ifthen.sty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/algorithmicx\algor
+ithmicx.sty"
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count129
+\c@ALG@rem=\count130
+\c@ALG@nested=\count131
+\ALG@tlm=\skip64
+\ALG@thistlm=\skip65
+\c@ALG@Lnr=\count132
+\c@ALG@blocknr=\count133
+\c@ALG@storecount=\count134
+\c@ALG@tmpcounter=\count135
+\ALG@tmplength=\skip66
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+)
+("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/algorithms\algorit
+hm.sty"
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+\@float@every@algorithm=\toks22
+\c@algorithm=\count136
+)
+\myindent=\skip67
+
 
 LaTeX Warning: Unused global option(s):
     [preprint,paper].
@@ -431,21 +465,21 @@ LaTeX Warning: Unused global option(s):
 (numerical_simulation.aux)
 \openout1 = `numerical_simulation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 44.
 
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -453,17 +487,17 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/context/base\supp-pdf.mk
 ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count129
+\scratchcounter=\count137
 \scratchdimen=\dimen148
 \scratchbox=\box57
-\nofMPsegments=\count130
-\nofMParguments=\count131
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count132
+\nofMPsegments=\count138
+\nofMParguments=\count139
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count140
 \MPscratchDim=\dimen149
-\MPnumerator=\count133
-\makeMPintoPDFobject=\count134
-\everyMPtoPDFconversion=\toks23
+\MPnumerator=\count141
+\makeMPintoPDFobject=\count142
+\everyMPtoPDFconversion=\toks24
 )
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-
 base.sty"
@@ -481,7 +515,7 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 \AtBeginShipoutBox=\box58
-Package hyperref Info: Link coloring ON on input line 33.
+Package hyperref Info: Link coloring ON on input line 44.
 
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.s
 ty"
@@ -491,291 +525,336 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 estring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count135
+\c@section@level=\count143
 )
-LaTeX Info: Redefining \ref on input line 33.
-LaTeX Info: Redefining \pageref on input line 33.
-LaTeX Info: Redefining \nameref on input line 33.
+LaTeX Info: Redefining \ref on input line 44.
+LaTeX Info: Redefining \pageref on input line 44.
+LaTeX Info: Redefining \nameref on input line 44.
  (numerical_simulation.out) (numerical_simulation.out)
 \@outlinefile=\write4
 \openout4 = `numerical_simulation.out'.
 
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 42.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 53.
 
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1phv.fd"
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 53.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 53.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 42.
-LaTeX Font Info:    Try loading font information for U+msa on input line 42.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 53.
+LaTeX Font Info:    Try loading font information for U+msa on input line 53.
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 42.
+LaTeX Font Info:    Try loading font information for U+msb on input line 53.
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 42.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 53.
 ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 42.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 53.
  ("C:\Users\junet\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 42.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 53.
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 42.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 53.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 64.
  [1
 
 {C:/Users/junet/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[2]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 135.
+
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.158 ...{2} \ddot{\phi}_{max} (t_f1 - t_0)^2 - \\
+                                                   \frac{\dot{\phi}_{max} ( ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.158 ...dot{\phi}_{max} (t_f1 - t_0)^2 - \\ \frac
+                                                  {\dot{\phi}_{max} ( \dot{\...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.158 ...dot{\phi}_{max} (t_f1 - t_0)^2 - \\ \frac
+                                                  {\dot{\phi}_{max} ( \dot{\...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[2] [3] [4]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 184.
+(hyperref)                removing `math shift' on input line 321.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\alpha' on input line 184.
+(hyperref)                removing `\alpha' on input line 321.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 184.
+(hyperref)                removing `math shift' on input line 321.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 195.
-<figures/alphaNot0/phi1_phi2_phi3.png, id=60, 526.96875pt x 395.22656pt>
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 332.
+<figures/alphaNot0/phi1_phi2_phi3.png, id=80, 526.96875pt x 395.22656pt>
 File: figures/alphaNot0/phi1_phi2_phi3.png Graphic file (type png)
 <use figures/alphaNot0/phi1_phi2_phi3.png>
 Package pdftex.def Info: figures/alphaNot0/phi1_phi2_phi3.png  used on input li
-ne 246.
+ne 383.
 (pdftex.def)             Requested size: 343.28249pt x 257.47316pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [3pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
+ [5pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.251 		
+l.388 		
         pdfTeX warning (ext4): destination with the same identifier (name{table
 .2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.251 		
+l.388 		
         ]
-<figures/alphaNot0/ang_vel_phi_total.png, id=68, 526.96875pt x 395.22656pt>
+<figures/alphaNot0/ang_vel_phi_total.png, id=88, 526.96875pt x 395.22656pt>
 File: figures/alphaNot0/ang_vel_phi_total.png Graphic file (type png)
 <use figures/alphaNot0/ang_vel_phi_total.png>
 Package pdftex.def Info: figures/alphaNot0/ang_vel_phi_total.png  used on input
- line 255.
+ line 392.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 255--256
+Overfull \hbox (5.0pt too wide) in paragraph at lines 392--393
  [] 
  []
 
-<figures/alphaNot0/ang_accel_total.png, id=69, 526.96875pt x 395.22656pt>
+<figures/alphaNot0/ang_accel_total.png, id=89, 526.96875pt x 395.22656pt>
 File: figures/alphaNot0/ang_accel_total.png Graphic file (type png)
 <use figures/alphaNot0/ang_accel_total.png>
 Package pdftex.def Info: figures/alphaNot0/ang_accel_total.png  used on input l
-ine 264.
+ine 401.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 264--265
+Overfull \hbox (5.0pt too wide) in paragraph at lines 401--402
  [] 
  []
 
-[4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+[6pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.274 	
+l.411 	
        pdfTeX warning (ext4): destination with the same identifier (name{figure
 .2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.274 	
+l.411 	
        pdfTeX warning (ext4): destination with the same identifier (name{figure
 .3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.274 	
+l.411 	
         <./figures/alphaNot0/phi1_phi2_phi3.png (PNG copy)> <./figures/alphaNot
 0/ang_vel_phi_total.png (PNG copy)> <./figures/alphaNot0/ang_accel_total.png (P
 NG copy)>]
-<figures/alphaNot0/quats_phi_total.png, id=81, 526.96875pt x 395.22656pt>
+<figures/alphaNot0/quats_phi_total.png, id=101, 526.96875pt x 395.22656pt>
 File: figures/alphaNot0/quats_phi_total.png Graphic file (type png)
 <use figures/alphaNot0/quats_phi_total.png>
 Package pdftex.def Info: figures/alphaNot0/quats_phi_total.png  used on input l
-ine 278.
+ine 415.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 278--279
+Overfull \hbox (5.0pt too wide) in paragraph at lines 415--416
  [] 
  []
 
-<figures/alphaNot0/torque_total.png, id=82, 526.96875pt x 395.22656pt>
+<figures/alphaNot0/torque_total.png, id=102, 526.96875pt x 395.22656pt>
 File: figures/alphaNot0/torque_total.png Graphic file (type png)
 <use figures/alphaNot0/torque_total.png>
 Package pdftex.def Info: figures/alphaNot0/torque_total.png  used on input line
- 286.
+ 423.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 286--287
+Overfull \hbox (5.0pt too wide) in paragraph at lines 423--424
  [] 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 293.
+(hyperref)                removing `math shift' on input line 430.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\alpha' on input line 293.
+(hyperref)                removing `\alpha' on input line 430.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 293.
+(hyperref)                removing `math shift' on input line 430.
 
-<figures/alpha0/phi1_phi2_phi3.png, id=84, 526.96875pt x 395.22656pt>
+<figures/alpha0/phi1_phi2_phi3.png, id=104, 526.96875pt x 395.22656pt>
 File: figures/alpha0/phi1_phi2_phi3.png Graphic file (type png)
 <use figures/alpha0/phi1_phi2_phi3.png>
 Package pdftex.def Info: figures/alpha0/phi1_phi2_phi3.png  used on input line 
-299.
+436.
 (pdftex.def)             Requested size: 343.28249pt x 257.47316pt.
-[5pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) 
+[7pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.306 			
+l.443 			
          pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.306 			
+l.443 			
          pdfTeX warning (ext4): destination with the same identifier (name{figu
 re.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.306 			
+l.443 			
           <./figures/alphaNot0/quats_phi_total.png (PNG copy)> <./figures/alpha
 Not0/torque_total.png (PNG copy)> <./figures/alpha0/phi1_phi2_phi3.png (PNG cop
 y)>]
-<figures/alpha0/ang_vel.png, id=98, 526.96875pt x 395.22656pt>
+<figures/alpha0/ang_vel.png, id=119, 526.96875pt x 395.22656pt>
 File: figures/alpha0/ang_vel.png Graphic file (type png)
 <use figures/alpha0/ang_vel.png>
-Package pdftex.def Info: figures/alpha0/ang_vel.png  used on input line 359.
+Package pdftex.def Info: figures/alpha0/ang_vel.png  used on input line 496.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 359--360
+Overfull \hbox (5.0pt too wide) in paragraph at lines 496--497
  [] 
  []
 
-<figures/alpha0/ang_accel.png, id=99, 526.96875pt x 395.22656pt>
+<figures/alpha0/ang_accel.png, id=120, 526.96875pt x 395.22656pt>
 File: figures/alpha0/ang_accel.png Graphic file (type png)
 <use figures/alpha0/ang_accel.png>
-Package pdftex.def Info: figures/alpha0/ang_accel.png  used on input line 367.
+Package pdftex.def Info: figures/alpha0/ang_accel.png  used on input line 504.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 367--368
+Overfull \hbox (5.0pt too wide) in paragraph at lines 504--505
  [] 
  []
 
-[6pdfTeX warning (ext4): destination with the same identifier (name{table.3}) h
+[8pdfTeX warning (ext4): destination with the same identifier (name{table.3}) h
 as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.375 			\begin
+l.512 			\begin
                {figure}[H]pdfTeX warning (ext4): destination with the same iden
 tifier (name{table.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.375 			\begin
+l.512 			\begin
                {figure}[H]pdfTeX warning (ext4): destination with the same iden
 tifier (name{figure.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.375 			\begin
+l.512 			\begin
                {figure}[H]pdfTeX warning (ext4): destination with the same iden
 tifier (name{figure.8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.375 			\begin
+l.512 			\begin
                {figure}[H] <./figures/alpha0/ang_vel.png (PNG copy)> <./figures
 /alpha0/ang_accel.png (PNG copy)>]
-<figures/alpha0/quats.png, id=108, 526.96875pt x 395.22656pt>
+<figures/alpha0/quats.png, id=129, 526.96875pt x 395.22656pt>
 File: figures/alpha0/quats.png Graphic file (type png)
 <use figures/alpha0/quats.png>
-Package pdftex.def Info: figures/alpha0/quats.png  used on input line 377.
+Package pdftex.def Info: figures/alpha0/quats.png  used on input line 514.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 377--378
+Overfull \hbox (5.0pt too wide) in paragraph at lines 514--515
  [] 
  []
 
-<figures/alpha0/torque.png, id=109, 526.96875pt x 395.22656pt>
+<figures/alpha0/torque.png, id=130, 526.96875pt x 395.22656pt>
 File: figures/alpha0/torque.png Graphic file (type png)
 <use figures/alpha0/torque.png>
-Package pdftex.def Info: figures/alpha0/torque.png  used on input line 385.
+Package pdftex.def Info: figures/alpha0/torque.png  used on input line 522.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 385--386
+Overfull \hbox (5.0pt too wide) in paragraph at lines 522--523
  [] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 394.
-[7pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) 
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 531.
+[9pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.394 \end{document}
+l.531 \end{document}
                     pdfTeX warning (ext4): destination with the same identifier
  (name{figure.10}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.394 \end{document}
+l.531 \end{document}
                      <./figures/alpha0/quats.png (PNG copy)> <./figures/alpha0/
 torque.png (PNG copy)>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 394.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 531.
  (numerical_simulation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 394.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 394.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 531.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 531.
 Package rerunfilecheck Info: File `numerical_simulation.out' has not changed.
-(rerunfilecheck)             Checksum: D869C257F3BA2744A768D0A3C7E66F9F;245.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 394.
+(rerunfilecheck)             Checksum: 94333EDFF7E9574FFFAAE631A033B2FF;335.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 531.
  ) 
 Here is how much of TeX's memory you used:
- 7058 strings out of 492946
- 104293 string characters out of 3126266
- 198967 words of memory out of 3000000
- 10752 multiletter control sequences out of 15000+200000
+ 7639 strings out of 492946
+ 112806 string characters out of 3126266
+ 214570 words of memory out of 3000000
+ 11308 multiletter control sequences out of 15000+200000
  36190 words of font info for 104 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,11n,45p,890b,475s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{section*.1} has been referenced but does not exis
+ 32i,11n,45p,890b,479s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{section*.2} has been referenced but does not exis
 t, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.1} has been referenced but does not exist,
+ replaced by a fixed one
 
 {C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<
 C:/Users/junet/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
@@ -794,9 +873,9 @@ MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/junet/AppData/Loc
 al/Programs/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/junet/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/junet/
 AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on numerical_simulation.pdf (7 pages, 468433 bytes).
+Output written on numerical_simulation.pdf (9 pages, 476253 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 195 PDF objects out of 1000 (max. 8388607)
+ 54 named destinations out of 1000 (max. 500000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 

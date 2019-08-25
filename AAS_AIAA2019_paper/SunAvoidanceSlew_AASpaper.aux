@@ -28,46 +28,56 @@
 \citation{Lee2014}
 \citation{Ramos2018}
 \@writefile{toc}{\contentsline {section}{Introduction}{1}{section*.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Problem Formulation}{2}{section*.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Sun-Avoidance Slew (SAS) Algorithm Description}{2}{section*.3}\protected@file@percent }
-\newlabel{eaxis}{{2}{2}{Sun-Avoidance Slew (SAS) Algorithm Description}{equation.0.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Gyrostat-centered unit sphere centered at point $\mathcal  {G^*}$. }}{3}{figure.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Numerical simulation}{4}{section*.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{SAS Algorithm Pseudocode}{4}{section*.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{Case I: $\alpha > 0$}{5}{section*.6}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Initial, Final, and Sun Positions in Inertial Frame and Constraints (Sample Inputs)}}{5}{table.1}\protected@file@percent }
-\newlabel{tab:alphaNot0_PiPfS_AWmax}{{1}{5}{Initial, Final, and Sun Positions in Inertial Frame and Constraints (Sample Inputs)}{table.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Slew Angles $\phi _1$, $\phi _2$, and $\phi _3$}}{5}{table.2}\protected@file@percent }
-\newlabel{tab:alphaNot0_phi_123}{{2}{5}{Slew Angles $\phi _1$, $\phi _2$, and $\phi _3$}{table.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Attitude Profile of the Entire Slew.}}{6}{figure.2}\protected@file@percent }
-\newlabel{fig:phi1_phi2_phi3}{{2}{6}{Attitude Profile of the Entire Slew}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Angular Velocity when $\alpha >0$.}}{6}{figure.3}\protected@file@percent }
-\newlabel{fig:ang_vel_phi_total}{{}{6}{Case I: $\alpha > 0$}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Angular Acceleration when $\alpha >0$.}}{6}{figure.4}\protected@file@percent }
-\newlabel{fig:ang_accel_total}{{}{6}{Case I: $\alpha > 0$}{figure.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Quaternions when $\alpha >0$.}}{6}{figure.5}\protected@file@percent }
-\newlabel{fig:quats_phi_total}{{}{6}{Case I: $\alpha > 0$}{figure.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Torque when $\alpha >0$.}}{6}{figure.6}\protected@file@percent }
-\newlabel{fig:torque_total}{{6}{6}{Torque when $\alpha >0$}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsection}{Case II: $\alpha = 0$}{7}{section*.7}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Attitude Profile of the Entire Slew when $\alpha =0$.}}{7}{figure.7}\protected@file@percent }
-\newlabel{fig:phi1_phi2_phi3_alpha0}{{}{7}{Case II: $\alpha = 0$}{figure.7}{}}
+\@writefile{toc}{\contentsline {section}{Steering Laws}{2}{section*.2}\protected@file@percent }
+\newlabel{phi_t}{{1}{2}{Steering Laws}{equation.0.1}{}}
+\newlabel{t1cons}{{2}{2}{Steering Laws}{equation.0.2}{}}
+\newlabel{t2cons}{{3}{2}{Steering Laws}{equation.0.3}{}}
+\newlabel{tfcons}{{4}{2}{Steering Laws}{equation.0.4}{}}
+\newlabel{tfcons_phit}{{5}{2}{Steering Laws}{equation.0.5}{}}
+\newlabel{t2cons_phit}{{6}{2}{Steering Laws}{equation.0.6}{}}
+\newlabel{t1cons_phit}{{7}{2}{Steering Laws}{equation.0.7}{}}
+\@writefile{toc}{\contentsline {section}{Numerical simulation}{3}{section*.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Slew Maneuver Check}}{3}{algorithm.1}\protected@file@percent }
+\newlabel{alg:pseudocode_slew}{{1}{3}{Numerical simulation}{algorithm.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Steering Profiles}}{3}{algorithm.2}\protected@file@percent }
+\newlabel{alg:pseudocode_steering}{{2}{3}{Numerical simulation}{algorithm.2}{}}
+\newlabel{D_R_N}{{8}{3}{Numerical simulation}{equation.0.8}{}}
+\newlabel{Euler_RBD}{{9}{4}{Numerical simulation}{equation.0.9}{}}
+\newlabel{kinematics}{{10}{4}{Numerical simulation}{equation.0.10}{}}
+\@writefile{toc}{\contentsline {subsection}{Case I: $\alpha > 0$}{4}{section*.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Initial, Final, and Sun Positions in Inertial Frame and Constraints (Sample Inputs)}}{4}{table.1}\protected@file@percent }
+\newlabel{tab:alphaNot0_PiPfS_AWmax}{{1}{4}{Initial, Final, and Sun Positions in Inertial Frame and Constraints (Sample Inputs)}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Slew Angles $\phi _1$, $\phi _2$, and $\phi _3$}}{4}{table.2}\protected@file@percent }
+\newlabel{tab:alphaNot0_phi_123}{{2}{4}{Slew Angles $\phi _1$, $\phi _2$, and $\phi _3$}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Attitude Profile of the Entire Slew.}}{5}{figure.1}\protected@file@percent }
+\newlabel{fig:phi1_phi2_phi3}{{1}{5}{Attitude Profile of the Entire Slew}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Angular Velocity when $\alpha >0$.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:ang_vel_phi_total}{{2}{5}{Angular Velocity when $\alpha >0$}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Angular Acceleration when $\alpha >0$.}}{5}{figure.3}\protected@file@percent }
+\newlabel{fig:ang_accel_total}{{3}{5}{Angular Acceleration when $\alpha >0$}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Quaternions when $\alpha >0$.}}{6}{figure.4}\protected@file@percent }
+\newlabel{fig:quats_phi_total}{{4}{6}{Quaternions when $\alpha >0$}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Torque when $\alpha >0$.}}{6}{figure.5}\protected@file@percent }
+\newlabel{fig:torque_total}{{5}{6}{Torque when $\alpha >0$}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{Case II: $\alpha = 0$}{6}{section*.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Attitude Profile of the Entire Slew when $\alpha =0$.}}{6}{figure.6}\protected@file@percent }
+\newlabel{fig:phi1_phi2_phi3_alpha0}{{}{6}{Case II: $\alpha = 0$}{figure.6}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Initial, Final, and Sun Positions in Inertial Frame and Constraints (inputs)}}{7}{table.3}\protected@file@percent }
 \newlabel{tab:alpha0_PiPfS_AWmax}{{3}{7}{Initial, Final, and Sun Positions in Inertial Frame and Constraints (inputs)}{table.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Slew Angles $\phi _1$, $\phi _2$, and $\phi _3$}}{7}{table.4}\protected@file@percent }
 \newlabel{tab:alpha0_phi_123}{{4}{7}{Slew Angles $\phi _1$, $\phi _2$, and $\phi _3$}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Angular Velocity when $\alpha =0$.}}{7}{figure.7}\protected@file@percent }
+\newlabel{fig:ang_vel_phi_total_alpha0}{{7}{7}{Angular Velocity when $\alpha =0$}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Angular Acceleration when $\alpha =0$.}}{7}{figure.8}\protected@file@percent }
+\newlabel{fig:ang_accel_total_alpha0}{{8}{7}{Angular Acceleration when $\alpha =0$}{figure.8}{}}
 \bibstyle{AAS_publication}
 \bibdata{references_SAA}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Angular Velocity when $\alpha =0$.}}{8}{figure.8}\protected@file@percent }
-\newlabel{fig:ang_vel_phi_total_alpha0}{{8}{8}{Angular Velocity when $\alpha =0$}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Angular Acceleration when $\alpha =0$.}}{8}{figure.9}\protected@file@percent }
-\newlabel{fig:ang_accel_total_alpha0}{{9}{8}{Angular Acceleration when $\alpha =0$}{figure.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Quaternions when $\alpha =0$.}}{8}{figure.10}\protected@file@percent }
-\newlabel{fig:quats_phi_total_alpha0}{{10}{8}{Quaternions when $\alpha =0$}{figure.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Applied Torque when $\alpha =0$.}}{8}{figure.11}\protected@file@percent }
-\newlabel{fig:torque_total_alpha0}{{11}{8}{Applied Torque when $\alpha =0$}{figure.11}{}}
-\@writefile{toc}{\contentsline {section}{Conclusion}{8}{section*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{Acknowledgment}{8}{section*.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Quaternions when $\alpha =0$.}}{8}{figure.9}\protected@file@percent }
+\newlabel{fig:quats_phi_total_alpha0}{{9}{8}{Quaternions when $\alpha =0$}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Applied Torque when $\alpha =0$.}}{8}{figure.10}\protected@file@percent }
+\newlabel{fig:torque_total_alpha0}{{10}{8}{Applied Torque when $\alpha =0$}{figure.10}{}}
+\@writefile{toc}{\contentsline {section}{Conclusion}{8}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Acknowledgment}{8}{section*.7}\protected@file@percent }
 \bibcite{McInnes1994}{1}
 \bibcite{Spindler1998}{2}
 \bibcite{Hablani1998}{3}
@@ -79,4 +89,4 @@
 \bibcite{Sun2015}{9}
 \bibcite{Lee2014}{10}
 \bibcite{Ramos2018}{11}
-\@writefile{toc}{\contentsline {section}{Notation}{9}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Notation}{9}{section*.8}\protected@file@percent }

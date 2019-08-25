@@ -51,6 +51,7 @@ end
 
 %%
 
+fsize = 18; 
 
 figure
 
@@ -98,15 +99,17 @@ figure
     plot3([P3_N(1) P2_N(1)], [P3_N(2) P2_N(2)], [P3_N(3) P2_N(3)], 'r:', 'LineWidth', 1.1); 
     
     % Initial, final, P2, P2 vectors 
-    t(2) = text(Pi_N(1), Pi_N(2), Pi_N(3), strcat('\phantom{   }', sprintf('   $P_i$')), 'Interpreter', 'latex'); 
-    t(2) = text(Pf_N(1), Pf_N(2), Pf_N(3), strcat('\phantom{   }', sprintf('   $P_f$')), 'Interpreter', 'latex'); 
-    t(3) = text(e_N(1), e_N(2), e_N(3), strcat('\phantom{   }', sprintf('   e')), 'Interpreter', 'latex'); 
-    t(4) = text(P1_N(1), P1_N(2), P1_N(3), strcat('\phantom{   }', sprintf('   $P_1$')), 'Interpreter', 'latex'); 
-    t(5) = text(P2_N(1), P2_N(2), P2_N(3), strcat('\phantom{   }', sprintf('   $P_2$')), 'Interpreter', 'latex'); 
-    t(6) = text(S_N(1), S_N(2), S_N(3), strcat('\phantom{   }', sprintf('    sun')), 'Interpreter', 'latex'); 
+    t(2) = text(Pi_N(1), Pi_N(2), Pi_N(3), strcat('\phantom{   }', sprintf('$P_i$')), 'Interpreter', 'latex', 'FontSize', fsize); 
+    t(2) = text(Pf_N(1), Pf_N(2), Pf_N(3), strcat('\phantom{   }', sprintf('$P_f$')), 'Interpreter', 'latex', 'FontSize', fsize); 
+    t(3) = text(e_N(1), e_N(2), e_N(3), strcat('\phantom{   }', sprintf('e')), 'Interpreter', 'latex', 'FontSize', fsize); 
+    t(4) = text(P1_N(1), P1_N(2), P1_N(3), strcat('\phantom{   }', sprintf('$P_1$')), 'Interpreter', 'latex', 'FontSize', fsize); 
+    t(5) = text(P2_N(1), P2_N(2), P2_N(3), strcat('\phantom{   }', sprintf('$P_2$')), 'Interpreter', 'latex', 'FontSize', fsize); 
+    t(6) = text(S_N(1), S_N(2), S_N(3), strcat('\phantom{   }', sprintf('sun')), 'Interpreter', 'latex', 'FontSize', fsize); 
 %     text(S_PiPf_N(1), S_PiPf_N(2), S_PiPf_N(3), sprintf(' sun_{proj}')) 
     
-    xlabel('N_x', 'Interpeter', 'latex')
-    ylabel('N_y', 'Interpeter', 'latex') 
-    zlabel('N_z', 'Interpeter', 'latex') 
-    title('$\phi_1$, $\phi_2$, and $\phi_3$ Slews', 'Interpreter', 'latex') 
+    xlabel('$N_x$','interpreter','latex', 'FontSize', fsize)
+    ylabel('$N_y$','interpreter','latex', 'FontSize', fsize)
+    zlabel('$N_z$','interpreter','latex', 'FontSize', fsize)
+    ax = gca;
+    ax.FontSize = fsize - 2;  
+    title('$\phi_1$, $\phi_2$, and $\phi_3$ Slews', 'Interpreter', 'latex', 'FontSize', fsize)

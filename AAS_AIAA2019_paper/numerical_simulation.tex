@@ -24,6 +24,9 @@
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{multicol}
 
+\usepackage{algpseudocode,algorithm,algorithmicx}
+
+
 
 
 \PaperNumber{19-801}
@@ -50,126 +53,252 @@
 
 %%%%%%%%%%%%
 
+	\section{SAS Algorithm: Computing Steering Profiles}
+	
+	Find: commanded angular velocity, angular acceleration, and quaternion profiles 
+			
+	\begin{enumerate}
+		
+		\item Compute $\phi_{t} = \frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}$
+		
+		\item Compute $t_1$, $t_2$, and $t_f$. 
+		
+		IF $\phi > \phi_{t}$, THEN : 
+		
+		$
+		t_1 = t_0 + \frac{\dot{\phi}_{max} - \dot{\phi}_0}{\ddot{\phi}_{max}}
+		$ 
+		
+		$
+		t_2 = t_1 + \frac{1}{\dot{\phi}_max} \big[ \phi_f - \dot{\phi}_0 (t_1 - t_0) - \frac{1}{2} \ddot{\phi}_{max} (t_f1 - t_0)^2 - \\ \frac{\dot{\phi}_{max} ( \dot{\phi}_{max} -  \dot{\phi}_f ) }{\ddot{\phi}_{max}} + \frac{ (\dot{\phi}_{max} - \dot{\phi}_f)^2}{2 \ddot{\phi}_{max}} \big]
+		$
+		
+		$
+		t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
+		$
+		
+		ELSE: 
+		
+		$ t_f = \sqrt{\frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}}
+		$
+		
+		$ t_2 = t_f / 2 $ 
+		
+		$ t_1 = t_2 $ 
+		
+		\item Find ${}^DR^N$: 
+		$
+		{}^DR^N = \big[(cos\phi)I_{3x3} + (1 - cos\phi)\hat{e}\hat{e}^T - (sin\alpha)E^x \big]
+		$
+		
+		\item Find $_\mathcal{B}\dot{\omega}^{D}$: 
+		$
+		_\mathcal{B}\dot{\omega}^{D} = {}^DR^N \ddot{\phi}_{max} \cdot _\mathcal{N}\hat{e}
+		$
+		
+		\item Solve for control torque, $u$: 
+		$
+		J \cdot _\mathcal{B}\dot{\omega}^D = u - _\mathcal{B}\omega^C \times J \cdot _\mathcal{B}\omega^C 
+		$
+		
+		\item FOR each $\phi$ between switching times, propagate $\omega$ and $q$ between switching times by solving above eqn and 
+		$
+		\dot{q} = \frac{1}{2} \Omega q 
+		$
+		
+		where
+		\[ \Omega = \left[ \begin{array}{cccc}
+		0 & \omega_3 & -\omega_2 & \omega_1 \\
+		-\omega_3 & 0 & -\omega_1 & \omega_2 \\
+		\omega_2 & -\omega_1 & 0 & \omega_3 \\ 
+		-\omega_1 & \omega_2 & -\omega_3 & 0 \\ 
+		\end{array} \right] \] 
+		
+		with correct $u$ for each switching time interval. 
+		
+	\end{enumerate} 
+
 	\section{Numerical simulation} 
 	The proposed algorithm was examined by running cases in which the initial, final, and sun position vectors were randomized. Consider a spacecraft as a rigid body with one sensitive instrument. The orientation of the boresight of the instrument to the spacecraft body axes, the current and final (desired) positions with respect to the inertial frame, and the location of the sun vector are known. Only one exclusion zone around a bright object (the sun) is considered. The initial and final positions are outside of the exclusion zone.  
 	
-	\subsection{SAS Algorithm Pseudocode}
+%	\subsection{SAS Algorithm Pseudocode} 
 	
-	\begin{enumerate}
-		
-		\item Find: sequence of slew maneuvers to avoid sun vector 
-		
-		\begin{enumerate}
-			
-			% SUN VECTOR INTRUSION 
-			\item Check the sun vector intrusion 
-			
-			\begin{enumerate}
-				\item Find eigenaxis $
-				\hat{e}=\frac{\hat{P}_i\times\hat{P}_f}{|\hat{P}_i\times \hat{P}_f|}
-				$
-				\item Compute $
-				\alpha=\frac{\pi}{2}-\cos^{-1}(\hat{S}\cdot_\mathcal{N}\hat{e})
-				$
-				\item IF $|\alpha|<\epsilon_p$, THEN find 
-				$
-				\vec{S}_{||}=\hat{S}\cos\alpha
-				$
-			\end{enumerate}
-			
-			% SLEW AROUND EIGENAXIS 
-			\item Compute $\phi_1$:
-			$
-			\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p
-			$
-			
-			% SLEW AROUND SUN VECTOR 
-			\item Compute $\phi_2$:
-			
-			\begin{enumerate}
-				\item IF $\alpha \neq 0$, THEN
-				$
-				\phi_2 = 2\sin^{-1}\Big( \frac{ \sin\epsilon_p}{\sin \theta}\Big),\ \theta=\cos^{-1}(\hat{P}_1\cdot\hat{S})
-				$
-				
-				\item IF $\alpha = 0$, THEN
-				$
-				\phi_2 = \pi
-				$
-				
-			\end{enumerate}
-			
-			% SLEW AROUND EIGENAXIS AGAIN 
-			\item Compute $\phi_3$:
-			$
-			\phi_3 = \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)
-			$
-			
-		\end{enumerate}
-		
-		\item Find: commanded angular velocity, angular acceleration, and quaternion profiles 
-		
-		\begin{enumerate}
-			
-			\item Compute $\phi_{t} = \frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}$
-			
-			\item Compute $t_1$, $t_2$, and $t_f$. 
-			
-			IF $\phi > \phi_{t}$, THEN : 
-			
-			$
-			t_1 = t_0 + \frac{\dot{\phi}_{max} - \dot{\phi}_0}{\ddot{\phi}_{max}}
-			$ 
-			
-			$
-			t_2 = t_1 + \frac{1}{\dot{\phi}_max} \big[ \phi_f - \dot{\phi}_0 (t_1 - t_0) - \frac{1}{2} \ddot{\phi}_{max} (t_f1 - t_0)^2 - \\ \frac{\dot{\phi}_{max} ( \dot{\phi}_{max} -  \dot{\phi}_f ) }{\ddot{\phi}_{max}} + \frac{ (\dot{\phi}_{max} - \dot{\phi}_f)^2}{2 \ddot{\phi}_{max}} \big]
-			$
-			
-			$
-			t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
-			$
-			
-			ELSE: 
-			
-			$ t_f = \sqrt{\frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}}
-			$
-			
-			$ t_2 = t_f / 2 $ 
-			
-			$ t_1 = t_2 $ 
-			
-			\item Find ${}^DR^N$: 
-			$
-			{}^DR^N = \big[(cos\phi)I_{3x3} + (1 - cos\phi)\hat{e}\hat{e}^T - (sin\alpha)E^x \big]
-			$
-			
-			\item Find $_\mathcal{B}\dot{\omega}^{D}$: 
-			$
-			_\mathcal{B}\dot{\omega}^{D} = {}^DR^N \ddot{\phi}_{max} \cdot _\mathcal{N}\hat{e}
-			$
-			
-			\item Solve for control torque, $u$: 
-			$
-			J \cdot _\mathcal{B}\dot{\omega}^D = u - _\mathcal{B}\omega^C \times J \cdot _\mathcal{B}\omega^C 
-			$
-			
-			\item FOR each $\phi$ between switching times, propagate $\omega$ and $q$ between switching times by solving above eqn and 
-			$
-			\dot{q} = \frac{1}{2} \Omega q 
-			$
-			
-			where
-			\[ \Omega = \left[ \begin{array}{cccc}
-			0 & \omega_3 & -\omega_2 & \omega_1 \\
-			-\omega_3 & 0 & -\omega_1 & \omega_2 \\
-			\omega_2 & -\omega_1 & 0 & \omega_3 \\ 
-			-\omega_1 & \omega_2 & -\omega_3 & 0 \\ 
-			\end{array} \right] \] 
-			
-			with correct $u$ for each switching time interval. 
-			
-		\end{enumerate} 
-	\end{enumerate}
+\begin{algorithm}
+	\caption{Slew Maneuver}
+		\label{alg:pseudocode_slew}
+	\begin{algorithmic}[1]
+		\State Find eigenaxis of slew plane 
+			\State \hskip1.5em Compute cross product of $P_i$ and $P_f$ unit vectors 
+		\State Compute $\alpha$ 
+		\If{$|\alpha| < \epsilon_p$}
+			\State find $ \vec{S}_{||} $
+			\State Compute $\phi_1$, $\phi_2$, $\phi_3$
+		\EndIf 
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Steering Profiles}
+	\label{alg:pseudocode_steering}
+	\begin{algorithmic}[1]
+		\State Compute $\phi_t$ 
+%		\For{each $\phi$}
+%		\State $\phi_1$: 
+		\If{$\phi > \phi_t$}
+			\State Compute $t_1$, $t_2$, $t_f$ for $\phi > \phi_t$
+			\State $t_1 = t_0 + \frac{\dot{\phi}_{max} - \dot{\phi}_0}{\ddot{\phi}_{max}}$
+			\State $t_2 = t_1 + \frac{1}{\dot{\phi}_max} \big[ \phi_f - \dot{\phi}_0 (t_1 - t_0) - \frac{1}{2} \ddot{\phi}_{max} (t_f1 - t_0)^2 - \\ \frac{\dot{\phi}_{max} ( \dot{\phi}_{max} -  \dot{\phi}_f ) }{\ddot{\phi}_{max}} + \frac{ (\dot{\phi}_{max} - \dot{\phi}_f)^2}{2 \ddot{\phi}_{max}} \big]$
+			\State $t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].$
+		\Else 
+			\State $ t_f = \sqrt{\frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}}$
+			\State $t_2 = t_f / 2 $ 
+			\State $t_1 = t_2 $ 
+		\EndIf 
+		\If{$\phi_2 > \phi_t$}
+			\State Compute $t_1$, $t_2$, $t_f$ for $\phi > \phi_t$ 
+		\Else 
+			\State Compute $t_1$, $t_2$, $t_f$ for $\phi \leq \phi_t$
+		\EndIf 
+		\If{$\phi_3 > \phi_t$} 
+			\State Compute $t_1$, $t_2$, $t_f$ for $\phi > \phi_t$ 
+		\Else 
+			\State Compute $t_1$, $t_2$, $t_f$ for $\phi \leq \phi_t$
+		\EndIf 
+		\For{$t$ between switching times}
+			\State Find ${}^DR^N$
+			\State Find ${}_\mathcal{B}\dot{\omega}^D$
+			\State Solve for control torque $u$
+			\State Propagate $\omega$ and $q$ 
+		\EndFor 
+%		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+%	\begin{algorithm} 
+%		\caption{Computing Steering Profiles} 
+%			\label{alg:pseudocode_steering}
+%		\begin{algorithmic}[1]
+%			\Function{test}
+%		\end{algorithmic}
+%	\end{algorithm} 
+	
+%	\subsection{SAS Algorithm Pseudocode: enumerate}
+%	
+%	\begin{enumerate}
+%		
+%		\item Find: sequence of slew maneuvers to avoid sun vector 
+%		
+%		\begin{enumerate}
+%			
+%			% SUN VECTOR INTRUSION 
+%			\item Check the sun vector intrusion 
+%			
+%			\begin{enumerate}
+%				\item Find eigenaxis $
+%				\hat{e}=\frac{\hat{P}_i\times\hat{P}_f}{|\hat{P}_i\times \hat{P}_f|}
+%				$
+%				\item Compute $
+%				\alpha=\frac{\pi}{2}-\cos^{-1}(\hat{S}\cdot_\mathcal{N}\hat{e})
+%				$
+%				\item IF $|\alpha|<\epsilon_p$, THEN find 
+%				$
+%				\vec{S}_{||}=\hat{S}\cos\alpha
+%				$
+%			\end{enumerate}
+%			
+%			% SLEW AROUND EIGENAXIS 
+%			\item Compute $\phi_1$:
+%			$
+%			\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p
+%			$
+%			
+%			% SLEW AROUND SUN VECTOR 
+%			\item Compute $\phi_2$:
+%			
+%			\begin{enumerate}
+%				\item IF $\alpha \neq 0$, THEN
+%				$
+%				\phi_2 = 2\sin^{-1}\Big( \frac{ \sin\epsilon_p}{\sin \theta}\Big),\ \theta=\cos^{-1}(\hat{P}_1\cdot\hat{S})
+%				$
+%				
+%				\item IF $\alpha = 0$, THEN
+%				$
+%				\phi_2 = \pi
+%				$
+%				
+%			\end{enumerate}
+%			
+%			% SLEW AROUND EIGENAXIS AGAIN 
+%			\item Compute $\phi_3$:
+%			$
+%			\phi_3 = \cos^{-1}(_\mathcal{G}\hat{P}_f.\hat{P}_2)
+%			$
+%			
+%		\end{enumerate}
+%		
+%		\item Find: commanded angular velocity, angular acceleration, and quaternion profiles 
+%		
+%		\begin{enumerate}
+%			
+%			\item Compute $\phi_{t} = \frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}$
+%			
+%			\item Compute $t_1$, $t_2$, and $t_f$. 
+%			
+%			IF $\phi > \phi_{t}$, THEN : 
+%			
+%			$
+%			t_1 = t_0 + \frac{\dot{\phi}_{max} - \dot{\phi}_0}{\ddot{\phi}_{max}}
+%			$ 
+%			
+%			$
+%			t_2 = t_1 + \frac{1}{\dot{\phi}_max} \big[ \phi_f - \dot{\phi}_0 (t_1 - t_0) - \frac{1}{2} \ddot{\phi}_{max} (t_f1 - t_0)^2 - \\ \frac{\dot{\phi}_{max} ( \dot{\phi}_{max} -  \dot{\phi}_f ) }{\ddot{\phi}_{max}} + \frac{ (\dot{\phi}_{max} - \dot{\phi}_f)^2}{2 \ddot{\phi}_{max}} \big]
+%			$
+%			
+%			$
+%			t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
+%			$
+%			
+%			ELSE: 
+%			
+%			$ t_f = \sqrt{\frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}}
+%			$
+%			
+%			$ t_2 = t_f / 2 $ 
+%			
+%			$ t_1 = t_2 $ 
+%			
+%			\item Find ${}^DR^N$: 
+%			$
+%			{}^DR^N = \big[(cos\phi)I_{3x3} + (1 - cos\phi)\hat{e}\hat{e}^T - (sin\alpha)E^x \big]
+%			$
+%			
+%			\item Find $_\mathcal{B}\dot{\omega}^{D}$: 
+%			$
+%			_\mathcal{B}\dot{\omega}^{D} = {}^DR^N \ddot{\phi}_{max} \cdot _\mathcal{N}\hat{e}
+%			$
+%			
+%			\item Solve for control torque, $u$: 
+%			$
+%			J \cdot _\mathcal{B}\dot{\omega}^D = u - _\mathcal{B}\omega^C \times J \cdot _\mathcal{B}\omega^C 
+%			$
+%			
+%			\item FOR each $\phi$ between switching times, propagate $\omega$ and $q$ between switching times by solving above eqn and 
+%			$
+%			\dot{q} = \frac{1}{2} \Omega q 
+%			$
+%			
+%			where
+%			\[ \Omega = \left[ \begin{array}{cccc}
+%			0 & \omega_3 & -\omega_2 & \omega_1 \\
+%			-\omega_3 & 0 & -\omega_1 & \omega_2 \\
+%			\omega_2 & -\omega_1 & 0 & \omega_3 \\ 
+%			-\omega_1 & \omega_2 & -\omega_3 & 0 \\ 
+%			\end{array} \right] \] 
+%			
+%			with correct $u$ for each switching time interval. 
+%			
+%		\end{enumerate} 
+%	\end{enumerate}
 	
 %	The progression of the spacecraft along its orbit was not incorporated in these simulations, therefore, the sun vector does not change during the slew maneuvers. However, the orbit must be taken into account in real missions, thus the location of the sun vector during the $\phi_2$ portion of the maneuvers should be considered. Or rather, the timing of the instrument boresight overlapping with the sun vector projection onto the slew plane should be used in the calculation of the slew angles. 
 	
