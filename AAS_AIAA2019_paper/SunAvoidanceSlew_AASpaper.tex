@@ -7,6 +7,7 @@
 %\documentclass[letterpaper, paper,10pt]{AAS}		% for final proceedings (20-page limit)
 %\documentclass[letterpaper, submit]{AAS}			% to submit to JAS
 
+
 \usepackage{bm}
 \usepackage{amsmath}
 \usepackage{subfigure}
@@ -24,9 +25,10 @@
 \usepackage{epstopdf}
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 
-
 \usepackage{algpseudocode,algorithm,algorithmicx}
 
+%\usepackage{longtable}
+\usepackage{supertabular}
 
 \PaperNumber{19-801}
 
@@ -95,11 +97,16 @@ If $|\alpha|>=\epsilon_p$ then the sun vector intrusion has not happened. Otherw
 		\end{array}
 		\right.
 		\end{equation}
-		\begin{figure}[htb]
-
+		\begin{figure}[H]
 			\begin{center}
-				\includegraphics[width=3.5in]{./Figures/SVAS_1r_modified}\includegraphics[width=3.5in]{./Figures/SVAS_1rb_modified}
-				\caption{The sensitive instrument boresight vector motion during the $1^{st}$ slew.}
+				\includegraphics[width=3.5in]{./Figures/SVAS_1r_modified}
+				\caption{View of the sensitive instrument boresight vector motion during the $1^{st}$ slew from above the slew plane.}
+			\end{center}
+		\end{figure}
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[width=3.5in]{./Figures/SVAS_1rb_modified}
+				\caption{Top and side views of the sensitive instrument boresight vector motion during the $1^{st}$ slew.}
 			\end{center}
 		\end{figure}
 		where 
@@ -420,7 +427,15 @@ and the angular position can be find by direct integration of Eq. (\ref{phid_con
 	
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	 Using the conditions, $\dot{\phi}(t_1)=\dot{\phi}_{max}$, $\dot{\phi}(t_f)=\dot{\phi}_f$, $\phi(t_f)=\phi_f$, we can determine switching times $t_1$, $t_2$, and final time $t_f$. But first, we need to calculate a threshold:
+	 Using the conditions, $\dot{\phi}(t_1)=\dot{\phi}_{max}$, $\dot{\phi}(t_f)=\dot{\phi}_f$, $\phi(t_f)=\phi_f$, we can determine switching times $t_1$, $t_2$, and final time $t_f$. But first, we need to calculate a threshold angle, which will be called $\phi_t$
+
+	\begin{equation}\label{phi_t}
+	\phi_t = \frac{\dot{\phi}_{max}}{\ddot{\phi}_{max}};
+	\end{equation}
+	
+	Using the conditions, $\dot{\phi}(t_1)=\dot{\phi}_{max}$, $\dot{\phi}(t_f)=\dot{\phi}_f$, $\phi(t_f)=\phi_f$: 
+	
+	If $\phi > \phi_t$, then we can determine switching times $t_1$, $t_2$, and final time $t_f$ as
 	
 	\begin{equation}\label{t1cons}
 	t_1=t_0+\frac{\dot{\phi}_{max}-\dot{\phi}_0}{\ddot{\phi}_{max}},
@@ -434,6 +449,18 @@ and the angular position can be find by direct integration of Eq. (\ref{phid_con
 	and
 	\begin{equation}\label{tfcons}
 	t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
+	\end{equation}
+	
+	Otherwise, if $\phi \leq \phi_t$, then the switching times are determined by: 
+	
+	\begin{equation}\label{tfcons_phit}
+	t_f = \sqrt{\frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}}
+	\end{equation}
+	\begin{equation}\label{t2cons_phit}
+	t_2 = \frac{t_f}{2}
+	\end{equation}
+	\begin{equation}\label{t1cons_phit}
+	t_1 = t_2 
 	\end{equation}
 	
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -608,7 +635,7 @@ The pseudocode for the proposed SAS algorithm is shown Algorithm \ref{alg:pseudo
 		\If{$\phi > \phi_t$}
 		\State Use equations \ref{t1cons} through \ref{tfcons} 
 		\Else 
-		\State Use equations \ref{t1cons_phit} through \ref{tfcons_phit}
+		\State Use equations \ref{tfcons_phit} through \ref{t1cons_phit}
 		\EndIf 
 		\For{$t_0 < t < t_1$}
 		\State Calculate inertial-to-desired rotation ${}^\mathcal{T}R^\mathcal{N}$
@@ -643,7 +670,7 @@ II)&$P_f$ & [-0.93, -0.25, 0.28] & $0.01\ (rad/s)$& $0.02\ (rad/s^2)$\\
 \end{table}
 	\begin{figure}[!ht]
 	\begin{center}
-		\includegraphics[width=4.75in]{figures/alphaNot0/phi1_phi2_phi3.png}
+		\includegraphics[width=4.75in]{figures/alphaNot0/phi1_phi2_phi3.eps}
 		\caption{Trajectory of the instrument boresight during the entire slew when $|\alpha|>0$.}
 		\label{fig:phi1_phi2_phi3}
 	\end{center}		
@@ -654,12 +681,12 @@ The time histories of angular velocity and angular acceleration are shown in Fig
     \centering
     \begin{minipage}{.5\textwidth}
         \centering
-    \includegraphics[width=3in]{figures/alphaNot0/ang_vel_phi_total.png}
+    \includegraphics[width=3in]{figures/alphaNot0/ang_vel_phi_total.eps}
     \caption{a)}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
-        \includegraphics[width=3in]{figures/alphaNot0/ang_accel_total.png}
+        \includegraphics[width=3in]{figures/alphaNot0/ang_accel_total.eps}
        % \includegraphics[width=0.3\linewidth, height=0.15\textheight]{prob1_6_1}
        \caption{b)}
     \end{minipage}
@@ -673,13 +700,13 @@ Due to the high velocity and acceleration constraints, there is no coasting peri
     \centering
     \begin{minipage}{.5\textwidth}
         \centering
-\includegraphics[width=3in]{figures/alphaNot0/quats_phi_total.png}
+\includegraphics[width=3in]{figures/alphaNot0/quats_phi_total.eps}
     \caption{a)}
         \label{fig:prob1_6_2}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
-   \includegraphics[width=3in]{figures/alphaNot0/torque_total.png}
+   \includegraphics[width=3in]{figures/alphaNot0/torque_total.eps}
        % \includegraphics[width=0.3\linewidth, height=0.15\textheight]{prob1_6_1}
         \label{fig:prob1_6_1}
        \caption{b)}
@@ -740,27 +767,27 @@ With smaller constraints, the simulation takes much longer to complete the slew 
 	\section{Acknowledgment}
 	This research is supported by Maxar Space Infrastructure (Formerly Space Systems/Loral). The second author would like to acknowledge Luke DeGalan for his useful comments.
 	\section{Notation}
-\begin{tabular}{r l}
-$\mathcal{G}$-frame& gyrostat body-fixed frame\\
-$^\mathcal{N}H^{\mathcal{G/G*}}$& the total angular momentum of the gyrostat with respect to its center of mass\\
-$I^{\mathcal{G/G^*}}$ &the mass-moment-of-inertia of the gyrostat\\
-$I^{w/w*}$ & the mass-moment-of-inertia of reaction wheels with respect to their center of masses\\
-$M_{max}$ & the maximum available torque along the eigenaxis\\
-$\mathcal{N}$-frame & the Newtonian frame \\
-
-$_\mathcal{N}\hat{e}$ & unit vector along the eigenaxis expressed in the $\mathcal{N}$-frame\\
-$_\mathcal{G}\hat{P}$ & unit vector along the boresight of payload expressed in the $\mathcal{G}$-frame\\
-$_\mathcal{N}\hat{P}_i$ & unit vector of the initial point expressed in the $\mathcal{N}$-frame\\
-$_\mathcal{N}\hat{P}_f$ & unit vector of the final point expressed in the $\mathcal{N}$-frame\\
-
-$^\mathcal{N}q^\mathcal{T}$& quaternion of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
-$_\mathcal{N}\hat{S}$ & unit vector of the sun vector in the $\mathcal{N}$-frame\\
-$\mathcal{T}$-frame & the target frame \\
-$\epsilon_p$ & Payload half-cone angle\\
-$^\mathcal{N}\alpha^\mathcal{T}$& angular acceleration of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
-$^\mathcal{N}\omega^\mathcal{T}$& angular velocity of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
-
-\end{tabular} \\
+	
+	\begin{supertabular}{rl}
+		$\mathcal{G}$-frame& gyrostat body-fixed frame \\
+		$^\mathcal{N}H^{\mathcal{G/G*}}$ & the total angular momentum of the gyrostat with respect to its center of mass \\
+		$I^{\mathcal{G/G^*}}$ &the mass-moment-of-inertia of the gyrostat\\
+		$I^{w/w*}$ & the mass-moment-of-inertia of reaction wheels with respect to their center of masses\\
+		$M_{max}$ & the maximum available torque along the eigenaxis\\
+		$\mathcal{N}$-frame & the Newtonian frame \\
+		
+		$_\mathcal{N}\hat{e}$ & unit vector along the eigenaxis expressed in the $\mathcal{N}$-frame\\
+		$_\mathcal{G}\hat{P}$ & unit vector along the boresight of payload expressed in the $\mathcal{G}$-frame\\
+		$_\mathcal{N}\hat{P}_i$ & unit vector of the initial point expressed in the $\mathcal{N}$-frame\\
+		$_\mathcal{N}\hat{P}_f$ & unit vector of the final point expressed in the $\mathcal{N}$-frame\\
+		
+		$^\mathcal{N}q^\mathcal{T}$& quaternion of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
+		$_\mathcal{N}\hat{S}$ & unit vector of the sun vector in the $\mathcal{N}$-frame\\
+		$\mathcal{T}$-frame & the target frame \\
+		$\epsilon_p$ & Payload half-cone angle\\
+		$^\mathcal{N}\alpha^\mathcal{T}$& angular acceleration of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
+		$^\mathcal{N}\omega^\mathcal{T}$& angular velocity of the $\mathcal{T}$-frame in the $\mathcal{N}$-frame\\
+	\end{supertabular}
 
 	
 	\bibliographystyle{AAS_publication}   % Number the references.

@@ -51,7 +51,7 @@ end
 
 %%
 
-fsize = 20; 
+fsize = 14; 
 
 figure
 
@@ -112,4 +112,4 @@ figure
     zlabel('$N_z$','interpreter','latex', 'FontSize', fsize)
     ax = gca;
     ax.FontSize = fsize - 2;  
-    title('$\phi_1$, $\phi_2$, and $\phi_3$ Slews', 'Interpreter', 'latex', 'FontSize', fsize)
+%     title('$\phi_1$, $\phi_2$, and $\phi_3$ Slews', 'Interpreter', 'latex', 'FontSize', fsize)
