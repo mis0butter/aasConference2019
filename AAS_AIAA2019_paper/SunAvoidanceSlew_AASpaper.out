@@ -1,8 +1,15 @@
 \BOOKMARK [1][-]{section*.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section*.2}{Steering Laws}{}% 2
-\BOOKMARK [1][-]{section*.3}{Numerical simulation}{}% 3
-\BOOKMARK [2][-]{section*.4}{Case I: > 0}{section*.3}% 4
-\BOOKMARK [2][-]{section*.5}{Case II: = 0}{section*.3}% 5
-\BOOKMARK [1][-]{section*.6}{Conclusion}{}% 6
-\BOOKMARK [1][-]{section*.7}{Acknowledgment}{}% 7
-\BOOKMARK [1][-]{section*.8}{Notation}{}% 8
+\BOOKMARK [1][-]{section*.2}{Problem Formulation}{}% 2
+\BOOKMARK [1][-]{section*.3}{Sun-Avoidance Slew \(SAS\) Algorithm Description}{}% 3
+\BOOKMARK [2][-]{section*.4}{Slew Planning}{section*.3}% 4
+\BOOKMARK [2][-]{section*.5}{Summary of Algorithm}{section*.3}% 5
+\BOOKMARK [1][-]{section*.6}{Steering Laws}{}% 6
+\BOOKMARK [2][-]{section*.7}{Case 1: Single-Axis, Agile Slew Maneuver with Velocity and Acceleration Constraints.}{section*.6}% 7
+\BOOKMARK [2][-]{section*.8}{Case 2: Single-Axis, Agile Slew Maneuver with Acceleration Constraint}{section*.6}% 8
+\BOOKMARK [3][-]{section*.9}{The First Slew Maneuver:}{section*.8}% 9
+\BOOKMARK [3][-]{section*.10}{The Second Slew Maneuver:}{section*.8}% 10
+\BOOKMARK [3][-]{section*.11}{The Third Slew Maneuver:}{section*.8}% 11
+\BOOKMARK [1][-]{section*.12}{Numerical simulation}{}% 12
+\BOOKMARK [1][-]{section*.13}{Conclusion}{}% 13
+\BOOKMARK [1][-]{section*.14}{Acknowledgment}{}% 14
+\BOOKMARK [1][-]{section*.15}{Notation}{}% 15
