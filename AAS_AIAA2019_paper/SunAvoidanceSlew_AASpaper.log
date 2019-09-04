@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2019.4.2)  3 SEP 2019 19:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2019.4.2)  3 SEP 2019 19:43
 entering extended mode
 **./SunAvoidanceSlew_AASpaper.tex
 (SunAvoidanceSlew_AASpaper.tex
@@ -1002,7 +1002,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 794.
 Here is how much of TeX's memory you used:
  7854 strings out of 493303
  114519 string characters out of 3138692
- 210626 words of memory out of 3000000
+ 210595 words of memory out of 3000000
  11068 multiletter control sequences out of 15000+200000
  34852 words of font info for 88 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1051,7 +1051,7 @@ am Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 /urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8
 a.pfb>
-Output written on SunAvoidanceSlew_AASpaper.pdf (20 pages, 2183608 bytes).
+Output written on SunAvoidanceSlew_AASpaper.pdf (20 pages, 2183544 bytes).
 PDF statistics:
  1026 PDF objects out of 1200 (max. 8388607)
  150 named destinations out of 1000 (max. 500000)

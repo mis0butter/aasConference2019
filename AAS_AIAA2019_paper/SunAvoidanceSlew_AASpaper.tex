@@ -170,7 +170,7 @@ or
 	
 	\subsection{Summary of Algorithm} 	
 	\begin{enumerate}
-		\item Slew around the eigenaxis,$\hat{e}$, through angle $\phi_1$:		
+		\item Slew around the eigenaxis, $\hat{e}$, through angle $\phi_1$:		
 		\begin{equation}\label{phi1}
 		\phi_1 = \cos^{-1}(\hat{P}_i\cdot_\mathcal{G}\hat{S}_{||})-\epsilon_p\\
 		\end{equation}
@@ -202,7 +202,7 @@ or
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	\section{Steering Laws} 
-	In this section we utilize the proposed sun-avoidance slew algorithm to generate the required angular rate, $_\mathcal{G}^\mathcal{N}\omega^\mathcal{T}$, angular acceleration, $_\mathcal{G}^\mathcal{N}\alpha^\mathcal{T}$, and quaternions, $^\mathcal{N}q^\mathcal{T}$, for the control system. Figure \ref{guidance_loop} shows how the generated commands are utilized by an attitude control system to guide the gyrostat in each leg of the SAS.
+	In this section we utilize the proposed sun-avoidance slew algorithm to generate the required angular rate, $_\mathcal{G}^\mathcal{N}\omega^\mathcal{T}$, angular acceleration, $_\mathcal{G}^\mathcal{N}\alpha^\mathcal{T}$, and quaternions, $^\mathcal{N}q^\mathcal{T}$, for the control system. Fig. ~\ref{guidance_loop} shows how the generated commands are utilized by an attitude control system to guide the gyrostat in each leg of the SAS.
 		\begin{figure}[H]
 		\begin{center}
 			\includegraphics[width=4in]{./Figures/guidance_loop}  
@@ -215,7 +215,7 @@ or
 	\subsection{Case 1: Single-Axis, Agile Slew Maneuver with Velocity and Acceleration Constraints.}	 
 	
 
-	{\it Problem Statement}: Consider the motion of a gyrostat around a given inertially-fixed axis, $_\mathcal{N}\hat{e}$, as shown in Fig. \ref{s/c}. The problem of minimum-time slew maneuver around the $_\mathcal{N}\hat{e}$-axis can be formulated as:
+	{\it Problem Statement}: Consider the motion of a gyrostat around a given inertially-fixed axis, $_\mathcal{N}\hat{e}$, as shown in Fig. ~\ref{s/c}. The problem of minimum-time slew maneuver around the $_\mathcal{N}\hat{e}$-axis can be formulated as:
 	
 	\begin{equation}\label{costfunction}
 	\underset{u\in \mathcal{U}}{Minimize}\ \mathcal{J}[x(.), u(.), t_f]=\int_{t0}^{t_f} dt,
@@ -277,7 +277,7 @@ or
 	%\ddot{\phi}_{max}= M_{max}/I_{\hat{e}}^{\mathcal{G/G*}},
 	%\end{equation}	
 	
-where $^\mathcal{N}H^{\mathcal{G/G*}}$ is the total angular momentum of the gyrostat with respect to its center of mass, $\mathcal{G}^*$, in the $\mathcal{N}$-frame. $I^{\mathcal{G/G^*}}$ and $I^{w/w*}$ represent the mass-moment-of-inertia of the gyrostat and reaction wheels with respect to their center of masses, respectively. $M_{max}$ is the maximum available torque along the eigenaxis in the $\mathcal{G}$-frame. Our goal is to find $^\mathcal{N}\omega^\mathcal{T}(t)$, $^\mathcal{N}\alpha^\mathcal{T}(t)$, and $^\mathcal{N}q^\mathcal{T}(t)$.\\
+where $^\mathcal{N}H^{\mathcal{G/G*}}$ is the total angular momentum of the gyrostat with respect to its center of mass, $\mathcal{G}^*$, in the $\mathcal{N}$-frame. $I^{\mathcal{G/G^*}}$ and $I^{w/w*}$ represent the mass-moment-of-inertia of the gyrostat and reaction wheels with respect to their center of masses, respectively. $M_{max}$ is the maximum available torque along the eigenaxis in the $\mathcal{G}$-frame. Our objective is to find $^\mathcal{N}\omega^\mathcal{T}(t)$, $^\mathcal{N}\alpha^\mathcal{T}(t)$, and $^\mathcal{N}q^\mathcal{T}(t)$.\\
 	
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
@@ -367,7 +367,7 @@ where $^\mathcal{N}H^{\mathcal{G/G*}}$ is the total angular momentum of the gyro
 	%	\seti
 	
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	The angular acceleration profile is bang-off-bang, as shown in Fig. \ref{bang_off_bang}
+	The angular acceleration profile is bang-off-bang, as shown in Fig. ~\ref{bang_off_bang}
 
 	\begin{equation}\label{phidd_cons}
 	\ddot{\phi}(t)=u=\left\{
@@ -525,7 +525,7 @@ Equations (\ref{phidd_cons})--(\ref{k_omega}) can be used with proper boundary c
 	
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	 It is well known that the angular acceleration about the $\hat{e}$ axis is a bang-bang control as shown in Fig. \ref{bang_bang}.
+	 It is well known that the angular acceleration about the $\hat{e}$ axis is a bang-bang control as shown in Fig. ~\ref{bang_bang}.
 	\begin{equation}\label{alpha}
 	\ddot{\phi}(t)=\ddot{\phi}_{max}\mathbb{U}(t_0)- 2\ddot{\phi}_{max}\mathbb{U}(t-t_1),
 	\end{equation}
@@ -610,7 +610,7 @@ The angular velocity and angular rate about the $\hat{e}$ axis are
 	Knowing the switching time for each slew, the $\ddot{\phi}(t)$, $\dot{\phi}(t)$, and  $\phi(t)$, can be found by substituting the boundary conditions for each slew in to Eqs. (\ref{alpha}), (\ref{omega}), and (\ref{phi}), respectively. Then the steering laws, i.e. $^\mathcal{N}\omega^\mathcal{T}(t)$, $^\mathcal{N}\alpha^\mathcal{T}(t)$, $^\mathcal{N}q^\mathcal{T}(t)$, can be found from Eqs. (\ref{quatT})--(\ref{k_omega}).	
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Numerical simulation} 
-We use  MATLAB$^{\textregistered}$ to examine and validate the proposed algorithm in this paper. The initial, final, and sun position vectors are selected randomly such that The initial and final positions are outside of the exclusion zone. The progression of the spacecraft along its orbit was not incorporated in these simulations, therefore, the sun vector does not change during the slew maneuvers. However, when the orbit is taken into account during real missions, the location of the sun vector during the $\phi_2$ portion of the maneuvers should be considered. Or rather, the timing of the instrument boresight overlapping with the sun vector projection onto the slew plane should be used in the calculation of the slew angles. 
+We used MATLAB$^{\textregistered}$ to examine and validate the proposed algorithm in this paper. The initial, final, and sun position vectors were selected randomly such that the initial and final positions end up outside of the exclusion zone. The progression of the spacecraft along its orbit was not incorporated in these simulations, therefore, the sun vector does not change during the slew maneuvers. However, when the orbit is taken into account during real missions, the location of the sun vector during the $\phi_2$ portion of the maneuvers should be considered. Or rather, the timing of the instrument boresight overlapping with the sun vector projection onto the slew plane should be used in the calculation of the slew angles. 
 The pseudocode for the proposed SAS algorithm is shown Algorithm \ref{alg:pseudocode_slew}.   
 	
 \begin{algorithm}[!h]
@@ -667,7 +667,7 @@ II)&$P_f$ & [-0.93, -0.25, 0.28] & $0.01\ (rad/s)$& $0.02\ (rad/s^2)$\\
 	\begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=4.75in]{figures/alphaNot0/phi1_phi2_phi3.eps}
-		\caption{Trajectory of the instrument boresight during the entire slew when $|\alpha|>0$.}
+		\caption{boresight during the entire slew when $|\alpha|>0$.}
 		\label{fig:phi1_phi2_phi3}
 	\end{center}		
 \end{figure}	
@@ -711,15 +711,15 @@ Due to the high velocity and acceleration constraints, there is no coasting peri
     \label{fig:quats_phi_total}
 	\end{figure}
 	
-In case II,  when $\alpha=0$, we choose much more realistic constraints: 0.01 rad/s for angular velocity and 0.01 rad/s$^2$ for angular acceleration. The computed slew angles in this case are $(41.82, 180, 62.45)^\circ$. The trajectory of the instrument boresight, is shown in Fig.~\ref{fig:phi1_phi2_phi3_alpha0}.
+In case II,  when $\alpha=0$, we choose much more realistic constraints: 0.01 rad/s for angular velocity and 0.01 rad/s$^2$ for angular acceleration. The computed slew angles in this case are $(41.82, 180, 62.45)^\circ$. The trajectory of the instrument boresight, is shown in Fig. ~\ref{fig:phi1_phi2_phi3_alpha0}.
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics[width=4.75in]{figures/alpha0/alpha0_phi1_phi2_phi3.eps}		
 	\end{center}
-\caption{Trajectory of the instrument boresight during the entire slew when $|\alpha|=0$.}
+\caption{Trajectory of the instrument boresight during the entire slew when $\alpha=0$.}
 \label{fig:phi1_phi2_phi3_alpha0}
 \end{figure}	
-With smaller constraints, the simulation takes much longer to complete the slew maneuvers. Figures \ref{fig:ang_vel_acc0} and \ref{fig:quats_phi_total0} show that the torque and acceleration applied are very short compared to the duration of the entire maneuver for case I ($|\alpha| > 0$), in contrast to Figures \ref{fig:ang_vel_acc} and \ref{fig:quats_phi_total} for case II ($\alpha = 0$). The spacecraft spends the majority of the time coasting at constant angular velocity, as seen in Fig. \ref{fig:ang_vel_acc0}. Though the initial and final points are further apart in the gyrostat unit sphere to begin with, the simulation takes an order of magnitude longer to complete at almost $500$ seconds for $\alpha = 0$, as opposed to about $5.5$ seconds for $\alpha > 0$. The case shown here is much more realistic example that reflects real-world conditions. The results for both cases demonstrate that the angular velocity and acceleration never exceed the velocity and acceleration constraints for any axis. 	
+With smaller constraints, the simulation takes much longer to complete the slew maneuvers. Figs. ~\ref{fig:ang_vel_acc0} and \ref{fig:quats_phi_total0} show that the torque and acceleration applied are very short compared to the duration of the entire maneuver for case I ($|\alpha| > 0$), in contrast to Figs. ~\ref{fig:ang_vel_acc} and \ref{fig:quats_phi_total} for case II ($\alpha = 0$). The spacecraft spends the majority of the time coasting at constant angular velocity, as seen in Fig. ~\ref{fig:ang_vel_acc0}. Though the initial and final points are further apart in the gyrostat unit sphere to begin with, the simulation takes an order of magnitude longer to complete at almost $500$ seconds for $\alpha = 0$, as opposed to about $5.5$ seconds for $|\alpha| > 0$. The case shown here is much more realistic example that reflects real-world conditions. The results for both cases demonstrate that the angular velocity and acceleration never exceed the velocity and acceleration constraints for any axis.
 \begin{figure}[!htb]
     \centering
     \begin{minipage}{.5\textwidth}
