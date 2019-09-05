@@ -20,16 +20,16 @@ figure()
     hold on; 
     plot(t, w(:, 2), 'k--', 'LineWidth', 1.1)
     plot(t, w(:, 3), 'm-.', 'LineWidth', 1.1)
-    plot(t_lim, linspace(w_max, w_max, n+1), 'r:x', t_lim, linspace(-w_max, -w_max,n+1), 'k:x')
+    plot(t_lim, linspace(w_max, w_max, n+1), 'r:x', t_lim, linspace(-w_max, -w_max,n+1), 'r:x')
 %     ylim(ylimits_w)
     ylim([-1.1*w_max, 1.1*w_max]) 
     grid on 
     leg = legend('$\dot{\phi}_1$', '$\dot{\phi}_2$', '$\dot{\phi}_3$', '$\dot{\phi}_c$'); 
         set(leg, 'Interpreter', 'latex', 'FontSize', fsize); 
-    ylabel('rad/s', 'Interpreter', 'latex', 'FontSize', fsize) 
+    ylabel('Angular Velocity (rad/s)', 'Interpreter', 'latex', 'FontSize', fsize) 
     xlabel('Time (sec.)', 'Interpreter', 'latex', 'FontSize', fsize)  
     ax = gca;
-    ax.FontSize = fsize - 2;  
+    ax.FontSize = fsize - 3;  
 %     title(strcat('Angular Velocity: $\dot{\phi}_{', phi_num, '}$'), 'Interpreter', 'latex', 'FontSize', fsize)
 
 figure()
@@ -43,10 +43,10 @@ figure()
         set(leg, 'Interpreter', 'latex', 'FontSize', fsize); 
     grid on 
     ylim(ylimits_q)
-    ylabel('quats', 'Interpreter', 'latex', 'FontSize', fsize)
+    ylabel('Quaternions', 'Interpreter', 'latex', 'FontSize', fsize)
     xlabel('Time (sec.)', 'Interpreter', 'latex', 'FontSize', fsize) 
     ax = gca;
-    ax.FontSize = fsize - 2;  
+    ax.FontSize = fsize - 3;  
 %     title(strcat('Quaternion: $q_{', phi_num, '}$'), 'Interpreter', 'latex', 'FontSize', fsize)
     
 % figure()
@@ -66,14 +66,14 @@ figure()
     hold on; 
     plot(t, torque(:, 2), 'r--', 'LineWidth', 1.1) 
     plot(t, torque(:, 3), 'm-.', 'LineWidth', 1.1)
-    leg = legend('$\tau_x$', '$\tau_y$', '$\tau_z$'); 
+    leg = legend('$u_x$', '$u_y$', '$u_z$'); 
         set(leg, 'Interpreter', 'latex', 'FontSize', fsize); 
     grid on 
     ylim(ylimits_torque)
     xlabel('Time (sec.)', 'Interpreter', 'latex', 'FontSize', fsize)
-    ylabel('Nm', 'Interpreter', 'latex', 'FontSize', fsize) 
+    ylabel('Torque (Nm)', 'Interpreter', 'latex', 'FontSize', fsize) 
     ax = gca;
-    ax.FontSize = fsize - 2;  
+    ax.FontSize = fsize - 3;  
 %     title(strcat('Torque: $\tau_{', phi_num, '}$'), 'Interpreter', 'latex', 'FontSize', fsize)
     
 figure()
@@ -81,16 +81,16 @@ figure()
     hold on; 
     plot(t(1:end - 1), a(:, 2), 'k--', 'LineWidth', 1.1)
     plot(t(1:end - 1), a(:, 3), 'm-.', 'LineWidth', 1.1) 
-    plot(t_lim, linspace(a_max, a_max, n+1), 'r:x', t_lim, linspace(-a_max, -a_max,n+1), 'k:x')
+    plot(t_lim, linspace(a_max, a_max, n+1), 'r:x', t_lim, linspace(-a_max, -a_max,n+1), 'r:x')
     leg = legend('$\ddot{\phi}_x$', '$\ddot{\phi}_y$', '$\ddot{\phi_z}$', '$\ddot{\phi_c}$');
         set(leg, 'Interpreter', 'latex', 'FontSize', fsize); 
     grid on 
 %     ylim(ylimits_a)
     ylim([-1.1*a_max, 1.1*a_max]) 
     xlabel('Time (sec.)', 'Interpreter', 'latex', 'FontSize', fsize)
-    ylabel('rad/s$^2$', 'Interpreter', 'latex', 'FontSize', fsize) 
+    ylabel('Angular Acceleration (rad/s$^2$)', 'Interpreter', 'latex', 'FontSize', fsize) 
     ax = gca;
-    ax.FontSize = fsize - 2;  
+    ax.FontSize = fsize - 3;  
 %     str = strcat('$\omega_{', phi_num, '}$', 'Interpreter', 'latex'); 
 %     title(strcat('Angular Acceleration: $\ddot{\phi}_{', phi_num, '}$'), 'Interpreter', 'latex', 'FontSize', fsize)
 end 

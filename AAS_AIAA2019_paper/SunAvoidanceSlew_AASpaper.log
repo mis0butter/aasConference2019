@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2019.4.2)  3 SEP 2019 19:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2019.4.2)  5 SEP 2019 16:28
 entering extended mode
 **./SunAvoidanceSlew_AASpaper.tex
 (SunAvoidanceSlew_AASpaper.tex
@@ -706,8 +706,8 @@ Package pdftex.def Info: figures/alphaNot0/phi1_phi2_phi3-eps-converted-to.pdf
  used on input line 669.
 (pdftex.def)             Requested size: 343.28249pt x 257.46591pt.
 Package epstopdf Info: Source file: <figures/alphaNot0/ang_vel_phi_total.eps>
-(epstopdf)                    date: 2019-09-03 17:41:56
-(epstopdf)                    size: 69068 bytes
+(epstopdf)                    date: 2019-09-05 16:28:22
+(epstopdf)                    size: 84110 bytes
 (epstopdf)             Output file: <figures/alphaNot0/ang_vel_phi_total-eps-co
 nverted-to.pdf>
 (epstopdf)                    date: 2019-09-03 17:42:36
@@ -715,7 +715,13 @@ nverted-to.pdf>
 (epstopdf)             Command: <epstopdf --outfile=figures/alphaNot0/ang_vel_p
 hi_total-eps-converted-to.pdf figures/alphaNot0/ang_vel_phi_total.eps>
 (epstopdf)             \includegraphics on input line 680.
-Package epstopdf Info: Output file is already uptodate.
+runsystem(epstopdf --outfile=figures/alphaNot0/ang_vel_phi_total-eps-converted-
+to.pdf figures/alphaNot0/ang_vel_phi_total.eps)...executed (allowed).
+
+Package epstopdf Info: Result file: <figures/alphaNot0/ang_vel_phi_total-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2019-09-05 16:28:29
+(epstopdf)                    size: 33263 bytes.
 <figures/alphaNot0/ang_vel_phi_total-eps-converted-to.pdf, id=825, 421.575pt x 
 316.18124pt>
 File: figures/alphaNot0/ang_vel_phi_total-eps-converted-to.pdf Graphic file (ty
@@ -725,8 +731,8 @@ Package pdftex.def Info: figures/alphaNot0/ang_vel_phi_total-eps-converted-to.p
 df  used on input line 680.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 Package epstopdf Info: Source file: <figures/alphaNot0/ang_accel_total.eps>
-(epstopdf)                    date: 2019-09-03 17:41:09
-(epstopdf)                    size: 73074 bytes
+(epstopdf)                    date: 2019-09-05 16:28:00
+(epstopdf)                    size: 92024 bytes
 (epstopdf)             Output file: <figures/alphaNot0/ang_accel_total-eps-conv
 erted-to.pdf>
 (epstopdf)                    date: 2019-09-03 17:42:40
@@ -734,7 +740,13 @@ erted-to.pdf>
 (epstopdf)             Command: <epstopdf --outfile=figures/alphaNot0/ang_accel
 _total-eps-converted-to.pdf figures/alphaNot0/ang_accel_total.eps>
 (epstopdf)             \includegraphics on input line 685.
-Package epstopdf Info: Output file is already uptodate.
+runsystem(epstopdf --outfile=figures/alphaNot0/ang_accel_total-eps-converted-to
+.pdf figures/alphaNot0/ang_accel_total.eps)...executed (allowed).
+
+Package epstopdf Info: Result file: <figures/alphaNot0/ang_accel_total-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2019-09-05 16:28:30
+(epstopdf)                    size: 32245 bytes.
 <figures/alphaNot0/ang_accel_total-eps-converted-to.pdf, id=826, 421.575pt x 31
 6.18124pt>
 File: figures/alphaNot0/ang_accel_total-eps-converted-to.pdf Graphic file (type
@@ -744,8 +756,8 @@ Package pdftex.def Info: figures/alphaNot0/ang_accel_total-eps-converted-to.pdf
   used on input line 685.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 Package epstopdf Info: Source file: <figures/alphaNot0/quats_phi_total.eps>
-(epstopdf)                    date: 2019-09-03 17:41:42
-(epstopdf)                    size: 73151 bytes
+(epstopdf)                    date: 2019-09-05 16:28:15
+(epstopdf)                    size: 78503 bytes
 (epstopdf)             Output file: <figures/alphaNot0/quats_phi_total-eps-conv
 erted-to.pdf>
 (epstopdf)                    date: 2019-09-03 17:42:45
@@ -753,7 +765,13 @@ erted-to.pdf>
 (epstopdf)             Command: <epstopdf --outfile=figures/alphaNot0/quats_phi
 _total-eps-converted-to.pdf figures/alphaNot0/quats_phi_total.eps>
 (epstopdf)             \includegraphics on input line 699.
-Package epstopdf Info: Output file is already uptodate.
+runsystem(epstopdf --outfile=figures/alphaNot0/quats_phi_total-eps-converted-to
+.pdf figures/alphaNot0/quats_phi_total.eps)...executed (allowed).
+
+Package epstopdf Info: Result file: <figures/alphaNot0/quats_phi_total-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2019-09-05 16:28:31
+(epstopdf)                    size: 31654 bytes.
 <figures/alphaNot0/quats_phi_total-eps-converted-to.pdf, id=829, 421.575pt x 31
 6.18124pt>
 File: figures/alphaNot0/quats_phi_total-eps-converted-to.pdf Graphic file (type
@@ -763,8 +781,8 @@ Package pdftex.def Info: figures/alphaNot0/quats_phi_total-eps-converted-to.pdf
   used on input line 699.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 Package epstopdf Info: Source file: <figures/alphaNot0/torque_total.eps>
-(epstopdf)                    date: 2019-09-03 17:41:29
-(epstopdf)                    size: 58570 bytes
+(epstopdf)                    date: 2019-09-05 16:28:07
+(epstopdf)                    size: 67471 bytes
 (epstopdf)             Output file: <figures/alphaNot0/torque_total-eps-convert
 ed-to.pdf>
 (epstopdf)                    date: 2019-09-03 17:42:50
@@ -772,7 +790,13 @@ ed-to.pdf>
 (epstopdf)             Command: <epstopdf --outfile=figures/alphaNot0/torque_to
 tal-eps-converted-to.pdf figures/alphaNot0/torque_total.eps>
 (epstopdf)             \includegraphics on input line 705.
-Package epstopdf Info: Output file is already uptodate.
+runsystem(epstopdf --outfile=figures/alphaNot0/torque_total-eps-converted-to.pd
+f figures/alphaNot0/torque_total.eps)...executed (allowed).
+
+Package epstopdf Info: Result file: <figures/alphaNot0/torque_total-eps-convert
+ed-to.pdf>
+(epstopdf)                    date: 2019-09-05 16:28:32
+(epstopdf)                    size: 21748 bytes.
 <figures/alphaNot0/torque_total-eps-converted-to.pdf, id=830, 421.575pt x 316.1
 8124pt>
 File: figures/alphaNot0/torque_total-eps-converted-to.pdf Graphic file (type pd
@@ -801,12 +825,12 @@ Package pdftex.def Info: figures/alpha0/alpha0_phi1_phi2_phi3-eps-converted-to.
 pdf  used on input line 717.
 (pdftex.def)             Requested size: 343.28249pt x 257.46591pt.
 Package epstopdf Info: Source file: <figures/alpha0/ang_vel.eps>
-(epstopdf)                    date: 2019-09-03 17:19:33
-(epstopdf)                    size: 153202 bytes
+(epstopdf)                    date: 2019-09-05 15:51:50
+(epstopdf)                    size: 170451 bytes
 (epstopdf)             Output file: <figures/alpha0/ang_vel-eps-converted-to.pd
 f>
-(epstopdf)                    date: 2019-09-03 17:19:38
-(epstopdf)                    size: 37653 bytes
+(epstopdf)                    date: 2019-09-05 15:52:30
+(epstopdf)                    size: 45734 bytes
 (epstopdf)             Command: <epstopdf --outfile=figures/alpha0/ang_vel-eps-
 converted-to.pdf figures/alpha0/ang_vel.eps>
 (epstopdf)             \includegraphics on input line 727.
@@ -818,12 +842,12 @@ Package pdftex.def Info: figures/alpha0/ang_vel-eps-converted-to.pdf  used on i
 nput line 727.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 Package epstopdf Info: Source file: <figures/alpha0/ang_accel.eps>
-(epstopdf)                    date: 2019-09-03 17:19:00
-(epstopdf)                    size: 150188 bytes
+(epstopdf)                    date: 2019-09-05 15:51:25
+(epstopdf)                    size: 158689 bytes
 (epstopdf)             Output file: <figures/alpha0/ang_accel-eps-converted-to.
 pdf>
-(epstopdf)                    date: 2019-09-03 17:19:39
-(epstopdf)                    size: 35994 bytes
+(epstopdf)                    date: 2019-09-05 15:52:31
+(epstopdf)                    size: 35479 bytes
 (epstopdf)             Command: <epstopdf --outfile=figures/alpha0/ang_accel-ep
 s-converted-to.pdf figures/alpha0/ang_accel.eps>
 (epstopdf)             \includegraphics on input line 732.
@@ -879,12 +903,12 @@ l.739
 haNot0/ang_vel_phi_total-eps-converted-to.pdf> <./figures/alphaNot0/ang_accel_t
 otal-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <figures/alpha0/quats.eps>
-(epstopdf)                    date: 2019-09-03 17:19:23
-(epstopdf)                    size: 191544 bytes
+(epstopdf)                    date: 2019-09-05 15:51:41
+(epstopdf)                    size: 198672 bytes
 (epstopdf)             Output file: <figures/alpha0/quats-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-09-03 17:19:40
-(epstopdf)                    size: 66611 bytes
+(epstopdf)                    date: 2019-09-05 15:52:33
+(epstopdf)                    size: 69697 bytes
 (epstopdf)             Command: <epstopdf --outfile=figures/alpha0/quats-eps-co
 nverted-to.pdf figures/alpha0/quats.eps>
 (epstopdf)             \includegraphics on input line 744.
@@ -896,12 +920,12 @@ Package pdftex.def Info: figures/alpha0/quats-eps-converted-to.pdf  used on inp
 ut line 744.
 (pdftex.def)             Requested size: 216.81pt x 162.61081pt.
 Package epstopdf Info: Source file: <figures/alpha0/torque.eps>
-(epstopdf)                    date: 2019-09-03 17:19:11
-(epstopdf)                    size: 139899 bytes
+(epstopdf)                    date: 2019-09-05 15:51:33
+(epstopdf)                    size: 137020 bytes
 (epstopdf)             Output file: <figures/alpha0/torque-eps-converted-to.pdf
 >
-(epstopdf)                    date: 2019-09-03 17:19:41
-(epstopdf)                    size: 31338 bytes
+(epstopdf)                    date: 2019-09-05 15:52:34
+(epstopdf)                    size: 25220 bytes
 (epstopdf)             Command: <epstopdf --outfile=figures/alpha0/torque-eps-c
 onverted-to.pdf figures/alpha0/torque.eps>
 (epstopdf)             \includegraphics on input line 749.
@@ -1051,7 +1075,7 @@ am Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 /urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8
 a.pfb>
-Output written on SunAvoidanceSlew_AASpaper.pdf (20 pages, 2183544 bytes).
+Output written on SunAvoidanceSlew_AASpaper.pdf (20 pages, 2212589 bytes).
 PDF statistics:
  1026 PDF objects out of 1200 (max. 8388607)
  150 named destinations out of 1000 (max. 500000)
