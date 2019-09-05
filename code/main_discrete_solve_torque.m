@@ -61,11 +61,6 @@ w_phi1 = [w1_phi1; w2_phi1(2:end ,:); w3_phi1(2:end, :)];
 q_phi1 = [q1_phi1; q2_phi1(2:end ,:); q3_phi1(2:end, :)]; 
 torque_phi1 = [torque1_phi1; torque2_phi1(2:end ,:); torque3_phi1(2:end, :)]; 
 
-ypr_phi1 = zeros(length(q_phi1), 3); 
-for i = 1:max(size(q_phi1))
-    ypr_phi1(i, :) = SpinCalc('QtoEA321', q_phi1(i, :), eps, 0); 
-end 
-
 %% Plot phi1
 plot_option = 0; 
 if plot_option == 1
@@ -143,11 +138,6 @@ w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)];
 q_phi2 = [q1_phi2; q2_phi2(2:end ,:); q3_phi2(2:end, :)]; 
 torque_phi2 = [torque1_phi2; torque2_phi2(2:end, :); torque3_phi2(2:end, :)]; 
 
-% ypr_phi2 = zeros(length(q_phi2), 3); 
-% for i = 1:max(size(q_phi2))
-%     ypr_phi2(i, :) = SpinCalc('QtoEA321', q_phi2(i, :), eps, 0); 
-% end 
-
 %% Plot phi2
 plot_option = 0; 
 if plot_option == 1
@@ -212,11 +202,6 @@ w_phi3 = [w1_phi3; w2_phi3(2:end ,:); w3_phi3(2:end, :)];
 q_phi3 = [q1_phi3; q2_phi3(2:end ,:); q3_phi3(2:end, :)]; 
 torque_phi3 = [torque1_phi3; torque2_phi3(2:end ,:); torque3_phi3(2:end, :)]; 
 
-% ypr_phi3 = zeros(length(q_phi3), 3); 
-% for i = 1:max(size(q_phi3))
-%     ypr_phi3(i, :) = SpinCalc('QtoEA321', q_phi3(i, :), eps, 0); 
-% end 
-
 %% Plot phi3
 plot_option = 0; 
 if plot_option == 1
@@ -240,12 +225,6 @@ q_total = [ q_phi1; ...
 torque_total = [torque_phi1; ... 
             torque_phi2(2:end, :); ... 
             torque_phi3(2:end, :)]; 
-
-        
-% ypr_total = zeros(length(q_total), 3); 
-% for i = 1:max(size(q_total))
-%     ypr_total(i, :) = SpinCalc('QtoEA321', q_total(i, :), eps, 0); 
-% end 
         
 %% plot total stuff 
 
@@ -307,12 +286,7 @@ w_phiNom = [w1_phiNom; w2_phiNom(2:end ,:); w3_phiNom(2:end, :)];
 q_phiNom = [q1_phiNom; q2_phiNom(2:end ,:); q3_phiNom(2:end, :)]; 
 torque_phiNom = [torque1_phiNom; torque2_phiNom(2:end ,:); torque3_phiNom(2:end, :)]; 
 
-% ypr_phiNom = zeros(length(q_phiNom), 3); 
-% for i = 1:max(size(q_phi1))
-%     ypr_phiNom(i, :) = SpinCalc('QtoEA321', q_phiNom(i, :), eps, 0); 
-% end 
-
-%%
+%% Post processing 
 
 post_processing_N
 
