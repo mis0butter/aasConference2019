@@ -6,12 +6,6 @@
 % close all; 
 % main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
-% optional plotting routine to check things 
-plot_option = 0; 
-if plot_option == 1
-    phi_check_vectors 
-end 
-
 %% Determine Phi 1 slew times
 
 % Initial conditions 
