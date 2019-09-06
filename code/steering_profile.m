@@ -17,36 +17,6 @@ t1 = round(t1, 2);
 t2 = round(t2, 2); 
 t3 = round(t3, 3); 
 
-% %% Solve for attitude determination - first slew 
-% 
-% % t0 --> t1 
-% w0 = [    0;    0;      0];                         % wrt G0 frame 
-% q0 = [    0;    0;      0;      1];                 % wrt G0 frame 
-% a_P = [ 0;  0; aMax];                               % acceleration around eigenaxis of P frame 
-% a_G0 = G0_DCM_P*a_P; 
-% torque_G0 = inertia_SC*a_G0;                                 % wrt G0 frame 
-% 
-% [t1_phi1, q1_phi1, w1_phi1, torque1_phi1] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0);
-% 
-% % t1 --> t2 
-% w0 = w1_phi1(end, :)'; 
-% q0 = q1_phi1(end, :)'; 
-% torque = [0; 0; 0]; 
-% 
-% [t2_phi1, q2_phi1, w2_phi1, torque2_phi1] = gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0);
-% 
-% % t2 --> t3 
-% w0 = w2_phi1(end, :)'; 
-% q0 = q2_phi1(end, :)'; 
-% 
-% [t3_phi1, q3_phi1, w3_phi1, torque3_phi1] = gyrostat_discrete_torqueN(dt, t2, t3, inertia_SC, -torque_G0, w0, q0);
-% 
-% % Putting it all together 
-% t_phi1 = [t1_phi1; t2_phi1(2:end); t3_phi1(2:end)]; 
-% w_phi1 = [w1_phi1; w2_phi1(2:end ,:); w3_phi1(2:end, :)]; 
-% q_phi1 = [q1_phi1; q2_phi1(2:end ,:); q3_phi1(2:end, :)]; 
-% torque_phi1 = [torque1_phi1; torque2_phi1(2:end ,:); torque3_phi1(2:end, :)]; 
-
 %% Solve for attitude determination - first slew 
 
 % t0 --> t1 
