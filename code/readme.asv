@@ -1,0 +1,13 @@
+SAS Algorithm Code 
+
+Run main.m 
+
+Command window output: 
+    phi 1+2+3 
+        sum of angles 
+    Final error 
+        Diff of target Pf and propagated final attitude 
+
+To generate plots: 
+    in post_processing.m 
+        set plot_option = 1 for various plots 
