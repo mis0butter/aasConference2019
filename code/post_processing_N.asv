@@ -55,7 +55,9 @@ fsize = 14;
 plot_option = 0; 
 if plot_option == 1
     
-    figure
+figure
+
+    % Actual Slew Profile 
     
     % Transparent sphere 
     [x, y, z] = sphere(100);

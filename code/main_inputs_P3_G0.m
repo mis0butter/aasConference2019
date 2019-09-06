@@ -61,11 +61,8 @@ Pf_N = N_DCM_G0*Pf_G0;
 % Calculate the threshold angle 
 phi_t = wMax^2/aMax; 
 
-% First slew around eigenaxis
+% Find phi1 
 phi1 = acos(dot(Pi_G0, S_PiPf_G0)) - ep;      % dot product of unit vectors 
-if phi1 > pi/2 
-    phi1_rem = phi1 - pi/2; 
-end 
 
 % Find P1 vector in G0 frame 
 P1_P = [ cos(phi1); sin(phi1); 0 ];           % P1 in P frame 
@@ -84,6 +81,7 @@ P2_N = N_DCM_G0*P2_G0;                      % P2 in N frame
 % Slew around sun vector via phi2 
 
 if alpha == 0
+    
     phi2 = pi; 
     theta = acos(dot(S_G0, P1_G0));           % angle btwn sun and P1 vectors 
     P3_G0 = S_G0*norm(P1_G0)*cos(theta);       % P3 vector in G frame (S and P1 already unit vectors)
@@ -113,22 +111,21 @@ else
     bot = dot(P1_G0, P2_G0) - dot(S_G0, P1_G0)*dot(S_G0, P2_G0);
     phi2_M3 = abs( atan2 ( top, bot ) ); 
     
-    % Last one? 
+    % Last one? This doesn't work
     theta = acos(dot(P1_G0, S_G0)); 
     top = (pi/2 - alpha)*sin(ep); 
     bot = cos(ep) - cos(theta)*cos(alpha); 
     phi2_M4 = 2*abs(atan2(top, bot)); 
 
     % The chosen phi2! 
-    phi2 = phi2_M3; 
+    phi2 = phi2_M; 
 
 end 
 
 
-%%
+%% Find phi3
 
 % Slew around eigenvector via phi3 
-% What if Pi and Pf overlap with P2 and P2? Need to ask Mohammad this ... 
 phi3 = acos(dot(Pf_G0, P2_G0)); 
 if phi3 > pi/2 
     phi3_rem = phi3 - pi/2; 

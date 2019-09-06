@@ -409,43 +409,44 @@ and the angular position can be find by direct integration of Eq. (\ref{phid_con
 	\right.
 	\end{equation}
 	
-	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	 Using the conditions, $\dot{\phi}(t_1)=\dot{\phi}_{max}$, $\dot{\phi}(t_f)=\dot{\phi}_f$, $\phi(t_f)=\phi_f$, we can determine switching times $t_1$, $t_2$, and final time $t_f$. But first, we need to calculate a threshold angle, which will be called $\phi_t$. 
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	\begin{equation}\label{phi_t}
-	\phi_t = \frac{\dot{\phi}_{max}}{\ddot{\phi}_{max}};
-	\end{equation}
-	
-	If $\phi > \phi_t$, then we can determine switching times $t_1$, $t_2$, and final time $t_f$ as
-	
-	\begin{equation}\label{t1cons}
-	t_1=t_0+\frac{\dot{\phi}_{max}-\dot{\phi}_0}{\ddot{\phi}_{max}},
-	\end{equation}
-	\begin{equation}\label{t2cons}
-	\begin{split}
-	t_2=&t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2\\
-	&-\frac{\dot{\phi}_{max}(\dot{\phi}_{max}-\dot{\phi}_f)}{\ddot{\phi}_{max}}+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big],
-	\end{split}
-	\end{equation}
-	and
-	\begin{equation}\label{tfcons}
-	t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
-	\end{equation}
-	
-	Otherwise, if $\phi \leq \phi_t$, then the switching times are determined by: 
-	
-	\begin{equation}\label{tfcons_phit}
-	t_f = \sqrt{\frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}}
-	\end{equation}
-	\begin{equation}\label{t2cons_phit}
-	t_2 = \frac{t_f}{2}
-	\end{equation}
-	\begin{equation}\label{t1cons_phit}
-	t_1 = t_2 
-	\end{equation}
-	
-	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Using the conditions, $\dot{\phi}(t_1)=\dot{\phi}_{max}$, $\dot{\phi}(t_f)=\dot{\phi}_f$, $\phi(t_f)=\phi_f$, we can determine switching times $t_1$, $t_2$, and final time $t_f$. Depending on the size of $\phi$ and the maximum velocity and acceleration constraints, the spacecraft may or may not reach its maximum allowed velocity during a slew, which in turn determines the calculation of switching times. There is a threshold angle, which is called $\phi_t$ and is calculated from the constraints: 
+
+\begin{equation}\label{phi_t}
+\phi_t = \frac{\dot{\phi}_{max}^2}{\ddot{\phi}_{max}}. 
+\end{equation}
+
+If $\phi > \phi_t$, then there will be period of coasting at constant velocity (at the maximum velocity constraint) in between the periods of acceleration and deceleration during the slew. In such a case, we can determine switching times $t_1$, $t_2$, and final time $t_f$ as
+
+\begin{equation}\label{t1cons}
+t_1=t_0+\frac{\dot{\phi}_{max}-\dot{\phi}_0}{\ddot{\phi}_{max}},
+\end{equation}
+\begin{equation}\label{t2cons}
+\begin{split}
+t_2=&t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2\\
+&-\frac{\dot{\phi}_{max}(\dot{\phi}_{max}-\dot{\phi}_f)}{\ddot{\phi}_{max}}+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big],
+\end{split}
+\end{equation}
+and
+\begin{equation}\label{tfcons}
+t_f=t_1+\frac{1}{\dot{\phi}_{max}}\Big[ \phi_f-\dot{\phi}_0(t_1-t_0)-\frac{1}{2}\ddot{\phi}_{max}(t_1-t_0)^2+\frac{(\dot{\phi}_{max}-\dot{\phi}_f)^2}{2\ddot{\phi}_{max}} \Big].
+\end{equation}
+
+Otherwise, if $\phi \leq \phi_t$, then there will be no period of coasting at angular velocity, and the acceleration profile of the spacecraft will be changing from the initial to the final point of the slew. The switching times are then are determined by: 
+
+\begin{equation}\label{tfcons_phit}
+t_f = \sqrt{\frac{4\phi}{\ddot{\phi}_{max}}}
+\end{equation}
+\begin{equation}\label{t2cons_phit}
+t_2 = \frac{t_f}{2}
+\end{equation}
+\begin{equation}\label{t1cons_phit}
+t_1 = t_2 
+\end{equation}
+
+%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	
 	
 		The target steering profiles including the quaternions, angular rate, and angular acceleration can be determined as

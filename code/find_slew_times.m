@@ -1,6 +1,6 @@
-function [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi, phi_tt)
+function [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi, phi_t)
 
-if phi > phi_tt
+if phi > phi_t
 
 %     t1 = t0 + (wMax-w0)/aMax;  
 %     % Coast t2 --> angular velocity: trapezoid profile 
