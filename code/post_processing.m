@@ -37,14 +37,14 @@ end
 
 %% NO sun intrusion slew - nominal 
 
-P_Gnom_G = zeros(length(t_phiNom), 3); 
-P_Gnom_G = zeros(length(t_phiNom), 3); 
+P_nom_G = zeros(length(t_phiNom), 3); 
+P_nom_N = zeros(length(t_phiNom), 3); 
 % convert quaternions --> DCMs --> vectors 
 for i = 1:length(t_phiNom)
     G0_DCM_G = quat2DCM(q_phiNom(i, :)); 
     G_DCM_G0 = G0_DCM_G'; 
-    P_Gnom_G(i, :) = G_DCM_G0*Pi_G0; 
-    P_Gnom_N(i, :) = N_DCM_G0*P_Gnom_G(i, :)'; 
+    P_nom_G(i, :) = G_DCM_G0*Pi_G0; 
+    P_nom_N(i, :) = N_DCM_G0*P_nom_G(i, :)'; 
 end 
 
 %% PLOT!
@@ -69,6 +69,9 @@ if plot_option == 1
     plot3(P_phi1_N(:, 1), P_phi1_N(:, 2), P_phi1_N(:,3), 'm', 'LineWidth', 2); 
     plot3(P_phi2_N(:, 1), P_phi2_N(:, 2), P_phi2_N(:,3), 'c', 'LineWidth', 2); 
     plot3(P_phi3_N(:, 1), P_phi3_N(:, 2), P_phi3_N(:,3), 'y', 'LineWidth', 2); 
+    
+%     % Plot nominal slew 
+%     plot3(P_nom_N(:, 1), P_nom_N(:, 2), P_nom_N(:, 3), 'b', 'LineWidth', 2); 
     
     % Plot Pi, Pf, P1, P2 points 
     plot3([0 Pi_N(1)], [0 Pi_N(2)], [0 Pi_N(3)], 'b:', 'LineWidth', 1.1); 

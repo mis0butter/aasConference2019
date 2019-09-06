@@ -251,3 +251,10 @@ a_phiNom = zeros(length(w_phiNom) - 1, 3);
 for i = 1:length(w_phiNom) - 1 
     a_phiNom(i, :) = (1/dt)*(w_phiNom(i + 1, :) - w_phiNom(i, :)); 
 end 
+        
+%% plot nominal stuff 
+
+plot_option = 0; 
+if plot_option == 1
+    plot_qwypr(t_phiNom, q_phiNom, w_phiNom, torque_phiNom, a_phiNom, 'total', aMax, wMax)
+end 
