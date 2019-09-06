@@ -2,9 +2,9 @@ SAS Algorithm Code
 
 Run main.m 
 
-To generate plots: 
+To toggle plot generation: 
     in post_processing.m: 
-        set plot_option = 1 for various plots 
+        set plot_option = 1 or 0 for various plots 
 
 Command window output: 
     phi 1+2+3 

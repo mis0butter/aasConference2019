@@ -22,7 +22,7 @@ if plot_option == 1
 end 
 
 % phi total 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, torque_total, a_total, 'total', aMax, wMax)
 end 
@@ -83,7 +83,7 @@ end
 
 fsize = 14; 
 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     
     figure
