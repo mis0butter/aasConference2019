@@ -57,15 +57,15 @@ q0 = [    0;    0;      0;      1];                 % wrt G0 frame
     e_G0, aMax, inertia_SC, w0, q0, wMax); 
 
 % t1 --> t2 
-w0 = w1_phi3(end, :)'; 
-q0 = q1_phi3(end, :)'; 
+w0 = w1_phi1(end, :)'; 
+q0 = q1_phi1(end, :)'; 
 
 [t2_phi1, q2_phi1, w2_phi1, torque2_phi1, phi2_phi1] = gyrostat_discrete_torqueN_solve_torque(dt, t1, t2, ... 
     e_G0, 0, inertia_SC, w0, q0, wMax); 
 
 % t2 --> t3 
-w0 = w2_phi3(end, :)'; 
-q0 = q2_phi3(end, :)'; 
+w0 = w2_phi1(end, :)'; 
+q0 = q2_phi1(end, :)'; 
 
 [t3_phi1, q3_phi1, w3_phi1, torque3_phi1, phi3_phi1] = gyrostat_discrete_torqueN_solve_torque(dt, t2, t3, ... 
     e_G0, -aMax, inertia_SC, w0, q0, wMax); 
@@ -75,7 +75,6 @@ t_phi1 = [t1_phi1; t2_phi1(2:end); t3_phi1(2:end)];
 w_phi1 = [w1_phi1; w2_phi1(2:end ,:); w3_phi1(2:end, :)]; 
 q_phi1 = [q1_phi1; q2_phi1(2:end ,:); q3_phi1(2:end, :)]; 
 torque_phi1 = [torque1_phi1; torque2_phi1(2:end ,:); torque3_phi1(2:end, :)]; 
-
 
 %% Plot phi1
 
@@ -116,7 +115,7 @@ w0 = w_phi1(end, :)';
 phi_w0 = 0; 
 
 [t1_phi2, q1_phi2, w1_phi2, torque1_phi2, phi1_phi2] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
-    S_G0, sign*aMax, inertia_SC, w0, q0, phi_w0); 
+    S_G0, sign*aMax, inertia_SC, w0, q0, wMax); 
 
 % t1 --> t2 
 w0 = w1_phi2(end, :)'; 
