@@ -1,5 +1,5 @@
 function plot_qwypr(t, q, w, torque, a, phi_num, a_max, w_max)
-% Plot q, w, torque, ypr 
+% Plot q, w, torque, a (ypr previously) 
 
 fsize = 20; 
 phi_num = num2str(phi_num); 
