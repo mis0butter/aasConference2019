@@ -56,7 +56,7 @@ Pf_N = N_DCM_G0*Pf_G0;
 %% Calculate slew angles 
 
 % Calculate the threshold angle 
-phi_t = wMax^2/aMax; 
+phi_tt = wMax^2/aMax; 
 
 % First slew around eigenaxis
 phi1 = acos(dot(Pi_G0, S_PiPf_G0)) - ep;      % dot product of unit vectors 

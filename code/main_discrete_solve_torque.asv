@@ -4,9 +4,9 @@
 
 % clear; 
 % close all; 
-main_inputs_P3_G0         % Creates all inputs and variables in workspace 
+% main_inputs_P3_G0         % Creates all inputs and variables in workspace 
 
-dt = 1/100;                 % gyrostat attitude solver discretization 
+d
 
 %% Determine Phi 1 slew times
 
@@ -15,7 +15,7 @@ w0 = 0;
 t0 = 0; 
 wf = 0; 
 
-[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi1, phi_t); 
+[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi1, phi_tt); 
 
 % Discretize slew times to 2 decimal places 
 t1 = round(t1, 2); 
@@ -23,6 +23,8 @@ t2 = round(t2, 2);
 t3 = round(t3, 3); 
 
 %% Solve for attitude determination - first slew 
+        
+dt = 1/100; 
 
 % t0 --> t1 
 w0 = [    0;    0;      0];                         % wrt G0 frame 
@@ -72,7 +74,7 @@ w0 = 0;
 t0 = 0; 
 wf = 0; 
 
-[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi2, phi_t); 
+[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi2, phi_tt); 
 
 %% Direction of phi2
 
@@ -89,6 +91,8 @@ else
 end 
     
 %% Solve for attitude determination - second slew 
+
+dt = 1/100; 
 
 % This is the quaternion of current G in initial G0 frame. G0_q_G
 q0 = q_phi1(end, :)';               % G0_q_G
@@ -137,9 +141,11 @@ w0 = 0;
 t0 = 0; 
 wf = 0; 
 
-[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi3, phi_t); 
+[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi3, phi_tt); 
 
 %% Solve for attitue determination - third slew 
+        
+dt = 1/100; 
 
 % t0 --> t1 
 w0 = w_phi2(end, :)'; 
@@ -221,7 +227,7 @@ w0 = 0;
 t0 = 0; 
 wf = 0; 
 
-[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, theta_Pi_Pf, phi_t); 
+[t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, theta_Pi_Pf, phi_tt); 
 
 % Discretize slew times to 2 decimal places 
 t1 = round(t1, 2); 
@@ -234,6 +240,7 @@ t3 = round(t3, 3);
 w0 = [    0;    0;      0];                         % wrt G0 frame 
 q0 = [    0;    0;      0;      1];                 % wrt G0 frame 
 
+dt = 1/100; 
 [t1_phiNom, q1_phiNom, w1_phiNom, torque1_phiNom] = gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0);
 
 % t1 --> t2 
