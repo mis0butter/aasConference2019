@@ -187,14 +187,16 @@ q_total = [ q_phi1; ...
 torque_total = [torque_phi1; ... 
             torque_phi2(2:end, :); ... 
             torque_phi3(2:end, :)]; 
-        
-a_total = [ a_phi1; ... 
-            a_phi2(2:end, :); ... 
-            a_phi3(2:end, :)]; 
+
+% total acceleration stuff 
+a_total = zeros(length(w_total) - 1, 3); 
+for i = 1:length(w_total) - 1 
+    a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
+end 
         
 %% plot total stuff 
 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, torque_total, a_total, 'total', aMax, wMax)
 end 

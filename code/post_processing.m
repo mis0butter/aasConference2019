@@ -51,7 +51,7 @@ end
 
 fsize = 14; 
 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     
     figure
@@ -80,16 +80,11 @@ if plot_option == 1
     plot3([0 P2_N(1)], [0 P2_N(2)], [0 P2_N(3)], 'b:', 'LineWidth', 1.1); 
         plot3(P2_N(1), P2_N(2), P2_N(3), 'ko', 'LineWidth', 1)
     plot3([0 e_N(1)], [0 e_N(2)], [0 e_N(3)], 'g-.', 'LineWidth', 1.1); 
-     
-%     plot3([0 S1_G0(1)], [0 S1_G0(2)], [0 S1_G0(3)])
-%     plot3([0 S2_G0(1)], [0 S2_G0(2)], [0 S2_G0(3)])
-%     plot3([0 S3_G0(1)], [0 S3_G0(2)], [0 S3_G0(3)])
-%     plot3(P_S(:, 1), P_S(:, 2), P_S(:, 3))
     
-    plot(theta,sin(theta)./theta,'LineWidth',3) 
+%     plot(theta,sin(theta)./theta,'LineWidth',3) 
     
     % Sun vector 
-    plot3(S_N(1), S_N(2), S_N(3), 'p', 'LineWidth', 3); 
+    plot3(S_N(1), S_N(2), S_N(3), 'rp', 'LineWidth', 3); 
 %     % Sun projection 
 %     plot3([0 S_PiPf_N(1)], [0 S_PiPf_N(2)], [0 S_PiPf_N(3)], 'g-.'); 
     
