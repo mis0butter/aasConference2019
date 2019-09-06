@@ -1,7 +1,39 @@
 % post-processing script
 % Junette Hsin 
+    
+%% Plot q, w, torque, a
 
-%% sun intrusion slew 
+% phi1
+plot_option = 0; 
+if plot_option == 1
+    plot_qwypr(t_phi1, q_phi1, w_phi1, torque_phi1, a_phi1, 'phi1', aMax, wMax)
+end 
+
+% phi2
+plot_option = 0; 
+if plot_option == 1
+    plot_qwypr(t_phi2, q_phi2, w_phi2, torque_phi2, a_phi2, 'phi2', aMax, wMax)
+end 
+
+% phi3
+plot_option = 0; 
+if plot_option == 1
+    plot_qwypr(t_phi3, q_phi3, w_phi3, torque_phi3, a_phi3, 'phi3', aMax, wMax)
+end 
+
+% phi total 
+plot_option = 0; 
+if plot_option == 1
+    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, 'total', aMax, wMax)
+end 
+
+% phi nominal 
+plot_option = 0; 
+if plot_option == 1
+    plot_qwypr(t_phiNom, q_phiNom, w_phiNom, torque_phiNom, a_phiNom, 'phiNom', aMax, wMax)
+end 
+
+%% quats --> DCMs --> vectors 
 
 % Actual slew profile 
 P_G = zeros(length(t_total), 3); 
@@ -115,6 +147,9 @@ if plot_option == 1
 end 
 
 %% how far off? 
+
+phi_total = 180/pi*(phi1 + phi2 + phi3); 
+strcat(sprintf('phi 1+2+3: %.2f', phi_total), ' deg') 
 
 err_final = acosd(dot(Pf_N, P_phi3_N(end, :)));
 strcat(sprintf('Final error: %.2f', err_final), ' deg')

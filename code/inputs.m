@@ -41,13 +41,12 @@ N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G fram
 
 % IF angular separation is less than payload half-cone angle --> while loop
 % until alpha < ep. for simulation!!! 
-
 while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ... 
         theta_Pi_Sproj > theta_Pi_Pf || theta_Sproj_Pf > theta_Pi_Pf 
-% while abs(alpha) > ep  
-    
+
     [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
         sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
+    
 end 
 
 %% Convert things back to inertial frame 

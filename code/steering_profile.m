@@ -51,13 +51,6 @@ a_phi1 = zeros(length(w_phi1) - 1, 3);
 for i = 1:length(w_phi1) - 1 
     a_phi1(i, :) = (1/dt)*(w_phi1(i + 1, :) - w_phi1(i, :)); 
 end 
-
-%% Plot phi1
-
-plot_option = 0; 
-if plot_option == 1
-    plot_qwypr(t_phi1, q_phi1, w_phi1, torque_phi1, a_phi1, 'total', aMax, wMax)
-end 
     
 %% Determine Phi 2 slew times 
 
@@ -113,13 +106,6 @@ for i = 1:length(w_phi2) - 1
     a_phi2(i, :) = (1/dt)*(w_phi2(i + 1, :) - w_phi2(i, :)); 
 end 
 
-%% Plot phi2
-
-plot_option = 0; 
-if plot_option == 1
-    plot_qwypr(t_phi2, q_phi2, w_phi2, torque_phi2, a_phi2, 'total', aMax, wMax)
-end 
-
 %% Determine Phi 3 slew times
 
 w0 = 0; 
@@ -163,13 +149,6 @@ for i = 1:length(w_phi3) - 1
     a_phi3(i, :) = (1/dt)*(w_phi3(i + 1, :) - w_phi3(i, :)); 
 end 
 
-%% Plot phi3
-
-plot_option = 0; 
-if plot_option == 1
-    plot_qwypr(t_phi3, q_phi3, w_phi3, torque_phi3, a_phi3, 'total', aMax, wMax)
-end 
-
 %% total slew stuff 
 
 t_total = [ t_phi1; ... 
@@ -192,13 +171,6 @@ torque_total = [torque_phi1; ...
 a_total = zeros(length(w_total) - 1, 3); 
 for i = 1:length(w_total) - 1 
     a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
-end 
-        
-%% plot total stuff 
-
-plot_option = 1; 
-if plot_option == 1
-    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, 'total', aMax, wMax)
 end 
 
 %% PHI NOMINAL - IF THERE WAS NO SUN INTRUSION 
@@ -250,11 +222,4 @@ torque_phiNom = [torque1_phiNom; torque2_phiNom(2:end ,:); torque3_phiNom(2:end,
 a_phiNom = zeros(length(w_phiNom) - 1, 3); 
 for i = 1:length(w_phiNom) - 1 
     a_phiNom(i, :) = (1/dt)*(w_phiNom(i + 1, :) - w_phiNom(i, :)); 
-end 
-        
-%% plot nominal stuff 
-
-plot_option = 0; 
-if plot_option == 1
-    plot_qwypr(t_phiNom, q_phiNom, w_phiNom, torque_phiNom, a_phiNom, 'total', aMax, wMax)
 end 
