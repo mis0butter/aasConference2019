@@ -41,8 +41,11 @@ N_DCM_G0 = G0_DCM_N';                         % G to N frame - initial!!! G fram
 
 % IF angular separation is less than payload half-cone angle --> while loop
 % until alpha < ep. for simulation!!! 
+
 while abs(alpha) > ep  || theta_Sproj_Pf < ep || theta_Pi_Sproj < ep || ... 
         theta_Pi_Sproj > theta_Pi_Pf || theta_Sproj_Pf > theta_Pi_Pf 
+% while abs(alpha) > ep  
+    
     [alpha, theta_Pi_Sproj, theta_Sproj_Pf, theta_Pi_Pf, S_N, S_PiPf_G0, S_G0] = ... 
         sun_vector(G0_DCM_N, e_G0, Pi_G0, Pf_G0); 
 end 
@@ -104,52 +107,22 @@ else
     SP1_G0 = P1_G0 - S_G0; 
     SP2_G0 = P2_G0 - S_G0; 
     phi2_S = acos(dot(SP1_G0/norm(SP1_G0), SP2_G0/norm(SP2_G0))); 
+    
+    % Another phi2
+    top = dot(S_G0, cross(P1_G0, P2_G0)); 
+    bot = dot(P1_G0, P2_G0) - dot(S_G0, P1_G0)*dot(S_G0, P2_G0);
+    phi2_M3 = abs( atan2 ( top, bot ) ); 
+    
+    % Last one? 
+    theta = acos(dot(P1_G0, S_G0)); 
+    top = (pi/2 - alpha)*sin(ep); 
+    bot = cos(ep) - cos(theta)*cos(alpha); 
+    phi2_M4 = 2*abs(atan2(top, bot)); 
+
+    % The chosen phi2! 
+    phi2 = phi2_M3; 
+
 end 
-
-%%%
-top = dot(S_G0, cross(P1_G0, P2_G0)); 
-bot = dot(P1_G0, P2_G0) - dot(S_G0, P1_G0)*dot(S_G0, P2_G0);
-phi2_M3 = abs( atan2 ( top, bot ) ); 
-%%%
-theta = acos(dot(P1_G0, S_G0)); 
-top = (pi/2 - alpha)*sin(ep); 
-bot = cos(ep) - cos(theta)*cos(alpha); 
-phi2_M4 = 2*abs(atan2(top, bot)); 
-    %%
-
-    plot_option = 0; 
-    if plot_option == 1
-        figure()
-            plot3([0 SP1_G0(1)], [0 SP1_G0(2)], [0 SP1_G0(3)], 'r')
-            hold on; grid on 
-            plot3([0 SP2_G0(1)], [0 SP2_G0(2)], [0 SP2_G0(3)], 'r')
-            plot3([0 SP3_G0(1)], [0 SP3_G0(2)], [0 SP3_G0(3)], 'r')
-            
-            plot3([0 S_G0(1)], [0 S_G0(2)], [0 S_G0(3)], 'r'); 
-            plot3([0 S_PiPf_G0(1)], [0 S_PiPf_G0(2)], [0 S_PiPf_G0(3)], 'r'); 
-
-            plot3([0 Pi_G0(1)], [0 Pi_G0(2)], [0 Pi_G0(3)], 'b'); 
-            plot3([0 Pf_G0(1)], [0 Pf_G0(2)], [0 Pf_G0(3)], 'b'); 
-            plot3([0 P1_G0(1)], [0 P1_G0(2)], [0 P1_G0(3)], 'b'); 
-            plot3([0 P2_G0(1)], [0 P2_G0(2)], [0 P2_G0(3)], 'b'); 
-            plot3([0 e_G0(1)], [0 e_G0(2)], [0 e_G0(3)], 'g'); 
-
-%             plot3(S_G0 + V_G0(:, 1), S_G0 + V_G0(:, 2), S_G0 + V_G0(:, 3), '-.')
-            plot3(P_phi2_G0(:, 1), P_phi2_G0(:, 2), P_phi2_G0(:, 3), '-.')
-        %     plot3(GP_G0(:, 1), GP_G0(:, 2), GP_G0(:, 3)) 
-        
-        
-            text(Pi_G0(1), Pi_G0(2), Pi_G0(3), sprintf(' Pi')) 
-            text(Pf_G0(1), Pf_G0(2), Pf_G0(3), sprintf(' Pf')) 
-%             text(e_G0(1), e_G0(2), e_G0(3), sprintf(' e')) 
-            text(P1_G0(1), P1_G0(2), P1_G0(3), sprintf(' P1')) 
-            text(P2_G0(1), P2_G0(2), P2_G0(3), sprintf(' P2')) 
-            text(S_G0(1), S_G0(2), S_G0(3), sprintf(' sun')) 
-            text(S_PiPf_G0(1), S_PiPf_G0(2), S_PiPf_G0(3), sprintf(' sun proj')) 
-        
-    %%
-        
-    end 
 
 
 %%

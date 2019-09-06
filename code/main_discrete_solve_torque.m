@@ -76,16 +76,11 @@ wf = 0;
 
 %% Direction of phi2
 
-sun_e = cross(S_G0, e_G0); 
-a = sun_e/norm(sun_e); 
-b = Pf_G0/norm(Pf_G0); 
-c = Pi_G0/norm(Pi_G0); 
-
-% if angle from sun_e and Pf is larger than sun_e and Pi 
-if acos(dot(a,b)) > acos(dot(a, c))
-    sign = -1; 
-else 
+% depends on angle between sun and eigenaxis 
+if acos(dot(e_G0, S_G0)) < pi/2
     sign = 1; 
+else 
+    sign = -1; 
 end 
     
 %% Solve for attitude determination - second slew 
