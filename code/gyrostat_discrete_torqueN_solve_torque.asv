@@ -1,5 +1,5 @@
 function [time_out, q_out, w_out, torque_out, phi] = gyrostat_discrete_torqueN_solve_torque(dt, t_start, t_end, ... 
-    e, a_max, inertia, w0, q0, w_max)
+    e, a_max, inertia, w0, q0, phi_w0)
 % Junette Hsin 
 % Discrete attitude determination for gyrostat 
 % 
@@ -7,12 +7,12 @@ function [time_out, q_out, w_out, torque_out, phi] = gyrostat_discrete_torqueN_s
 %   dt          = time step 
 %   t_start     = time start 
 %   t_end       = time end 
-%   e           = eigenaxis (axis of rotation) in inertial frame 
+%   e           = eigenaxis in inertial frame 
 %   a_max       = acceleration constraint 
-%   inertia     = SC inertia, in body frame 
+%   v_max       = velocity constraint 
+%   J           = SC inertia, in body frame 
 %   w0          = initial velocity 
 %   q0          = initial attitude 
-%   w_max       = velocity constraint 
 % 
 % Outputs: 
 %   time_out    = output time 
@@ -47,7 +47,7 @@ time_out = [t_start; zeros(length(dt : dt : (t_end - t_start)), 1)];
 for t = t_start+dt : dt : t_end 
     
     % Desired phi angle 
-    phi = w_max*(t - t_start) + 0.5*a_max*(t - t_start)^2; 
+    phi = phi_w0*(t - t_start) + 0.5*a_max*(t - t_start)^2; 
        
     % rotation around eigenaxis by phi into DCM 
     B_DCM_N = [ cos(phi).*eye(3) + (1 - cos(phi)).*(e*e') - sin(phi).*e_skew ]; 
