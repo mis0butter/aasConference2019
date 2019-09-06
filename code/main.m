@@ -4,7 +4,7 @@
 
 % clear; 
 % close all; 
-inputs                          % Creates all inputs and variables in workspace 
-steering_profile
-post_processing
+inputs                          % Creates initial, final, and sun vectors 
+steering_profile                % Computes vel, accel, quat, torque profiles 
+post_processing                 % Generates gyrostat unit sphere plot 
 
