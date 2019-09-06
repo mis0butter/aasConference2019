@@ -117,7 +117,7 @@ else
     phi2_M4 = 2*abs(atan2(top, bot)); 
 
     % The chosen phi2! 
-    phi2 = phi2_M; 
+    phi2 = phi2_M2; 
 
 end 
 

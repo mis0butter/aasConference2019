@@ -83,7 +83,7 @@ end
 
 fsize = 14; 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     
     figure
@@ -149,7 +149,7 @@ end
 %% how far off? 
 
 phi_total = 180/pi*(phi1 + phi2 + phi3); 
-strcat(sprintf('phi 1+2+3: %.2f', phi_total), ' deg') 
+disp(strcat(sprintf('phi 1+2+3: %.2f', phi_total), ' deg'))
 
 err_final = acosd(dot(Pf_N, P_phi3_N(end, :)));
-strcat(sprintf('Final error: %.2f', err_final), ' deg')
+disp(strcat(sprintf('Final error: %.2f', err_final), ' deg'))
