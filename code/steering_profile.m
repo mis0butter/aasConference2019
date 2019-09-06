@@ -46,13 +46,13 @@ w_phi1 = [w1_phi1; w2_phi1(2:end ,:); w3_phi1(2:end, :)];
 q_phi1 = [q1_phi1; q2_phi1(2:end ,:); q3_phi1(2:end, :)]; 
 torque_phi1 = [torque1_phi1; torque2_phi1(2:end ,:); torque3_phi1(2:end, :)]; 
 
-%% Plot phi1
-
 % acceleration stuff 
 a_phi1 = zeros(length(w_phi1) - 1, 3); 
 for i = 1:length(w_phi1) - 1 
     a_phi1(i, :) = (1/dt)*(w_phi1(i + 1, :) - w_phi1(i, :)); 
 end 
+
+%% Plot phi1
 
 plot_option = 0; 
 if plot_option == 1
@@ -107,13 +107,13 @@ w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)];
 q_phi2 = [q1_phi2; q2_phi2(2:end ,:); q3_phi2(2:end, :)]; 
 torque_phi2 = [torque1_phi2; torque2_phi2(2:end, :); torque3_phi2(2:end, :)]; 
 
-%% Plot phi2
-
 % acceleration stuff 
 a_phi2 = zeros(length(w_phi2) - 1, 3); 
 for i = 1:length(w_phi2) - 1 
     a_phi2(i, :) = (1/dt)*(w_phi2(i + 1, :) - w_phi2(i, :)); 
 end 
+
+%% Plot phi2
 
 plot_option = 0; 
 if plot_option == 1
@@ -157,13 +157,13 @@ w_phi3 = [w1_phi3; w2_phi3(2:end ,:); w3_phi3(2:end, :)];
 q_phi3 = [q1_phi3; q2_phi3(2:end ,:); q3_phi3(2:end, :)]; 
 torque_phi3 = [torque1_phi3; torque2_phi3(2:end ,:); torque3_phi3(2:end, :)]; 
 
-%% Plot phi3
-
 % acceleration stuff 
 a_phi3 = zeros(length(w_phi3) - 1, 3); 
 for i = 1:length(w_phi3) - 1 
     a_phi3(i, :) = (1/dt)*(w_phi3(i + 1, :) - w_phi3(i, :)); 
 end 
+
+%% Plot phi3
 
 plot_option = 0; 
 if plot_option == 1
@@ -188,13 +188,11 @@ torque_total = [torque_phi1; ...
             torque_phi2(2:end, :); ... 
             torque_phi3(2:end, :)]; 
         
+a_total = [ a_phi1; ... 
+            a_phi2(2:end, :); ... 
+            a_phi3(2:end, :)]; 
+        
 %% plot total stuff 
-
-% acceleration stuff 
-a_total = zeros(length(w_total) - 1, 3); 
-for i = 1:length(w_total) - 1 
-    a_total(i, :) = (1/dt)*(w_total(i + 1, :) - w_total(i, :)); 
-end 
 
 plot_option = 0; 
 if plot_option == 1
@@ -217,35 +215,7 @@ t1 = round(t1, 2);
 t2 = round(t2, 2); 
 t3 = round(t3, 3); 
 
-%% Solve for attitude determination - phiNom
-        
-% t0 --> t1 
-w0 = [    0;    0;      0];                         % wrt G0 frame 
-q0 = [    0;    0;      0;      1];                 % wrt G0 frame 
-
-[t1_phiNom, q1_phiNom, w1_phiNom, torque1_phiNom] = old_misc/gyrostat_discrete_torqueN(dt, t0, t1, inertia_SC, torque_G0, w0, q0);
-
-% t1 --> t2 
-w0 = w1_phiNom(end, :)'; 
-q0 = q1_phiNom(end, :)'; 
-torque = [0; 0; 0]; 
-
-[t2_phiNom, q2_phiNom, w2_phiNom, torque2_phiNom] = old_misc/gyrostat_discrete_torqueN(dt, t1, t2, inertia_SC, torque, w0, q0);
-
-% t2 --> t3 
-w0 = w2_phiNom(end, :)'; 
-q0 = q2_phiNom(end, :)'; 
-
-[t3_phiNom, q3_phiNom, w3_phiNom, torque3_phiNom] = old_misc/gyrostat_discrete_torqueN(dt, t2, t3, inertia_SC, -torque_G0, w0, q0);
-
-t_phiNom = [t1_phiNom; t2_phiNom(2:end); t3_phiNom(2:end)]; 
-w_phiNom = [w1_phiNom; w2_phiNom(2:end ,:); w3_phiNom(2:end, :)]; 
-q_phiNom = [q1_phiNom; q2_phiNom(2:end ,:); q3_phiNom(2:end, :)]; 
-torque_phiNom = [torque1_phiNom; torque2_phiNom(2:end ,:); torque3_phiNom(2:end, :)]; 
-
-
-
-%% Solve for attitue determination - third slew 
+%% Solve for attitue determination - phi nominal 
 
 % t0 --> t1 
 w0 = [    0;    0;      0];                         % wrt G0 frame 
@@ -273,3 +243,9 @@ t_phiNom = [t1_phiNom; t2_phiNom(2:end); t3_phiNom(2:end)];
 w_phiNom = [w1_phiNom; w2_phiNom(2:end ,:); w3_phiNom(2:end, :)]; 
 q_phiNom = [q1_phiNom; q2_phiNom(2:end ,:); q3_phiNom(2:end, :)]; 
 torque_phiNom = [torque1_phiNom; torque2_phiNom(2:end ,:); torque3_phiNom(2:end, :)]; 
+
+% acceleration stuff 
+a_phiNom = zeros(length(w_phiNom) - 1, 3); 
+for i = 1:length(w_phiNom) - 1 
+    a_phiNom(i, :) = (1/dt)*(w_phiNom(i + 1, :) - w_phiNom(i, :)); 
+end 

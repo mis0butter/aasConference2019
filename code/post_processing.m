@@ -35,7 +35,6 @@ for i = 1:length(t_phi3)
     P_phi3_N(i, :) = N_DCM_G0*G0_DCM_G'*Pi_G0; 
 end 
 
-
 %% NO sun intrusion slew - nominal 
 
 P_Gnom_G = zeros(length(t_phiNom), 3); 
@@ -71,6 +70,7 @@ if plot_option == 1
     plot3(P_phi2_N(:, 1), P_phi2_N(:, 2), P_phi2_N(:,3), 'c', 'LineWidth', 2); 
     plot3(P_phi3_N(:, 1), P_phi3_N(:, 2), P_phi3_N(:,3), 'y', 'LineWidth', 2); 
     
+    % Plot Pi, Pf, P1, P2 points 
     plot3([0 Pi_N(1)], [0 Pi_N(2)], [0 Pi_N(3)], 'b:', 'LineWidth', 1.1); 
         plot3(Pi_N(1), Pi_N(2), Pi_N(3), 'ko', 'LineWidth', 1)
     plot3([0 Pf_N(1)], [0 Pf_N(2)], [0 Pf_N(3)], 'b:', 'LineWidth', 1.1); 
@@ -90,7 +90,7 @@ if plot_option == 1
     
     % Sun vector 
     plot3(S_N(1), S_N(2), S_N(3), 'p', 'LineWidth', 3); 
-    % Sun projection 
+%     % Sun projection 
 %     plot3([0 S_PiPf_N(1)], [0 S_PiPf_N(2)], [0 S_PiPf_N(3)], 'g-.'); 
     
     % Phi2 - P3 (P1,P2 proj onto Sun vector) lines 

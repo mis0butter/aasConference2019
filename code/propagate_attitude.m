@@ -1,7 +1,8 @@
 function [time_out, q_out, w_out, torque_out, phi] = propagate_attitude(dt, t_start, t_end, ... 
     e, a_max, inertia, w0, q0, w_max)
+% 
 % Junette Hsin 
-% Discrete attitude determination for gyrostat 
+% Discrete attitude determination & propagation function for gyrostat 
 % 
 % Inputs: 
 %   dt          = time step 
