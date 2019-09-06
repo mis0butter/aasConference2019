@@ -9,6 +9,7 @@ n = 10;
 t_dt = max(t)/n; 
 t_lim = 0:t_dt:max(t); 
 
+% Get y-axis range for plots 
 ylimits_q = get_ylimits(q); 
 ylimits_w = get_ylimits(w); 
 % ylimits_ypr = get_ylimits(ypr); 
@@ -94,6 +95,8 @@ figure()
 %     str = strcat('$\omega_{', phi_num, '}$', 'Interpreter', 'latex'); 
 %     title(strcat('Angular Acceleration: $\ddot{\phi}_{', phi_num, '}$'), 'Interpreter', 'latex', 'FontSize', fsize)
 end 
+
+%% 
 
 function ylimits = get_ylimits(data) 
 % Set y limits of axis 
