@@ -76,9 +76,10 @@ P2_P = [cos(phiP2); sin(phiP2); 0];         % P2 in P frame
 P2_G0 = G0_DCM_P*P2_P;                        % P2 in G frame 
 P2_N = N_DCM_G0*P2_G0;                      % P2 in N frame 
 
-%% EVERYTHING THERE IS TO FIND PHI2
+%% FIND PHI2
 
 % Slew around sun vector via phi2 
+
 if alpha == 0
     phi2 = pi; 
     theta = acos(dot(S_G0, P1_G0));           % angle btwn sun and P1 vectors 
@@ -86,6 +87,7 @@ if alpha == 0
     P3_N = N_DCM_G0*P3_G0;                      % P3 in N frame 
     
 else 
+    
     % Not sure how to get the one below: 
     theta = acos(dot(P1_G0, S_G0)); 
     phi2_M = 2*asin(sin(ep/2)/sin(theta/2)); 
@@ -113,59 +115,6 @@ theta = acos(dot(P1_G0, S_G0));
 top = (pi/2 - alpha)*sin(ep); 
 bot = cos(ep) - cos(theta)*cos(alpha); 
 phi2_M4 = 2*abs(atan2(top, bot)); 
-
-%%%
-
-% %%
-% 
-% % SP plane is not actually from sun vector to P --> it is now P3 to P
-% % plane, but we are keeping the nomenclature. Sorry. 
-% 
-% % FINDING PHI2
-% 
-%     SPa_G0 = P2_G0 - P3_G0; 
-%     SPb_G0 = P1_G0 - P3_G0; 
-%     SPe_G0 = cross(SPa_G0, SPb_G0); 
-% 
-%     SP1_G0 = SPb_G0; 
-%         SP1_G0 = SP1_G0 / norm(SP1_G0); 
-%     SP3_G0 = SPe_G0; 
-%         SP3_G0 = SP3_G0 / norm(SP3_G0); 
-%     SP2_G0 = cross(SP1_G0, SP3_G0); 
-%         
-%     SP_DCM_G0 = [SP1_G0'; SP2_G0'; SP3_G0']; 
-%     G0_DCM_SP = SP_DCM_G0'; 
-%     
-%     P3_SP = SP_DCM_G0*P3_G0; 
-% 
-%     dphi = 0.001;        % radians 
-% 
-%     v_length = norm(P1_G0 - P3_G0); 
-%     V_SP(1, :) = [1 0 0]*v_length;
-%     P_SP(1, :) = SP_DCM_G0*P1_G0; 
-%     V_G0(1, :) = G0_DCM_SP * V_SP(1, :)'; 
-%     P_phi2_G0(1, :) = P1_G0; 
-%     
-%     i = 1; 
-%     P_phi2_G0(i, :) = P1_G0'; 
-%     while dot(P_phi2_G0(i, :), P2_G0') < 0.9999
-%         
-%         i = i + 1; 
-%         V_SP(i, :) = [cos(i*dphi), sin(i*dphi), 0 ] * v_length; 
-%         P_SP(i, :) = P3_SP' + V_SP(i, :); 
-%         
-%         V_G0(i, :) = G0_DCM_SP * V_SP(i, :)'; 
-%         P_phi2_G0(i, :) = P3_G0' + V_G0(i, :); 
-%         P_phi2_G0(i, :) = P_phi2_G0(i, :) / norm(P_phi2_G0(i, :)); 
-% 
-%         a = P_phi2_G0(i, :); 
-%         b = P_phi2_G0(i - 1, :); 
-%         phi2_P(i) = acos(dot(a, b)/(norm(a)*norm(b)));  
-%         
-%     end 
-% 
-%     phi2_P_sum = sum(phi2_P); 
-    
     %%
 
     plot_option = 0; 
