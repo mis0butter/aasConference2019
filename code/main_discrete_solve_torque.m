@@ -60,7 +60,7 @@ for i = 1:length(w_phi1) - 1
     a_phi1(i, :) = (1/dt)*(w_phi1(i + 1, :) - w_phi1(i, :)); 
 end 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi1, q_phi1, w_phi1, torque_phi1, a_phi1, 'total', aMax, wMax)
 end 
@@ -71,10 +71,6 @@ end
 w0 = 0; 
 t0 = 0; 
 wf = 0; 
-
-% phi2 = 2.5; 
-% phi2 = 1.9043;      % hard-coded just for this 
-% phi2 = 2.25; 
 
 [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi2, phi_tt); 
 
@@ -93,11 +89,6 @@ else
 end 
     
 %% Solve for attitude determination - second slew 
-% 
-% What I need to happen: 
-% for t0 --> t1: 
-% 
-% the direction of torque_G needs to be recalculated at every time step. 
 
 dt = 1/100; 
 
@@ -129,7 +120,7 @@ w_phi2 = [w1_phi2; w2_phi2(2:end ,:); w3_phi2(2:end, :)];
 q_phi2 = [q1_phi2; q2_phi2(2:end ,:); q3_phi2(2:end, :)]; 
 torque_phi2 = [torque1_phi2; torque2_phi2(2:end, :); torque3_phi2(2:end, :)]; 
 
-%% Plot phi1
+%% Plot phi2
 
 % acceleration stuff 
 a_phi2 = zeros(length(w_phi2) - 1, 3); 
@@ -137,7 +128,7 @@ for i = 1:length(w_phi2) - 1
     a_phi2(i, :) = (1/dt)*(w_phi2(i + 1, :) - w_phi2(i, :)); 
 end 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi2, q_phi2, w_phi2, torque_phi2, a_phi2, 'total', aMax, wMax)
 end 
@@ -155,31 +146,20 @@ wf = 0;
 dt = 1/100; 
 
 % t0 --> t1 
-% tEnd = t1 - t0; 
 w0 = w_phi2(end, :)'; 
 q0 = q_phi2(end, :)';  
-a_P = [0; 0; -aMax]; 
-a_G0 = G0_DCM_P*a_P; 
-G0_DCM_G = quat2DCM(q0); 
-G_DCM_G0 = G0_DCM_G'; 
-a_G = G_DCM_G0*a_G0; 
-torque_G = inertia_SC*a_G;              % inertia_SC always in G frame 
-% torque_G0 = G0_DCM_G*torque_G; 
 
 [t1_phi3, q1_phi3, w1_phi3, torque1_phi3, phi1_phi3] = gyrostat_discrete_torqueN_solve_torque(dt, t0, t1, ... 
     e_G0, aMax, inertia_SC, w0, q0, wMax); 
 
 % t1 --> t2 
-% tEnd = t2 - t1; 
 w0 = w1_phi3(end, :)'; 
 q0 = q1_phi3(end, :)'; 
-% torque = [0; 0; 0]; 
 
 [t2_phi3, q2_phi3, w2_phi3, torque2_phi3, phi2_phi3] = gyrostat_discrete_torqueN_solve_torque(dt, t1, t2, ... 
     e_G0, 0, inertia_SC, w0, q0, wMax); 
 
 % t2 --> t3 
-% tEnd = t3 - t2; 
 w0 = w2_phi3(end, :)'; 
 q0 = q2_phi3(end, :)'; 
 
@@ -200,7 +180,7 @@ for i = 1:length(w_phi3) - 1
     a_phi3(i, :) = (1/dt)*(w_phi3(i + 1, :) - w_phi3(i, :)); 
 end 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi3, q_phi3, w_phi3, torque_phi3, a_phi3, 'total', aMax, wMax)
 end 
