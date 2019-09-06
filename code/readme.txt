@@ -15,3 +15,7 @@ Command window output:
 To set alpha = 0 
     in sun_vector.m: 
         un-comment "Make alpha = 0" section 
+
+Workspace for results in paper: 
+    alpha0.mat 
+    alphaNot0.mat 
