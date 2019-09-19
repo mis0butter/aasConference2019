@@ -41,7 +41,7 @@ for i = 1:n
     % Write into MC_summary
     err_final = acosd(dot(Pf_N, P_phi3_N(end, :)));
     fprintf(MC_summary, '%s \t \t', date_str); 
-    fprintf(MC_summary, 'Final error: %.2f deg \n \n', err_final); 
+    fprintf(MC_summary, 'Final error: %.2f deg \n', err_final); 
 
     
 end 
