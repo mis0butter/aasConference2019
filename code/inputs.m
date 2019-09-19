@@ -12,8 +12,10 @@ inertia_w = [  20   0    0;
                0    0    20  ]; 
 
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
-aMax = 0.2;                                  % Maximum acceleration, rad/s^2
-wMax = 0.1;                                  % Maximum angular velocity, rad/s
+% aMax = 0.2;                                  % Maximum acceleration, rad/s^2
+% wMax = 0.1;                                  % Maximum angular velocity, rad/s
+aMax = 10*rand; 
+wMax = 10*rand; 
 
 %% Create random points 
 

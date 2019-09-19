@@ -6,7 +6,6 @@
 % phi1
 plot_option = 0; 
 if plot_option == 1
-    figure('name', '
     plot_qwypr(t_phi1, q_phi1, w_phi1, torque_phi1, a_phi1, 'phi1', aMax, wMax)
 end 
 
@@ -87,7 +86,7 @@ fsize = 14;
 plot_option = 1; 
 if plot_option == 1
     
-    figure
+    figure('name', 'profile_unit_sphere') 
     
     % Transparent sphere 
     [x, y, z] = sphere(100);
