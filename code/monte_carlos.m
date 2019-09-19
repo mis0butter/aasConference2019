@@ -4,7 +4,7 @@
 addpath('.'); 
 
 % # of test cases 
-n = 5; 
+n = 10; 
 
 % Create overall summary 
 MC_summary = fopen(sprintf('outputs/%s_MC_summary.txt', datestr(now, 'dd-mmm-yyyy_HH.MM.SS')), 'w'); 
@@ -12,7 +12,10 @@ MC_summary = fopen(sprintf('outputs/%s_MC_summary.txt', datestr(now, 'dd-mmm-yyy
 % run tests 
 for i = 1:n 
     
-    % Main test script 
+    % Main test script. Contains: 
+    % - inputs.m
+    % - steering_profile.m
+    % - post_processing.m
     main
     
     % Create folder to put results 
@@ -43,6 +46,5 @@ for i = 1:n
     fprintf(MC_summary, '%s \t \t', date_str); 
     fprintf(MC_summary, 'Final error: %.2f deg \n', err_final); 
 
-    
 end 
 
