@@ -12,7 +12,7 @@ for i = 1:n
     % Main test script 
     main
     
-    % Create output folder 
+    % Create folder to put results 
     cd outputs; 
     dir_output = datestr(now, 'dd-mmm-yyyy_HH.MM.SS'); 
     mkdir(dir_output); 

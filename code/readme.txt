@@ -1,6 +1,10 @@
 SAS Algorithm Code 
 
-Run main.m 
+Run main.m for stand-alone simulation 
+
+Run run_monte_carlos.m to run batch tests 
+    also runs create_summary 
+    saves plots, workspace vars, and profile unit sphere fig to outputs folder 
 
 To toggle plot generation: 
     in post_processing.m: 
