@@ -32,6 +32,7 @@ for i = 1:n
     close all;
     save workspace.mat 
     
+    % Return to code folder 
 	cd ../..
     
 end 
