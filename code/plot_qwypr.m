@@ -16,7 +16,7 @@ ylimits_w = get_ylimits(w);
 ylimits_torque = get_ylimits(torque); 
 ylimits_a = get_ylimits(a); 
 
-figure()
+figure('name', 'angular_velocity')
     plot(t, w(:, 1), 'LineWidth', 1.1)
     hold on; 
     plot(t, w(:, 2), 'k--', 'LineWidth', 1.1)
@@ -33,7 +33,7 @@ figure()
     ax.FontSize = fsize - 3;  
 %     title(strcat('Angular Velocity: $\dot{\phi}_{', phi_num, '}$'), 'Interpreter', 'latex', 'FontSize', fsize)
 
-figure()
+figure('name', 'quaternions')
     plot(t, q(:, 1), 'b', 'LineWidth', 1.1)
     hold on; 
     plot(t, q(:, 2), 'r--', 'LineWidth', 1.1)
@@ -62,7 +62,7 @@ figure()
 %     ylabel('degrees') 
 %     title(strcat('Euler Angles: \phi_{', phi_num, '}'))
     
-figure()
+figure('name', 'torque')
     plot(t, torque(:, 1), 'LineWidth', 1.1)
     hold on; 
     plot(t, torque(:, 2), 'r--', 'LineWidth', 1.1) 
@@ -77,7 +77,7 @@ figure()
     ax.FontSize = fsize - 3;  
 %     title(strcat('Torque: $\tau_{', phi_num, '}$'), 'Interpreter', 'latex', 'FontSize', fsize)
     
-figure()
+figure('name', 'angular_acceleration')
     plot(t(1:end - 1), a(:,1), 'LineWidth', 1.1)
     hold on; 
     plot(t(1:end - 1), a(:, 2), 'k--', 'LineWidth', 1.1)
