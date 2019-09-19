@@ -6,6 +6,9 @@ addpath('.');
 % # of test cases 
 n = 5; 
 
+% Create overall summary 
+MC_summary = fopen(sprintf('outputs/%s_MC_summary.txt', datestr(now, 'dd-mmm-yyyy_HH.MM.SS')), 'w'); 
+
 % run tests 
 for i = 1:n 
     
@@ -14,9 +17,9 @@ for i = 1:n
     
     % Create folder to put results 
     cd outputs; 
-    dir_output = datestr(now, 'dd-mmm-yyyy_HH.MM.SS'); 
-    mkdir(dir_output); 
-    cd(dir_output); 
+    date_str = datestr(now, 'dd-mmm-yyyy_HH.MM.SS'); 
+    mkdir(date_str); 
+    cd(date_str); 
     
     % Create summary.txt 
     create_summary
@@ -34,6 +37,12 @@ for i = 1:n
     
     % Return to code folder 
 	cd ../..
+    
+    % Write into MC_summary
+    err_final = acosd(dot(Pf_N, P_phi3_N(end, :)));
+    fprintf(MC_summary, '%s \t \t', date_str); 
+    fprintf(MC_summary, 'Final error: %.2f deg \n \n', err_final); 
+
     
 end 
 
