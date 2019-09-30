@@ -17,10 +17,9 @@ ep = pi/12;                                 % payload half-cone angle. pi/12 rad
 aMax = 10*rand; 
 wMax = 10*rand; 
 
-% Ensure discretization of slew times is greater than 10 ms
-while wMax/aMax < 0.01 
-    aMax = 10*rand; 
-    wMax = 10*rand; 
+% Are aMax and wMax feasible? 
+if wMax/aMax < 0.01 
+    
 end 
 
 %% Create random points 

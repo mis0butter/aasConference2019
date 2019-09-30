@@ -1,0 +1,14 @@
+Pi in N frame = 	 	 	 [0.499, -0.856, 0.134] 
+Pf in N frame = 	 	 	 [0.225, 0.926, 0.302] 
+S in N frame = 	 	 	 	 [0.638, 0.563, 0.525] 
+ 
+alpha = 	 	 	 	 	 -0.041 rad, -2.373 deg 
+ 
+aMax = 	 	 	 	 	 5.601 rad/s^2 
+wMax = 	 	 	 	 	 0.007 rad/s 
+ 
+phi 1 = 	 	 	 	 	 1.402 rad, 80.317 deg 
+phi 2 = 	 	 	 	 	 2.737 rad, 156.821 deg 
+phi 3 = 	 	 	 	 	 2.737 rad, 19.449 deg 
+ 
+Final error: 	 	 	 	 129.77 deg 
