@@ -4,7 +4,7 @@
 %% Plot q, w, torque, a
 
 % phi1
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
     plot_qwypr(t_phi1, q_phi1, w_phi1, torque_phi1, a_phi1, 'phi1', aMax, wMax)
 end 
@@ -22,7 +22,7 @@ if plot_option == 1
 end 
 
 % phi total 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_total, q_total, w_total, torque_total, a_total, 'total', aMax, wMax)
 end 

@@ -12,9 +12,9 @@ function [t1, t2, t3] = find_slew_times(t0, w0, wf, wMax, aMax, phi, phi_t)
 %   phi_t   = phi threshold 
 % 
 % Outputs: 
-%   t1      = time to reach max velocity constraint 
-%   t2      = time to end coasting at max velocity (if phi < phi_t, t2 == t1) 
-%   t3      = total duration of slew 
+%   t1      = 
+%   t2      = 
+%   t3      = 
 
 if phi > phi_t
 

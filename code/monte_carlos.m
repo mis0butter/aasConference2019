@@ -1,13 +1,14 @@
 % Monte carlos 
 
 % Add current folder to path 
-addpath('.'); 
+dir_code = pwd; 
+addpath(dir_code); 
 
 % # of test cases 
-n = 10; 
+n = 100; 
 
 % Create overall summary 
-MC_summary = fopen(sprintf('outputs/%s_MC_summary.txt', datestr(now, 'dd-mmm-yyyy_HH.MM.SS')), 'w'); 
+MC_summary = fopen(sprintf('outputs/%s_MC_summary.txt', datestr(now, 'yyyy-mmm-dd_HH.MM.SS')), 'w'); 
 
 % run tests 
 for i = 1:n 
@@ -19,8 +20,8 @@ for i = 1:n
     main
     
     % Create folder to put results 
-    cd outputs; 
-    date_str = datestr(now, 'dd-mmm-yyyy_HH.MM.SS'); 
+    cd('outputs'); 
+    date_str = datestr(now, 'yyyy-mmm-dd_HH.MM.SS'); 
     mkdir(date_str); 
     cd(date_str); 
     
@@ -39,7 +40,7 @@ for i = 1:n
     save workspace.mat 
     
     % Return to code folder 
-	cd ../..
+	cd(dir_code) 
     
     % Write into MC_summary
     err_final = acosd(dot(Pf_N, P_phi3_N(end, :)));
