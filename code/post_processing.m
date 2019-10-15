@@ -4,7 +4,7 @@
 %% Plot q, w, torque, a
 
 % phi1
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     plot_qwypr(t_phi1, q_phi1, w_phi1, torque_phi1, a_phi1, 'phi1', aMax, wMax)
 end 
@@ -148,8 +148,7 @@ end
 
 %% how far off? 
 
-phi_total = 180/pi*(phi1 + phi2 + phi3); 
-disp(strcat(sprintf('phi 1+2+3: %.2f', phi_total), ' deg'))
+fprintf(sprintf('\t phi 1: %.2f, phi 2: %.2f, phi 3: %.2f deg \n', phi1*180/pi, phi2*180/pi, phi3*180/pi))
 
 err_final = acosd(dot(Pf_N, P_phi3_N(end, :)));
-disp(strcat(sprintf('Final error: %.2f', err_final), ' deg'))
+fprintf(sprintf('\t Final error: %.2f deg \n', err_final))
