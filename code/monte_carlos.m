@@ -20,7 +20,7 @@ for i = 1:n_cases
     % - inputs.m
     % - steering_profile.m
     % - post_processing.m
-    main
+    main()
     
     % Create folder to put results 
     cd('outputs'); 
@@ -29,7 +29,7 @@ for i = 1:n_cases
     cd(date_str); 
     
     % Create summary.txt 
-    create_summary
+    create_summary()
     
     % Save figures and plots 
     savefig('profile_unit_sphere'); 

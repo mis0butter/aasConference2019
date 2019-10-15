@@ -36,47 +36,45 @@ end
 %% quats --> DCMs --> vectors 
 
 % Actual slew profile 
-P_G = zeros(length(t_total), 3); 
 P_N = zeros(length(t_total), 3); 
 % convert quaternions --> DCMs --> vectors 
 for i = 1:length(t_total)
-    G0_DCM_G = quat2DCM(q_total(i, :)); 
-    G_DCM_G0 = G0_DCM_G'; 
-    P_G(i, :) = G_DCM_G0*Pi_G0; 
-    P_N(i, :) = N_DCM_G0*P_G(i, :)'; 
+    N_DCM_G = quat2DCM(q_total(i, :)); 
+    G_DCM_N = N_DCM_G'; 
+    
+    % G_DCM_N is rotation matrix from N to G frame. Applying rotation to vector also makes it rotate by that amount 
+    P_N(i, :) = G_DCM_N*Pi_N;           
 end 
 
 % phi1 slew 
 P_phi1_N = zeros(length(q_phi1), 3); 
 for i = 1:length(t_phi1) 
-    G0_DCM_G = quat2DCM(q_phi1(i, :)); 
-    P_phi1_N(i, :) = N_DCM_G0*G0_DCM_G'*Pi_G0; 
+    N_DCM_G = quat2DCM(q_phi1(i, :)); 
+    P_phi1_N(i, :) = N_DCM_G'*Pi_N; 
 end 
 
 % phi12 slew 
 P_phi2_N = zeros(length(q_phi2), 3); 
 for i = 1:length(t_phi2) 
-    G0_DCM_G = quat2DCM(q_phi2(i, :)); 
-    P_phi2_N(i, :) = N_DCM_G0*G0_DCM_G'*Pi_G0; 
+    N_DCM_G = quat2DCM(q_phi2(i, :)); 
+    P_phi2_N(i, :) = N_DCM_G'*Pi_N; 
 end 
 
 % phi3 slew 
 P_phi3_N = zeros(length(q_phi3), 3); 
 for i = 1:length(t_phi3) 
-    G0_DCM_G = quat2DCM(q_phi3(i, :)); 
-    P_phi3_N(i, :) = N_DCM_G0*G0_DCM_G'*Pi_G0; 
+    N_DCM_G = quat2DCM(q_phi3(i, :)); 
+    P_phi3_N(i, :) = N_DCM_G'*Pi_N; 
 end 
 
 %% NO sun intrusion slew - nominal 
 
-P_nom_G = zeros(length(t_phiNom), 3); 
 P_nom_N = zeros(length(t_phiNom), 3); 
 % convert quaternions --> DCMs --> vectors 
 for i = 1:length(t_phiNom)
-    G0_DCM_G = quat2DCM(q_phiNom(i, :)); 
-    G_DCM_G0 = G0_DCM_G'; 
-    P_nom_G(i, :) = G_DCM_G0*Pi_G0; 
-    P_nom_N(i, :) = N_DCM_G0*P_nom_G(i, :)'; 
+    N_DCM_G = quat2DCM(q_phiNom(i, :)); 
+    G_DCM_N = N_DCM_G'; 
+    P_nom_N(i, :) = G_DCM_N*Pi_N; 
 end 
 
 %% PLOT!
