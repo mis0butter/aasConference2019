@@ -5,11 +5,21 @@ dir_code = pwd;
 addpath(dir_code); 
 
 % # of test cases 
-n_cases = 1000;  
+n_cases = 3;  
 
 % Create overall summary 
-date_folder = sprintf('outputs/%s_MC_summary.txt', datestr(now, 'yyyy-mmm-dd_HH.MM.SS')); 
+folder_date_string = datestr(now, 'yyyy-mmm-dd_HH.MM.SS'); 
+date_folder = sprintf('outputs/%s_MC_summary.txt', folder_date_string); 
 MC_summary = fopen(date_folder, 'w'); 
+
+% Create large errors summary 
+errors_folder = sprintf('outputs/%s_large_errors.txt', folder_date_string); 
+errors_summary = fopen(errors_folder, 'w'); 
+fprintf(errors_summary, '\t \t \t \t \t \t '); 
+fprintf(errors_summary, 'Pi_N \t \t \t \t \t \t Pf_N \t \t \t \t \t \t S_N \t \t \t \t \t \t '); 
+fprintf(errors_summary, 'alpha \t \t \t a_max \t \t \t w_max \t \t \t '); 
+fprintf(errors_summary, 'phi_1 \t \t \t phi_2 \t \t \t error \n'); 
+
 
 % run tests 
 for i = 1:n_cases 
@@ -49,6 +59,21 @@ for i = 1:n_cases
     err_final = acosd(dot(Pf_N, P_phi3_N(end, :)));
     fprintf(MC_summary, '%s \t \t', date_str); 
     fprintf(MC_summary, 'Final error: %.2f deg \n', err_final); 
+    
+    % Write into errors_summary
+    if err_final > 0
+        fprintf(errors_summary, '%s \t ', date_str); 
+        fprintf(errors_summary, '[%.3f, %.3f, %.3f] \t ', Pi_N(1), Pi_N(2), Pi_N(3)); 
+        fprintf(errors_summary, '[%.3f, %.3f, %.3f] \t ', Pf_N(1), Pf_N(2), Pf_N(3)); 
+        fprintf(errors_summary, '[%.3f, %.3f, %.3f] \t ', S_N(1), S_N(2), S_N(3)); 
+        fprintf(errors_summary, '%.3f rad \t ', alpha); 
+        fprintf(errors_summary, '%.3f rad/s^2 \t ', aMax); 
+        fprintf(errors_summary, '%.3f rad/s \t ', wMax); 
+        fprintf(errors_summary, '%.3f rad \t \t ', phi1); 
+        fprintf(errors_summary, '%.3f rad \t \t ', phi2); 
+        fprintf(errors_summary, '%.3f rad \t \t ', phi3); 
+        fprintf(errors_summary, '%.3f deg \n', err_final); 
+    end 
 
 end 
 

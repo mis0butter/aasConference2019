@@ -18,7 +18,7 @@ aMax = 10*rand;
 wMax = 10*rand; 
 
 % Ensure discretization of slew times is greater than 10 ms
-while wMax/aMax < 0.01 
+while wMax/aMax < 0.1
     aMax = 10*rand; 
     wMax = 10*rand; 
 end 
