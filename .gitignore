@@ -1,1 +1,8 @@
 code/outputs
+*.bst
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.gz
