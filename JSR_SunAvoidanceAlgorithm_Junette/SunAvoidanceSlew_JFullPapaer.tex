@@ -11,10 +11,10 @@
 \usepackage{longtable,tabularx}
 \usepackage{algpseudocode,algorithm,algorithmicx}
 
+% Added packages 
 %\usepackage{longtable}
 \usepackage{supertabular}
 \setlength\LTleft{0pt} 
-
 
 \title{Sun-Avoidance Slew Planning with Keep-Out Cone and  Actuator Constraints}
 
@@ -202,7 +202,7 @@ or
 	
 	%-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	\section{Slew Planning} 
+	\section{Slew Planning} \label{slew_planning}
 	In this section we utilize the proposed sun-avoidance slew algorithm to generate the required angular rate, $_\mathcal{G}^\mathcal{N}\omega^\mathcal{T}(t)$, angular acceleration, $_\mathcal{G}^\mathcal{N}\dot{\omega}^\mathcal{T}(t)$, and quaternions, $^\mathcal{N}q^\mathcal{T}(t)$, for the control system. Fig. ~\ref{guidance_loop} shows how the generated commands are utilized by an attitude control system to guide the gyrostat in each leg of the SAS.
 		\begin{figure}[h!]
 		\centering
@@ -666,14 +666,14 @@ The time histories of angular velocity and angular acceleration are shown in Fig
     \centering
     \begin{minipage}{.5\textwidth}
         \centering
+        \nocaption{a)}
     \includegraphics[width=3in]{figures/alphaNot0/ang_vel_phi_total.eps}
-    \nocaption{a)}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
+        \nocaption{b)}
         \includegraphics[width=3in]{figures/alphaNot0/ang_accel_total.eps}
        % \includegraphics[width=0.3\linewidth, height=0.15\textheight]{prob1_6_1}
-       \nocaption{b)}
     \end{minipage}
     \caption{Time histories of gyrostat a) angular velocity and b) angular acceleration when $|\alpha|>0$.}
     \label{fig:ang_vel_acc} 
@@ -684,16 +684,16 @@ Due to the high velocity and acceleration constraints, there is no coasting peri
     \centering
     \begin{minipage}{.5\textwidth}
         \centering
+        \nocaption{a)}
 \includegraphics[width=3in]{figures/alphaNot0/quats_phi_total.eps}
-    \nocaption{a)}
         \label{fig:prob1_6_2}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
+        \nocaption{b)}
    \includegraphics[width=3in]{figures/alphaNot0/torque_total.eps}
        % \includegraphics[width=0.3\linewidth, height=0.15\textheight]{prob1_6_1}
         \label{fig:prob1_6_1}
-       \nocaption{b)}
     \end{minipage}
     \caption{Time histories of a) gyrostat-frame quaternions and b) body torques when $|\alpha|>0$.}
     \label{fig:quats_phi_total}
@@ -706,19 +706,22 @@ In case II,  when $\alpha=0$, we choose much more realistic constraints: 0.01 ra
 \caption{Trajectory of the tip of instrument's boresight during the entire slew when $\alpha=0$.}
 \label{fig:phi1_phi2_phi3_alpha0}
 \end{figure}	
-With smaller constraints, the simulation takes much longer to complete the slew maneuvers. Figs. ~\ref{fig:ang_vel_acc0} and \ref{fig:quats_phi_total0} show that the torque and acceleration applied are very short compared to the duration of the entire maneuver for case I ($|\alpha| > 0$), in contrast to Figs. ~\ref{fig:ang_vel_acc} and \ref{fig:quats_phi_total} for case II ($\alpha = 0$). The gyrostat spends the majority of the time coasting at constant angular velocity, as seen in Fig. ~\ref{fig:ang_vel_acc0}. Though the initial and final points are further apart in the gyrostat unit sphere to begin with, the simulation takes an order of magnitude longer to complete at almost $500$ seconds for $\alpha = 0$, as opposed to about $5.5$ seconds for $|\alpha| > 0$. The case shown here is much more realistic example that reflects real-world conditions. The results for both cases demonstrate that the angular velocity and acceleration never exceed the velocity and acceleration constraints for any axis.
+With smaller constraints, the body torque is applied for a very short amount of time before the spacecraft reaches the angular velocity limit. Therefore the period of coasting is increased and the simulation takes longer to complete the slew maneuvers. Figs. ~\ref{fig:ang_vel_acc0} and \ref{fig:quats_phi_total0} show that the torque and acceleration applied are very short compared to the duration of the entire maneuver for case I ($|\alpha| > 0$), in contrast to Figs. ~\ref{fig:ang_vel_acc} and \ref{fig:quats_phi_total} for case II ($\alpha = 0$). The gyrostat spends the majority of the time coasting at constant angular velocity, as seen in Fig. ~\ref{fig:ang_vel_acc0}. Though the initial and final points are further apart in the gyrostat unit sphere to begin with, the simulation takes an order of magnitude longer to complete at almost $500$ seconds for $\alpha = 0$, as opposed to about $5.5$ seconds for $|\alpha| > 0$. The case shown here is much more realistic example that reflects real-world conditions. The results for both cases demonstrate that the angular velocity and acceleration never exceed the velocity and acceleration constraints for any axis.
+
+The maneuver duration is determined by the acceleration and velocity constraints. The path determined by the optimal control solution drives the spacecraft to meet the acceleration and velocity constraints; thus, if one wishes to impose a maneuver duration constraint, that must be defined during the slew planning phase in Section \ref{slew_planning}. 
+
 \begin{figure}[htb!]
     \centering
     \begin{minipage}{.5\textwidth}
         \centering
+        \nocaption{a)}
   \includegraphics[width=3in]{figures/alpha0/ang_vel.eps}
-    \nocaption{a)}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
+        \nocaption{b)}
        \includegraphics[width=3in]{figures/alpha0/ang_accel.eps}
        % \includegraphics[width=0.3\linewidth, height=0.15\textheight]{prob1_6_1}
-       \nocaption{b)}
     \end{minipage}
     \caption{Time histories of gyrostat a) angular velocity and b) angular acceleration when $\alpha=0$.}
     \label{fig:ang_vel_acc0} 
@@ -728,13 +731,13 @@ With smaller constraints, the simulation takes much longer to complete the slew 
     \centering
     \begin{minipage}{.5\textwidth}
         \centering
+        \nocaption{a)}
 \includegraphics[width=3in]{figures/alpha0/quats.eps}
-    \nocaption{a)}
     \end{minipage}%
     \begin{minipage}{0.5\textwidth}
         \centering
+        \nocaption{b)}
 \includegraphics[width=3in]{figures/alpha0/torque.eps}
-       \nocaption{b)}
     \end{minipage}
     \caption{Time histories of a) gyrostat-frame quaternions and b) body torques when $\alpha=0$.}
     \label{fig:quats_phi_total0}
