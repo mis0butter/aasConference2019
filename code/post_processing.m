@@ -1,36 +1,45 @@
 % post-processing script
 % Junette Hsin 
     
-%% Plot q, w, torque, a
+%% Plot q, w, torque, a, etc 
+
+% Convert wheel speeds from rad/s to rpm 
+ws_phi1 = ws_phi1 / (2*pi); 
+ws_phi2 = ws_phi2 / (2*pi); 
+ws_phi3 = ws_phi3  / (2*pi); 
+ws_total = ws_total  / (2*pi); 
+ws_phiNom = ws_phiNom  / (2*pi); 
+
+hMax = 12; 
 
 % phi1
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
-    plot_qwypr(t_phi1, q_phi1, w_phi1, torque_phi1, a_phi1, 'phi1', aMax, wMax)
+    plot_qwypr(t_phi1, q_phi1, w_phi1, h_phi1, torque_phi1, a_phi1, ws_phi1, 'phi1', aMax, wMax, hMax)
 end 
 
 % phi2
 plot_option = 0; 
 if plot_option == 1
-    plot_qwypr(t_phi2, q_phi2, w_phi2, torque_phi2, a_phi2, 'phi2', aMax, wMax)
+    plot_qwypr(t_phi2, q_phi2, w_phi2, h_phi2, torque_phi2, a_phi2, ws_phi2, 'phi2', aMax, wMax, hMax)
 end 
 
 % phi3
 plot_option = 0; 
 if plot_option == 1
-    plot_qwypr(t_phi3, q_phi3, w_phi3, torque_phi3, a_phi3, 'phi3', aMax, wMax)
+    plot_qwypr(t_phi3, q_phi3, w_phi3, h_phi3, torque_phi3, a_phi3, ws_phi3, 'phi3', aMax, wMax, hMax)
 end 
 
 % phi total 
-plot_option = 0; 
+plot_option = 1; 
 if plot_option == 1
-    plot_qwypr(t_total, q_total, w_total, torque_total, a_total, 'total', aMax, wMax)
+    plot_qwypr(t_total, q_total, w_total, h_total, torque_total, a_total, ws_total, 'total', aMax, wMax, hMax)
 end 
 
 % phi nominal 
 plot_option = 0; 
 if plot_option == 1
-    plot_qwypr(t_phiNom, q_phiNom, w_phiNom, torque_phiNom, a_phiNom, 'phiNom', aMax, wMax)
+    plot_qwypr(t_phiNom, q_phiNom, w_phiNom, h_phiNom, torque_phiNom, a_phiNom, ws_phiNom, 'phiNom', aMax, wMax, hMax)
 end 
 
 %% quats --> DCMs --> vectors 
@@ -83,7 +92,7 @@ end
 
 fsize = 14; 
 
-plot_option = 1; 
+plot_option = 0; 
 if plot_option == 1
     
     figure('name', 'profile_unit_sphere') 
@@ -137,9 +146,9 @@ if plot_option == 1
     t(6) = text(S_N(1), S_N(2), S_N(3), strcat('\phantom{   }', sprintf('sun')), 'Interpreter', 'latex', 'FontSize', fsize); 
 %     text(S_PiPf_N(1), S_PiPf_N(2), S_PiPf_N(3), sprintf(' sun_{proj}')) 
     
-    xlabel('$N_x$','interpreter','latex', 'FontSize', fsize)
-    ylabel('$N_y$','interpreter','latex', 'FontSize', fsize)
-    zlabel('$N_z$','interpreter','latex', 'FontSize', fsize)
+    xlabel('$X$','interpreter','latex', 'FontSize', fsize)
+    ylabel('$Y$','interpreter','latex', 'FontSize', fsize)
+    zlabel('$Z$','interpreter','latex', 'FontSize', fsize)
     ax = gca;
     ax.FontSize = fsize - 2;  
 %     title('$\phi_1$, $\phi_2$, and $\phi_3$ Slews', 'Interpreter', 'latex', 'FontSize', fsize)

@@ -7,15 +7,16 @@
 inertia_SC = [ 100     0       0; 
                0       100     0; 
                0       0       100]; 
-inertia_w = [  20   0    0; 
-               0    20   0; 
-               0    0    20  ]; 
+inertia_whl = [ 4e-4    0       0;
+                0       4e-4    0; 
+                0       0       4e-4]; 
 
 ep = pi/12;                                 % payload half-cone angle. pi/12 rad = 15 deg  
-% aMax = 0.2;                                  % Maximum acceleration, rad/s^2
-% wMax = 0.1;                                  % Maximum angular velocity, rad/s
-aMax = 10*rand; 
-wMax = 10*rand; 
+% aMax = 0.02;                                  % Maximum acceleration, rad/s^2
+% wMax = 0.01;                                  % Maximum angular velocity, rad/s
+aMax = 5*pi/180; 
+wMax = 5*pi/180; 
+tMax = 100*aMax; 
 
 % Ensure discretization of slew times is greater than 10 ms
 while wMax/aMax < 0.01 
