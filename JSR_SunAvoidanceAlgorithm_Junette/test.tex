@@ -1,0 +1,97 @@
+	
+\documentclass[journal ]{new-aiaa}
+%\documentclass[conf]{new-aiaa} for conference papers
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\usepackage{longtable,tabularx}
+\usepackage{algpseudocode,algorithm,algorithmicx}
+
+% Added packages 
+%\usepackage{longtable}
+\usepackage{supertabular}
+\setlength\LTleft{0pt} 
+
+\title{Sun-Avoidance Slew Planning with Keep-Out Cone and  Actuator Constraints}
+
+\author{Mohammad A. Ayoubi \footnote{Associate Professor, Department of Mechanical Engineering, Santa Clara University, 500 El Camino Real, Santa Clara, CA 95053, AIAA Senior Member.} }
+\affil{Santa Clara University, 500 El Camino Real, Santa Clara, CA 95053 }
+\author{Junette Hsin\footnote{Engineer, Dynamics and Control Analysis Group, Maxar Space Infrastructure (formerly Space Systems/Loral), 3825 Fabian Way, Palo Alto, CA 94303.}}
+\affil{Maxar Space Infrastructure (formerly Space Systems/Loral), 3825 Fabian Way, Palo Alto, CA 94303}
+
+\begin{document}
+
+\maketitle
+				
+	\begin{abstract}
+This paper presents a geometric approach for a Sun (or any bright object) avoidance slew maneuver with pointing and actuator constraints. We assume that a gyrostat has a single light-sensitive payload with control-torque and reaction wheels' angular momentum constraints. Furthermore, we assume that the initial and final attitudes, an instrument's line-of-sight (LOS) vector, and sun vector are known. Then we use Pontryagin's minimum principle (PMP) and derive the desired or target-frame quaternions, angular velocity and acceleration. In the end, a Monte Carlo simulation is performed to show the viability of the proposed algorithm with control-torque and angular momentum constraints. 
+% for two cases: 1) with control-torque and reaction wheels' angular momentum constraints, and 2) with control-torque. constraint.  		
+	\end{abstract}
+\section*{Nomenclature}
+
+%\noindent(Nomenclature entries should have the units identified)
+{\renewcommand\arraystretch{1.0}
+\noindent\begin{longtable*}{@{}l @{\quad=\quad} l@{}}
+		
+		$\hat{e}$ & unit vector along eigenaxis \\ 
+		$H$ & the total angular momentum of the gyrostat with respect to its center-of-mass \\ 
+		$h$ & the total angular momentum of reaction wheel with respect to its center-of-mass  \\ 
+		$I$ &the mass-moment-of-inertia of the gyrostat\\ 
+%		$I^{w/w*}$ & the mass-moment-of-inertia of reaction wheels with respect to their center of masses\\ \\
+		$\hat{P}$ & unit position vector \\ 
+		$q$& quaternion of one frame with respect to the other frame\\ 
+		$\hat{S}$ & unit sun vector\\ 
+		$\epsilon$ & instrument half-cone angle\\ 	
+		$\alpha$& the angle between the sun vector and the slew plane\\ 
+		$\omega$& angular velocity of gyrostat\\ 
+		\multicolumn{2}{@{}l}{Subscripts or superscripts}\\
+		$\mathcal{G}$-frame& gyrostat body-fixed frame \\ 
+		$\mathcal{G^*}$& gyrostat center-of-mass \\ 
+		$\mathcal{N}$-frame & the Newtonian frame \\ 
+		$p$ & Payload \\ 
+		$\mathcal{T}$-frame & the target frame \\ 
+		$w$ & reaction wheel frame \\ 
+		$w*$ & reaction wheel center-of-mass \\ 
+
+\end{longtable*}}
+	\section{Introduction}
+	
+	A geometric approach was proposed by Spindle\cite{s}, Hablani\cite{Hablani1998}, and Biggs and Colley\cite{Biggs2016}  where a feasible attitude maneuver, or a guidance law, is precomputed based on the attitude-avoidance-zone constraints.  Another approach for addressing this problem used randomized algorithms\cite{Frazzoli01}. However, depending on the number of constraints and initial and final attitudes, this approach can be computationally expensive and not suitable for onboard implementation. Another approach for solving the time optimal reorientation maneuver subject to boundaries and path constraints was proposed by Spiller et al.\cite{Spiller2016}. They used the particle swarm optimization (PSO) technique to find a sub-optimal solution with keep-out constraints. Another approach casted the problem as a convex optimization problem and used semi-definite programming (SDP) or quadratically constrained quadratic programming (QCQP) in its solution (see for instance Kim and Mesbahi\cite{Kim2004}, Kim et al.\cite{Kim2010}, Sun and Dai\cite{Sun2015}, and Lee and Mesbahi\cite{Lee2014}). Recently, Ramos and Schaub\cite{Ramos2018} proposed a method based on the Lyapunov stability theorem and logarithmic barrier potential function to derive a steering law for attitude control of a gyrostat subject to conically constrained inclusion and exclusion regions. They also considered the control-torque constraint in their algorithm. 
+	
+	\begin{eqnarray}
+	\alpha \dot{test} & asdf \dot{\alpha} \\ 
+	\end{eqnarray}
+			
+			\begin{equation}\label{Bcs}
+			BCs:\left\{
+			\begin{array}{l}
+			~\phi(t_0)=0, \phi(t_f)=\phi_{f},\\
+			~\dot{\phi}(t_0)=\dot{\phi}_{0},\dot{ \phi}(t_f)=\dot{\phi}_{f}, \\
+			\end{array}
+			\right.
+			\end{equation}
+			
+			
+			\begin{equation}
+			~\dot{\alpha}
+			\begin{array}{ll}
+			~\dot{\alpha} & \alpha
+			\end{array}
+			\end{equation}
+	
+%%%%%%%%%%%%
+
+	
+
+
+	
+	\bibliographystyle{AAS_publication}   % Number the references.
+	\bibliography{references_SAA}   % Use references.bib to resolve the labels.
+	
+	
+	
+\end{document}

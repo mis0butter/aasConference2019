@@ -625,7 +625,7 @@ The pseudocode for the proposed SAS algorithm is shown Algorithm \ref{alg:pseudo
 		\EndIf 
 		\For{$t_0 < t < t_1$}
 		\State Calculate inertial-to-desired rotation ${}^\mathcal{G}R^\mathcal{N}$
-		\State From ${}^\mathcal{G}R^\mathcal{N}$, calculate $^\mathcal{N}\omega}^\mathcal{T}$, $^\mathcal{N}\dot{\omega}}^\mathcal{T}$ in the $\mathcal{G}$-frame
+		\State From ${}^\mathcal{G}R^\mathcal{N}$, calculate $^\mathcal{N}\omega^\mathcal{T}$, $^\mathcal{N}\dot{\omega}^\mathcal{T}$ in the $\mathcal{G}$-frame
 		\State \hskip1.5em Solve for control torque $u$ with equation (\ref{Euler_RBD1})
 		\State \hskip1.5em Propagate $^\mathcal{N}\omega^\mathcal{G}$ and $^\mathcal{N}q^\mathcal{G}$ by solving equations (\ref{Euler_RBD}) and (\ref{kinematics}) 
 		\EndFor 
